@@ -10,8 +10,8 @@
             <img class="w-auto 2xl:h-[666px]" src="{{ asset('img/Group 87.png') }}" alt="">
         </div>
         <p class="m-auto text-center text-2xl font-serif font-semibold pb-10 text-black">Daftar Titik Lokasi Wisata</p>
-        <div class="justify-between flex">
-            <div class="mb-6 flex">
+        <div class="md:justify-between md:flex pb-4">
+            <div class="md:mb-0 mb-4  flex">
                 <button class="btn bg-white text-black hover:bg-[#414833] hover:text-white">Pilih Lokasi Anda</button>
 
             </div>
