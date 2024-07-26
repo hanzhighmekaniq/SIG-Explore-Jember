@@ -28,10 +28,10 @@
                 </div>
                 <button class="btn bg-[#414833] text-white w-full max-w-2xl ">Kirim</button>
             </div>
-            <div class="text-end">
+            <div class="xl:text-end text-start xl:pt-0 pt-10">
                 <p class="text-4xl font-bold text-black pacifico-regular mb-10">Visit Jember</p>
 
-                <div class="flex items-center justify-end">
+                <div class="flex items-center xl:justify-end justify-start xl:text-end text-start">
                     <p class="flex mr-2 text-black text-lg font-semibold">085259990293</p>
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                         width="24" height="24" x="0" y="0" viewBox="0 0 682 682.667"
@@ -43,7 +43,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="flex items-center justify-end">
+                <div class="flex items-center xl:justify-end justify-start xl:text-end text-start">
                     <p class="flex mr-2 text-black text-lg font-semibold">cs.visit@gmail.com</p>
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                         width="24" height="24" x="0" y="0" viewBox="0 0 512 512"
