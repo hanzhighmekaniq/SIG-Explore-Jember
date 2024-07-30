@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <html class="bg-white p-0 " lang="en">
 
 @include('partials.navbarPengunjung')
@@ -12,7 +15,7 @@
             <div class="absolute inset-0 flex items-center justify-center">
                 <figcaption class="container text-center space-y-4 lg:space-y-10">
                     <p
-                        class="font-serif font-semibold text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl text-[#C2C5AA] drop-shadow-lg">
+                        class="rubik-mono-one-regular font-semibold text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#C2C5AA] drop-shadow-lg">
                         WISATA <br> KABUPATEN JEMBER
                     </p>
                     <p
