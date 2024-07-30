@@ -8,6 +8,8 @@
     {{-- NAVBAR CUSTOMER --}}
     {{-- TAILWIND --}}
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     {{-- GOOGLE FONT --}}
@@ -25,7 +27,7 @@
     {{-- ALPIN.JS --}}
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
-<nav class="fixed xl:top-5 z-40 w-full flex-none">
+<nav class="absolute xl:top-5 z-40 w-full flex-none">
     <div class="container hidden xl:block">
         <div class="flex xl:h-[60px] shadow-[#656D4A] w-full justify-between rounded-3xl items-center m-auto bg-white"
             style="box-shadow: 0px 5px 6px 1px rgba(0, 0, 0, 0.2);">

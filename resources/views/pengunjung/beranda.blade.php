@@ -15,7 +15,7 @@
             <div class="absolute inset-0 flex items-center justify-center">
                 <figcaption class="container text-center space-y-4 lg:space-y-10">
                     <p
-                        class="rubik-mono-one-regular font-semibold text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#C2C5AA] drop-shadow-lg">
+                        class="rubik-mono-one-regular font-semibold text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-7xl text-[#C2C5AA] drop-shadow-lg">
                         WISATA <br> KABUPATEN JEMBER
                     </p>
                     <p
@@ -27,6 +27,7 @@
                     </p>
                     <div class="w-auto h-auto flex justify-center m-auto">
                         <a class="bg-[#C2C5AA] shadow-lg shadow-gray-800 text-xs xl:text-base px-6 py-2 xl:px-12 xl:py-2 rounded-2xl xl:rounded-3xl text-center flex items-center justify-center font-serif text-black"
+                        style="box-shadow: 0px 5px 6px 1px rgba(0, 0, 0, 0.2);"
                             href="">
                             Buka Peta Wisata
                         </a>
@@ -143,6 +144,7 @@
                 </div>
                 <div class="flex justify-center items-center mb-24">
                     <a class="py-2 px-20  rounded-3xl text-black font-serif shadow-md shadow-black bg-[#C2C5AA]"
+                    style="box-shadow: 0px 5px 6px 1px rgba(0, 0, 0, 0.2);"
                         href="">LAINNYA...</a>
                 </div>
             </div>
