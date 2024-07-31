@@ -280,4 +280,8 @@
                 </div>
             </div>
         </div>
+<<<<<<< Updated upstream
     </footer>
+=======
+    </footer>
+>>>>>>> Stashed changes
