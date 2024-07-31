@@ -3,15 +3,9 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-<<<<<<< Updated upstream
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
-=======
-    "./resources//*.blade.php",
-    "./resources//*.js",
-    "./resources//*.vue",
->>>>>>> Stashed changes
   ],
   theme: {
     container: {

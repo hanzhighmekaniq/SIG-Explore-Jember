@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <style>
         #map {
-            height: 9eb
-            00px; /* Atur tinggi peta sesuai kebutuhan */
+            height: 911px; /* Atur tinggi peta sesuai kebutuhan */
         }
     </style>
 </head>
