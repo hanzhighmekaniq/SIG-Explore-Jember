@@ -9,7 +9,7 @@ module.exports = {
   ],
   theme: {
     container: {
-      center: true, // This adds margin auto to the container
+      center: true,
       padding: {
         DEFAULT: '1rem',
         sm: '2rem',
@@ -31,6 +31,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-  ],
+  plugins: [],
 }
