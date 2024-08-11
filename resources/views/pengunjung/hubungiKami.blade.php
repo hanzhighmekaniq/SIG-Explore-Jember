@@ -64,3 +64,4 @@
     </div>
 
 </div>
+@include('partials.footerPengunjung')

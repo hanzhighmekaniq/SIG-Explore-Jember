@@ -138,63 +138,6 @@
         </div>
     </div>
 
-    <footer class="bg-white dark:bg-gray-900">
-        <div class="mx-auto w-full max-w-screen-2xl p-4 py-6 lg:py-8">
-            <div class="md:flex md:justify-between">
-                <div class="mb-6 md:mb-0">
-                    <a href="https://flowbite.com/" class="flex items-center">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="Flowbite Logo">
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Visit Jember</span>
-                    </a>
-                </div>
-                <div class="grid grid-cols-4 gap-8 md:gap-6">
-                    <div>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-                        <ul class="text-gray-600 dark:text-gray-400">
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Flowbite</a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Tailwind CSS</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
-                        <ul class="text-gray-600 dark:text-gray-400">
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Github</a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Discord</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-                        <ul class="text-gray-600 dark:text-gray-400">
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Privacy Policy</a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="#" class="hover:underline">Terms & Conditions</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-6 border-gray-700 dark:border-gray-600" />
-            <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-                <span class="text-sm text-gray-500 dark:text-gray-400">© 2023 Visit Jember. All Rights Reserved.</span>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/flowbite@1.6.2/dist/flowbite.min.js"></script>
     <script>
@@ -212,3 +155,4 @@
     </script>
 </body>
 </html>
+@include('partials.footerPengunjung')
