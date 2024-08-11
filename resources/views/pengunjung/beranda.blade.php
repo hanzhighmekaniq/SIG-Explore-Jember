@@ -238,7 +238,7 @@
                 </div>
         
                 <!-- Dropdown and Search Bar -->
-                <form class="flex items-center mb-6">
+                <form class="flex items-center mb-4">
                     <!-- Dropdown -->
                     <div class="relative">
                         <button id="dropdown-button" data-dropdown-toggle="dropdown" class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">

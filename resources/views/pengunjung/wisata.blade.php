@@ -52,16 +52,45 @@
         </div>
 
         <!-- Grid of Items -->
-        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 pb-40 pt-4">
+        <div class="grid lg:grid-cols-4 gap-8 pb-40 pt-4">
             <!-- Item Card 1 -->
             <div>
                 <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
                     <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
                     <div class="w-auto h-auto">
-                        <p class="text-black font-bold text-xl">Pantai Payangan</p>
+                        <p class="text-black font-bold text-xl">Rembangan</p>
                         <p class="text-black text-sm">
-                            Merupakan tempat wisata alam sekaligus tempat untuk ritual meditasi oleh pengunjung.
-                            Meskipun memiliki pasir pantai yang tidak putih, namun butiran pasirnya sangat lembut serta nyaman.
+                            Wisata Alam, Wisata Keluarga, Gunung
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+        
+            <!-- Item Card 2 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Dira Park</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+        
+            <!-- Item Card 3 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Gunung Gambir</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Perbukitan
                         </p>
                     </div>
                     <div class="flex-grow"></div>
@@ -69,15 +98,254 @@
                 </div>
             </div>
 
-            <!-- Item Card 2 -->
+            <!-- Item Card 4 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Alun Alun Jember</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga, Taman Kota
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 5 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Gumitir</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Pengunungan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 6 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Rembangan Diary Farm</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 7 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Pantai Watu Ulo</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Pantai
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 8 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Taman Galaxy</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga, Perbukitan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 9 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Pantai Papuma</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Pantai
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 10 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Citra Mandiri Land</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 11 -->
             <div>
                 <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
                     <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
                     <div class="w-auto h-auto">
                         <p class="text-black font-bold text-xl">Pantai Payangan</p>
                         <p class="text-black text-sm">
-                            Merupakan tempat wisata alam sekaligus tempat untuk ritual meditasi oleh pengunjung.
-                            Meskipun memiliki pasir pantai yang tidak putih, namun butiran pasirnya sangat lembut serta nyaman.
+                            Wisata Alam, Pantai
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 12 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Mini Zoo</p>
+                        <p class="text-black text-sm">
+                            Wisata Keluarga, Kebun Binatang
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 13 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Bukit Domba</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Perbukitan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 14 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Situs Duplang</p>
+                        <p class="text-black text-sm">
+                            Wisata Sejarah
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 15 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Kemuning Lor Nature Park</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Wisata Keluarga, Perbukitan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 16 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Museum Huruf</p>
+                        <p class="text-black text-sm">
+                            Wisata Sejarah
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 17 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Taman Botani</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Wisata Keluarga, Perbukitan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 18 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Museum Tembakau</p>
+                        <p class="text-black text-sm">
+                            Wisata Sejarah
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 19 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Kampung Durian</p>
+                        <p class="text-black text-sm">
+                            Wisata Alam, Hutan
+                        </p>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button class="w-full bg-[#414833] text-white rounded-lg py-2 mt-4">Button</button>
+                </div>
+            </div>
+
+            <!-- Item Card 20 -->
+            <div>
+                <div class="space-y-2 h-auto w-auto border p-4 rounded-lg">
+                    <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}" alt="Image">
+                    <div class="w-auto h-auto">
+                        <p class="text-black font-bold text-xl">Museum Coklat</p>
+                        <p class="text-black text-sm">
+                            Wisata Sejarah
                         </p>
                     </div>
                     <div class="flex-grow"></div>
@@ -85,7 +353,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        
 
 </div>
 @include('partials.footerPengunjung')
