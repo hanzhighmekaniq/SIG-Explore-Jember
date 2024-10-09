@@ -21,15 +21,6 @@ class CreateDataWisataTable extends Migration
             $table->decimal('htm_parkir', 10, 2);
             $table->unsignedBigInteger('id_data_wisata_event')->nullable();
             $table->unsignedBigInteger('id_data_wisata_kuliner')->nullable();
-
-            $table->foreign('id_data_wisata_event')
-                ->references('id')->on('data_wisata_events')
-                ->onDelete('set null');
-
-            $table->foreign('id_data_wisata_kuliner')
-                ->references('id')->on('data_wisata_kuliners')
-                ->onDelete('set null');
-
             $table->timestamps();
         });
     }

@@ -44,18 +44,18 @@
 
                     <div id="controls-carousel" class="relative w-full" data-carousel="static">
                         <!-- Carousel wrapper -->
-                        <div class="relative h-[600px] overflow-hidden  ">
+                        <div class="relative h-[570px] overflow-hidden  ">
                             <!-- Item 1 -->
                             <div class="p-2 hidden duration-700 ease-in-out md:flex md:h-auto"
                                 data-carousel-item="active">
-                                <div class="grid grid-cols-7 h-full bg-[#C2C5AA] p-4 rounded-lg">
+                                <div class="grid grid-cols-7 h-full bg-[#C2C5AA] p-4 rounded-md">
                                     <!-- Image Container -->
-                                    <div class="col-span-3 overflow-hidden">
+                                    <div class="col-span-7 xl:col-span-3 overflow-hidden">
                                         <img src="{{ asset('img/banner-berdiri.jpg') }}"
                                             class="rounded-lg object-center w-full h-full object-cover" alt="...">
                                     </div>
                                     <!-- Text Content -->
-                                    <div class="col-span-4 p-4 flex flex-col justify-center pl-8">
+                                    <div class="hidden xl:flex xl:col-span-4 p-4  flex-col justify-center pl-8">
                                         <div>
                                             <h1 class="text-4xl font-bold flex pb-4">Jember Fashion Carnaval</h1>
                                             <p class="text-lg pr-20 mb-2 font-medium ">Jember Fashion Carnaval adalah
@@ -90,14 +90,14 @@
 
                             <!-- Item 2 -->
                             <div class="p-2 hidden  duration-700 ease-in-out md:flex md:h-auto" data-carousel-item>
-                                <div class="grid grid-cols-7 h-full bg-[#C2C5AA] p-4 rounded-lg">
+                                <div class="grid xl:grid-cols-7 grid-cols-1 h-full bg-[#C2C5AA] p-4 rounded-lg">
                                     <!-- Image Container -->
-                                    <div class="col-span-3 overflow-hidden">
+                                    <div class="col-span-7 xl:col-span-3 overflow-hidden">
                                         <img src="{{ asset('img/banner-berdiri.jpg') }}"
                                             class="rounded-lg object-center w-full h-full object-cover" alt="...">
                                     </div>
                                     <!-- Text Content -->
-                                    <div class="col-span-4 p-4 flex flex-col justify-center pl-8">
+                                    <div class="hidden xl:flex xl:col-span-4 p-4  flex-col justify-center pl-8">
                                         <div>
                                             <h1 class="text-4xl font-bold flex pb-4">Jember Fashion Carnaval</h1>
                                             <p class="text-lg pr-20 mb-2 font-medium ">Jember Fashion Carnaval adalah
@@ -186,7 +186,7 @@
                         <h5 class="pl-9">Berikut adalah beberapa wisata saat ini</h5>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-8">
+                    <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
                         <div class="space-y-2 h-auto w-auto border border-slate-500 p-4 rounded-lg">
                             <img class="object-cover w-full h-48 rounded-lg" src="{{ asset('img/Botani.png') }}"
                                 alt="Image">
@@ -238,31 +238,54 @@
                             <h5 class="pl-9">Berikut adalah persebaran seluruh wisata saat ini</h5>
                         </div>
                         <!-- Dropdown and Search Bar -->
-                        <form class="flex items-center mb-4">
+                        <form class="flex items-center justify-end mb-4">
                             <!-- Dropdown -->
-                            <div class="">
-                                <div>
-                                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                                        class="inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 "
-                                        type="button">
-                                        ~~~Semua Wisata~~~
-                                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div id="dropdown"
-                                    class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
-                                    <ul class="py-2 text-sm text-gray-700 ">
-                                        <li><button type="button" class="w-full px-4 py-2 hover:bg-gray-100 ">Wisata
-                                                Budaya</button></li>
 
-                                    </ul>
-                                </div>
-                                
+                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+                                type="button">Semua <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div id="dropdown"
+                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                                <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Alami</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Sign out</a>
+                                    </li>
+                                </ul>
                             </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const dropdownButton = document.getElementById('dropdownDefaultButton');
+                                    const dropdownMenu = document.getElementById('dropdown');
+                            
+                                    dropdownButton.addEventListener('click', function () {
+                                        dropdownMenu.classList.toggle('hidden');
+                                        dropdownMenu.style.zIndex = 1000; // Set z-index saat dropdown terbuka
+                                    });
+                            
+                                    window.addEventListener('click', function (event) {
+                                        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                                            dropdownMenu.classList.add('hidden');
+                                        }
+                                    });
+                                });
+                            </script>
+
                         </form>
 
                         <!-- Leaflet Map -->
@@ -271,11 +294,12 @@
 
 
                     {{-- LEFLEAT JS --}}
+
                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
                     <script>
                         // Initialize Leaflet map
                         var map = L.map('map', {
-                            center: [-8.1691362,113.7021103],
+                            center: [-8.1691362, 113.7021103],
                             zoom: 10,
                             zoomControl: true, // Menonaktifkan kontrol zoom
                             dragging: true, // Menonaktifkan dragging
@@ -294,7 +318,6 @@
 
                         // Add more markers here
                     </script>
-
 
 
 
