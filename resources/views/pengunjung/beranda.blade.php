@@ -1,4 +1,4 @@
-<x-layout>
+    <x-layout>
 
     <div class="bg-white top-0 w-full h-auto">
         <!-- Hero Section -->
@@ -269,16 +269,16 @@
                                 </ul>
                             </div>
                             <script>
-                                document.addEventListener('DOMContentLoaded', function () {
+                                document.addEventListener('DOMContentLoaded', function() {
                                     const dropdownButton = document.getElementById('dropdownDefaultButton');
                                     const dropdownMenu = document.getElementById('dropdown');
-                            
-                                    dropdownButton.addEventListener('click', function () {
+
+                                    dropdownButton.addEventListener('click', function() {
                                         dropdownMenu.classList.toggle('hidden');
                                         dropdownMenu.style.zIndex = 1000; // Set z-index saat dropdown terbuka
                                     });
-                            
-                                    window.addEventListener('click', function (event) {
+
+                                    window.addEventListener('click', function(event) {
                                         if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                                             dropdownMenu.classList.add('hidden');
                                         }

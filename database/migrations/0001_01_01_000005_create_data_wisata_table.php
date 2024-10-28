@@ -9,18 +9,25 @@ class CreateDataWisataTable extends Migration
     public function up()
     {
         Schema::create('data_wisata', function (Blueprint $table) {
-            $table->id('id_wisata');
-            $table->string('nama_wisata');
+            $table->id();
+            $table->string('nama_wisata')->unique();
             $table->string('kategori_wisata');
             $table->text('deskripsi_wisata')->nullable();
+            $table->string('img')->nullable();
+            $table->json('img_wisata')->nullable();
             $table->text('fasilitas')->nullable();
             $table->string('lokasi');
             $table->string('latitude');
             $table->string('longitude');
             $table->decimal('htm_wisata', 10, 2);
             $table->decimal('htm_parkir', 10, 2);
-            $table->unsignedBigInteger('id_data_wisata_event')->nullable();
-            $table->unsignedBigInteger('id_data_wisata_kuliner')->nullable();
+
+            // Foreign key untuk event wisata
+            $table->foreignId('event_id')->nullable()->constrained('data_wisata_event')->onDelete('cascade');
+
+            // Foreign key untuk kuliner
+            $table->foreignId('kuliner_id')->nullable()->constrained('data_wisata_kuliner')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

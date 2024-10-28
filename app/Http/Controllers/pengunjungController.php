@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class pengunjungController extends Controller
+class PengunjungController extends Controller
 {
     public function beranda()
     {
@@ -28,7 +28,7 @@ class pengunjungController extends Controller
 
     public function detailWisata ()
     {
-        return view('pengunjung.detailWisata');
+        return view('pengunjung.profilWisata');
     }
 
     public function rute ()

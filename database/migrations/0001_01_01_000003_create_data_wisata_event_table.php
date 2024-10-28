@@ -9,7 +9,7 @@ class CreateDataWisataEventTable extends Migration
     public function up()
     {
         Schema::create('data_wisata_event', function (Blueprint $table) {
-            $table->id('id_data_wisata_event');
+            $table->id();
             $table->string('nama_event');
             $table->text('deskripsi_event')->nullable();
             $table->date('tgl_mulai');

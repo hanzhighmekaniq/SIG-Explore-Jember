@@ -1,121 +1,105 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+   <div class="h-full  px-3 pb-4 overflow-y-auto bg-white    ">
+       <ul class="space-y-2 font-medium ">
+           <li class="">
+               <a href="/dashboard"
+                   class="flex items-center p-2  rounded-lg text-[#414833]  hover:text-white  hover:bg-[#656D4A]  {{ request()->is('dashboard') ? 'bg-[#656D4A]  text-white' : '' }}">
+                   <svg class="w-5 h-5 hover:text-white  transition duration-75   " aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                       <path
+                           d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                       <path
+                           d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                   </svg>
+                   <span class="ms-3  hover:text-white">Dashboard</span>
+               </a>
+           </li>
+           <li class="group">
+               <a href="/data-wisata"
+                   class="flex items-center p-2 rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white {{ request()->is('data-wisata', 'tambah-wisata', 'tambah-event', 'tambah-kuliner') ? 'bg-[#656D4A] text-white' : '' }}">
+                   <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                       <path
+                           d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
+                   </svg>
+                   <span class="flex-1 ms-3 whitespace-nowrap">Data Wisata</span>
+                   <span
+                       class="inline-flex items-center justify-center w-auto px-2 h-auto ms-3 text-sm font-medium bg-[#656D4A] rounded-full group-hover:bg-white group-hover:text-[#656D4A] {{ request()->is('data-wisata') ? 'bg-white text-[#656D4A]' : 'text-white' }}">
+                       34
+                   </span>
+               </a>
+           </li>
 
-
-    {{-- NAVBAR CUSTOMER --}}
-    {{-- TAILWIND --}}
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    {{-- GOOGLE FONT --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- FONT --}}
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Pacifico&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Arimo:ital,wght@0,700;1,700&family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Jersey+25&family=Poetsen+One&family=Ramabhadra&family=Righteous&family=Rubik+Mono+One&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
-
-    {{-- CSS FONT --}}
-    <link rel="stylesheet" href="./css/font.css">
-    {{-- ALPIN.JS --}}
-    <script src="//unpkg.com/alpinejs" defer></script>
-</head>
-
-
-
-<aside id="sidebar"
-    class="flex fixed top-0 left-0 z-20 flex-col flex-shrink-0 pt-16 w-64 h-full duration-200 lg:flex transition-width"
-    aria-label="Sidebar">
-    <div class="flex relative flex-col flex-1 pt-0 min-h-0 bg-gray-50">
-        <div class="flex overflow-y-auto flex-col flex-1 pt-8 pb-4">
-            <div class="flex-1 px-3 bg-gray-50" id="sidebar-items">
-                <ul class="pb-2 pt-1">
-                    <li>
-                        <form action="#" method="GET" class="lg:hidden">
-                            <label for="mobile-search" class="sr-only">Search</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <input type="text" name="search" id="mobile-search"
-                                    class="bg-gray-50 border border-gray-300 text-dark-500 text-sm font-light rounded-lg focus:ring-2 focus:ring-fuchsia-50 focus:border-fuchsia-300 block w-full pl-10 p-2.5 mb-2"
-                                    placeholder="Search" aria-label="Search">
-                            </div>
-                        </form>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-center py-2.5 px-4 text-base font-normal text-dark-500 rounded-lg hover:bg-gray-200 group bg-white shadow-lg shadow-gray-200 transition-all duration-200"
-                            aria-label="Dashboard">
-                            <div
-                                class="bg-fuchsia-500 text-white w-8 h-8 p-2.5 mr-1 rounded-lg text-center grid place-items-center">
-                                <svg width="12px" height="12px" viewBox="0 0 45 40"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <title>shop</title>
-                                    <path
-                                        d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"
-                                        opacity="0.598981585"></path>
-                                </svg>
-                            </div>
-                            <span class="ml-3 text-dark-500 text-sm font-light">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://demos.creative-tim.com/soft-ui-flowbite-pro/mailing/inbox/"
-                            class="flex items-center py-2.5 px-4 text-base font-normal text-dark-500 rounded-lg hover:bg-gray-200 group transition-all duration-200"
-                            aria-label="Kanban">
-                            <div
-                                class="bg-fuchsia-500 text-white w-8 h-8 p-2.5 mr-1 rounded-lg text-center grid place-items-center">
-                                <svg width="12px" height="12px" viewBox="0 0 40 44"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <title>document</title>
-                                    <path
-                                        d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"
-                                        opacity="0.603585379"></path>
-                                    <path
-                                        d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span class="ml-3 text-dark-500 text-sm font-light">Kanban</span>
-                            <span
-                                class="bg-fuchsia-50 text-fuchsia-800 ml-auto text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://demos.creative-tim.com/soft-ui-flowbite-pro/kanban/"
-                            class="flex items-center py-2.5 px-4 text-base font-normal text-dark-500 rounded-lg hover:bg-gray-200 group transition-all duration-200"
-                            aria-label="Inbox">
-                            <div
-                                class="bg-fuchsia-500 text-white w-8 h-8 p-2.5 mr-1 rounded-lg text-center grid place-items-center">
-                                <svg width="12px" height="12px" viewBox="0 0 46 42"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <title>customer-support</title>
-                                    <path
-                                        d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.434,20.958 26.641,20.868 L32.608,18.734 C32.713,18.693 32.825,18.656 32.936,18.621 L32.936,31.852 L23.917,32.737 C23.639,32.756 23.373,32.957 23.253,33.222 L21.968,36.883 L21.968,38.309 C21.968,38.485 22.138,38.644 22.345,38.644 L40.078,38.644 C40.284,38.644 40.453,38.485 40.453,38.309 L40.453,36.883 L39.168,33.222 C39.048,32.957 38.782,32.756 38.504,32.737 L29.484,31.852 L29.484,18.621 L29.595,18.734 L35.553,20.895 C35.882,21.068 36.118,21.26 36.118,21.571 L36.118,1 C36.118,0.447 35.671,0 35.118,0 L22.118,0 C21.565,0 21.118,0.447 21.118,1 L21.118,16.944 C21.118,17.318 21.399,17.666 21.749,17.666 L26.111,17.666 C26.688,17.666 27.256,17.943 27.498,18.423 L28.978,21.597 L28.978,27.597 L30.953,25.644 L39.949,20.951 L39.949,21.158 L46.227,12.963 C46.306,12.798 46.363,12.616 46.363,12.437 L46.363,2.989 C46.363,2.812 46.306,2.63 46.227,2.465 L45.283,1.229 C45.254,1.171 45.227,1.117 45.192,1.063 L45.014,0.938 C45.007,0.931 45,0.924 44.991,0.916 L45,0 Z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <span class="ml-3 text-dark-500 text-sm font-light">Inbox</span>
-                        </a>
-                    </li>
+           <li>
+               <a href="#"
+                   class="flex items-center p-2  rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white ">
+                   <svg class="flex-shrink-0 w-5 h-5  transition duration-75   " aria-hidden="true"
+                       xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                       <path
+                           d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+                   </svg>
+                   <span class="flex-1 ms-3 whitespace-nowrap">Pengaturan</span>
+               </a>
+           </li>
+           <li>
+               <form action="{{ route('logout') }}" method="POST" id="logout-form" class="inline">
+                   @csrf
+                   <button type="button" id="logout-button"
+                       class="flex items-center p-2 w-full rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white">
+                       <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true"
+                           xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                           <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
+                           <path
+                               d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
+                           <path
+                               d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
+                       </svg>
+                       <span class="flex ms-3 whitespace-nowrap">Log Out</span>
+                   </button>
+               </form>
 
 
 
-            </div>
-        </div>
-</aside>
 
-<div class="hidden fixed inset-0 z-10 bg-gray-900 opacity-50" id="sidebarBackdrop"></div>
+               <script>
+                   document.addEventListener('DOMContentLoaded', function() {
+                       const logoutButton = document.getElementById('logout-button');
+                       const modal = document.getElementById('popup-modal');
+                       const confirmLogoutButton = document.getElementById('confirm-logout');
+                       const closeModalButton = document.getElementById('close-modal');
+                       const cancelLogoutButton = document.getElementById('cancel-logout');
+                       const logoutForm = document.getElementById('logout-form');
+
+                       // Ketika tombol logout di klik
+                       logoutButton.addEventListener('click', function() {
+                           modal.classList.remove('hidden'); // Hapus class hidden
+                           modal.classList.add('flex'); // Tambahkan class flex
+                       });
+
+                       // Ketika tombol confirm logout di klik
+                       confirmLogoutButton.addEventListener('click', function() {
+                           logoutForm.submit(); // Submit the form to log out
+                       });
+
+                       // Ketika tombol close di klik
+                       closeModalButton.addEventListener('click', function() {
+                           modal.classList.add('hidden'); // Tambahkan class hidden
+                           modal.classList.remove('flex'); // Hapus class flex
+                       });
+
+                       // Ketika tombol cancel di klik
+                       cancelLogoutButton.addEventListener('click', function() {
+                           modal.classList.add('hidden'); // Tambahkan class hidden
+                           modal.classList.remove('flex'); // Hapus class flex
+                       });
+                   });
+               </script>
+
+
+
+
+
+
+
+           </li>
+       </ul>
+   </div>
