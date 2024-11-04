@@ -35,29 +35,39 @@
 
             <div>
                 <div class="pt-6">
-                    @if (request()->is('data-wisata', 'tambah-wisata', 'tambah-event', 'tambah-kuliner'))
-                        {{-- SEARCH --}}
+                    @if (request()->routeIs(
+                            'wisata.index',
+                            'event.index',
+                            'kuliner.index',
+                            'wisata.create',
+                            'event.create',
+                            'kuliner.create'))
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 ">
                             @include('partials.navlink')
                         </div>
-                        {{ $slot }}
-
-                        @else
-                        {{ $slot }}
-
+                        @if (request()->routeIs('wisata.index', 'wisata.create'))
+                            @include('partials.navData.navWisata')
+                        @elseif (request()->routeIs('event.index', 'event.create'))
+                            @include('partials.navData.navEvent')
+                        @elseif (request()->routeIs('kuliner.index', 'kuliner.create'))
+                            @include('partials.navData.navKuliner')
+                        @endif
+                    @else
                     @endif
+                    {{ $slot }}
+
                 </div>
             </div>
         </div>
     </div>
 </body>
 
-{{-- POPUP LOGOUT --}}
-<div id="popup-modal" tabindex="-1"
+{{-- MODAL LOGOUT --}}
+<div id="default-modal-logout" tabindex="-1"
     class="hidden fixed inset-0 z-50  items-center justify-center bg-black bg-opacity-50">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button"
+            <button type="button" data-modal-hide="default-modal-logout"
                 class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 id="close-modal">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -73,21 +83,26 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you
-                    want to log out?</h3>
-                <button type="button" id="confirm-logout"
-                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                    Yes, I'm sure
-                </button>
-                <button type="button" id="cancel-logout"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    No, cancel
-                </button>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin ingin
+                    keluar?</h3>
+                <div class="flex justify-center">
+                    <form id="" method="GET" action="{{ route('logout') }}">
+                        @csrf <!-- Token CSRF -->
+                        <button type="submit"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Ya, Keluar
+                        </button>
+                    </form>
+
+                    <button type="button" id="cancel-logout"data-modal-hide="default-modal-logout"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        Tidak, Batal
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 
