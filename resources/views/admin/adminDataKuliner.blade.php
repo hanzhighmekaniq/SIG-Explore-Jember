@@ -10,16 +10,16 @@
                         No
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Kuliner
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Deskripsi
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Wisata
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Kategori
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Detail Kategori
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Deskripsi
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Gambar
@@ -30,37 +30,34 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($DataWisata as $index => $wisata)
+                @foreach ($DataKuliner as $index => $kuliner)
                     <tr class="odd:bg-white even:bg-gray-50 border-b">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $index + 1 }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $wisata->nama_wisata }}
+                            {{ $kuliner->nama_kuliner }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->kategori->nama_kategori ?? 'N/A' }}
+                            {{ $kuliner->deskripsi_kuliner }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->kategori->detail_kategori ?? 'N/A' }}
+                            {{ $kuliner->wisata->nama_wisata }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->deskripsi_wisata }}
+                            {{ $kuliner->wisata->kategori->nama_kategori }}-
+                            {{ $kuliner->wisata->kategori->detail_kategori }}
                         </td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $wisata->img) }}" class="h-20 w-auto" alt="Image">
+                            <img src="{{ $kuliner->img }}" alt="Gambar" width="50">
                         </td>
-
-
-
-
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center">
                                 <a href="#" class="font-medium text-blue-600 border px-4 py-2 rounded-lg">Edit</a>
                             </div>
                             <div class="flex justify-center">
                                 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                    data-id="{{ $wisata->id }}"
+                                    data-id="{{ $kuliner->id }}"
                                     class="font-medium text-red-600 border px-4 py-2 rounded-lg delete-button">
                                     Hapus
                                 </button>
@@ -122,7 +119,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    const deleteUrl = `/data-wisata/${id}`;
+                    const deleteUrl = `/data-kuliner/${id}`;
                     deleteForm.setAttribute('action', deleteUrl);
                 });
             });

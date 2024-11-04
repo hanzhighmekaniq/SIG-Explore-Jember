@@ -13,16 +13,6 @@ class AdminController extends Controller
         return view('admin.adminBeranda');
     }
 
-    public function adminDataWisata()
-    {
-        $showDataWisata = DataWisata::all();
-        return view('admin.adminDataWisata', ['dataWisata' => $showDataWisata]);
-    }
-
-    public function tambahWisata()
-    {
-        return view('admin.tambahWisata');
-    }
     public function tambahEvent()
     {
         return view('admin.tambahEvent');
@@ -36,12 +26,5 @@ class AdminController extends Controller
 
 
 
-    // CRUD
-    public function destroy($id)
-    {
-        $wisata = DataWisata::findOrFail($id);
-        $wisata->delete();
 
-        return redirect()->route('dataWisata')->with('success', 'Data berhasil dihapus');
-    }
 }
