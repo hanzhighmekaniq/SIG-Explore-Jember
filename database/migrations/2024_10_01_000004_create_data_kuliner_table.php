@@ -15,12 +15,14 @@ return new class extends Migration
             $table->string('gambar_kuliner')->nullable();
             $table->string('gambar_menu')->nullable();
             $table->timestamps();
-            
+
             // Ubah 'data_kategoris' menjadi 'data_wisata' jika itu tabel yang benar
-            $table->foreignId('id_wisata')->constrained(
-                table: 'data_wisatas',
-                indexName: 'kuliner_id'
-            )->nullable();
+            $table->foreignId('id_wisata')
+            ->nullable() // Membuat kolom ini bisa NULL
+                ->constrained('data_wisatas') // Nama tabel yang dijadikan referensi
+                ->onDelete('set null') // Aturan saat data dihapus
+                ->onUpdate('cascade'); // Aturan saat data diupdate
+
         });
     }
 
@@ -29,4 +31,3 @@ return new class extends Migration
         Schema::dropIfExists('data_kuliner');
     }
 };
-

@@ -2,7 +2,7 @@
 
 <ul class="text-sm  flex font-medium text-center text-gray-500 rounded-lg  ">
 
-    <li class="flex {{ request()->routeIs('wisata.index','wisata.create') ? 'bg-[#656D4A]  text-white' : '' }}">
+    <li class="flex {{ request()->routeIs('wisata.index','wisata.create','wisata.edit') ? 'bg-[#656D4A]  text-white' : '' }}">
         <a href="{{ route('wisata.index') }}" class="flex justify-center  py-2 items-center border px-4 border-gray-400 ">
             Wisata
             <div
@@ -10,7 +10,7 @@
             </div>
         </a>
     </li>
-    <li class="flex {{ request()->routeIs('event.index','event.create') ? 'bg-[#656D4A]  text-white' : '' }}">
+    <li class="flex {{ request()->routeIs('event.index','event.create','event.edit') ? 'bg-[#656D4A]  text-white' : '' }}">
         <a href="{{ route('event.index') }}" class="flex justify-center  py-2 items-center border px-4 border-gray-400  ">
 
             <div
@@ -18,7 +18,7 @@
                 Event</div>
         </a>
     </li>
-    <li class="flex {{ request()->routeIs('kuliner.index','kuliner.create') ? 'bg-[#656D4A]  text-white' : '' }}">
+    <li class="flex {{ request()->routeIs('kuliner.index','kuliner.create','kuliner.edit') ? 'bg-[#656D4A]  text-white' : '' }}">
         <a href="{{ route('kuliner.index') }}"
             class="flex justify-center  py-2 items-center border px-4 border-gray-400   ">
 

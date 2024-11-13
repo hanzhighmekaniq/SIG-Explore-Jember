@@ -11,7 +11,7 @@
     </style>
 </head>
  --}}
- <x-layout>
+<x-layout>
 
     <div class="bg-white h-auto w-full">
         <div class="container m-auto">
@@ -25,7 +25,7 @@
             <div class="flex justify-center items-center pb-32 w-full">
                 <div class="w-full pt-32">
                     <p class="font-bold 2xl:text-4xl mb-10">Titik Koordinat Lokasi Wisata</p>
-                    <div id="map"></div>
+                    <div id="map" class="relative z-[1]                 "></div>
                 </div>
             </div>
             <style>
@@ -50,11 +50,14 @@
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-
-                // Contoh menambahkan marker lokasi wisata
-                var marker = L.marker([-8.4310054, 113.5559703]).addTo(map)
-                    .bindPopup('<b>Wisata Tanjung Papuma</b><br>Pantai Selatan.')
-                    .openPopup();
+                @foreach ($wisata as $wisata)
+                    // Contoh menambahkan marker lokasi wisata
+                    var marker = L.marker([{{ $wisata->latitude }}, {{ $wisata->longitude }}]).addTo(map)
+                        .bindPopup(
+                            '<b>{{ $wisata->nama_wisata }}</b><br>{{ $wisata->kategori->nama_kategori }}, {{ $wisata->kategori->detail_kategori }}.'
+                            )
+                        .openPopup();
+                @endforeach
             </script>
 
             {{-- Tabel --}}

@@ -1,30 +1,28 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\DataWisata;
-use App\Models\DataWisataEvent;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
     public function adminBeranda()
     {
-        return view('admin.adminBeranda');
+        // Menghitung wisata yang memiliki kategori 'Alam'
+        $countAlam = DataWisata::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'Alam');
+        })->count();
+
+        // Menghitung wisata yang memiliki kategori 'Buatan'
+        $countBuatan = DataWisata::whereHas('kategori', function ($query) {
+            $query->where('nama_kategori', 'Buatan');
+        })->count();
+
+        // Mengambil seluruh data lokasi
+        $dataLokasi = DataWisata::all();
+
+        // Mengirim data ke view adminBeranda
+        return view('admin.adminBeranda', compact('countAlam', 'countBuatan', 'dataLokasi'));
     }
-
-    public function tambahEvent()
-    {
-        return view('admin.tambahEvent');
-    }
-    public function tambahKuliner()
-    {
-        return view('admin.tambahKuliner');
-    }
-
-
-
-
-
-
 }
+

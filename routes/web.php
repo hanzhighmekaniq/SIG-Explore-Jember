@@ -5,12 +5,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\aqController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\WisataController;
+
+//aq
+Route::get('/aq', [aqController::class, 'aq'])->name('aq.index');
 
 // Rute untuk pengunjung
 Route::get('/', [PengunjungController::class, 'beranda'])->name('beranda.index');

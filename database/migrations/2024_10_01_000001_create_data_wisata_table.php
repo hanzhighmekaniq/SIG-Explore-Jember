@@ -23,14 +23,15 @@ return new class extends Migration
             $table->json('img_detail')->nullable();
             $table->string('latitude');
             $table->string('longitude');
-            $table->decimal('htm_wisata', 10, 5)->nullable();
-            $table->decimal('htm_parkir', 10, 5)->nullable();
+            $table->decimal('htm_wisata', 15, 2)->nullable();
+            $table->decimal('htm_parkir', 15, 2)->nullable();
             $table->timestamps();
-            $table->foreignId('id_kategori')->constrained(
-                table: 'data_kategori',
-                column: 'id',
-                indexName: 'wisata_id'
-            )->nullable();
+
+            $table->foreignId('id_kategori')
+                ->nullable()
+                ->constrained('data_kategori')
+                ->onDelete('set null') // Set ke NULL jika data dihapus
+                ->onUpdate('cascade');
         });
     }
 

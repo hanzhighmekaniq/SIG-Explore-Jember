@@ -15,14 +15,14 @@ class DataEventFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition():array
+    public function definition(): array
     {
         return [
             'nama_event' => fake()->word(),
-            'id_wisata' => DataWisata::inRandomOrder()->first()->id,// Ini akan diisi dari seeder atau recycle
+            'id_wisata' => DataWisata::inRandomOrder()->first()->id, // Ini akan diisi dari seeder atau recycle
             'deskripsi_event' => fake()->paragraph(),
-            'event_mulai' => fake()->dateTime(),
-            'event_berakhir' => fake()->dateTime(),
+            'event_mulai' => fake()->dateTime()->format('Y-m-d\TH:i'),
+            'event_berakhir' => fake()->dateTime()->format('Y-m-d\TH:i'),
             'htm_event' => fake()->numberBetween(5000, 50000), // Contoh untuk harga tiket masuk
         ];
     }

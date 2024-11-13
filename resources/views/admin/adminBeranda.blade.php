@@ -8,7 +8,7 @@
                 <div class="justify-end flex p-4">
                     <div class="justify-between">
                         <p class="justify-start">Wisata Alam</p>
-                        <p class="justify-end">10</p>
+                        <p class="justify-end">{{ $countAlam }}</p>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="justify-end flex p-4">
                     <div class="justify-between">
                         <p class="justify-start">Wisata Alam</p>
-                        <p class="justify-end">10</p>
+                        <p class="justify-end">{{ $countBuatan }}</p>
                     </div>
                 </div>
             </div>
@@ -34,13 +34,15 @@
                 }
             </style>
 
-            <div id="map" class="relative z-[1] w-full h-56 sm:h-64 md:h-96 lg:h-[500px] xl:h-[600px] max-w-4xl rounded-lg shadow-lg"></div>
+            <div id="map"
+                class="relative z-[1] w-full h-56 sm:h-64 md:h-96 lg:h-[500px] xl:h-[600px] max-w-4xl rounded-lg shadow-lg">
+            </div>
 
             <!-- Leaflet JS -->
             <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
             <script>
                 // Initialize the map with default center and zoom level
-                const map = L.map('map').setView([-8.1693844,113.7041932], 10);
+                const map = L.map('map').setView([-8.1693844, 113.7041932], 10);
 
                 // Add a tile layer from OpenStreetMap
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -49,11 +51,14 @@
 
                 // Dummy markers data
                 const markers = [
-                    {
-                        coords: [-8.1693844,113.7041932],
-                        popupText: 'Lokasi 1',
-                        href: '#'
-                    }
+
+                    @foreach ($dataLokasi as $lokasi)
+                        {
+                            coords: [{{$lokasi->latitude}}, {{ $lokasi->longitude }}],
+                            popupText: 'Wisata {{ $lokasi->nama_wisata }}',
+                            href: '{{ route('wisata.index') }}'
+                        },
+                    @endforeach
                 ];
 
                 // Add markers to the map
@@ -71,7 +76,9 @@
                         popupAnchor: [1, -34],
                     });
 
-                    const userMarker = L.marker(e.latlng, { icon: userIcon }).addTo(map);
+                    const userMarker = L.marker(e.latlng, {
+                        icon: userIcon
+                    }).addTo(map);
                     userMarker.bindPopup("You are here").openPopup();
 
                     map.setView(e.latlng, 20);

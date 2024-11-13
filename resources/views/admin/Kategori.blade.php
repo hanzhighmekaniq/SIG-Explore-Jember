@@ -236,6 +236,7 @@
             </div>
         </div>
     @endforeach
+    
     {{-- Modal DELETE Kategori --}}
     @foreach ($DataKategori as $kategori)
         <div id="default-modal-delete-kategori{{ $kategori->id }}" tabindex="-1"

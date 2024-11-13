@@ -1,4 +1,4 @@
-<nav class=" w-full bg-white shadow-lg">
+<nav class=" w-full bg-white shadow-lg z-[100] relative">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#beranda" class="pacifico-regular text-2xl  text-[#656D4A]    hover:text-black">Visit Jember</a>
 

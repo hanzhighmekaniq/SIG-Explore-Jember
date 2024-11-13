@@ -14,17 +14,19 @@ return new class extends Migration
             $table->text('deskripsi_event')->nullable();
             $table->datetime('event_mulai'); // Menggabungkan tanggal dan waktu mulai
             $table->datetime('event_berakhir'); // Menggabungkan tanggal dan waktu berakhir
-            $table->decimal('htm_event', 10, 2)->nullable();
+            $table->decimal('htm_event', 15, 2)->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
 
             // Menambahkan foreign key
-            $table->foreignId('id_wisata')->constrained(
-                table: 'data_wisatas',
-                indexName: 'event_id'
-            )->nullable();
+            $table->foreignId('id_wisata')
+                ->nullable() // Kolom bisa NULL
+                ->constrained('data_wisatas') // Menunjuk ke tabel data_wisatas
+                ->onDelete('set null') // Set ke NULL jika data dihapus
+                ->onUpdate('cascade');  // Perbarui nilai jika data diupdate
         });
     }
+
 
     public function down(): void
     {

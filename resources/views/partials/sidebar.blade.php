@@ -37,7 +37,7 @@
                    <span class="flex-1 ms-3 whitespace-nowrap">Data Wisata</span>
                    <span
                        class="inline-flex items-center justify-center w-auto px-2 h-auto ms-3 text-sm font-medium bg-[#656D4A] rounded-full group-hover:bg-white group-hover:text-[#656D4A] {{ request()->is('data-wisata') ? 'bg-white text-[#656D4A]' : 'text-white' }}">
-                       34
+                       {{ $countWisata }}
                    </span>
                </a>
            </li>

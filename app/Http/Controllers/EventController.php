@@ -6,6 +6,7 @@ use App\Models\DataEvent;
 use App\Models\DataWisata;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
@@ -13,7 +14,8 @@ class EventController extends Controller
     public function index()
     {
 
-        $showDataEvent = DataEvent::all();
+        $showDataEvent = DataEvent::latest()->get();
+
         return view('admin.adminDataEvent', ['DataEvent' => $showDataEvent]);
     }
 
@@ -61,11 +63,87 @@ class EventController extends Controller
     }
 
 
-    public function edit($id) {}
+    public function edit($id)
+    {
+        // Ambil data kuliner berdasarkan ID
+        $event = DataEvent::find($id);
 
-    public function update(Request $request, $id) {}
+        // Cek apakah data ditemukan
+        if (!$event) {
+            return redirect()->route('event.index')->with(['error' => 'Data tidak ditemukan']);
+        }
 
-    public function destroy($id) {}
+        // Ambil data wisata untuk dropdown
+        $wisata = DataWisata::all();
+
+        // Kirim data ke view edit
+        return view('admin.editEvent', [
+            'event' => $event,
+            'wisata' => $wisata
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'id_wisata' => 'required', // Pastikan ID wisata ada
+            'nama_event' => 'required|string|max:255',
+            'deskripsi_event' => 'nullable|string',
+            'event_mulai' => 'required',
+            'event_berakhir' => 'required', // Validasi multiple files
+            'htm_event' => 'nullable', // Validasi multiple files
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi multiple files
+        ]);
+
+        // Ambil data kuliner berdasarkan ID
+        $event = DataEvent::find($id);
+
+        // Cek apakah data ditemukan
+        if (!$event) {
+            return redirect()->route('kuliner.edit')->with(['error' => 'Data tidak ditemukan']);
+        }
+        try {
+            // Update data kuliner
+            $event->id_wisata = $request->id_wisata;
+            $event->nama_event = $request->nama_event;
+            $event->deskripsi_event = $request->deskripsi_event;
+            $event->event_mulai = $request->event_mulai;
+            $event->event_berakhir = $request->event_berakhir;
+
+            // Cek jika ada gambar baru yang di-upload untuk gambar kuliner
+            if ($request->hasFile('img')) {
+                // Hapus gambar lama jika ada
+                if ($event->img) {
+                    Storage::delete('public/' . $event->img);
+                }
+
+
+                // Simpan gambar baru
+                $path = $request->file('img')->store('images/event/img', 'public');
+                $event->img = $path;
+            }
+
+
+            // Simpan perubahan
+            $event->save();
+
+            // Redirect ke halaman index kuliner dengan pesan sukses
+            return redirect()->route('event.index')->with(['success' => 'Data Event berhasil diupdate']);
+        } catch (\Exception $e) {
+            return redirect()->route('event.edit')->with(['error' => 'Data Event gagal diupdate']);
+        }
+    }
+
+    public function destroy($id)
+    {
+        // Temukan kategori berdasarkan ID
+        $event = DataEvent::findOrFail($id);
+
+        // Hapus kategori
+        $event->delete();
+        return redirect()->route('event.index')->with('success', 'Event berhasil dihapus.');
+    }
 
     public function show($id) {}
 }
