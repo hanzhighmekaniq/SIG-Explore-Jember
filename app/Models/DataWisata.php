@@ -11,7 +11,7 @@ class DataWisata extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_wisatas';
+    protected $table = 'data_wisata';
 
     protected $fillable = [
         'nama_wisata',

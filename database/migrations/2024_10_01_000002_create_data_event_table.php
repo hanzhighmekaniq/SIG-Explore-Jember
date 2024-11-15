@@ -21,7 +21,7 @@ return new class extends Migration
             // Menambahkan foreign key
             $table->foreignId('id_wisata')
                 ->nullable() // Kolom bisa NULL
-                ->constrained('data_wisatas') // Menunjuk ke tabel data_wisatas
+                ->constrained('data_wisata') 
                 ->onDelete('set null') // Set ke NULL jika data dihapus
                 ->onUpdate('cascade');  // Perbarui nilai jika data diupdate
         });

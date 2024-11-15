@@ -34,6 +34,7 @@ Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
+        Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
 
         // Resource routes
         Route::resource('kategori', KategoriController::class);

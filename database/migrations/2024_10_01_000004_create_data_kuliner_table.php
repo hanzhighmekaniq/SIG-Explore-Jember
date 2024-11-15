@@ -19,7 +19,7 @@ return new class extends Migration
             // Ubah 'data_kategoris' menjadi 'data_wisata' jika itu tabel yang benar
             $table->foreignId('id_wisata')
             ->nullable() // Membuat kolom ini bisa NULL
-                ->constrained('data_wisatas') // Nama tabel yang dijadikan referensi
+                ->constrained('data_wisata') // Nama tabel yang dijadikan referensi
                 ->onDelete('set null') // Aturan saat data dihapus
                 ->onUpdate('cascade'); // Aturan saat data diupdate
 

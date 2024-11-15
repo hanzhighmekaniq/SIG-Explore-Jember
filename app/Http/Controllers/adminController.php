@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\DataWisata;
@@ -24,5 +25,10 @@ class AdminController extends Controller
         // Mengirim data ke view adminBeranda
         return view('admin.adminBeranda', compact('countAlam', 'countBuatan', 'dataLokasi'));
     }
+    public function dashboard()
+    {
+        $countWisata = DataWisata::count();
+        view()->share('countWisata', $countWisata); // Bagikan variabel ke seluruh view
+        return view('partials.sidebar');
+    }
 }
-

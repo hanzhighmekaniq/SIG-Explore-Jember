@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Membagikan countWisata ke seluruh view
-        $countWisata = DataWisata::count();
-        View::share('countWisata', $countWisata);
+        // $countWisata = DataWisata::count();
+        // View::share('countWisata', $countWisata);
     }
 }
