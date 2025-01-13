@@ -1,4 +1,4 @@
-<footer class="bg-[#414833] text-white w-full py-6">
+<footer class="bg-[#414833] text-white w-full py-6 px-4">
     <div class="container m-auto">
 
         <!-- Section Title -->
@@ -28,7 +28,7 @@
                         class="textarea textarea-bordered max-w-xl w-full h-32 placeholder:text-base focus-within:border-white placeholder-shown:border-white placeholder:text-white text-white bg-[#414833]"
                         placeholder="Kritik Atau Saran"></textarea>
                 </div>
-                <button class="btn bg-white text-[#414833] w-full max-w-xl">Kirim</button>
+                <button class="btn bg-white text-[#414833] py-2 font-bold w-full max-w-xl">Kirim</button>
             </div>
 
             <!-- Contact Information -->
@@ -36,16 +36,16 @@
                 <p class="text-3xl font-bold text-white pacifico-regular mb-6">Visit Jember</p>
                 <div class="flex items-center xl:justify-end justify-start xl:text-end text-start mb-2">
                     <p class="flex mr-2 text-white text-lg font-semibold">085259990293</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 682 682.667" style="enable-background:new 0 0 512 512">
-                        <!-- SVG Path here -->
-                    </svg>
+                    <!-- Menggunakan atribut fill di SVG -->
+
                 </div>
+
                 <div class="flex items-center xl:justify-end justify-start xl:text-end text-start">
                     <p class="flex mr-2 text-white text-lg font-semibold">cs.visit@gmail.com</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512">
-                        <!-- SVG Path here -->
-                    </svg>
+                    <!-- Menggunakan atribut fill pada path -->
+                    
                 </div>
+
             </div>
         </div>
     </div>

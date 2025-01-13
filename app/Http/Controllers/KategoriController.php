@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataKategori;
+use App\Models\DataKategoriDetail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,8 +13,9 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        $showDataKategori = DataKategori::all();
-        return view('admin.Kategori', ['DataKategori' => $showDataKategori]);
+        $DataKategori = DataKategori::with(['kategori_details'])->simplePaginate(5);
+        $SubKategori = DataKategoriDetail::with(['kategori'])->simplePaginate(10);
+        return view('admin.Kategori', compact('DataKategori', 'SubKategori'));
     }
 
     public function create() {}
@@ -22,13 +24,11 @@ class KategoriController extends Controller
     {
         $request->validate([
             'nama_kategori' => 'required',
-            'detail_kategori' => 'required'
         ]);
 
         try {
             DataKategori::create([
                 'nama_kategori' => $request->nama_kategori,
-                'detail_kategori' => $request->detail_kategori
             ]);
 
             return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Ditambahkan']);
@@ -37,7 +37,7 @@ class KategoriController extends Controller
             return redirect()->route('kategori.index')->with(['error' => 'Data Sudah Ada']);
         }
     }
-
+    
 
 
     public function edit($id)

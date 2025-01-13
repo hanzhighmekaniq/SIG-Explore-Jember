@@ -14,14 +14,13 @@ class DataKategori extends Model
 
     protected $fillable = [
         'nama_kategori',
-        'detail_kategori',
     ];
 
     public $timestamps = true;
 
     // Relasi dengan DataWisata
-    public function wisatas(): HasMany
+    public function kategori_details(): HasMany
     {
-        return $this->hasMany(DataWisata::class, 'id_kategori', 'id'); // Menentukan foreign key dan local key
+        return $this->hasMany(DataKategoriDetail::class, 'id_kategori', 'id'); // Menentukan foreign key dan local key
     }
 }

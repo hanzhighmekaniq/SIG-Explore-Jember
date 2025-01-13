@@ -1,29 +1,22 @@
 <x-layadmin>
     <div class="">
-        <div class="grid grid-cols-2 gap-4 py-4">
-            <div class="bg-[#C2C5AA] justify-start rounded-lg grid grid-cols-2 ">
-                <div class="h-auto w-24 p-2 items-center justify-center flex">
-                    <img src="{{ asset('img/icon_beach.png') }}" alt="Beach Icon">
-                </div>
-                <div class="justify-end flex p-4">
-                    <div class="justify-between">
-                        <p class="justify-start">Wisata Alam</p>
-                        <p class="justify-end">{{ $countAlam }}</p>
+        <div class="grid md:grid-cols-2  grid-cols-1 gap-4 py-4">
+            <div class="grid grid-cols-2 gap-4">
+                @foreach ($categories as $category)
+                    <div class="bg-[#C2C5AA] rounded-lg flex items-center p-4">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('img/icon_beach.png') }}" alt="Beach Icon" class="h-24 w-auto">
+                        </div>
+                        <div class="ml-4 flex-grow">
+                            <p class="text-lg font-bold">{{ $category->nama_kategori }}</p>
+                            <p class="text-sm text-gray-600">Jumlah Wisata: {{ $category->total_wisatas }}</p>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
 
-            <div class="bg-[#C2C5AA] justify-start rounded-lg grid grid-cols-2 ">
-                <div class="h-auto w-24 p-2 items-center justify-center flex">
-                    <img src="{{ asset('img/icon_gunung.png') }}" alt="Gunung Icon">
-                </div>
-                <div class="justify-end flex p-4">
-                    <div class="justify-between">
-                        <p class="justify-start">Wisata Alam</p>
-                        <p class="justify-end">{{ $countBuatan }}</p>
-                    </div>
-                </div>
-            </div>
+
+            
 
 
         </div>
@@ -54,7 +47,7 @@
 
                     @foreach ($dataLokasi as $lokasi)
                         {
-                            coords: [{{$lokasi->latitude}}, {{ $lokasi->longitude }}],
+                            coords: [{{ $lokasi->latitude }}, {{ $lokasi->longitude }}],
                             popupText: 'Wisata {{ $lokasi->nama_wisata }}',
                             href: '{{ route('wisata.index') }}'
                         },

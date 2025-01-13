@@ -2,31 +2,47 @@
     font-family: "Pacifico", cursive;
     font-weight: 400;
     font-style: normal;
-  }
+}
 .archivo-black-regular {
     font-family: "Archivo Black", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
 .archivo-uniquifier {
     font-family: "Archivo", sans-serif;
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
-    font-variation-settings:
-      "wdth" 100;
-  }
+    font-variation-settings: "wdth" 100;
+}
 
 .rubik-mono-one-regular {
     font-family: "Rubik Mono One", monospace;
     font-weight: 400;
     font-style: normal;
-  } 
+}
 
-  .playfair-display-uniquifier {
+.playfair-display-uniquifier {
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
-  }
+}
+.dm-sans {
+    font-family: "DM Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+.castoro-regular {
+    font-family: "Castoro", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.castoro-regular-italic {
+    font-family: "Castoro", serif;
+    font-weight: 400;
+    font-style: italic;
+}

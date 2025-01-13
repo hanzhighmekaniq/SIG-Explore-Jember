@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <style>
         #map {
-            height: 911px; /* Atur tinggi peta sesuai kebutuhan */
+            height: 911px;
+            /* Atur tinggi peta sesuai kebutuhan */
         }
     </style>
 </head>
+
 <body>
     <div class="">
         <div class="grid">
@@ -43,8 +46,13 @@
                     // Tambahkan rute menggunakan Leaflet Routing Machine
                     L.Routing.control({
                         waypoints: [
-                            L.latLng(lat, lng),  // Titik awal dari lokasi real-time pengguna
-                            L.latLng(-8.4500, 113.7000)   // Titik tujuan (contoh koordinat Tanjung Papuma)
+
+
+                            L.latLng(lat, lng), // Titik awal dari lokasi real-time pengguna
+                            L.latLng({{ $rute->latitude }},
+                                {{ $rute->longitude }}
+                            ) // Titik tujuan (contoh koordinat Tanjung Papuma)
+
                         ],
                         routeWhileDragging: true
                     }).addTo(map);
@@ -63,4 +71,5 @@
         getLocationAndRoute();
     </script>
 </body>
+
 </html>

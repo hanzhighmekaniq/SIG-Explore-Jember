@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('data_kategori', function (Blueprint $table) {
             $table->id(); // Kolom ID untuk kategori
             $table->string('nama_kategori'); // Kolom untuk nama kategori dengan unique constraint
-            $table->string('detail_kategori'); // Kolom untuk detail kategori
             $table->timestamps(); // Kolom created_at dan updated_at
-            $table->unique(['nama_kategori', 'detail_kategori']);
         });
     }
 

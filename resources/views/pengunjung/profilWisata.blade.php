@@ -1,185 +1,245 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visit Jember</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link href="https://unpkg.com/tailwindcss@3.2.0/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/flowbite@1.6.2/dist/flowbite.min.css" rel="stylesheet">
-    <style>
-        #map {
-            height: 500px;
-            /* Atur tinggi peta sesuai kebutuhan */
-        }
-    </style>
-</head>
+    <body>
+        <!-- Navbar Pengunjung -->
+        <div class="container 2xl:pt-20 px-4">
+            <div class="flex justify-start items-center">
+                <div class=" pt-2">
+                    <nav class="flex" aria-label="Breadcrumb">
+                        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                            <li class="inline-flex items-center">
+                                <a href="{{ route('wisata.pengunjung') }}"
+                                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
 
-<body>
-    <!-- Navbar Pengunjung -->
-    @include('partials.navbarPengunjung')
+                                    Wisata
+                                </a>
+                            </li>
+                            <li>
+                                <div class="flex items-center">
+                                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 9 4-4-4-4" />
+                                    </svg>
+                                    <a href="#"
+                                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{ $wisata->nama_wisata }}</a>
+                                </div>
+                            </li>
 
-    <div class="container mb-20 2xl:pt-20">
-        <div class="flex justify-start items-center">
-            <div class="pl-10 pt-2">
-                <nav class="flex" aria-label="Breadcrumb">
-                    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                        <li class="inline-flex items-center">
-                            <a href="#"
-                                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                                <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-                                </svg>
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <div class="flex items-center">
-                                <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 9 4-4-4-4" />
-                                </svg>
-                                <a href="#"
-                                    class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Projects</a>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="pt-4">
+                <p class="font-bold 2xl:text-4xl mb-10">{{ $wisata->nama_wisata }}</p>
+                <div class="grid grid-cols-6 gap-4">
+                    <div
+                        class=" col-span-2 flex flex-col justify-between dm-sans bg-slate-200 rounded-lg px-4 pb-6 pt-4 shadow-xl shadow-slate-400">
+                        <div>
+                            <p class="text-3xl font-semibold castoro-regular">Tentang</p>
+                            <p class="text-lg font-serif pt-2" style="text-indent: 2rem;">
+                                {{ $wisata->deskripsi_wisata }}
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="text-xl font-semibold space-y-1">
+                                <div class="flex">
+                                    <p class="w-32">Lokasi</p>
+                                    <p class="w-4">:</p>
+                                    <p>{{ $wisata->lokasi }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p class="w-32">Kategori</p>
+                                    <p class="w-4">:</p>
+                                    <p>{{ $wisata->kategori_detail->kategori->nama_kategori }},
+                                        {{ $wisata->kategori_detail->nama_kategori_detail }}
+                                    </p>
+                                </div>
+                                <div class="flex">
+                                    <p class="w-32">Fasilitas</p>
+                                    <p class="w-4">:</p>
+                                    <p>{{ $wisata->fasilitas }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p class="w-32">HTM</p>
+                                    <p class="w-4">:</p>
+                                    <p>{{ $wisata->htm_wisata }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p class="w-32">Parkir</p>
+                                    <p class="w-4">:</p>
+                                    <p>{{ $wisata->htm_wisata }}</p>
+                                </div>
                             </div>
-                        </li>
-                        <li aria-current="page">
-                            <div class="flex items-center">
-                                <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 9 4-4-4-4" />
-                                </svg>
+
+
+                            <div class="items-end">
+                                <div
+                                    class="flex justify-center items-center px-4 py-2 rounded-lg mt-4 bg-slate-300 shadow-md shadow-slate-400">
+                                    <p>Rute Terdekat</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-4 mx-4 flex flex-col rounded-2xl overflow-hidden shadow-xl shadow-slate-400">
+                        <!-- Gambar Utama dan Galeri -->
+                        <div class="col-span-4 rounded-lg overflow-hidden">
+                            <!-- Gambar Utama -->
+                            <div>
+                                @if (!empty($imgDetails) && isset($imgDetails[0]))
+                                    <img id="main-image" src="{{ asset('storage/' . $imgDetails[0]) }}"
+                                        class="object-cover w-full h-[512px]"
+                                        alt="Gambar utama {{ $wisata->nama_wisata }}">
+                                @else
+                                    <div class="flex justify-center items-center h-[512px] bg-gray-200 text-gray-500">
+                                        <p>Gambar Kosong</p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- Gambar Kecil -->
+                            @if (!empty($imgDetails))
+                                <div class="grid grid-cols-8 gap-0">
+                                    @foreach ($imgDetails as $img)
+                                        <img src="{{ asset('storage/' . $img) }}"
+                                            class="object-cover w-full h-24 cursor-pointer border-0 hover:border-blue-500"
+                                            alt="Gambar detail"
+                                            onclick="changeMainImage('{{ asset('storage/' . $img) }}')">
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-center py-4 text-gray-500">
+                                    <p>Gambar Detail Tidak Tersedia</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Script untuk Pergantian Gambar -->
+                        <script>
+                            function changeMainImage(newSrc) {
+                                const mainImage = document.getElementById('main-image');
+                                mainImage.src = newSrc;
+                            }
+                        </script>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="pt-32">
+                <p class="font-bold 2xl:text-4xl mb-10">Lokasi Wilayah</p>
+                <div class="grid">
+                    <div id="map" class="aspect-video z-[1]"></div> <!-- Tentukan tinggi untuk peta -->
+                </div>
+
+                <!-- Memuat Leaflet -->
+                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+                <script>
+                    // Inisialisasi peta dengan titik tengah menggunakan koordinat dari variabel $wisata
+                    var map = L.map('map', {
+                        center: [{{ $wisata->latitude }}, {{ $wisata->longitude }}], // Atur titik pusat
+                        zoom: 13, // Atur level zoom
+                        scrollWheelZoom: false // Menonaktifkan zoom menggunakan scroll mouse
+                    });
+
+                    // Tambahkan tile layer dari OpenStreetMap
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    // Tambahkan marker lokasi wisata dengan popup
+                    L.marker([{{ $wisata->latitude }}, {{ $wisata->longitude }}]).addTo(map)
+                        .bindPopup(
+                            `<b>{{ $wisata->nama_wisata }}</b><br>{{ $wisata->kategori_detail->kategori->nama_kategori }}, {{ $wisata->kategori_detail->nama_kategori_detail }}.`
+                        );
+                </script>
+
+
+            </div>
+
+
+            <div class="pt-32">
+                <p class="font-bold 2xl:text-4xl mb-10">Kuliner yang Tersedia</p>
+                <div class="grid">
+                    @if ($kuliner->isEmpty())
+
+                        <p class="text-center">Kuliner tidak ada saat ini</p>
+                    @else
+                        <!-- beranda.blade.php -->
+                        <div id="carousel" class="relative w-full" data-carousel="slide">
+                            <!-- Carousel wrapper -->
+                            <div class="relative overflow-hidden px-4">
+                                @foreach ($kuliner->chunk(5) as $chunk)
+                                    <!-- Memecah data menjadi potongan 5 per slide -->
+                                    <div class="grid grid-cols-5 gap-4 duration-700 ease-in-out">
+                                        @foreach ($chunk as $item)
+                                            <a href="#" class="w-full flex-shrink-0 border p-4">
+                                                <img src="{{ asset('storage/' . $item->gambar_kuliner) }}"
+                                                    class="w-full h-48 object-contain rounded-lg" alt="Kuliner Image">
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Slider controls -->
+                            <button type="button"
+                                class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                data-carousel-prev>
                                 <span
-                                    class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
-                            </div>
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16267.307563311364!2d113.72317357358806!3d-8.154435366860604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd69575bf790c09%3A0xb5bbb76459f1e8cf!2sOlah%20Roso%20Culinary%20and%20Eatery!5e1!3m2!1sid!2sid!4v1729838590657!5m2!1sid!2sid"
-            width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <div class="pt-16">
-            <p class="font-bold 2xl:text-4xl mb-10">Tanjung Papuma</p>
-            <div class="grid grid-cols-5">
-                <div class="pt-4 col-span-2 flex flex-col justify-between">
-                    <div>
-                        <p>Tentang</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Lokasi : Desa</p>
-                        <p>Kategori</p>
-                        <p>Fasilitas</p>
-                        <p>HTM</p>
-                        <p>Parkir</p>
-                    </div>
-                    <div class="items-end">
-                        <div class="flex justify-center items-center px-4 py-2 rounded-lg mt-4 bg-slate-300">
-                            <p>Rute Terdekat</p>
+                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-500 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M5 1 1 5l4 4" />
+                                    </svg>
+                                    <span class="sr-only">Previous</span>
+                                </span>
+                            </button>
+                            <button type="button"
+                                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                data-carousel-next>
+                                <span
+                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-500 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 9 4-4-4-4" />
+                                    </svg>
+                                    <span class="sr-only">Next</span>
+                                </span>
+                            </button>
                         </div>
-                    </div>
-                </div>
-                <div class="col-span-3 mx-4 flex flex-col rounded-2xl overflow-hidden">
-                    <div>
-                        <img src="{{ asset('img/bg-utama.png') }}" class="object-cover w-full h-[450px]" alt="">
-                    </div>
-                    <div class="grid grid-cols-7">
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                        <div>
-                            <img src="{{ asset('img/bg-utama.png') }}" class="object-cover 2xl:h-20 2xl:w-auto"
-                                alt="">
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
-        </div>
 
-        <div class="pt-32">
-            <p class="font-bold 2xl:text-4xl mb-10">Lokasi Wilayah</p>
-            <div class="grid">
-                <div id="map"></div>
-            </div>
-        </div>
+            <div class="pt-32 pb-32">
+                <p class="font-bold 2xl:text-4xl mb-10">Event yang sedang berlangsung</p>
 
-        <div class="pt-32">
-            <p class="font-bold 2xl:text-4xl mb-10">Kuliner yang Tersedia</p>
-            <p>Ada beberapa kuliner yang tersedia ditempat wisata ini yang dijamin woeenaak pwoll</p>
-            <div class="grid">
-            </div>
-        </div>
-
-        <div class="pt-32">
-            <p class="font-bold 2xl:text-4xl mb-10">Event yang sedang berlangsung</p>
-            <div class="grid grid-cols-3">
-                <div class="pt-4 col-span-1 flex flex-col rounded-2xl overflow-hidden justify-between">
-                    <div>
-                        <img src="{{ asset('img/banner-berdiri.jpg') }}" class="object-cover w-full h-[600px]"
-                            alt="">
+                @if ($wisata->events->isEmpty())
+                    <p class="text-center text-black">Event tidak tersedia saat ini</p>
+                @else
+                    <div class="relative w-full overflow-hidden">
+                        @foreach ($wisata->events as $event)
+                            <a href="{{ route('event.detail', ['id' => $event->id]) }}">
+                                <div class="carousel-item duration-700 ease-in-out">
+                                    <img src="{{ asset('storage/' . $event->img) }}"
+                                        class="w-full h-auto object-cover transition-all duration-300 filter grayscale hover:grayscale-0"
+                                        alt="{{ $event->name ?? 'Event Image' }}">
+                                    <p class="text-center mt-2 font-semibold">{{ $event->name }}</p>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
-                </div>
-                <div class="pt-4 col-span-2 flex flex-col justify-between">
-                    <div>
-                        <p>Jember Fashion Carnaval</p>
-                        <p>theme pinkyy pet</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Tanggal</p>
-                        <p>Jam</p>
-                        <p>HTM</p>
-                    </div>
-                </div>
+                @endif
             </div>
+
+
         </div>
-    </div>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/flowbite@1.6.2/dist/flowbite.min.js"></script>
-    <script>
-        // Inisialisasi peta
-        var map = L.map('map').setView([-8.1667, 113.6500], 13); // Koordinat Jember
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Menambahkan marker
-        L.marker([-8.1667, 113.6500]).addTo(map)
-            .bindPopup('Lokasi Wisata')
-            .openPopup();
-    </script>
-</body>
-
-</html>
-@include('partials.footerPengunjung')
+    </body>
+</x-layout>

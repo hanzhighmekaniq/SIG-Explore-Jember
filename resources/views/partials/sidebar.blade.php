@@ -7,7 +7,7 @@
     <ul class="space-y-2 font-medium ">
         <li class="">
             <a href="{{ route('dashboard') }}"
-                class="flex items-center p-2  rounded-lg text-[#414833]  hover:text-white  hover:bg-[#656D4A]  {{ request()->is('dashboard') ? 'bg-[#656D4A]  text-white' : '' }}">
+                class="flex items-center p-2  rounded-lg text-[#414833]  hover:text-white  hover:bg-[#656D4A]  {{ request()->is('admin/dashboard') ? 'bg-[#656D4A]  text-white' : '' }}">
                 <svg class="w-5 h-5 hover:text-white  transition duration-75   " aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                     <path
@@ -20,7 +20,7 @@
         </li>
         <li class="">
             <a href="{{ route('kategori.index') }}"
-                class="flex items-center p-2  rounded-lg text-[#414833]  hover:text-white  hover:bg-[#656D4A]  {{ request()->is('dashboard') ? 'bg-[#656D4A]  text-white' : '' }}">
+                class="flex items-center p-2  rounded-lg text-[#414833]  hover:text-white  hover:bg-[#656D4A]  {{ request()->is('admin/kategori') ? 'bg-[#656D4A]  text-white' : '' }}">
                 <svg class="w-5 h-5 hover:text-white  transition duration-75   " aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                     <path
@@ -33,7 +33,7 @@
         </li>
         <li class="group">
             <a href="{{ route('wisata.index') }}"
-                class="flex items-center p-2 rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white {{ request()->is('data-wisata', 'tambah-wisata', 'tambah-event', 'tambah-kuliner') ? 'bg-[#656D4A] text-white' : '' }}">
+                class="flex items-center p-2 rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white {{ request()->is('~data-wisata', 'tambah-wisata', 'tambah-event', 'tambah-kuliner') ? 'bg-[#656D4A] text-white' : '' }}">
                 <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -59,7 +59,6 @@
             </a>
         </li>
         <li>
-
             <button data-modal-target="default-modal-logout" data-modal-toggle="default-modal-logout" type="button"
                 id="logout-button"
                 class="flex items-center p-2 w-full rounded-lg text-[#414833] hover:bg-[#656D4A] hover:text-white">
@@ -73,51 +72,6 @@
                 </svg>
                 <span class="flex ms-3 whitespace-nowrap">Log Out</span>
             </button>
-
-
-
-
-
-            {{-- <script>
-                   document.addEventListener('DOMContentLoaded', function() {
-                       const logoutButton = document.getElementById('logout-button');
-                       const modal = document.getElementById('popup-modal');
-                       const confirmLogoutButton = document.getElementById('confirm-logout');
-                       const closeModalButton = document.getElementById('close-modal');
-                       const cancelLogoutButton = document.getElementById('cancel-logout');
-                       const logoutForm = document.getElementById('logout-form');
-
-                       // Ketika tombol logout di klik
-                       logoutButton.addEventListener('click', function() {
-                           modal.classList.remove('hidden'); // Hapus class hidden
-                           modal.classList.add('flex'); // Tambahkan class flex
-                       });
-
-                       // Ketika tombol confirm logout di klik
-                       confirmLogoutButton.addEventListener('click', function() {
-                           logoutForm.submit(); // Submit the form to log out
-                       });
-
-                       // Ketika tombol close di klik
-                       closeModalButton.addEventListener('click', function() {
-                           modal.classList.add('hidden'); // Tambahkan class hidden
-                           modal.classList.remove('flex'); // Hapus class flex
-                       });
-
-                       // Ketika tombol cancel di klik
-                       cancelLogoutButton.addEventListener('click', function() {
-                           modal.classList.add('hidden'); // Tambahkan class hidden
-                           modal.classList.remove('flex'); // Hapus class flex
-                       });
-                   });
-               </script> --}}
-
-
-
-
-
-
-
         </li>
     </ul>
 </div>

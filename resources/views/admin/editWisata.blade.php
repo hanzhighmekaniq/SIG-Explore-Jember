@@ -39,13 +39,14 @@
                     <label for="id_kategori" class="block text-gray-700 font-bold mb-2">Kategori</label>
                     <select id="id_kategori" name="id_kategori"
                         class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
-                        @foreach ($dataKategori as $kategori)
-                            <option value="{{ $kategori->id }}"
-                                {{ old('id_kategori', $wisata->id_kategori) == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->nama_kategori ?? 'Nama kategori tidak tersedia' }}
-                                ,{{ $kategori->detail_kategori ?? 'Detail kategori tidak tersedia' }}
+                        @foreach ($dataKategori as $item)
+                            <option value="{{ $item->id }}"
+                                {{ old('id_kategori_detail', $wisata->id) == $item->id ? 'selected' : '' }}>
+                                {{ $item->kategori->nama_kategori ?? 'Nama kategori tidak tersedia' }},
+                                {{ $item->nama_kategori_detail ?? 'Detail kategori tidak tersedia' }}
                             </option>
                         @endforeach
+
                     </select>
                     @error('id_kategori')
                         <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>

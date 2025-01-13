@@ -1,9 +1,9 @@
-<nav class=" w-full bg-white shadow-lg z-[100] relative">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#beranda" class="pacifico-regular text-2xl  text-[#656D4A]    hover:text-black">Visit Jember</a>
+<nav class="w-full bg-white shadow-lg z-[100] relative">
+    <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#beranda" class="pacifico-regular text-2xl text-[#656D4A] hover:text-black">Visit Jember</a>
 
         <button data-collapse-toggle="navbar-default" type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-default" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -14,21 +14,24 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul
-                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white ">
+                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                 <li>
                     <a href="/"
-                        class="block py-2 px-3 text-[#656D4A] rounded md:bg-transparent md:p-0 "
+                        class="block py-2 px-3 rounded md:bg-transparent md:p-0 
+                            {{ request()->is('/') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="/wisata"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">About</a>
+                        class="block py-2 px-3 rounded md:bg-transparent md:p-0 
+                            {{ request()->is('wisata*') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}">Wisata</a>
                 </li>
                 <li>
                     <a href="/petaWilayah"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Services</a>
+                        class="block py-2 px-3 rounded md:bg-transparent md:p-0 
+                            {{ request()->is('petaWilayah*') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}">Peta
+                        Wilayah</a>
                 </li>
-                
             </ul>
         </div>
     </div>

@@ -35,16 +35,17 @@
 
 
                 <div>
-                    <label for="id_kategori" class="block text-gray-700 font-bold mb-2">Kategori</label>
-                    <select id="id_kategori" name="id_kategori"
+                    <label for="id_kategori_detail" class="block text-gray-700 font-bold mb-2">Sub Kategori</label>
+                    <select id="id_kategori_detail" name="id_kategori_detail"
                         class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($dataKategori as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }},
-                                {{ $kategori->detail_kategori }}</option>
+                        <option value="">Pilih Sub Kategori</option>
+                        @foreach ($dataKategori as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_kategori_detail }}
+                                {{-- {{ $item->kategori->nama_kategori }} --}}
+                            </option>
                         @endforeach
                     </select>
-                    @error('id_kategori')
+                    @error('id_kategori_detail')
                         <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
                     @enderror
                 </div>

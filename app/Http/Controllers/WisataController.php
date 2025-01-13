@@ -6,6 +6,7 @@ use App\Models\DataWisata;
 use App\Models\DataKategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DataKategoriDetail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; // Memperbaiki import Validator
 
@@ -24,7 +25,7 @@ class WisataController extends Controller
 
     public function create()
     {
-        $showDataKategori = DataKategori::all();
+        $showDataKategori = DataKategoriDetail::with('kategori')->get();
         return view('admin.tambahWisata', ['dataKategori' => $showDataKategori]);
     }
 
@@ -32,7 +33,7 @@ class WisataController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'id_kategori' => 'required',
+            'id_kategori_detail' => 'required',
             'nama_wisata' => 'required|string|max:255',
             'deskripsi_wisata' => 'required|string',
             'fasilitas' => 'required|string',
@@ -75,7 +76,7 @@ class WisataController extends Controller
 
             // Simpan data wisata ke tabel `data_wisata` melalui model `DataWisata`
             DataWisata::create([
-                'id_kategori' => $request->id_kategori,
+                'id_kategori_detail' => $request->id_kategori_detail,
                 'nama_wisata' => $request->nama_wisata,
                 'deskripsi_wisata' => $request->deskripsi_wisata,
                 'fasilitas' => $request->fasilitas,
@@ -102,9 +103,10 @@ class WisataController extends Controller
     public function edit($id)
     {
         $wisata = DataWisata::findOrFail($id);
-        $dataKategori = DataKategori::all();
+        $dataKategori = DataKategoriDetail::with('kategori')->get(); // Perbaikan: tambahkan get()
         return view('admin.editWisata', compact('wisata', 'dataKategori'));
     }
+
 
     public function update(Request $request, $id)
     {

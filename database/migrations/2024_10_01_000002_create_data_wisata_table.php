@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_wisata', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_wisata', 255);
+            $table->string('nama_wisata', 255)->unique();
             $table->longText('deskripsi_wisata')->nullable();
             $table->text('fasilitas')->nullable();
             $table->longText('lokasi')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->decimal('htm_parkir', 15, 2)->nullable();
             $table->timestamps();
 
-            $table->foreignId('id_kategori')
+            $table->foreignId('id_kategori_detail')
                 ->nullable()
-                ->constrained('data_kategori')
+                ->constrained('kategori_detail')
                 ->onDelete('set null') // Set ke NULL jika data dihapus
                 ->onUpdate('cascade');
         });

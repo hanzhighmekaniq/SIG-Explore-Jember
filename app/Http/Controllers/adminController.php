@@ -3,28 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataWisata;
+use App\Models\DataKategori;
 use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
     public function adminBeranda()
     {
-        // Menghitung wisata yang memiliki kategori 'Alam'
-        $countAlam = DataWisata::whereHas('kategori', function ($query) {
-            $query->where('nama_kategori', 'Alam');
-        })->count();
+        // Mengambil seluruh DataKategori beserta jumlah wisata
+        $categories = DataKategori::with(['kategori_details.wisatas'])
+            ->get()
+            ->map(function ($category) {
+                $category->total_wisatas = $category->kategori_details->sum(function ($detail) {
+                    return $detail->wisatas->count();
+                });
+                return $category;
+            });
+        $dataLokasi = DataWisata::with('kategori_detail.kategori')->get();
 
-        // Menghitung wisata yang memiliki kategori 'Buatan'
-        $countBuatan = DataWisata::whereHas('kategori', function ($query) {
-            $query->where('nama_kategori', 'Buatan');
-        })->count();
-
-        // Mengambil seluruh data lokasi
-        $dataLokasi = DataWisata::all();
-
-        // Mengirim data ke view adminBeranda
-        return view('admin.adminBeranda', compact('countAlam', 'countBuatan', 'dataLokasi'));
+        // Mengirim data ke view
+        return view('admin.adminBeranda', compact('categories', 'dataLokasi'));
     }
+
+
+
     public function dashboard()
     {
         $countWisata = DataWisata::count();

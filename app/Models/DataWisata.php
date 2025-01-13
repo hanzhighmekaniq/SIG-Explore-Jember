@@ -15,7 +15,7 @@ class DataWisata extends Model
 
     protected $fillable = [
         'nama_wisata',
-        'id_kategori',
+        'id_kategori_detail',
         'img',
         'deskripsi_wisata',
         'fasilitas',
@@ -27,11 +27,12 @@ class DataWisata extends Model
         'htm_parkir',
     ];
 
-    // Relasi dengan model DataKategori
-    public function kategori(): BelongsTo
+    // Di model DataWisata
+    public function kategori_detail(): BelongsTo
     {
-        return $this->belongsTo(DataKategori::class, 'id_kategori', 'id'); // Menentukan foreign key dan local key
+        return $this->belongsTo(DataKategoriDetail::class, 'id_kategori_detail', 'id');
     }
+
 
     // Relasi dengan DataKuliner
     public function kuliners(): HasMany
