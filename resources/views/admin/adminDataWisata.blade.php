@@ -1,34 +1,57 @@
 <x-layadmin>
-    @if ($message = Session::get('success'))
-        <div id="toast-success"
-            class="absolute top-20 left-1/2 transform -translate-x-1/2 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow"
-            role="alert">
-            <div
-                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <span class="sr-only">Check icon</span>
-            </div>
-            <div class="ms-3 text-sm font-normal">{{ $message }}</div>
-            <button type="button"
-                class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
-                data-dismiss-target="#toast-success" aria-label="Close" onclick="closeToast()">
-                <span class="sr-only">Close</span>
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                </svg>
-            </button>
+    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+        Data Wisata
+    </p>
+    <div class="flex justify-between items-center">
+        <!-- Kiri: Tombol Tambah-Wisata -->
+        <div class="flex ">
+            <a href="{{ route('wisata.create') }}" id="tambah-data-wisata"
+                class="{{ request()->routeIs('wisata.create') ? 'bg-[#656D4A] text-white' : '' }} 
+                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg 
+                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white 
+                       focus:z-10 focus:ring-2 focus:ring-slate-300">
+                Tambah-Wisata
+            </a>
         </div>
-    @endif
+
+        <!-- Kanan: Form Filter -->
+        <div class="flex justify-end">
+            @if (request()->routeIs('wisata.index'))
+                <form class="flex max-w-lg w-full" method="GET" action="{{ route('wisata.index') }}">
+                    <!-- Dropdown Kategori -->
+                    <select name="id_kategori" id="id_kategori"
+                        class="h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md 
+                               focus:ring-blue-500 focus:border-blue-500 
+                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
+                        <option value="">Semua Kategori</option>
+                        @foreach ($category as $item)
+                            <option value="{{ $item->id }}">
+                                {{ $item->nama_kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <!-- Input Nama Wisata -->
+                    <input type="text" name="nama_wisata" placeholder="Cari nama Wisata"
+                        value="{{ request('nama_wisata') }}"
+                        class="h-full px-4 py-2 text-xs border-t border-b border-gray-300 
+                               focus:ring-blue-500 focus:border-blue-500 
+                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
+
+                    <!-- Button Cari -->
+                    <button type="submit"
+                        class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300 
+                               rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300 
+                               dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                        Cari
+                    </button>
+                </form>
+            @endif
+        </div>
+    </div>
 
 
-
-    <div class="py-4">
+    <div class="">
         {{ $DataWisata->links() }}
     </div>
     {{-- TABEL --}}
@@ -46,7 +69,7 @@
                         Kategori
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Detail Kategori
+                        Sub Kategori
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Deskripsi
@@ -69,10 +92,12 @@
                             {{ $wisata->nama_wisata }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->kategori->nama_kategori ?? 'N/A' }}
+                            {{ $wisata->kategori_detail->kategori->nama_kategori ?? 'N/A' }}
+
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->kategori->detail_kategori ?? 'N/A' }}
+                            {{ $wisata->kategori_detail->nama_kategori_detail ?? 'N/A' }}
+
                         </td>
                         <td class="px-6 py-4">
                             {{ $wisata->deskripsi_wisata }}
@@ -80,9 +105,6 @@
                         <td class="px-6 py-4">
                             <img src="{{ asset('storage/' . $wisata->img) }}" class="w-44 h-auto" alt="Image">
                         </td>
-
-
-
 
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center">

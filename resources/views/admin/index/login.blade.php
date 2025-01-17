@@ -36,9 +36,12 @@
 
     <script>
         function closeToast() {
-            // Sembunyikan toast tanpa konfirmasi
+            // Sembunyikan toast
             document.getElementById('toast-success').classList.add('hidden');
         }
+
+        // Timer 5 detik untuk menyembunyikan toast
+        setTimeout(closeToast, 5000);
     </script>
 @endif
 

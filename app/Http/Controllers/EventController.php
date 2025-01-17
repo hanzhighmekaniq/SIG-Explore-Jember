@@ -5,18 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\DataEvent;
 use App\Models\DataWisata;
 use Illuminate\Http\Request;
+use App\Models\DataKategoriDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $wisata = DataKategoriDetail::with('wisatas')->get();
+        $query = DataEvent::query();
 
-        $showDataEvent = DataEvent::latest()->get();
+        // Filter berdasarkan kategori (jika ada input id_kategori)
+        if ($request->id_kategori_detail) {
+            $query->whereHas('wisata.kategori_detail', function ($q) use ($request) {
+                $q->where('id', $request->id_kategori_detail);
+            });
+        }
 
-        return view('admin.adminDataEvent', ['DataEvent' => $showDataEvent]);
+        // Filter berdasarkan nama wisata (jika ada input nama_wisata)
+        if ($request->nama_kuliner) {
+            $query->where('nama_kuliner', 'like', '%' . $request->nama_kuliner . '%');
+        }
+
+        $DataEvent = $query->with(['wisata.kategori_detail'])->paginate(10);
+
+
+        return view('admin.adminDataEvent', compact('wisata', 'DataEvent'));
     }
 
     public function create()

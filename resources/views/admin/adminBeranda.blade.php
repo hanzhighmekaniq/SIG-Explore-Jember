@@ -1,6 +1,6 @@
 <x-layadmin>
     <div class="">
-        <div class="grid md:grid-cols-2  grid-cols-1 gap-4 py-4">
+        <div class=" py-4">
             <div class="grid grid-cols-2 gap-4">
                 @foreach ($categories as $category)
                     <div class="bg-[#C2C5AA] rounded-lg flex items-center p-4">

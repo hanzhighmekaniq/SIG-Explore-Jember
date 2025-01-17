@@ -12,13 +12,32 @@ use Illuminate\Support\Facades\Validator; // Memperbaiki import Validator
 
 class WisataController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $showDataWisata = DataWisata::latest()->paginate(15);
-        return view('admin.adminDataWisata', [
-            'DataWisata' => $showDataWisata,
-        ]);
+        // Ambil semua kategori dengan relasi kategori_details
+        $category = DataKategori::with('kategori_details')->get();
+
+        // Mulai query DataWisata
+        $query = DataWisata::query();
+
+        // Filter berdasarkan kategori (jika ada input id_kategori)
+        if ($request->id_kategori) {
+            $query->whereHas('kategori_detail.kategori', function ($q) use ($request) {
+                $q->where('id', $request->id_kategori);
+            });
+        }
+
+        // Filter berdasarkan nama wisata (jika ada input nama_wisata)
+        if ($request->nama_wisata) {
+            $query->where('nama_wisata', 'like', '%' . $request->nama_wisata . '%');
+        }
+
+        // Ambil data wisata dengan relasi kategori_detail dan kategori
+        $DataWisata = $query->with(['kategori_detail.kategori'])->paginate(10);
+
+        return view('admin.adminDataWisata', compact('category', 'DataWisata'));
     }
+
 
 
 
@@ -115,7 +134,7 @@ class WisataController extends Controller
                 'nama_wisata' => 'required',
                 'img' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
                 'img_detail.*' => 'file|mimes:jpeg,png,jpg|max:2048',
-                'id_kategori' => 'required',
+                'id_kategori_detail' => 'required',
                 'deskripsi_wisata' => 'required',
                 'fasilitas' => 'required',
                 'lokasi' => 'required',
@@ -163,7 +182,7 @@ class WisataController extends Controller
 
             // Update data wisata
             $wisata->update([
-                'id_kategori' => $request->id_kategori,
+                'id_kategori_detail' => $request->id_kategori_detail,
                 'nama_wisata' => $request->nama_wisata,
                 'deskripsi_wisata' => $request->deskripsi_wisata,
                 'fasilitas' => $request->fasilitas,

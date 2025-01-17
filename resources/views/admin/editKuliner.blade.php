@@ -1,5 +1,8 @@
 <x-layadmin>
-    <div class="mx-auto bg-white py-4 rounded-lg">
+    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+        Edit Kuliner
+    </p>    
+    <div class="mx-auto bg-white rounded-lg">
         <form action="{{ route('kuliner.update', $kuliner->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -82,7 +85,7 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="flex justify-end">
+            <div class="flex">
                 <button type="submit"
                     class="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Simpan</button>
             </div>

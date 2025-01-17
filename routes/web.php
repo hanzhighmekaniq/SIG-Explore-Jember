@@ -49,7 +49,6 @@ Route::get('/ujicoba', [UjiCoba::class, 'ujicoba'])->name('ujicoba');
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
-        Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
 
         // Resource routes
         // Route::POST('/kategori-detail', [KategoriController::class, 'storeSubKategori'])->name('subKategori.store');

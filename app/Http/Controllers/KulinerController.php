@@ -6,15 +6,33 @@ use App\Models\DataWisata;
 use App\Models\DataKuliner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DataKategoriDetail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class KulinerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $showDataKuliner = DataKuliner::all();
-        return view('admin.adminDataKuliner', ['DataKuliner' => $showDataKuliner]);
+        $wisata = DataKategoriDetail::with('wisatas')->get();
+
+        $query = DataKuliner::query();
+
+        // Filter berdasarkan kategori (jika ada input id_kategori)
+        if ($request->id_kategori_detail) {
+            $query->whereHas('wisata.kategori_detail', function ($q) use ($request) {
+                $q->where('id', $request->id_kategori_detail);
+            });
+        }
+
+        // Filter berdasarkan nama wisata (jika ada input nama_wisata)
+        if ($request->nama_kuliner) {
+            $query->where('nama_kuliner', 'like', '%' . $request->nama_kuliner . '%');
+        }
+
+        // Ambil data wisata dengan relasi kategori_detail dan kategori
+        $DataKuliner = $query->with(['wisata.kategori_detail'])->paginate(10);
+        return view('admin.adminDataKuliner', compact('DataKuliner', 'wisata'));
     }
 
     public function create()

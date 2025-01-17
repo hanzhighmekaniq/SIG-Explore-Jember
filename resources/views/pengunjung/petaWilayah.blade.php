@@ -64,25 +64,41 @@
 
                 // Data
                 const Jarak = [
-                    @foreach ($rute as $item)
+                    @forelse ($rute as $item)
                         {
                             nama_wisata: "{{ $item->nama_wisata }}",
                             kategori: "{{ $item->kategori_detail->nama_kategori_detail ?? 'Tidak ada kategori' }}",
-                            latitude: {{ $item->latitude }},
-                            longitude: {{ $item->longitude }},
+                            latitude: {{ $item->latitude ?? 0 }},
+                            longitude: {{ $item->longitude ?? 0 }},
                         },
-                    @endforeach
+                    @empty
+                        {
+                            nama_wisata: "Data Kosong",
+                            kategori: "Data Kosong",
+                            latitude: 0,
+                            longitude: 0,
+                        },
+                    @endforelse
                 ];
+
                 const wisataData = [
-                    @foreach ($peta as $item)
+                    @forelse ($peta as $item)
                         {
                             nama_wisata: "{{ $item->nama_wisata }}",
                             kategori: "{{ $item->kategori_detail->nama_kategori_detail ?? 'Tidak ada kategori' }}",
-                            latitude: {{ $item->latitude }},
-                            longitude: {{ $item->longitude }},
+                            latitude: {{ $item->latitude ?? 0 }},
+                            longitude: {{ $item->longitude ?? 0 }},
                         },
-                    @endforeach
+                    @empty
+                        {
+                            nama_wisata: "Data Kosong",
+                            kategori: "Data Kosong",
+                            latitude: 0,
+                            longitude: 0,
+                        },
+                    @endforelse
                 ];
+
 
                 // Icon custom untuk posisi saat ini
                 const currentPositionIcon = L.icon({
@@ -129,30 +145,41 @@
                         .bindPopup(`<strong>${wisata.nama_wisata}</strong><br>${wisata.kategori}`);
                 });
 
-                // Hitung jarak dan render ke tabel
                 function updateTable(currentPosition) {
                     let tableBody = document.querySelector("table tbody");
                     tableBody.innerHTML = ""; // Bersihkan tabel sebelum render ulang
 
                     Jarak.forEach((rute, index) => {
-                        const endLatLng = L.latLng(rute.latitude, rute.longitude);
-                        const distance = currentPosition.distanceTo(endLatLng) / 1000; // Jarak dalam km
+                        // Jika latitude atau longitude adalah 0, beri jarak default "-" (tidak dihitung)
+                        let distance = "-";
+                        if (rute.latitude !== 0 && rute.longitude !== 0) {
+                            const endLatLng = L.latLng(rute.latitude, rute.longitude);
+                            distance = (currentPosition.distanceTo(endLatLng) / 1000).toFixed(2) + " km";
+                        }
 
                         // Tambahkan baris ke tabel
                         let row = document.createElement("tr");
 
                         row.innerHTML = `
-                            <td class="py-3 px-4 border">${index + 1}</td>
-                            <td class="py-3 px-4 border">${rute.nama_wisata}</td>
-                            <td class="py-3 px-4 border">${rute.kategori}</td>
-                            <td class="py-3 px-4 border">${distance.toFixed(2)} km</td>
-                            <td class="py-3 px-4 border underline text-blue-500">
-                                <a href="{{ route('ruteTerdekat.index', $item->nama_wisata) }}" target="_blank">Lihat</a>
-                            </td>
-                        `;
+                                            <td class="py-3 px-4 border">${index + 1}</td>
+                                            <td class="py-3 px-4 border">${rute.nama_wisata}</td>
+                                            <td class="py-3 px-4 border">${rute.kategori}</td>
+                                            <td class="py-3 px-4 border">${distance}</td>
+                                            <td class="py-3 px-4 border underline text-blue-500">
+                                                <a href="${rute.nama_wisata !== "Data Kosong" ? `/ruteTerdekat/${rute.nama_wisata}` : "#"}" target="_blank">Lihat</a>
+                                            </td>
+                                        `;
                         tableBody.appendChild(row);
                     });
                 }
+
+                // Render semua data wisata pada peta
+                wisataData.forEach(wisata => {
+                    if (wisata.latitude !== 0 && wisata.longitude !== 0) {
+                        L.marker([wisata.latitude, wisata.longitude]).addTo(map)
+                            .bindPopup(`<strong>${wisata.nama_wisata}</strong><br>${wisata.kategori}`);
+                    }
+                });
             </script>
 
 

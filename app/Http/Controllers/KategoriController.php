@@ -56,7 +56,6 @@ class KategoriController extends Controller
             // Temukan kategori berdasarkan ID
             $kategori = DataKategori::findOrFail($id);
             $kategori->nama_kategori = $request->nama_kategori;
-            $kategori->detail_kategori = $request->detail_kategori;
 
             // Simpan perubahan
             $kategori->save();
