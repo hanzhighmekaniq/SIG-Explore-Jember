@@ -2,7 +2,7 @@
     <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
         Data Kuliner
     </p>
-    <div class="flex justify-between items-center">
+    <div class="lg:flex space-y-2 lg:space-y-0 lg:justify-between lg:items-center">
         <!-- Kiri: Tombol Tambah-Wisata -->
         <div class="flex ">
             <a href="{{ route('kuliner.create') }}" id="tambah-data-kuliner"
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Kanan: Form Filter -->
-        <div class="flex justify-end">
+        <div class="flex lg:justify-end">
             @if (request()->routeIs('kuliner.index'))
                 <form class="flex max-w-lg w-full" method="GET" action="{{ route('kuliner.index') }}">
                     <!-- Dropdown Kategori -->

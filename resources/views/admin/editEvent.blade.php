@@ -72,12 +72,12 @@
                     <div>
                         <form class="max-w-lg">
 
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                for="user_avatar">Upload Gambar Event</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Upload Gambar
+                                Event</label>
                             <div class="flex space-x-2">
 
                                 <input
-                                    class="block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none "
+                                    class="block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50  focus:outline-none "
                                     aria-describedby="user_avatar_help" id="img" name="img" type="file">
                                 <div class="flex">
                                     <div data-modal-target="modal-gambar-event" data-modal-toggle="modal-gambar-event"
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
 
-                            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A
+                            <div class="mt-1 text-sm text-gray-500" id="user_avatar_help">A
                                 profile
                                 picture is useful to confirm your are logged into your account</div>
 
@@ -104,21 +104,23 @@
         </div>
     </div>
     <div id="modal-gambar-event" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full  max-w-2xl xl:max-w-5xl max-h-full">
+        class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl xl:max-w-5xl max-h-full">
             <!-- Modal content -->
-            <div class="relative rounded-lg shadow dark:bg-gray-700 bg-[#4F7F81]">
+            <div class="relative rounded-lg shadow bg-white">
                 <!-- Modal body -->
                 <div class="p-4 md:p-5">
-                    <div class="">
+                    <div class="flex justify-center items-center">
                         @if ($event->img)
-                            <img src="{{ asset('storage/' . $event->img) }}" class="object-cover " alt="Gambar">
+                            <img src="{{ asset('storage/' . $event->img) }}" class=" rounded-lg"
+                                alt="Gambar">
                         @else
-                            <p>Tidak ada gambar yang tersedia.</p>
+                            <p class="text-center">Tidak ada gambar yang tersedia.</p>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </x-layadmin>

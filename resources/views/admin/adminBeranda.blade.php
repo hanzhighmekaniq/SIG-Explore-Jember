@@ -1,7 +1,10 @@
 <x-layadmin>
+    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+        Dashboard
+    </p>
     <div class="">
-        <div class=" py-4">
-            <div class="grid grid-cols-2 gap-4">
+        <div class=" pb-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 @foreach ($categories as $category)
                     <div class="bg-[#C2C5AA] rounded-lg flex items-center p-4">
                         <div class="flex-shrink-0">

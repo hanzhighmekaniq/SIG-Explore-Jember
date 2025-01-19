@@ -129,7 +129,6 @@ class PengunjungController extends Controller
 
         // Mengambil gambar detail dan membatasi hanya 7 gambar per slide
         $imgDetails = json_decode($wisata->img_detail, true);
-
         // Mengambil data kuliner terkait wisata
         $kuliner = DataKuliner::where('id', $wisata->id)->get();
 

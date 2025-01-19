@@ -32,9 +32,9 @@
             </div>
             <div class="pt-4">
                 <p class="font-bold 2xl:text-4xl mb-10">{{ $wisata->nama_wisata }}</p>
-                <div class="grid grid-cols-6 gap-4">
+                <div class="grid grid-cols-1 xl:grid-cols-6 gap-4">
                     <div
-                        class=" col-span-2 flex flex-col justify-between dm-sans bg-slate-200 rounded-lg px-4 pb-6 pt-4 shadow-xl shadow-slate-400">
+                        class=" xl:col-span-2 flex flex-col justify-between dm-sans bg-slate-200 rounded-lg px-4 pb-6 pt-4 shadow-xl shadow-slate-400">
                         <div>
                             <p class="text-3xl font-semibold castoro-regular">Tentang</p>
                             <p class="text-lg font-serif pt-2" style="text-indent: 2rem;">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-span-4 mx-4 flex flex-col rounded-2xl overflow-hidden shadow-xl shadow-slate-400">
+                    <div class="xl:col-span-4 flex flex-col rounded-2xl overflow-hidden shadow-xl shadow-slate-400">
                         <!-- Gambar Utama dan Galeri -->
                         <div class="col-span-4 rounded-lg overflow-hidden">
                             <!-- Gambar Utama -->
@@ -219,23 +219,21 @@
             <div class="pt-32 pb-32">
                 <p class="font-bold 2xl:text-4xl mb-10">Event yang sedang berlangsung</p>
 
-                @if ($wisata->events->isEmpty())
-                    <p class="text-center text-black">Event tidak tersedia saat ini</p>
+                @if ($wisata->events && $wisata->events->isNotEmpty())
+                    @foreach ($wisata->events as $event)
+                        <div class="duration-700 ease-in-out mb-6" data-carousel-item>
+                            <img src="{{ asset('storage/' . $event->img) }}"
+                                class="block w-full h-auto max-h-[500px] object-cover transition-all duration-300 filter grayscale hover:grayscale-0 mx-auto"
+                                alt="{{ $event->name ?? 'Event Image' }}">
+                            <p class="text-center mt-4 font-semibold text-lg">{{ $event->nama_event ?? 'Event Name' }}</p>
+                        </div>
+                    @endforeach
                 @else
-                    <div class="relative w-full overflow-hidden">
-                        @foreach ($wisata->events as $event)
-                            <a href="{{ route('event.detail', ['id' => $event->id]) }}">
-                                <div class="carousel-item duration-700 ease-in-out">
-                                    <img src="{{ asset('storage/' . $event->img) }}"
-                                        class="w-full h-auto object-cover transition-all duration-300 filter grayscale hover:grayscale-0"
-                                        alt="{{ $event->name ?? 'Event Image' }}">
-                                    <p class="text-center mt-2 font-semibold">{{ $event->name }}</p>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
+                    <p class="text-center text-gray-500">Tidak ada event yang sedang berlangsung saat ini.</p>
                 @endif
             </div>
+
+
 
 
         </div>

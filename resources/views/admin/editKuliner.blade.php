@@ -1,7 +1,7 @@
 <x-layadmin>
     <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
         Edit Kuliner
-    </p>    
+    </p>
     <div class="mx-auto bg-white rounded-lg">
         <form action="{{ route('kuliner.update', $kuliner->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -98,53 +98,52 @@
 
 
 <div id="modal-gambar-kuliner" tabindex="-1" aria-hidden="true"
-    class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full  max-w-2xl xl:max-w-5xl max-h-full">
+    class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl xl:max-w-5xl max-h-full">
         <!-- Modal content -->
-        <div class="relative rounded-lg shadow dark:bg-gray-700 bg-[#4F7F81]">
+        <div class="relative rounded-lg shadow dark:bg-gray-700">
             <!-- Modal body -->
-            <div class="p-4 md:p-5">
-                <div class="">
-                    @if ($kuliner->gambar_kuliner)
-                        <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}" class="object-cover "
-                            alt="Gambar">
-                    @else
-                        <p>Tidak ada gambar yang tersedia.</p>
-                    @endif
-                </div>
+            <div class="p-4 md:p-5 flex justify-center items-center">
+                @if ($kuliner->gambar_kuliner)
+                    <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
+                        class="object-contain w-full max-w-full h-auto max-h-[500px]" alt="Gambar">
+                @else
+                    <p class="text-center text-white">Tidak ada gambar yang tersedia.</p>
+                @endif
             </div>
         </div>
     </div>
 </div>
+
 <div id="modal-detail-gambar-kuliner" tabindex="-1" aria-hidden="true"
-    class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50  justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full  max-w-2xl xl:max-w-5xl max-h-full">
+    class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl xl:max-w-5xl max-h-full">
         <!-- Modal content -->
-        <div class="relative rounded-lg shadow dark:bg-gray-700 bg-[#4F7F81]">
+        <div class="relative rounded-lg shadow dark:bg-gray-700">
             <!-- Modal body -->
             <div class="p-4 md:p-5">
-                <div class="relative flex overflow-hidden w-full">
+                <div class="relative flex justify-center items-center w-full overflow-hidden">
                     @if (!empty($kuliner->gambar_menu))
                         <div id="carousel" class="flex transition-transform duration-300">
                             @foreach (json_decode($kuliner->gambar_menu, true) as $image)
-                                <div class="flex-shrink-0 w-full items-center flex justify-center">
+                                <div class="flex-shrink-0 w-full flex justify-center items-center">
                                     <img src="{{ asset('storage/' . $image) }}"
-                                        class=" object-contain w-full h-auto max-h-[500px] mx-auto" alt="Gambar">
+                                        class="object-contain w-full h-auto max-h-[500px] mx-auto" alt="Gambar">
                                 </div>
                             @endforeach
                         </div>
 
                         <!-- Navigasi Geser -->
                         <button id="prev"
-                            class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-200 bg-opacity-50 rounded-full p-2 ml-2">
+                            class="absolute top-1/2 left-10 transform -translate-y-1/2 bg-gray-200 bg-opacity-50 rounded-full p-2">
                             &#10094; <!-- Tanda panah kiri -->
                         </button>
                         <button id="next"
-                            class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-200 bg-opacity-50 rounded-full p-2 mr-2">
+                            class="absolute top-1/2 right-10 transform -translate-y-1/2 bg-gray-200 bg-opacity-50 rounded-full p-2">
                             &#10095; <!-- Tanda panah kanan -->
                         </button>
                     @else
-                        <p>Tidak ada gambar yang tersedia.</p>
+                        <p class="text-center">Tidak ada gambar yang tersedia.</p>
                     @endif
                 </div>
             </div>
@@ -167,8 +166,6 @@
                     });
                 });
             </script>
-
-
         </div>
     </div>
 </div>
