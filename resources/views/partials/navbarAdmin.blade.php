@@ -5,16 +5,17 @@
                     type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd" fill-rule="evenodd"
-                            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-                        </path>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-menu">
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
                     </svg>
                 </button>
-                <a href="/dashboard" class="flex ms-2 md:me-24">
+                <a href="/beranda" class="flex ms-2 md:me-24">
                     <span
-                        class="self-center text-[#656D4A] pacifico-regular text-xl font-semibold sm:text-2xl whitespace-nowrap">Visit
+                        class="pacifico-regular self-center text-[#5C7AFF] text-xl font-semibold sm:text-2xl whitespace-nowrap">Visit
                         Jember</span>
                 </a>
             </div>

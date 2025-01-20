@@ -1,9 +1,9 @@
         <x-layout>
 
-            <div class="bg-white top-0 w-full h-auto">
+            <div class="bg-white top-0 w-full h-auto" id="beranda">
                 <!-- Hero Section -->
                 <div class="relative">
-                    <img src="{{ asset('img/bg-utama.png') }}" alt="Full Width"
+                    <img src="{{ asset('img/bg-2.jpg') }}" alt="Full Width"
                         class="object-cover w-full h-[500px] sm:h-[584px] md:h-[668px] lg:h-[752px] xl:h-[836px] 2xl:h-[920px]">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <figcaption class="container ">
@@ -38,8 +38,8 @@
                         <!-- Upcoming Events -->
                         <div>
                             <div class="mb-4">
-                                <p class="text-2xl font-bold pb-2">🎆Event Yang Akan Datang</p>
-                                <h5 class="pl-9">Berikut adalah event yang akan datang saat ini</h5>
+                                <p class="text-2xl font-bold pb-2 ">Event Yang Akan Datang</p>
+                                <h5 class="pl-0">Berikut adalah event yang akan datang saat ini</h5>
                             </div>
 
 
@@ -118,17 +118,17 @@
                         <!-- Section Title -->
                         <div>
 
-                            <p class="text-2xl font-bold pb-2">🗺️Persebaran Wisata</p>
-                            <h5 class="pl-9">Berikut adalah persebaran seluruh wisata saat ini</h5>
+                            <p class="text-2xl font-bold pb-2">Persebaran Wisata</p>
+                            <h5 class="pl-0">Berikut adalah persebaran seluruh wisata saat ini</h5>
                         </div>
                         <div class="flex items-end">
                             <a href="{{ route('petaWilayah.index') }}"
-                                class="px-4 py-2 bg-blue-500 text-white rounded-xl">Selengkapnya</a>
+                                class="px-4 py-2 bg-[#4A8FE7] text-white rounded-xl">Selengkapnya</a>
                         </div>
                     </div>
 
                     <!-- Leaflet Map -->
-                    <div id="map" class="aspect-video rounded-lg relative z-[1]"></div>
+                    <div id="map" class="h-96 rounded-lg relative z-[1]"></div>
 
                     <!-- LEAFLET JS -->
                     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -152,55 +152,54 @@
                         @endforeach
                     </script>
 
-                </div>
 
 
-                <!-- Popular Tourist Spots -->
-                <div class="container py-28 px-4">
-                    <div class="mb-4 flex justify-between">
-                        <div>
+                    <!-- Popular Tourist Spots -->
+                    <div class="container py-28 px-4">
+                        <div class="mb-4 flex justify-between">
+                            <div>
 
-                            <p class="text-2xl font-bold pb-2">🏝️Beberapa Wisata</p>
-                            <h5 class="pl-9">Berikut adalah beberapa wisata saat ini</h5>
+                                <p class="text-2xl font-bold pb-2">Beberapa Wisata</p>
+                                <h5 class="pl-0">Berikut adalah beberapa wisata saat ini</h5>
+                            </div>
+                            <div class="flex items-end">
+                                <a href="{{ route('wisata.pengunjung') }}"
+                                    class="px-4 py-2 bg-[#4A8FE7] text-white rounded-xl">Selengkapnya</a>
+                            </div>
                         </div>
-                        <div class="flex items-end">
-                            <a href="{{ route('wisata.pengunjung') }}"
-                                class="px-4 py-2 bg-blue-500 text-white rounded-xl">Selengkapnya</a>
-                        </div>
-                    </div>
 
 
 
-                    <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-                        @foreach ($filterWisata as $filter)
-                            <div class="space-y-2 h-auto w-auto border border-slate-500 p-4 rounded-lg">
-                                <img class="object-cover w-full aspect-[1080/540] rounded-lg"
-                                    src="{{ asset('storage/' . $filter->img) }}" alt="Image">
+                        <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+                            @foreach ($filterWisata as $filter)
+                                <div class="space-y-2 h-auto w-auto border border-slate-500 p-4 rounded-lg">
+                                    <img class="object-cover w-full aspect-[1080/540] rounded-lg"
+                                        src="{{ asset('storage/' . $filter->img) }}" alt="Image">
 
-                                <div class="w-auto h-auto">
-                                    <p class="text-black font-bold text-xl">{{ $filter->nama_wisata }}</p>
-                                    <div class="flex text-black items-center font-semibold font-semibold">
+                                    <div class="w-auto h-auto">
+                                        <p class="text-black font-bold text-xl">{{ $filter->nama_wisata }}</p>
+                                        <div class="flex text-black items-center font-semibold">
 
-                                        <p class="pr-1  text-md">
-                                            {{ $filter->kategori_detail->kategori->nama_kategori }},
-                                        </p>
-                                        <p class=" text-sm">
+                                            <p class="pr-1  text-md">
+                                                {{ $filter->kategori_detail->kategori->nama_kategori }},
+                                            </p>
+                                            <p class=" text-sm">
 
-                                            {{ $filter->kategori_detail->nama_kategori_detail }}
-                                        </p>
+                                                {{ $filter->kategori_detail->nama_kategori_detail }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex w-full">
+                                        <a href="{{ route('profilWisata.index', $filter->nama_wisata) }}"
+                                            class="w-full text-center bg-[#414833] text-white rounded-lg py-2 mt-4">Lihat
+                                            Detail</a>
                                     </div>
                                 </div>
-                                <div class="flex w-full">
-                                    <a href="{{ route('profilWisata.index', $filter->nama_wisata) }}"
-                                        class="w-full text-center bg-[#414833] text-white rounded-lg py-2 mt-4">Lihat
-                                        Detail</a>
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+
+                        </div>
 
                     </div>
 
                 </div>
-
-            </div>
         </x-layout>

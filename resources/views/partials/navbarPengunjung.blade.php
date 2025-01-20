@@ -1,6 +1,6 @@
 <nav class="w-full bg-white shadow-lg z-[100] relative">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#beranda" class="pacifico-regular text-2xl text-[#656D4A] hover:text-black">Visit Jember</a>
+        <a href="/beranda" class="pacifico-regular text-2xl text-[#59D2FE] hover:text-[#4A8FE7]">Visit Jember</a>
 
         <button data-collapse-toggle="navbar-default" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -18,21 +18,22 @@
                 <li>
                     <a href="/"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0 
-                            {{ request()->is('/') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}"
+                            {{ request()->is('/') ? 'text-[#4A8FE7] font-semibold' : 'text-[#59D2FE] hover:text-[#4A8FE7]' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="/wisata"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0 
-                            {{ request()->is('wisata*') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}">Wisata</a>
+                            {{ request()->is('wisata*') ? 'text-[#4A8FE7] font-semibold' : 'text-[#59D2FE] hover:text-[#4A8FE7]' }}">Wisata</a>
                 </li>
                 <li>
                     <a href="/petaWilayah"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0 
-                            {{ request()->is('petaWilayah*') ? 'text-gray-800 font-semibold' : 'text-[#656D4A] hover:text-gray-700' }}">Peta
+                            {{ request()->is('petaWilayah*') ? 'text-[#4A8FE7] font-semibold' : 'text-[#59D2FE] hover:text-[#4A8FE7]' }}">Peta
                         Wilayah</a>
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
