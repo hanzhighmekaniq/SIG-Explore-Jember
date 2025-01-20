@@ -20,7 +20,7 @@ class KulinerController extends Controller
 
         // Filter berdasarkan kategori (jika ada input id_kategori)
         if ($request->id_kategori_detail) {
-            $query->whereHas('wisata.kategori_detail', function ($q) use ($request) {
+            $query->whereHas('wisata.kategori_detail.kategori', function ($q) use ($request) {
                 $q->where('id', $request->id_kategori_detail);
             });
         }
@@ -48,8 +48,8 @@ class KulinerController extends Controller
             'id_wisata' => 'required',
             'nama_kuliner' => 'required|string|max:255',
             'deskripsi_kuliner' => 'required|string',
-            'gambar_kuliner' => 'required|file|mimes:jpeg,png,jpg|max:2048',
-            'gambar_menu.*' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'gambar_kuliner' => 'required',
+            'gambar_menu.*' => 'nullable',
         ]);
 
         // Cek apakah validasi gagal
@@ -116,8 +116,8 @@ class KulinerController extends Controller
             'id_wisata' => 'required', // Pastikan ID wisata ada
             'nama_kuliner' => 'required|string|max:255',
             'deskripsi_kuliner' => 'nullable|string',
-            'gambar_kuliner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
-            'gambar_menu.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi multiple files
+            'gambar_kuliner' => 'nullable', // Validasi gambar
+            'gambar_menu.*' => 'nullable', // Validasi multiple files
         ]);
 
         // Ambil data kuliner berdasarkan ID

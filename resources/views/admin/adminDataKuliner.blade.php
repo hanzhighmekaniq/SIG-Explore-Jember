@@ -98,14 +98,14 @@
                             {{ $kuliner->wisata->nama_wisata }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ optional($kuliner->wisata->kategori)->nama_kategori ?? 'N/A' }} -
-                            {{ optional($kuliner->wisata->kategori)->detail_kategori ?? 'N/A' }}
+                            {{ optional($kuliner->wisata->kategori_detail->kategori)->nama_kategori ?? 'N/A' }} -
+                            {{ optional($kuliner->wisata->kategori_detail)->nama_kategori_detail ?? 'N/A' }}
                         </td>
 
 
                         <td class="px-6 py-4">
                             <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
-                                class="w-10 sm:w-20 md:w-24 lg:w-32 xl:w-44 h-auto">
+                                class="aspect-auto object-contain h-20 w-full">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center">

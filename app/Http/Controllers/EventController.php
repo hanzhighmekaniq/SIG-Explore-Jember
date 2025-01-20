@@ -50,7 +50,7 @@ class EventController extends Controller
             'event_mulai' => 'required',
             'event_berakhir' => 'required',
             'htm_event' => 'required',
-            'img' => 'required|file|mimes:jpeg,png,jpg|max:2048',
+            'img' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -109,7 +109,7 @@ class EventController extends Controller
             'event_mulai' => 'required',
             'event_berakhir' => 'required', // Validasi multiple files
             'htm_event' => 'nullable', // Validasi multiple files
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi multiple files
+            'img' => 'nullable', // Validasi multiple files
         ]);
 
         // Ambil data kuliner berdasarkan ID

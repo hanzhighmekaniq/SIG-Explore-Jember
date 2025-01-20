@@ -124,7 +124,7 @@ class PengunjungController extends Controller
     {
         // Mengambil data wisata dan memuat relasi 'kategori_detail' dan 'events'
         $wisata = DataWisata::where('nama_wisata', $nama_wisata)
-            ->with(['kategori_detail.kategori', 'events']) // Tambahkan relasi events
+            ->with(['kategori_detail.kategori', 'events','kuliners']) // Tambahkan relasi events
             ->firstOrFail(); // Jika tidak ada, akan lempar exception dan tampilkan halaman 404
 
         // Mengambil gambar detail dan membatasi hanya 7 gambar per slide

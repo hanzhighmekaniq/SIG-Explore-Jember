@@ -160,38 +160,48 @@
             </div>
 
 
-            <div class="pt-32">
+            <div class="pt-10 lg:pt-32">
                 <p class="font-bold 2xl:text-4xl mb-10">Kuliner yang Tersedia</p>
                 <div class="grid">
                     @if ($kuliner->isEmpty())
-
                         <p class="text-center">Kuliner tidak ada saat ini</p>
                     @else
-                        <!-- beranda.blade.php -->
-                        <div id="carousel" class="relative w-full" data-carousel="slide">
+                        <div id="default-carousel" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
-                            <div class="relative overflow-hidden px-4">
-                                @foreach ($kuliner->chunk(5) as $chunk)
-                                    <!-- Memecah data menjadi potongan 5 per slide -->
-                                    <div class="grid grid-cols-5 gap-4 duration-700 ease-in-out">
-                                        @foreach ($chunk as $item)
-                                            <a href="#" class="w-full flex-shrink-0 border p-4">
-                                                <img src="{{ asset('storage/' . $item->gambar_kuliner) }}"
-                                                    class="w-full h-48 object-contain rounded-lg" alt="Kuliner Image">
-                                            </a>
-                                        @endforeach
+                            <div class="relative overflow-hidden rounded-lg aspect-[1920/640] aspect-auto">
+                                @foreach ($wisata->kuliners as $index => $kuliner)
+                                    <!-- Set class "hidden" untuk item kecuali yang pertama -->
+                                    <div class="{{ $index === 0 ? 'block' : 'hidden' }} duration-700 flex justify-center items-center ease-in-out"
+                                        data-carousel-item>
+                                        <div class="px-16"
+                                            data-modal-target="modal-gambar-detail-wisata-{{ $kuliner->id }}"
+                                            data-modal-toggle="modal-gambar-detail-wisata-{{ $kuliner->id }}">
+                                            <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
+                                                class="w-full object-cover rounded-lg"
+                                                alt="{{ $kuliner->nama_kuliner ?? 'Kuliner Image' }}">
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
-
+                            <!-- Slider indicators -->
+                            <div
+                                class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                                @foreach ($wisata->kuliners as $index => $kuliner)
+                                    <button type="button" class="w-3 h-3 rounded-full"
+                                        aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                                        aria-label="Slide {{ $index + 1 }}"
+                                        data-carousel-slide-to="{{ $index }}"></button>
+                                @endforeach
+                            </div>
                             <!-- Slider controls -->
                             <button type="button"
-                                class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 sm:px-3 md:px-4 lg:px-6 cursor-pointer group focus:outline-none"
                                 data-carousel-prev>
                                 <span
-                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-500 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-black/70 group-hover:bg-black/90 group-focus:ring-4 group-focus:ring-black/50">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 6 10">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="M5 1 1 5l4 4" />
                                     </svg>
@@ -199,12 +209,13 @@
                                 </span>
                             </button>
                             <button type="button"
-                                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-2 sm:px-3 md:px-4 lg:px-6 cursor-pointer group focus:outline-none"
                                 data-carousel-next>
                                 <span
-                                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-500 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-black/70 group-hover:bg-black/90 group-focus:ring-4 group-focus:ring-black/50">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 6 10">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m1 9 4-4-4-4" />
                                     </svg>
@@ -212,9 +223,15 @@
                                 </span>
                             </button>
                         </div>
+
+
+
                     @endif
                 </div>
             </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+
+
 
             <div class="pt-32 pb-32">
                 <p class="font-bold 2xl:text-4xl mb-10">Event yang sedang berlangsung</p>
@@ -225,7 +242,8 @@
                             <img src="{{ asset('storage/' . $event->img) }}"
                                 class="block w-full h-auto max-h-[500px] object-cover transition-all duration-300 filter grayscale hover:grayscale-0 mx-auto"
                                 alt="{{ $event->name ?? 'Event Image' }}">
-                            <p class="text-center mt-4 font-semibold text-lg">{{ $event->nama_event ?? 'Event Name' }}</p>
+                            <p class="text-center mt-4 font-semibold text-lg">{{ $event->nama_event ?? 'Event Name' }}
+                            </p>
                         </div>
                     @endforeach
                 @else
@@ -241,3 +259,76 @@
 
     </body>
 </x-layout>
+
+@foreach ($wisata->kuliners as $kuliner)
+    <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-6xl max-h-full">
+            <div class="relative rounded-lg shadow dark:bg-gray-700 bg-white">
+                <!-- Modal body -->
+                <div class="p-4">
+                    @if (!empty($kuliner->gambar_menu))
+                        <div class="grid grid-cols-8 gap-4">
+                            <!-- Kolom Gambar -->
+                            <div class="col-span-3 relative overflow-x-auto p-4">
+                                <div class="flex space-x-4 flex-nowrap">
+                                    @foreach (json_decode($kuliner->gambar_menu, true) as $gambar_menu)
+                                        <div class="flex-shrink-0 w-64">
+                                            <img src="{{ asset('storage/' . $gambar_menu) }}"
+                                                class="object-contain aspect-[1080/1920] rounded-lg"
+                                                alt="Gambar Kuliner {{ $kuliner->nama_kuliner }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Kolom Informasi -->
+                            <div class="col-span-5">
+                                <!-- Tampilkan Nama Kuliner -->
+                                <div class="mb-4">
+                                    <h2 class="text-2xl font-bold text-gray-800">
+                                        {{ $kuliner->nama_kuliner }}
+                                    </h2>
+                                </div>
+
+                                <!-- Tampilkan Deskripsi -->
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-700">Deskripsi:</h3>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
+                                    </p>
+                                </div>
+
+                                <!-- Tampilkan Informasi Tambahan -->
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-700">Informasi Tambahan:</h3>
+                                    <ul class="list-disc pl-5 text-gray-600">
+                                        <li><strong>Harga:</strong>
+                                            Rp{{ number_format($kuliner->harga_kuliner, 0, ',', '.') }}</li>
+                                        <li><strong>ID Kuliner:</strong> {{ $kuliner->id }}</li>
+                                        <li><strong>Lokasi:</strong> {{ $kuliner->lokasi ?? 'Tidak diketahui' }}</li>
+                                        <li><strong>Kategori:</strong>
+                                            {{ $kuliner->kategori->nama_kategori ?? 'Tidak ada kategori' }}</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tampilkan Kontak (Opsional) -->
+                                @if (!empty($kuliner->kontak))
+                                    <div class="mb-6">
+                                        <h3 class="text-lg font-semibold text-gray-700">Kontak:</h3>
+                                        <p class="text-gray-600">
+                                            {{ $kuliner->kontak }}
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @else
+                        <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
+                    @endif
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endforeach

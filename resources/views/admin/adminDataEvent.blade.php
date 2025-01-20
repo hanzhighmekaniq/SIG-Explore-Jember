@@ -107,7 +107,7 @@
                             {{ $event->htm_event }}
                         </td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $event->img) }}" alt="Gambar" class="w-44 h-auto">
+                            <img src="{{ asset('storage/' . $event->img) }}" alt="Gambar" class="aspect-auto object-contain h-20 w-full">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center">

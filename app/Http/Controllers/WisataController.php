@@ -57,8 +57,8 @@ class WisataController extends Controller
             'deskripsi_wisata' => 'required|string',
             'fasilitas' => 'required|string',
             'lokasi' => 'required|string|max:255',
-            'img' => 'required|file|mimes:jpeg,png,jpg|max:2048',
-            'img_detail.*' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'img' => 'required',
+            'img_detail.*' => 'nullable',
             'latitude' => 'required|numeric',
             'longitude' => 'nullable|numeric',
             'htm_wisata' => 'nullable|numeric',
@@ -70,7 +70,6 @@ class WisataController extends Controller
             'longitude.min' => 'Kolom longitude tidak boleh kurang dari -180.',
             'required' => ':attribute harus diisi.', // Pesan umum untuk required
             'numeric' => ':attribute harus berupa angka.',
-            'file' => ':attribute harus berupa file.',
             'mimes' => ':attribute harus berformat: :values.',
             'max' => ':attribute tidak boleh lebih dari :max.',
         ]);
@@ -132,8 +131,8 @@ class WisataController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nama_wisata' => 'required',
-                'img' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-                'img_detail.*' => 'file|mimes:jpeg,png,jpg|max:2048',
+                'img' => 'nullable',
+                'img_detail.*' => 'nullable',
                 'id_kategori_detail' => 'required',
                 'deskripsi_wisata' => 'required',
                 'fasilitas' => 'required',

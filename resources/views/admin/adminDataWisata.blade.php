@@ -103,10 +103,10 @@
                             {{ $wisata->deskripsi_wisata }}
                         </td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $wisata->img) }}" class="w-44 h-auto" alt="Image">
+                            <img src="{{ asset('storage/' . $wisata->img) }}" class="aspect-auto object-contain h-20 w-full" alt="Image">
                         </td>
 
-                        <td class="px-2 py-4 flex justify-center gap-2">
+                        <td class="px-6 py-4 flex justify-center gap-2">
                             <div class="flex justify-center">
                                 <a href="{{ route('wisata.edit', $wisata->id) }}"
                                     class="font-medium text-blue-600 border px-4 py-2 rounded-lg">Edit</a>
