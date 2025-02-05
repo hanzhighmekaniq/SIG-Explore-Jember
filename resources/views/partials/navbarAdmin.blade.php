@@ -13,7 +13,7 @@
                         <line x1="4" x2="20" y1="18" y2="18" />
                     </svg>
                 </button>
-                <a href="/beranda" class="flex ms-2 md:me-24">
+                <a href="/" class="flex ms-2 md:me-24">
                     <span
                         class="pacifico-regular self-center text-[#5C7AFF] text-xl font-semibold sm:text-2xl whitespace-nowrap">Visit
                         Jember</span>

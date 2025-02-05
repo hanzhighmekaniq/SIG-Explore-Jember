@@ -10,15 +10,15 @@
         <li class="">
             <a href="{{ route('dashboard') }}"
             class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:text-white hover:bg-[#5C7AFF] focus:text-white active:text-white focus:outline-none {{ request()->is('admin/dashboard') ? 'bg-[#5C7AFF] text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hover:text-white transition duration-75"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    viewBox="0 0 24 24">
-                    <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-                    <path d="M18 17V9" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }} transition duration-75"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        viewBox="0 0 24 24">
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <path d="M18 17V9" />
                     <path d="M13 17V5" />
                     <path d="M8 17v-3" />
                 </svg>
-                <span class="poppins-semibold ms-3 hover:text-white">Dashboard</span>
+                <span class="poppins-semibold ms-3 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }}">Dashboard</span>
             </a>
         </li>
         <li class="">
