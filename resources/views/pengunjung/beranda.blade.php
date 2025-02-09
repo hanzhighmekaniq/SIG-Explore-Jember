@@ -9,7 +9,7 @@
                         <figcaption class="container ">
                             <div class=" text-center px-4 2xl:px-8 space-y-4 lg:space-y-10">
                                 <p
-                                    class="rubik-mono-one-regular font-semibold text-3xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-7xl text-[#C2C5AA] drop-shadow-lg">
+                                    class="rubik-mono-one-regular font-semibold text-3xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-7xl text-[#FFFFFF] drop-shadow-lg">
                                     WISATA <br> KABUPATEN JEMBER
                                 </p>
                                 <p

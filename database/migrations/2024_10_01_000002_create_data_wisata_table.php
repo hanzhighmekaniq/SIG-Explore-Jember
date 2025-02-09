@@ -23,8 +23,8 @@ return new class extends Migration
             $table->json('img_detail')->nullable();
             $table->string('latitude');
             $table->string('longitude');
-            $table->decimal('htm_wisata', 15, 2)->nullable();
-            $table->decimal('htm_parkir', 15, 2)->nullable();
+            $table->string('htm_wisata')->nullable();
+            $table->string('htm_parkir')->nullable();
             $table->timestamps();
 
             $table->foreignId('id_kategori_detail')

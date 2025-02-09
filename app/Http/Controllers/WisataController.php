@@ -61,15 +61,14 @@ class WisataController extends Controller
             'img_detail.*' => 'nullable',
             'latitude' => 'required|numeric',
             'longitude' => 'nullable|numeric',
-            'htm_wisata' => 'nullable|numeric',
-            'htm_parkir' => 'nullable|numeric',
+            'htm_wisata' => 'nullable',
+            'htm_parkir' => 'nullable',
         ], [
             'latitude.max' => 'Kolom latitude tidak boleh lebih dari 90.',
             'latitude.min' => 'Kolom latitude tidak boleh kurang dari -90.',
             'longitude.max' => 'Kolom longitude tidak boleh lebih dari 180.',
             'longitude.min' => 'Kolom longitude tidak boleh kurang dari -180.',
             'required' => ':attribute harus diisi.', // Pesan umum untuk required
-            'numeric' => ':attribute harus berupa angka.',
             'mimes' => ':attribute harus berformat: :values.',
             'max' => ':attribute tidak boleh lebih dari :max.',
         ]);

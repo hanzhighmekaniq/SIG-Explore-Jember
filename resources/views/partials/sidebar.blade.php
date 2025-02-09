@@ -1,5 +1,5 @@
 @php
-    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\DB; 
     $countWisata = DB::table('data_wisata')->count();
     $countKuliner = DB::table('data_kuliner')->count();
     $countEvent = DB::table('data_event')->count();

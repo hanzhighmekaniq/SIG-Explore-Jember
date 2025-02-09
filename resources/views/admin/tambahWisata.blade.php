@@ -126,7 +126,7 @@
 
             <div>
                 <label for="htm_wisata" class="block text-gray-700 font-bold mb-2">HTM Wisata:</label>
-                <input type="number" id="htm_wisata" name="htm_wisata" step="0.01"
+                <input type="text" id="htm_wisata" name="htm_wisata" step="0.01"
                     class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
                 @error('htm_wisata')
                     <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
@@ -135,7 +135,7 @@
 
             <div>
                 <label for="htm_parkir" class="block text-gray-700 font-bold mb-2">HTM Parkir:</label>
-                <input type="number" id="htm_parkir" name="htm_parkir" step="0.01"
+                <input type="text" id="htm_parkir" name="htm_parkir" step="0.01"
                     class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
                 @error('htm_parkir')
                     <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
