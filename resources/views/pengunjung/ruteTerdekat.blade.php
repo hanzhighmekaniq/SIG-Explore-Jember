@@ -10,66 +10,121 @@
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-    <style>
-        #map {
-            height: 911px;
-            /* Atur tinggi peta sesuai kebutuhan */
-        }
-    </style>
+
 </head>
 
 <body>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100vh;
+            /* Tinggi 100% dari viewport */
+            width: 100vw;
+            /* Lebar 100% dari viewport */
+        }
+    </style>
+
     <div class="">
         <div class="grid">
-            <div id="map"></div>
+            <div class="" id="map"></div>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script>
-        // Inisialisasi peta
-        var map = L.map('map').setView([-8.2644, 113.6321], 10); // Sesuaikan koordinat dan zoom level
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi peta dengan koordinat awal dan zoom level
+            var map = L.map('map', {
+                    dragging: false,
+                    touchZoom: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false
+                })
+                .setView([-8.2644, 113.6321], 10);
 
-        // Tambahkan tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+            // Menambahkan tile layer dari OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        // Fungsi untuk mendapatkan lokasi real-time pengguna
-        function getLocationAndRoute() {
+            // Variabel untuk menyimpan marker lokasi pengguna
+            var userMarker;
+
+            // Cek apakah browser mendukung geolocation
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var lat = position.coords.latitude;
-                    var lng = position.coords.longitude;
-
-                    // Tambahkan rute menggunakan Leaflet Routing Machine
-                    L.Routing.control({
-                        waypoints: [
-
-
-                            L.latLng(lat, lng), // Titik awal dari lokasi real-time pengguna
-                            L.latLng({{ $rute->latitude }},
-                                {{ $rute->longitude }}
-                            ) // Titik tujuan (contoh koordinat Tanjung Papuma)
-
-                        ],
-                        routeWhileDragging: true
-                    }).addTo(map);
-
-                    // Pindahkan peta ke lokasi real-time pengguna
-                    map.setView([lat, lng], 13);
-                }, function(error) {
-                    console.error("Error Code = " + error.code + " - " + error.message);
+                // Lokasi pengguna akan dicari dan peta akan disesuaikan
+                map.locate({
+                    setView: true,
+                    maxZoom: 16.5
                 });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
 
-        // Panggil fungsi untuk mendapatkan lokasi dan menambahkan rute
-        getLocationAndRoute();
+                // Ketika lokasi pengguna ditemukan
+                map.on('locationfound', function(e) {
+                    var userLatLng = e.latlng;
+
+                    // Jika marker sudah ada, perbarui lokasinya
+                    if (userMarker) {
+                        userMarker.setLatLng(userLatLng);
+                    } else {
+                        // Tambahkan marker untuk lokasi pengguna jika belum ada
+                        userMarker = L.marker(userLatLng, {
+                                interactive: true
+                            })
+                            .addTo(map)
+                            .bindPopup("📍 Lokasi Anda")
+                            .openPopup();
+                    }
+
+                    // Menambahkan marker untuk lokasi tujuan
+                    var destinationLatLng = L.latLng({{ $rute->latitude }}, {{ $rute->longitude }});
+                    L.marker(destinationLatLng, {
+                            interactive: false
+                        })
+                        .addTo(map)
+                        .bindPopup("📍 {{ $rute->nama_kursus }}")
+                        .openPopup();
+
+                    // Tambahkan rute antara lokasi pengguna dan tujuan
+                    L.Routing.control({
+                        waypoints: [userLatLng, destinationLatLng],
+                        routeWhileDragging: false, // Nonaktifkan drag untuk menjaga rute tetap sesuai
+                        draggableWaypoints: false, // Pastikan titik rute tidak bisa dipindah
+                        collapsible: true, // Buat kontrol bisa disembunyikan
+                        createMarker: function() {
+                            return null;
+                        }, // Tidak menampilkan marker tambahan
+                        fitSelectedRoutes: true // Pastikan peta menyesuaikan ke rute
+                    }).addTo(map);
+                });
+
+                // Tangani error jika geolocation tidak tersedia
+                map.on('locationerror', function(e) {
+                    console.error("Geolocation error: " + e.message);
+                    L.popup()
+                        .setLatLng([-8.2644, 113.6321])
+                        .setContent("❌ Tidak dapat menemukan lokasi Anda.")
+                        .openOn(map);
+                });
+
+            } else {
+                // Jika browser tidak mendukung geolocation
+                L.popup()
+                    .setLatLng([-8.2644, 113.6321])
+                    .setContent("❌ Geolocation tidak didukung di browser Anda.")
+                    .openOn(map);
+            }
+        });
     </script>
+
+
 </body>
 
 </html>

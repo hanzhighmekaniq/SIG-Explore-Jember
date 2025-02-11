@@ -95,12 +95,17 @@
                             {{ $kuliner->deskripsi_kuliner }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $kuliner->wisata->nama_wisata }}
+                            {{ optional($kuliner->wisata)->nama_wisata ?? 'Tidak Ada Wisata' }}
+
                         </td>
                         <td class="px-6 py-4">
-                            {{ optional($kuliner->wisata->kategori_detail->kategori)->nama_kategori ?? 'N/A' }} -
-                            {{ optional($kuliner->wisata->kategori_detail)->nama_kategori_detail ?? 'N/A' }}
+                            {{-- {{ optional($kuliner->wisata->kategori_detail->kategori)->nama_kategori ?? 'Tidak Ada Kategori' }}
+                            -
+                            {{ optional($kuliner->wisata->kategori_detail)->nama_kategori_detail ?? 'Tidak Ada Detail Kategori' }} --}}
+
                         </td>
+
+
 
 
                         <td class="px-6 py-4">

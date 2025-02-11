@@ -10,8 +10,9 @@
                 <p class="pacifico-regular text-5xl text-[#656D4A] ">Visit Jember</p>
             </div>
 
-            <div class="flex justify-end items-center space-x-4 pt-8 ">
-                <form action="{{ route('wisata.pengunjung') }}" method="GET" class="flex space-x-2 items-center">
+            <div class="flex justify-end items-center space-x-4 py-4 ">
+                <form action="{{ route('wisata.pengunjung') }}" method="GET"
+                    class="md:flex space-y-2 md:space-y-0 md:space-x-2 items-center">
                     <!-- Dropdown Kategori -->
                     <select name="id_kategori" id="id_kategori" class="px-4 py-2 border rounded-md text-xs">
                         <option value="">Semua Kategori</option>
@@ -24,7 +25,8 @@
                     </select>
 
                     <!-- Dropdown Kategori Detail (will be populated dynamically) -->
-                    <select name="id_kategori_detail" id="id_kategori_detail" class="px-4 py-2 border rounded-md text-xs">
+                    <select name="id_kategori_detail" id="id_kategori_detail"
+                        class="px-4 py-2 border rounded-md text-xs">
                         <option value="">Semua Sub Kategori</option>
                         @foreach ($kategorisDetail as $kategoriDetail)
                             <option value="{{ $kategoriDetail->id }}"
@@ -42,27 +44,29 @@
                 </form>
             </div>
 
-
             <!-- Grid of Items or Empty Message -->
-            <div class="pb-40 pt-8">
+            <div class="pb-10">
                 @if ($wisata->isEmpty())
                     <div class="text-center text-slate-500 text-xl py-28 border border-slate-300 rounded-xl">
                         <p class="uppercase font-bold">Wisata kosong</p>
                     </div>
                 @else
-                    <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-8">
+                    <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
                         @foreach ($wisata as $item)
-                            <div class="space-y-2 h-auto w-auto border border-slate-500 p-4 rounded-lg">
-                                <img class="object-cover w-full aspect-[1080/540] rounded-lg"
-                                    src="{{ $item->img ? asset('storage/' . $item->img) : asset('images/placeholder.png') }}"
-                                    alt="{{ $item->nama_wisata }}" />
+                            <div class="space-y-2 flex justify-between flex-col h-auto w-auto border border-slate-500 p-4 rounded-lg">
+                                <div>
 
-                                <div class="w-auto h-auto">
-                                    <p class="text-black font-bold text-xl">{{ $item->nama_wisata }}</p>
-                                    <p class="text-black text-sm">
-                                        {{ $item->kategori_detail->nama_kategori_detail ?? 'Kategori Tidak Tersedia' }}
-                                        {{ $item->kategori_detail->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}
-                                    </p>
+                                    <img class="object-cover w-full aspect-[1080/540] rounded-lg"
+                                        src="{{ $item->img ? asset('storage/' . $item->img) : asset('images/placeholder.png') }}"
+                                        alt="{{ $item->nama_wisata }}" />
+
+                                    <div class="w-auto h-auto">
+                                        <p class="text-black font-bold text-xl">{{ $item->nama_wisata }}</p>
+                                        <p class="text-black text-sm">
+                                            {{ $item->kategori_detail->nama_kategori_detail ?? 'Kategori Tidak Tersedia' }}
+                                            {{ $item->kategori_detail->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div class="flex w-full">
@@ -75,7 +79,13 @@
                         @endforeach
                     </div>
                 @endif
+                <div class="pt-10">
+
+                    {{ $wisata->links() }}
+                </div>
+
             </div>
+
             <script>
                 document.getElementById('id_kategori').addEventListener('change', function() {
                     let kategoriId = this.value;
@@ -97,8 +107,6 @@
                     }
                 });
             </script>
-
-
         </div>
     </div>
 </x-layout>

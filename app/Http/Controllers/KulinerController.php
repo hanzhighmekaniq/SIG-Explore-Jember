@@ -20,8 +20,8 @@ class KulinerController extends Controller
 
         // Filter berdasarkan kategori (jika ada input id_kategori)
         if ($request->id_kategori_detail) {
-            $query->whereHas('wisata.kategori_detail.kategori', function ($q) use ($request) {
-                $q->where('id', $request->id_kategori_detail);
+            $query->whereHas('wisata.kategori_detail', function ($q) use ($request) {
+                $q->where('id_kategori', $request->id_kategori_detail);
             });
         }
 
@@ -31,7 +31,8 @@ class KulinerController extends Controller
         }
 
         // Ambil data wisata dengan relasi kategori_detail dan kategori
-        $DataKuliner = $query->with(['wisata.kategori_detail'])->paginate(10);
+        $DataKuliner = $query->with(['wisata.kategori_detail.kategori'])->paginate(10);
+
         return view('admin.adminDataKuliner', compact('DataKuliner', 'wisata'));
     }
 

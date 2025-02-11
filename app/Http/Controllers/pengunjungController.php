@@ -82,7 +82,7 @@ class PengunjungController extends Controller
         }
 
         // Jika tidak ada filter, tampilkan semua data wisata dengan paginate
-        $wisata = $query->paginate(10);  // Mengambil 9 data per halaman
+        $wisata = $query->paginate(12);  // Mengambil 9 data per halaman
 
         // Return view dengan data
         return view('pengunjung.wisata', compact('kategoris', 'kategorisDetail', 'wisata'));
@@ -124,15 +124,14 @@ class PengunjungController extends Controller
     {
         // Mengambil data wisata dan memuat relasi 'kategori_detail' dan 'events'
         $wisata = DataWisata::where('nama_wisata', $nama_wisata)
-            ->with(['kategori_detail.kategori', 'events','kuliners']) // Tambahkan relasi events
+            ->with(['kategori_detail.kategori', 'events', 'kuliners']) // Tambahkan relasi events
             ->firstOrFail(); // Jika tidak ada, akan lempar exception dan tampilkan halaman 404
 
         // Mengambil gambar detail dan membatasi hanya 7 gambar per slide
         $imgDetails = json_decode($wisata->img_detail, true);
-        // Mengambil data kuliner terkait wisata
-        $kuliner = DataKuliner::where('id', $wisata->id)->get();
+        // $imgKuliner = json_decode($wisata->kuliners->gambar_menu, true);
 
         // Mengirim data ke view
-        return view('pengunjung.profilWisata', compact('wisata', 'kuliner', 'imgDetails'));
+        return view('pengunjung.profilWisata', compact('wisata', 'imgDetails'));
     }
 }
