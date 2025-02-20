@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PengunjungController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\subKategori;
 use App\Http\Controllers\UjiCoba;
 
@@ -26,9 +27,7 @@ Route::get('/', [PengunjungController::class, 'beranda'])->name('beranda.index')
 
 // Route untuk AJAX request
 Route::get('/get-detail-kategori', [PengunjungController::class, 'getDetailKategori'])->name('get.detail.kategori');
-
 Route::get('/wisata', [PengunjungController::class, 'wisata'])->name('wisata.pengunjung');
-
 Route::get('/get-kategori-details/{kategori_id}', [PengunjungController::class, 'getKategoriDetails']);
 
 
@@ -45,21 +44,21 @@ Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 Route::get('/ujicoba', [UjiCoba::class, 'ujicoba'])->name('ujicoba');
 
 // Rute untuk admin
-
+route::post('/sendMail', [SendEmailController::class, 'sendmail'])->name('send.mail');
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');
 
-        // Resource routes
-        // Route::POST('/kategori-detail', [KategoriController::class, 'storeSubKategori'])->name('subKategori.store');
-        Route::resource('subKategori', subKategori::class);
-        Route::resource('kategori', KategoriController::class);
-        Route::resource('wisata', WisataController::class);
-        Route::resource('event', EventController::class);
-        Route::resource('kuliner', KulinerController::class);
+    // Resource routes
+    // Route::POST('/kategori-detail', [KategoriController::class, 'storeSubKategori'])->name('subKategori.store');
+    Route::resource('subKategori', subKategori::class);
+    Route::resource('kategori', KategoriController::class);
+    Route::resource('wisata', WisataController::class);
+    Route::resource('event', EventController::class);
+    Route::resource('kuliner', KulinerController::class);
 
-        // Optional Profile Routes
-        // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Optional Profile Routes
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

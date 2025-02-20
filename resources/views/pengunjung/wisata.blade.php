@@ -1,47 +1,48 @@
 {{-- pacifico-regular --}}
 <x-layout>
-    <div class="bg-white h-auto w-full">
+    <div class="bg-slate-100 h-auto w-full">
 
         <div class="container m-auto px-4">
             <!-- Title Section -->
-            <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
-                <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary">
+            <div class="m-auto w-auto text-center pt-20 lg:pt-28 pb-10 text-6xl">
+                <p class="pb-4  text-center font-bold lg:font-extrabold xl:text-xl text-lime-800 text-lg leading-7 text-primary">
                     WISATA</p>
                 <p class="pacifico-regular text-5xl text-[#656D4A] ">Visit Jember</p>
             </div>
 
-            <div class="flex justify-end items-center space-x-4 py-4 ">
+            <div class="flex justify-center items-center space-x-4 pt-4 pb-8 ">
                 <form action="{{ route('wisata.pengunjung') }}" method="GET"
-                    class="md:flex space-y-2 md:space-y-0 md:space-x-2 items-center">
-                    <!-- Dropdown Kategori -->
-                    <select name="id_kategori" id="id_kategori" class="px-4 py-2 border rounded-md text-xs">
-                        <option value="">Semua Kategori</option>
+                    class="space-y-4 lg:space-y-0 lg:flex gap-2 items-center">
+
+                    <!-- Filter Kategori dengan Button -->
+                    <div class="items-center justify-center flex flex-wrap gap-2">
+                        <a href="{{ route('wisata.pengunjung') }}"
+                            class="px-4 py-2 rounded-full text-xs  border shadow-md shadow-gray-400 border-[#414833] {{ request('id_kategori') ? 'bg-white ' : 'bg-[#414833]  text-white' }}">
+                            Semua
+                        </a>
                         @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}"
-                                {{ request('id_kategori') == $kategori->id ? 'selected' : '' }}>
+                            <a href="{{ route('wisata.pengunjung', ['id_kategori' => $kategori->id]) }}"
+                                class="px-4 py-2 rounded-full text-xs shadow-md shadow-gray-400 border border-[#414833]
+                               {{ request('id_kategori') == $kategori->id ? 'bg-[#414833] text-white' : 'bg-white' }}">
                                 {{ $kategori->nama_kategori }}
-                            </option>
+                            </a>
                         @endforeach
-                    </select>
+                    </div>
 
-                    <!-- Dropdown Kategori Detail (will be populated dynamically) -->
-                    <select name="id_kategori_detail" id="id_kategori_detail"
-                        class="px-4 py-2 border rounded-md text-xs">
-                        <option value="">Semua Sub Kategori</option>
-                        @foreach ($kategorisDetail as $kategoriDetail)
-                            <option value="{{ $kategoriDetail->id }}"
-                                {{ request('id_kategori_detail') == $kategoriDetail->id ? 'selected' : '' }}>
-                                {{ $kategoriDetail->nama_kategori_detail }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <!-- Input Pencarian dengan Tombol -->
+                    <div class="flex items-center shadow-md shadow-gray-400 rounded-full overflow-hidden ">
+                        <input type="text" name="nama_wisata" placeholder="Cari nama wisata"
+                            value="{{ request('nama_wisata') }}"
+                            class="px-4 py-2 w-full text-xs rounded-l-full focus:outline-none">
 
-                    <!-- Input Nama Wisata -->
-                    <input type="text" name="nama_wisata" placeholder="Cari nama wisata"
-                        value="{{ request('nama_wisata') }}" class="px-4 py-2 border rounded-md text-xs">
+                        <button type="submit"
+                            class="px-4 py-2 bg-[#414833] border  border-[#414833] text-white text-xs rounded-r-full">
+                            Cari
+                        </button>
+                    </div>
 
-                    <button type="submit" class="px-4 py-2 bg-[#414833] text-white rounded-md text-xs">Cari</button>
                 </form>
+
             </div>
 
             <!-- Grid of Items or Empty Message -->
@@ -51,17 +52,19 @@
                         <p class="uppercase font-bold">Wisata kosong</p>
                     </div>
                 @else
-                    <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
+                    <div class="grid xl:grid-cols-5 md:grid-cols-2 grid-cols-2 gap-2 xl:gap-6">
                         @foreach ($wisata as $item)
-                            <div class="space-y-2 flex justify-between flex-col h-auto w-auto border border-slate-500 p-4 rounded-lg">
+                            <a href="{{ route('profilWisata.index', $item->nama_wisata) }}"
+                                class="shadow-md lg:shadow-xl shadow-slate-400 bg-white flex justify-between flex-col h-auto w-auto border-slate-500 rounded-xl
+                                   transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl hover:shadow-slate-400">
                                 <div>
 
-                                    <img class="object-cover w-full aspect-[1080/540] rounded-lg"
+                                    <img class="object-cover w-full aspect-[1080/540] rounded-t-xl"
                                         src="{{ $item->img ? asset('storage/' . $item->img) : asset('images/placeholder.png') }}"
                                         alt="{{ $item->nama_wisata }}" />
 
-                                    <div class="w-auto h-auto">
-                                        <p class="text-black font-bold text-xl">{{ $item->nama_wisata }}</p>
+                                    <div class="w-auto h-auto pt-2 px-4 pb-4">
+                                        <p class="text-black font-bold text-md">{{ $item->nama_wisata }}</p>
                                         <p class="text-black text-sm">
                                             {{ $item->kategori_detail->nama_kategori_detail ?? 'Kategori Tidak Tersedia' }}
                                             {{ $item->kategori_detail->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}
@@ -70,12 +73,12 @@
                                 </div>
 
                                 <div class="flex w-full">
-                                    <a href="{{ route('profilWisata.index', $item->nama_wisata) }}"
-                                        class="w-full text-center bg-[#414833] text-white rounded-lg py-2 mt-4">
-                                        Lihat Detail
-                                    </a>
+                                    {{-- <a href="{{ route('profilWisata.index', $item->nama_wisata) }}"
+                                    class="w-full text-center bg-[#414833] text-white rounded-lg py-2 mt-4">
+                                    Lihat Detail
+                                </a> --}}
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 @endif

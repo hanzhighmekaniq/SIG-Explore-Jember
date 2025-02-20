@@ -21,6 +21,7 @@ class DataWisata extends Model
         'fasilitas',
         'lokasi',
         'img_detail',
+        'jam_operasional',
         'latitude',
         'longitude',
         'htm_wisata',

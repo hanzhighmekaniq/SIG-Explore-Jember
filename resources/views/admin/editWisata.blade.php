@@ -138,6 +138,35 @@
                 @enderror
             </div>
 
+            <div>
+                <label for="Jam_Operasional" class="block mb-2 text-sm font-medium text-gray-900">Jam
+                    Operasional</label>
+                <div id="jam-operasional-container"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'] as $hari)
+                        @php
+                            $buka = isset($jamOperasional[$hari]['buka']) ? $jamOperasional[$hari]['buka'] : '';
+                            $tutup = isset($jamOperasional[$hari]['tutup']) ? $jamOperasional[$hari]['tutup'] : '';
+                        @endphp
+
+                        <div class="border-2 border-slate-500 p-3 rounded-lg bg-gray-50">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">{{ ucfirst($hari) }}</label>
+
+                            <div class="flex gap-2">
+                                <input type="time" name="jam_operasional[{{ $hari }}][buka]"
+                                    class="w-full p-2 border rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                                    value="{{ old("jam_operasional.$hari.buka", $buka) }}" required>
+
+                                <input type="time" name="jam_operasional[{{ $hari }}][tutup]"
+                                    class="w-full p-2 border rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                                    value="{{ old("jam_operasional.$hari.tutup", $tutup) }}">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
             <!-- Latitude dan Longitude -->
             <div class="grid-cols-2 grid gap-4">
                 <div>

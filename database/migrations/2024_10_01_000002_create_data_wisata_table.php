@@ -25,12 +25,13 @@ return new class extends Migration
             $table->string('longitude');
             $table->string('htm_wisata')->nullable();
             $table->string('htm_parkir')->nullable();
+            $table->json('jam_operasional')->nullable(); // Kolom baru untuk jam buka & tutup
             $table->timestamps();
 
             $table->foreignId('id_kategori_detail')
                 ->nullable()
                 ->constrained('kategori_detail')
-                ->onDelete('set null') // Set ke NULL jika data dihapus
+                ->onDelete('set null')
                 ->onUpdate('cascade');
         });
     }

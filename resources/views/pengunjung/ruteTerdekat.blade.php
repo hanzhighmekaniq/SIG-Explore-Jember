@@ -43,10 +43,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Inisialisasi peta dengan koordinat awal dan zoom level
             var map = L.map('map', {
-                    dragging: false,
-                    touchZoom: false,
-                    scrollWheelZoom: false,
-                    doubleClickZoom: false
+                    dragging: true,
+                    touchZoom: true,
+                    scrollWheelZoom: true,
+                    doubleClickZoom: true
                 })
                 .setView([-8.2644, 113.6321], 10);
 
@@ -79,7 +79,7 @@
                                 interactive: true
                             })
                             .addTo(map)
-                            .bindPopup("📍 Lokasi Anda")
+                            .bindPopup("Lokasi Anda")
                             .openPopup();
                     }
 
@@ -89,14 +89,14 @@
                             interactive: false
                         })
                         .addTo(map)
-                        .bindPopup("📍 {{ $rute->nama_kursus }}")
+                        .bindPopup("{{ $rute->nama_kursus }}")
                         .openPopup();
 
                     // Tambahkan rute antara lokasi pengguna dan tujuan
                     L.Routing.control({
                         waypoints: [userLatLng, destinationLatLng],
-                        routeWhileDragging: false, // Nonaktifkan drag untuk menjaga rute tetap sesuai
-                        draggableWaypoints: false, // Pastikan titik rute tidak bisa dipindah
+                        routeWhileDragging: true, // Nonaktifkan drag untuk menjaga rute tetap sesuai
+                        draggableWaypoints: true, // Pastikan titik rute tidak bisa dipindah
                         collapsible: true, // Buat kontrol bisa disembunyikan
                         createMarker: function() {
                             return null;

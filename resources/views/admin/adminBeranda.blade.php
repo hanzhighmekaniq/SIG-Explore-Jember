@@ -4,11 +4,10 @@
     </p>
     <div class="">
         <div class=" pb-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($categories as $category)
                     <div class="bg-[#C2C5AA] rounded-lg flex items-center p-4">
                         <div class="flex-shrink-0">
-                            <img src="{{ asset('img/icon_beach.png') }}" alt="Beach Icon" class="h-24 w-auto">
                         </div>
                         <div class="ml-4 flex-grow">
                             <p class="text-lg font-bold">{{ $category->nama_kategori }}</p>

@@ -100,7 +100,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $event->wisata->nama_wisata }}
+                            {{ $event->wisata->nama_wisata ?? '-' }}
                         </td>
 
                         <td class="px-6 py-4">

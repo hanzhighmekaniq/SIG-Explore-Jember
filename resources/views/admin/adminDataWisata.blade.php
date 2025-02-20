@@ -6,9 +6,9 @@
         <!-- Kiri: Tombol Tambah-Wisata -->
         <div class="flex ">
             <a href="{{ route('wisata.create') }}" id="tambah-data-wisata"
-                class="{{ request()->routeIs('wisata.create') ? 'bg-[#656D4A] text-white' : '' }} 
-                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg 
-                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white 
+                class="{{ request()->routeIs('wisata.create') ? 'bg-[#656D4A] text-white' : '' }}
+                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
+                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white
                        focus:z-10 focus:ring-2 focus:ring-slate-300">
                 Tambah-Wisata
             </a>
@@ -18,42 +18,44 @@
         <div class="flex lg:justify-end">
             @if (request()->routeIs('wisata.index'))
                 <form class="flex max-w-lg w-full" method="GET" action="{{ route('wisata.index') }}">
-                    <!-- Dropdown Kategori -->
-                    <select name="id_kategori" id="id_kategori"
-                        class="h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md 
-                               focus:ring-blue-500 focus:border-blue-500 
+                    <div>
+                        <!-- Dropdown Kategori -->
+                        <select name="id_kategori" id="id_kategori"
+                            class="h-full py-2 text-xs border border-gray-300 rounded-l-md
+                               focus:ring-blue-500 focus:border-blue-500
                                dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
-                        <option value="">Semua Kategori</option>
-                        @foreach ($category as $item)
-                            <option value="{{ $item->id }}">
-                                {{ $item->nama_kategori }}
-                            </option>
-                        @endforeach
-                    </select>
+                            <option value="">Semua Kategori</option>
+                            @foreach ($category as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    <!-- Input Nama Wisata -->
-                    <input type="text" name="nama_wisata" placeholder="Cari nama Wisata"
-                        value="{{ request('nama_wisata') }}"
-                        class="h-full px-4 py-2 text-xs border-t border-b border-gray-300 
-                               focus:ring-blue-500 focus:border-blue-500 
+                    <div class="flex">
+                        <!-- Input Nama Wisata -->
+                        <input type="text" name="nama_wisata" placeholder="Cari nama Wisata"
+                            value="{{ request('nama_wisata') }}"
+                            class="h-full py-2 text-xs border-t border-b border-gray-300
+                               focus:ring-blue-500 focus:border-blue-500
                                dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
 
-                    <!-- Button Cari -->
-                    <button type="submit"
-                        class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300 
-                               rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300 
+                        <!-- Button Cari -->
+                        <button type="submit"
+                            class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300
+                               rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300
                                dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
-                        Cari
-                    </button>
+                            Cari
+                        </button>
+                    </div>
                 </form>
             @endif
         </div>
     </div>
 
 
-    <div class="">
-        {{ $DataWisata->links() }}
-    </div>
+
     {{-- TABEL --}}
     <div class="relative overflow-x-auto  sm:rounded-lg py-2">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -100,10 +102,12 @@
 
                         </td>
                         <td class="px-6 py-4">
-                            {{ $wisata->deskripsi_wisata }}
+                            {{ Str::limit($wisata->deskripsi_wisata, 30) }}
+
                         </td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $wisata->img) }}" class="aspect-auto object-contain h-20 w-full" alt="Image">
+                            <img src="{{ asset('storage/' . $wisata->img) }}"
+                                class="aspect-auto object-contain h-20 w-full" alt="Image">
                         </td>
 
                         <td class="px-6 py-4 flex justify-center gap-2">
@@ -124,6 +128,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="py-4">
+        {{ $DataWisata->links() }}
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

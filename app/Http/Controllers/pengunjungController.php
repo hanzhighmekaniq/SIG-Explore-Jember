@@ -35,7 +35,7 @@ class PengunjungController extends Controller
         // Mengambil maksimal 3 data wisata secara acak berdasarkan kategori dan kategori detail
         $filterWisata = DataWisata::with('kategori_detail.kategori') // Memastikan relasi ke kategori dan kategori detail
             ->inRandomOrder() // Ambil data secara acak
-            ->limit(3) // Ambil maksimal 3 data
+            ->limit(4) // Ambil maksimal 3 data
             ->get();
 
 
@@ -57,36 +57,29 @@ class PengunjungController extends Controller
         // Ambil semua kategori
         $kategoris = DataKategori::all();
 
-        // Jika id_kategori ada, ambil subkategori yang sesuai, jika tidak kosong
-        $kategorisDetail = $request->has('id_kategori') ?
-            DataKategoriDetail::where('id_kategori', $request->id_kategori)->get() : DataKategoriDetail::all();
-
-        // Query untuk data wisata dengan filter
+        // Query utama untuk wisata
         $query = DataWisata::query();
 
-        // Jika ada filter nama wisata
-        if ($request->has('nama_wisata') && $request->nama_wisata != '') {
+        // Filter berdasarkan nama wisata
+        if ($request->filled('nama_wisata')) {
             $query->where('nama_wisata', 'like', '%' . $request->nama_wisata . '%');
         }
 
-        // Jika ada filter kategori
-        if ($request->has('id_kategori') && $request->id_kategori != '') {
+        // Filter berdasarkan kategori jika dipilih
+        if ($request->filled('id_kategori')) {
             $query->whereHas('kategori_detail', function ($q) use ($request) {
                 $q->where('id_kategori', $request->id_kategori);
             });
         }
 
-        // Jika ada filter kategori detail
-        if ($request->has('id_kategori_detail') && $request->id_kategori_detail != '') {
-            $query->where('id_kategori_detail', $request->id_kategori_detail);
-        }
-
-        // Jika tidak ada filter, tampilkan semua data wisata dengan paginate
-        $wisata = $query->paginate(12);  // Mengambil 9 data per halaman
+        // Paginate hasilnya
+        $wisata = $query->paginate(20);
 
         // Return view dengan data
-        return view('pengunjung.wisata', compact('kategoris', 'kategorisDetail', 'wisata'));
+        return view('pengunjung.wisata', compact('kategoris', 'wisata'));
     }
+
+
 
 
 
@@ -127,9 +120,10 @@ class PengunjungController extends Controller
             ->with(['kategori_detail.kategori', 'events', 'kuliners']) // Tambahkan relasi events
             ->firstOrFail(); // Jika tidak ada, akan lempar exception dan tampilkan halaman 404
 
-        // Mengambil gambar detail dan membatasi hanya 7 gambar per slide
         $imgDetails = json_decode($wisata->img_detail, true);
-        // $imgKuliner = json_decode($wisata->kuliners->gambar_menu, true);
+        shuffle($imgDetails); // Acak urutan gambar
+        $imgDetails = array_slice($imgDetails, 0, 8); // Ambil maksimal 7 gambar
+
 
         // Mengirim data ke view
         return view('pengunjung.profilWisata', compact('wisata', 'imgDetails'));

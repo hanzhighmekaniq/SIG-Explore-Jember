@@ -1,5 +1,5 @@
 @php
-    use Illuminate\Support\Facades\DB; 
+    use Illuminate\Support\Facades\DB;
     $countWisata = DB::table('data_wisata')->count();
     $countKuliner = DB::table('data_kuliner')->count();
     $countEvent = DB::table('data_event')->count();
@@ -9,21 +9,23 @@
     <ul class="space-y-2 font-medium ">
         <li class="">
             <a href="{{ route('dashboard') }}"
-            class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:text-white hover:bg-[#5C7AFF] focus:text-white active:text-white focus:outline-none {{ request()->is('admin/dashboard') ? 'bg-[#5C7AFF] text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }} transition duration-75"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        viewBox="0 0 24 24">
-                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-                        <path d="M18 17V9" />
+                class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:text-white hover:bg-[#5C7AFF] focus:text-white active:text-white focus:outline-none {{ request()->is('admin/dashboard') ? 'bg-[#5C7AFF] text-white' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }} transition duration-75"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    viewBox="0 0 24 24">
+                    <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                    <path d="M18 17V9" />
                     <path d="M13 17V5" />
                     <path d="M8 17v-3" />
                 </svg>
-                <span class="poppins-semibold ms-3 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }}">Dashboard</span>
+                <span
+                    class="poppins-semibold ms-3 hover:text-white {{ request()->is('admin/dashboard') ? 'text-white' : '' }}">Dashboard</span>
             </a>
         </li>
         <li class="">
             <a href="{{ route('kategori.index') }}"
-            class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:text-white hover:bg-[#5C7AFF] {{ request()->is('admin/kategori') ? 'bg-[#5C7AFF] text-white' : '' }}">
+                class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:text-white hover:bg-[#5C7AFF] {{ request()->is('admin/kategori') ? 'bg-[#5C7AFF] text-white' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-chart-bar-stacked">
@@ -38,7 +40,7 @@
         </li>
         <li class="group">
             <a href="{{ route('wisata.index') }}"
-            class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/wisata*') ? 'bg-[#5C7AFF] text-white' : '' }}">
+                class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/wisata*') ? 'bg-[#5C7AFF] text-white' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-map-pinned">
@@ -50,14 +52,14 @@
                 </svg>
                 <span class="flex-1 ms-3 whitespace-nowrap">Data Wisata</span>
                 <span
-                    class="inline-flex items-center justify-center w-auto px-2 h-auto ms-3 text-sm font-medium bg-[##4A8FE7] rounded-full group-hover:bg-white group-hover:text-[#4A8FE7] {{ request()->is('admin/wisata*') ? 'bg-white text-[#4A8FE7]' : 'text-white' }}">
+                    class="inline-flex items-center justify-center w-auto px-2 h-auto ms-3 text-sm font-medium bg-[#4A8FE7] rounded-full group-hover:bg-white group-hover:text-[#4A8FE7] {{ request()->is('admin/wisata*') ? 'bg-white text-[#4A8FE7]' : 'text-white' }}">
                     {{ $countWisata }}
                 </span>
             </a>
         </li>
         <li class="group">
             <a href="{{ route('kuliner.index') }}"
-            class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/kuliner*') ? 'bg-[#5C7AFF] text-white' : '' }}">
+                class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/kuliner*') ? 'bg-[#5C7AFF] text-white' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-utensils">
@@ -74,7 +76,7 @@
         </li>
         <li class="group">
             <a href="{{ route('event.index') }}"
-            class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/event*') ? 'bg-[#5C7AFF] text-white' : '' }}">
+                class="flex items-center p-2 rounded-lg text-[#5C7AFF] hover:bg-[#5C7AFF] hover:text-white {{ request()->is('admin/event*') ? 'bg-[#5C7AFF] text-white' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-book-image">
@@ -115,7 +117,7 @@
             <button data-modal-target="default-modal-logout" data-modal-toggle="default-modal-logout" type="button"
                 id="logout-button"
                 class="flex items-center p-2 w-full rounded-lg text-[#4A8FE7] hover:bg-[#4A8FE7] hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/s    vg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-log-out">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

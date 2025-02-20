@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="bg-white h-auto w-full">
+    <div class="bg-slate-100 h-auto w-full">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
                 <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary">PETA
@@ -9,13 +9,13 @@
             </div>
 
             {{-- Peta Wisata --}}
-            <div class="flex justify-center items-center pb-32 w-full">
+            <div class="flex justify-center items-center pb-10 lg:pb-14 xl:pb-16 w-full">
                 <div class="w-full pt-8">
                     <div id="map" class="relative z-[1] rounded-xl aspect-video"></div>
                 </div>
             </div>
             {{-- Tabel Daftar Lokasi Wisata --}}
-            <p class="m-auto text-center text-2xl font-serif font-semibold pb-10 text-black">Daftar Titik Lokasi Wisata
+            <p class="m-auto text-start text-2xl font-serif font-semibold pb-10 text-black">Daftar Titik Lokasi Wisata
             </p>
             {{ $rute->links() }}
             <div class="overflow-x-auto pb-20">
@@ -166,7 +166,7 @@
                                             <td class="py-3 px-4 border">${rute.kategori}</td>
                                             <td class="py-3 px-4 border">${distance}</td>
                                             <td class="py-3 px-4 border underline text-blue-500">
-                                                <a href="${rute.nama_wisata !== "Data Kosong" ? `/ruteTerdekat/${rute.nama_wisata}` : "#"}" target="_blank">Lihat</a>
+                                                <a href="${rute.nama_wisata !== "Data Kosong" ? `/wisata/profil/ruteTerdekat/${rute.nama_wisata}` : "#"}" target="_blank">Lihat</a>
                                             </td>
                                         `;
                         tableBody.appendChild(row);

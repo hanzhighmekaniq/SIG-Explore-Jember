@@ -6,9 +6,9 @@
         <!-- Kiri: Tombol Tambah-Wisata -->
         <div class="flex ">
             <a href="{{ route('kuliner.create') }}" id="tambah-data-kuliner"
-                class="{{ request()->routeIs('kuliner.create') ? 'bg-[#656D4A] text-white' : '' }} 
-                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg 
-                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white 
+                class="{{ request()->routeIs('kuliner.create') ? 'bg-[#656D4A] text-white' : '' }}
+                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
+                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white
                        focus:z-10 focus:ring-2 focus:ring-slate-300">
                 Tambah-Kuliner
             </a>
@@ -19,34 +19,36 @@
             @if (request()->routeIs('kuliner.index'))
                 <form class="flex max-w-lg w-full" method="GET" action="{{ route('kuliner.index') }}">
                     <!-- Dropdown Kategori -->
-                    <select name="id_kategori" id="id_kategori"
-                        class="h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md 
-                               focus:ring-blue-500 focus:border-blue-500 
-                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
+                    <select name="id_kategori_detail" id="id_kategori_detail"
+                        class="h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md
+                   focus:ring-blue-500 focus:border-blue-500
+                   dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
                         <option value="">Semua Sub Kategori</option>
-                        @foreach ($wisata as $item)
-                            <option value="{{ $item->id }}">
+                        @foreach ($kategoriDetails as $item)
+                            <option value="{{ $item->id }}"
+                                {{ request('id_kategori_detail') == $item->id ? 'selected' : '' }}>
                                 {{ $item->nama_kategori_detail }}
                             </option>
                         @endforeach
                     </select>
 
-                    <!-- Input Nama Wisata -->
+                    <!-- Input Nama Kuliner -->
                     <input type="text" name="nama_kuliner" placeholder="Cari nama Kuliner"
                         value="{{ request('nama_kuliner') }}"
-                        class="h-full px-4 py-2 text-xs border-t border-b border-gray-300 
-                               focus:ring-blue-500 focus:border-blue-500 
-                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
+                        class="h-full px-4 py-2 text-xs border-t border-b border-gray-300
+                   focus:ring-blue-500 focus:border-blue-500
+                   dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
 
                     <!-- Button Cari -->
                     <button type="submit"
-                        class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300 
-                               rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300 
-                               dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                        class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300
+                   rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300
+                   dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
                         Cari
                     </button>
                 </form>
             @endif
+
         </div>
     </div>
 
@@ -92,16 +94,16 @@
                             {{ $kuliner->nama_kuliner }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $kuliner->deskripsi_kuliner }}
+                            {{ Str::limit($kuliner->deskripsi_kuliner, 30) }}
                         </td>
                         <td class="px-6 py-4">
                             {{ optional($kuliner->wisata)->nama_wisata ?? 'Tidak Ada Wisata' }}
 
                         </td>
                         <td class="px-6 py-4">
-                            {{-- {{ optional($kuliner->wisata->kategori_detail->kategori)->nama_kategori ?? 'Tidak Ada Kategori' }}
+                            {{ $kuliner->wisata->kategori_detail->kategori->nama_kategori ?? '-' }}
                             -
-                            {{ optional($kuliner->wisata->kategori_detail)->nama_kategori_detail ?? 'Tidak Ada Detail Kategori' }} --}}
+                            {{ $kuliner->wisata->kategori_detail->nama_kategori_detail ?? '-' }}
 
                         </td>
 

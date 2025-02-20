@@ -14,27 +14,33 @@ class KulinerController extends Controller
 {
     public function index(Request $request)
     {
-        $wisata = DataKategoriDetail::with('wisatas')->get();
+        // Debug untuk melihat data yang dikirim dari form pencarian
+        // dd($request->all());
 
+        // Ambil daftar kategori detail untuk dropdown
+        $kategoriDetails = DataKategoriDetail::all();
+
+        // Query utama DataKuliner
         $query = DataKuliner::query();
 
-        // Filter berdasarkan kategori (jika ada input id_kategori)
+        // Filter berdasarkan kategori (jika ada input id_kategori_detail)
         if ($request->id_kategori_detail) {
             $query->whereHas('wisata.kategori_detail', function ($q) use ($request) {
-                $q->where('id_kategori', $request->id_kategori_detail);
+                $q->where('id', $request->id_kategori_detail);
             });
         }
 
-        // Filter berdasarkan nama wisata (jika ada input nama_wisata)
+        // Filter berdasarkan nama kuliner (jika ada input nama_kuliner)
         if ($request->nama_kuliner) {
             $query->where('nama_kuliner', 'like', '%' . $request->nama_kuliner . '%');
         }
 
-        // Ambil data wisata dengan relasi kategori_detail dan kategori
+        // Ambil data kuliner dengan relasi wisata dan kategori
         $DataKuliner = $query->with(['wisata.kategori_detail.kategori'])->paginate(10);
 
-        return view('admin.adminDataKuliner', compact('DataKuliner', 'wisata'));
+        return view('admin.adminDataKuliner', compact('DataKuliner', 'kategoriDetails'));
     }
+
 
     public function create()
     {
@@ -48,7 +54,7 @@ class KulinerController extends Controller
         $validator = Validator::make($request->all(), [
             'id_wisata' => 'required',
             'nama_kuliner' => 'required|string|max:255',
-            'deskripsi_kuliner' => 'required|string',
+            'deskripsi_kuliner' => 'required|string|max:800',
             'gambar_kuliner' => 'required',
             'gambar_menu.*' => 'nullable',
         ]);
@@ -116,7 +122,7 @@ class KulinerController extends Controller
         $request->validate([
             'id_wisata' => 'required', // Pastikan ID wisata ada
             'nama_kuliner' => 'required|string|max:255',
-            'deskripsi_kuliner' => 'nullable|string',
+            'deskripsi_kuliner' => 'nullable|string|max:800',
             'gambar_kuliner' => 'nullable', // Validasi gambar
             'gambar_menu.*' => 'nullable', // Validasi multiple files
         ]);
