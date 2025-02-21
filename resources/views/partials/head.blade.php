@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 
     <!-- Tailwind CSS -->
-    @vite('resources/css/app.css')
+    @vite('resources/css/app.css', 'resources/js/app.js', 'resources/css.font.js')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Leaflet (for maps) -->
@@ -32,11 +32,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
         rel="stylesheet">
-    <!-- Custom CSS for fonts -->
-    <link rel="stylesheet" href="./css/font.css">
 
     <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>
-
-    <!-- Flowbite JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>

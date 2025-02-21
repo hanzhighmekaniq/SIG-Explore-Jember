@@ -2,7 +2,13 @@
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2 lg:p-4">
         <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#59D2FE] hover:text-[#4A8FE7]">Visit
             Jember</a>
-
+        <style>
+            .pacifico-regular {
+                font-family: "Pacifico", cursive;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
         <button data-collapse-toggle="navbar-default" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-default" aria-expanded="false">
