@@ -58,7 +58,7 @@
 
 </html>
 
-<button type="button" data-modal-target="service" data-modal-toggle="service"
+<button type="button" data-modal-target="hubungi-kami" data-modal-toggle="hubungi-kami"
     class="fixed bottom-10 right-0 z-50 inline-flex items-center space-x-2.5 rounded-l-lg bg-primary p-3 px-4 uppercase text-primary-foreground duration-300 ease-in-out bg-blue-300 md:pr-5"
     id="radix-:R8m:" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -71,7 +71,7 @@
     </svg><span class="hidden text-xs font-medium md:inline">Hubungi Kami</span></button>
 
 
-<div id="service" tabindex="-1" aria-hidden="true"
+<div id="hubungi-kami" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-xl max-h-full ">
         <!-- Modal content -->
@@ -81,7 +81,7 @@
                 <p class="text-xl font-extrabold">HUBUNGI KAMI</p>
                 <button type="button"
                     class="text-white bg-transparent hover:bg-gray-600 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                    data-modal-hide="service">
+                    data-modal-hide="hubungi-kami">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 
     <!-- Tailwind CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/css/app.css', 'resources/js/app.js', 'resources/css.font.js')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
 
