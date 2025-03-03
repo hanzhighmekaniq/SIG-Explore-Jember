@@ -31,19 +31,29 @@
             <div class="xl:grid grid-cols-1 xl:grid-cols-8 gap-4 flex flex-col-reverse xl:flex-col">
                 <div class="xl:col-span-3 dm-sans rounded-xl">
                     <!-- Tombol Navigasi -->
-                    <p class="font-bold text-2xl 2xl:text-4xl mb-8">{{ $wisata->nama_wisata }}</p>
+                    <p class="font-bold text-2xl 2xl:text-6xl mb-8 text-[#004165] font-fjalla uppercase">{{ $wisata->nama_wisata }}</p>
 
                     <div class="flex items-start space-x-2 text-md font-semibold">
+                        <!-- Tombol "Deskripsi" -->
                         <button id="btn-deskripsi"
-                            class="tab-button active flex rounded-xl px-4 py-1 border border-blue-300 hover:bg-blue-100">
+                            class="tab-button active flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
+       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
                             Deskripsi
                         </button>
+
+                        <!-- Tombol "Detail" -->
                         <button id="btn-detail"
-                            class="tab-button flex rounded-xl px-4 py-1 border border-blue-300 hover:bg-blue-100">
+                            class="tab-button flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
+       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
                             Detail
                         </button>
+
+                        <!-- Tombol "Rute" -->
                         <a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank"
-                            class="flex rounded-xl px-4 py-1 border border-blue-300 hover:bg-blue-100">Rute</a>
+                            class="flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
+  bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
+                            Rute
+                        </a>
                     </div>
 
                     <!-- Konten -->
@@ -60,11 +70,11 @@
 
                                 <div class="grid grid-cols-12">
                                     <div class="col-span-2">
-                                        <p class="font-semibold">Kategori</p>
+                                        <p class="font-semibold font-poppins">Kategori</p>
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2">
+                                        <p class="flex ml-2 font-poppins">
                                             {{ $wisata->kategori_detail->kategori->nama_kategori }},
                                             {{ $wisata->kategori_detail->nama_kategori_detail }}
                                         </p>
@@ -73,48 +83,48 @@
 
                                 <div class="grid grid-cols-12">
                                     <div class="col-span-2">
-                                        <p class="font-semibold">Lokasi</p>
+                                        <p class="font-semibold font-poppins">Lokasi</p>
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2">{{ $wisata->lokasi }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $wisata->lokasi }}</p>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-12">
                                     <div class="col-span-2">
-                                        <p class="font-semibold">Fasilitas</p>
+                                        <p class="font-semibold font-poppins">Fasilitas</p>
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2">{{ $wisata->fasilitas }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $wisata->fasilitas }}</p>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-12">
                                     <div class="col-span-2">
-                                        <p class="font-semibold">HTM</p>
+                                        <p class="font-semibold font-poppins">HTM</p>
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2">Rp {{ $wisata->htm_wisata }}</p>
+                                        <p class="flex ml-2 font-poppins">Rp {{ $wisata->htm_wisata }}</p>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-12">
                                     <div class="col-span-2">
-                                        <p class="font-semibold">Parkir</p>
+                                        <p class="font-semibold font-poppins">Parkir</p>
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2">{{ $wisata->parkir ?? 'Tidak tersedia' }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $wisata->parkir ?? 'Tidak tersedia' }}</p>
                                     </div>
                                 </div>
 
 
                                 <!-- Jam Operasional -->
                                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-2">
-                                    <p class="font-semibold col-span-full">Jam Operasional</p>
+                                    <p class="font-semibold col-span-full font-poppins">Jam Operasional</p>
                                     @php
                                         $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                                     @endphp
@@ -125,10 +135,10 @@
                                             $jamTutup = $jamOperasional[$hari]['tutup'] ?? 'Kosong';
                                         @endphp
                                         <div class="border-2 border-slate-500 p-2 rounded-lg bg-gray-50">
-                                            <p class="font-semibold">{{ ucfirst($hari) }}</p>
-                                            <p class="text-sm">Buka: <span
+                                            <p class="font-semibold font-poppins">{{ ucfirst($hari) }}</p>
+                                            <p class="text-sm font-poppins">Buka: <span
                                                     class="font-medium">{{ $jamBuka }}</span></p>
-                                            <p class="text-sm">Tutup: <span
+                                            <p class="text-sm font-poppins">Tutup: <span
                                                     class="font-medium">{{ $jamTutup }}</span></p>
                                         </div>
                                     @endforeach
@@ -154,7 +164,7 @@
                                     alt="Gambar utama {{ $wisata->nama_wisata }}">
                             @else
                                 <div
-                                    class="flex justify-center items-center h-[300px] md:h-[400px] lg:h-[500px] bg-gray-200 text-gray-500 rounded-lg">
+                                    class="flex justify-center items-center h-[300px] md:h-[400px] lg:h-[500px] bg-gray-200 text-gray-500 rounded-lg font-poppins">
                                     <p>Gambar Kosong</p>
                                 </div>
                             @endif
@@ -171,7 +181,7 @@
                                 @endforeach
                             </div>
                         @else
-                            <div class="text-center py-4 text-gray-500">
+                            <div class="text-center py-4 text-gray-500 font-poppins">
                                 <p>Gambar Detail Tidak Tersedia</p>
                             </div>
                         @endif
@@ -188,7 +198,7 @@
             </div>
         </div>
         <div class="pt-8 xl:pt-16 pb-4">
-            <p class="font-bold text-2xl 2xl:text-4xl mb-4">Lokasi Wilayah</p>
+            <p class="font-bold text-2xl 2xl:text-4xl mb-4 text-[#004165] font-fjalla">Lokasi Wilayah</p>
             <div class="grid ">
                 <div id="map" class="aspect-[1920/1920] sm:aspect-[1920/1080] xl:sm:aspect-[1920/540] z-[1]">
                 </div> <!-- Tentukan tinggi untuk peta -->
@@ -219,8 +229,8 @@
 
         </div>
         <div class="mb-4 pt-10">
-            <p class="text-2xl 2xl:text-4xl font-bold pb-2 ">Kuliner Saat Ini</p>
-            <h5 class="pl-0">Berikut adalah kuliner yang tersedia saat ini</h5>
+            <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Kuliner Saat Ini</p>
+            <h5 class="pl-0 text-gray-500">Berikut adalah kuliner yang tersedia saat ini</h5>
         </div>
         @if ($wisata->kuliners->isEmpty())
             <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border">
@@ -251,8 +261,8 @@
             </div>
         @endif
         <div class="mb-4 pt-10 ">
-            <p class="text-2xl 2xl:text-4xl font-bold pb-2 ">Event Yang Akan Datang</p>
-            <h5 class="pl-0">Berikut adalah event yang akan datang saat ini</h5>
+            <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Event Yang Akan Datang</p>
+            <h5 class="pl-0 text-gray-500">Berikut adalah event yang akan datang saat ini</h5>
         </div>
         @if ($wisata->events && $wisata->events->isNotEmpty())
             <div id="event-carousel" class="relative w-full pt-4 pb-4 mb-20" data-carousel="slide">
@@ -310,7 +320,7 @@
                 </button>
             </div>
         @else
-            <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border">
+            <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border font-poppins">
                 Event yang akan datang sedang tidak ada.
             </div>
         @endif
@@ -325,7 +335,7 @@
                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                     <div
                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white font-poppins">
 
                         </h3>
                         <button type="button"
@@ -336,7 +346,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
-                            <span class="sr-only">Close modal</span>
+                            <span class="sr-only font-poppins">Close modal</span>
                         </button>
 
                     </div>
@@ -394,8 +404,8 @@
                                     </div>
                                     <!-- Tampilkan Deskripsi -->
                                     <div class="mb-6">
-                                        <h3 class="text-lg font-semibold text-gray-700">Deskripsi:</h3>
-                                        <p class="text-gray-600 leading-relaxed">
+                                        <h3 class="text-lg font-semibold text-gray-500 font-poppins">Deskripsi:</h3>
+                                        <p class="text-gray-500 leading-relaxed font-poppins">
                                             {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
                                         </p>
                                     </div>
@@ -404,8 +414,8 @@
                                     <!-- Tampilkan Kontak (Opsional) -->
                                     @if (!empty($kuliner->kontak))
                                         <div class="mb-6">
-                                            <h3 class="text-lg font-semibold text-gray-700">Kontak:</h3>
-                                            <p class="text-gray-600">
+                                            <h3 class="text-lg font-semibold text-gray-500 font-poppins">Kontak:</h3>
+                                            <p class="text-gray-600 font-poppins">
                                                 {{ $kuliner->kontak }}
                                             </p>
                                         </div>
@@ -413,7 +423,7 @@
                                 </div>
                             </div>
                         @else
-                            <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
+                            <p class="text-center text-gray-500 font-poppins">Tidak ada gambar yang tersedia.</p>
                         @endif
                     </div>
 

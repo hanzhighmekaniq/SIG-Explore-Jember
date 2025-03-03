@@ -6,17 +6,18 @@
                     <div>
                         <img src="{{ asset('img/bg-2.jpg') }}" alt="Full Width"
                             class="object-cover w-full h-[500px] sm:h-[584px] md:h-[668px] lg:h-[752px] xl:h-[836px] 2xl:h-[920px]">
-                        <img src="{{ asset('img/layered-waves-haikei.svg') }}" alt="Full Width" class="  w-full relative bottom-10 sm:bottom-12 md:bottom-16 lg:bottom-24 2xl:bottom-36">
+                        <img src="{{ asset('img/layered-waves-haikei.svg') }}" alt="Full Width"
+                            class="  w-full relative bottom-10 sm:bottom-12 md:bottom-16 lg:bottom-24 2xl:bottom-36">
                     </div>
                     <div class="absolute inset-0 flex items-center mb-10 justify-center">
                         <figcaption class="container ">
                             <div class=" text-center px-4  2xl:px-8 space-y-4 lg:space-y-10">
                                 <p
-                                    class="rubik-mono-one-regular font-semibold text-3xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-7xl text-[#FFFFFF] drop-shadow-lg">
+                                    class="font-fjalla font-semibold text-2xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#FFFFFF] drop-shadow-lg">
                                     WISATA <br> KABUPATEN JEMBER
                                 </p>
                                 <p
-                                    class="text-white break-words font-serif text-sm sm:text-sm    md:text-lg lg:text-xl xl:text-2xl drop-shadow-lg">
+                                    class="text-white break-words font-montserrat text-sm sm:text-sm md:text-lg lg:text-xl xl:text-2xl drop-shadow-lg">
                                     Selamat datang di Jember, kota yang menawarkan pesona alam yang memukau, budaya yang
                                     kaya,
                                     serta
@@ -42,13 +43,13 @@
                         <!-- Upcoming Events -->
 
                         <div class="mb-4">
-                            <p class="text-2xl font-bold pb-2 ">Event Yang Akan Datang</p>
-                            <h5 class="pl-0">Berikut adalah event yang akan datang saat ini</h5>
+                            <p class="text-3xl font-fjalla font-bold pb-2 text-[#004165]">EVENT YANG AKAN DATANG</p>
+                            <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah event yang akan datang saat ini</h5>
                         </div>
 
 
                         @if ($event->isEmpty())
-                            <div class="p-10 text-center font-bold text-gray-500 rounded border">
+                            <div class="p-10 text-center font-bold text-gray-500 rounded border font-poppins">
                                 Event yang akan datang sedang tidak ada.
                             </div>
                         @else
@@ -122,12 +123,21 @@
                     <!-- Section Title -->
                     <div>
 
-                        <p class="text-2xl font-bold pb-2">Persebaran Wisata</p>
-                        <h5 class="pl-0">Berikut adalah persebaran seluruh wisata saat ini</h5>
+                        <p class="text-3xl font-bold pb-2 font-fjalla text-[#004165]">PERSEBARAN WISATA</p>
+                        <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah persebaran seluruh wisata saat ini</h5>
                     </div>
                     <div class="flex items-end">
                         <a href="{{ route('petaWilayah.index') }}"
-                            class="px-4 py-2 bg-[#4A8FE7] text-white rounded-xl">Selengkapnya</a>
+                            class="px-4 py-2 rounded-xl text-white font-semibold transition-all duration-500 ease-in-out
+                        bg-[linear-gradient(to_bottom_right,#00BAFF_2%,#006495_100%)]
+                        hover:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
+                        hover:scale-105 hover:shadow-2xl active:scale-95
+                        relative overflow-hidden
+                        before:absolute before:inset-0 before:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
+                        before:opacity-0 before:transition-opacity before:duration-500 before:ease-in-out
+                        hover:before:opacity-100">
+                            <span class="relative z-10 font-poppins">Selengkapnya</span>
+                        </a>
                     </div>
                 </div>
 
@@ -168,12 +178,21 @@
                     <div class="mb-4 flex justify-between ">
                         <div>
 
-                            <p class="text-2xl font-bold pb-2">Beberapa Wisata</p>
-                            <h5 class="pl-0">Berikut adalah beberapa wisata saat ini</h5>
+                            <p class="text-3xl font-bold pb-2 text-[#004165] font-fjalla">BEBERAPA WISATA</p>
+                            <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah beberapa wisata saat ini</h5>
                         </div>
                         <div class="flex items-end">
                             <a href="{{ route('wisata.pengunjung') }}"
-                                class="px-4 py-2 bg-[#4A8FE7] text-white rounded-xl">Selengkapnya</a>
+                                class="px-4 py-2 rounded-xl text-white font-semibold transition-all duration-500 ease-in-out
+                                    bg-[linear-gradient(to_bottom_right,#00BAFF_2%,#006495_100%)]
+                                    hover:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
+                                    hover:scale-105 hover:shadow-2xl active:scale-95
+                                    relative overflow-hidden
+                                    before:absolute before:inset-0 before:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
+                                    before:opacity-0 before:transition-opacity before:duration-500 before:ease-in-out
+                                    hover:before:opacity-100">
+                                <span class="relative z-10 font-poppins">Selengkapnya</span>
+                            </a>
                         </div>
                     </div>
 

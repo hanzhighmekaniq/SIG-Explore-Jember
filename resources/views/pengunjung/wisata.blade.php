@@ -1,11 +1,12 @@
 {{-- pacifico-regular --}}
 <x-layout>
-    <div class="bg-slate-100 h-auto w-full">
+    <div class="bg-[#f3f3f3] h-auto w-full">
 
         <div class="container m-auto px-4">
             <!-- Title Section -->
             <div class="m-auto w-auto text-center pt-20 lg:pt-28 pb-10 text-6xl">
-                <p class="pb-4  text-center font-bold lg:font-extrabold xl:text-xl text-lime-800 text-lg leading-7 text-primary">
+                <p
+                    class="pb-4  text-center font-bold lg:font-extrabold xl:text-xl text-lime-800 text-lg leading-7 text-primary">
                     WISATA</p>
                 <p class="pacifico-regular text-5xl text-[#656D4A] ">Visit Jember</p>
             </div>
@@ -14,29 +15,38 @@
                 <form action="{{ route('wisata.pengunjung') }}" method="GET"
                     class="space-y-4 lg:space-y-0 lg:flex gap-2 items-center">
 
-                    <!-- Filter Kategori dengan Button -->
                     <div class="items-center justify-center flex flex-wrap gap-2">
+                        <!-- Tombol "Semua" -->
                         <a href="{{ route('wisata.pengunjung') }}"
-                            class="px-4 py-2 rounded-full text-xs  border shadow-md shadow-gray-400 border-[#414833] {{ request('id_kategori') ? 'bg-white ' : 'bg-[#414833]  text-white' }}">
+                            class="px-4 py-2 rounded-full text-sm shadow-md shadow-gray-400 transition-all duration-500 ease-in-out font-poppins
+                                  {{ !request('id_kategori') ? 'bg-white border border-[#006495] text-[#006495] font-bold' : 'bg-gray-200 text-gray-500' }}
+                                  hover:bg-gray-200 hover:text-[#006495] hover:scale-105 hover:shadow-lg">
                             Semua
                         </a>
+
+                        <!-- Tombol Kategori -->
                         @foreach ($kategoris as $kategori)
                             <a href="{{ route('wisata.pengunjung', ['id_kategori' => $kategori->id]) }}"
-                                class="px-4 py-2 rounded-full text-xs shadow-md shadow-gray-400 border border-[#414833]
-                               {{ request('id_kategori') == $kategori->id ? 'bg-[#414833] text-white' : 'bg-white' }}">
+                                class="px-4 py-2 rounded-full text-sm shadow-md shadow-gray-400 transition-all duration-500 ease-in-out font-poppins
+                                    {{ request('id_kategori') == $kategori->id ? 'bg-white border border-[#006495] text-[#006495] font-bold' : 'bg-gray-200 text-gray-500' }}
+                                    hover:bg-gray-200 hover:text-[#006495] hover:scale-105 hover:shadow-lg">
                                 {{ $kategori->nama_kategori }}
                             </a>
                         @endforeach
                     </div>
 
                     <!-- Input Pencarian dengan Tombol -->
-                    <div class="flex items-center shadow-md shadow-gray-400 rounded-full overflow-hidden ">
+                    <div class="flex items-center shadow-md shadow-gray-400 rounded-full overflow-hidden">
+                        <!-- Input Pencarian -->
                         <input type="text" name="nama_wisata" placeholder="Cari nama wisata"
                             value="{{ request('nama_wisata') }}"
-                            class="px-4 py-2 w-full text-xs rounded-l-full focus:outline-none">
+                            class="px-4 py-2 w-full text-sm rounded-l-full bg-white focus:outline-none border-none">
 
+                        <!-- Tombol "Cari" -->
                         <button type="submit"
-                            class="px-4 py-2 bg-[#414833] border  border-[#414833] text-white text-xs rounded-r-full">
+                            class="px-4 py-2 bg-[#006495] text-white text-sm rounded-r-full
+                                       transition-all duration-500 ease-in-out font-poppins
+                                       hover:bg-[#004165] hover:scale-105 hover:shadow-lg ">
                             Cari
                         </button>
                     </div>
@@ -49,7 +59,7 @@
             <div class="pb-10">
                 @if ($wisata->isEmpty())
                     <div class="text-center text-slate-500 text-xl py-28 border border-slate-300 rounded-xl">
-                        <p class="uppercase font-bold">Wisata kosong</p>
+                        <p class="uppercase font-bold font-poppins">Wisata kosong</p>
                     </div>
                 @else
                     <div class="grid xl:grid-cols-5 md:grid-cols-2 grid-cols-2 gap-2 xl:gap-6">
@@ -64,8 +74,8 @@
                                         alt="{{ $item->nama_wisata }}" />
 
                                     <div class="w-auto h-auto pt-2 px-4 pb-4">
-                                        <p class="text-black font-bold text-md">{{ $item->nama_wisata }}</p>
-                                        <p class="text-black text-sm">
+                                        <p class="text-[#004165] font-bold text-xl font-fjalla uppercase">{{ $item->nama_wisata }}</p>
+                                        <p class="text-gray-500 text-sm font-poppins">
                                             {{ $item->kategori_detail->nama_kategori_detail ?? 'Kategori Tidak Tersedia' }}
                                             {{ $item->kategori_detail->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}
                                         </p>

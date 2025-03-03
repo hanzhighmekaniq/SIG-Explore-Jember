@@ -54,7 +54,11 @@ module.exports = {
                 ],
             },
             fontFamily: {
-                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans], // Font default
+                poppins: ['Poppins', 'sans-serif'], // Tambahkan Poppins
+                montserrat: ['Montserrat', 'sans-serif'], // Tambahkan Montserrat
+                oswald: ['Oswald', 'sans-serif'],
+                fjalla: ['Fjalla One', 'sans-serif'],
             },
         },
     },
