@@ -1,6 +1,6 @@
 <nav class="w-full bg-white shadow-md xl:shadow-lg z-[100] relative">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2 lg:p-4">
-        <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2]">Visit
+        <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Visit
             Jember</a>
         <style>
             .pacifico-regular {
@@ -26,7 +26,7 @@
                     <!-- Menu "Home" -->
                     <li>
                         <a href="/"
-                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                 {{ request()->is('/') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}"
                             aria-current="page">Home</a>
                     </li>
@@ -34,7 +34,7 @@
                     <!-- Menu "Wisata" -->
                     <li>
                         <a href="/wisata"
-                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                 {{ request()->is('wisata*') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                             Wisata
                         </a>
@@ -43,7 +43,7 @@
                     <!-- Menu "Peta Wilayah" -->
                     <li>
                         <a href="/petaWilayah"
-                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                 {{ request()->is('petaWilayah*') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                             Peta Wilayah
                         </a>
@@ -55,7 +55,7 @@
                         <div class="relative">
                             <!-- Tombol User Menu -->
                             <button type="button"
-                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
+                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95"
                                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                                 data-dropdown-placement="bottom">
                                 <span class="sr-only font-poppins">Open user menu</span>
@@ -74,7 +74,7 @@
                                     <!-- Menu "Dashboard" -->
                                     <li>
                                         <a href="{{ route('dashboard') }}"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('dashboard') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Dashboard
                                         </a>
@@ -83,7 +83,7 @@
                                     <!-- Menu "Settings" -->
                                     <li>
                                         <a href="#"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('settings') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Settings
                                         </a>
@@ -92,7 +92,7 @@
                                     <!-- Menu "Sign out" -->
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('logout') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Sign out
                                         </a>
@@ -103,7 +103,7 @@
                     @endauth
                     @guest
                         <a href="/login"
-                            class="block py-2 px-3 rounded md:bg-transparent md:p-0
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                             {{ request()->is('login*') ? 'text-[#205C9E] font-semibold' : 'text-[#205C9E] hover:text-[#4A90E2]' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" x="0" y="0"

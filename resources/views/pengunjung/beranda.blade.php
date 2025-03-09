@@ -135,7 +135,7 @@
                         relative overflow-hidden
                         before:absolute before:inset-0 before:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
                         before:opacity-0 before:transition-opacity before:duration-500 before:ease-in-out
-                        hover:before:opacity-100">
+                        hover:before:opacity-100 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             <span class="relative z-10 font-poppins">Selengkapnya</span>
                         </a>
                     </div>
@@ -190,7 +190,7 @@
                                     relative overflow-hidden
                                     before:absolute before:inset-0 before:bg-[linear-gradient(to_bottom_right,#006495_2%,#00BAFF_100%)]
                                     before:opacity-0 before:transition-opacity before:duration-500 before:ease-in-out
-                                    hover:before:opacity-100">
+                                    hover:before:opacity-100 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 <span class="relative z-10 font-poppins">Selengkapnya</span>
                             </a>
                         </div>

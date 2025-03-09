@@ -8,10 +8,10 @@
             @method('PUT')
             <!-- Pilih Wisata -->
             <div class="mb-2">
-                <label for="id_wisata" class="block text-gray-700 font-bold mb-2">Pilih Wisata Untuk Menambah
+                <label for="id_wisata" class="font-poppins block text-gray-700 font-bold mb-2">Pilih Wisata Untuk Menambah
                     Kuliner</label>
                 <select id="id_wisata" name="id_wisata" required
-                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
                     @foreach ($wisata as $wisata)
                         <option value="{{ $wisata->id }}" {{ $kuliner->id_wisata == $wisata->id ? 'selected' : '' }}>
                             {{ $wisata->nama_wisata ?? 'Nama wisata tidak tersedia' }}
@@ -23,35 +23,35 @@
 
             <!-- Nama Kuliner -->
             <div class="mb-2">
-                <label for="nama_kuliner" class="block text-gray-700 font-bold mb-2">Nama Kuliner</label>
+                <label for="nama_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Nama Kuliner</label>
                 <input type="text" id="nama_kuliner" name="nama_kuliner" value="{{ $kuliner->nama_kuliner }}"
-                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                    class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
                     required>
                 @error('nama_kuliner')
-                    <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Deskripsi Kuliner -->
             <div class="mb-2">
-                <label for="deskripsi_kuliner" class="block text-gray-700 font-bold mb-2">Deskripsi Kuliner</label>
+                <label for="deskripsi_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Deskripsi Kuliner</label>
                 <textarea id="deskripsi_kuliner" name="deskripsi_kuliner"
-                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">{{ $kuliner->deskripsi_kuliner }}</textarea>
+                    class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">{{ $kuliner->deskripsi_kuliner }}</textarea>
                 @error('deskripsi_kuliner')
-                    <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Gambar Kuliner -->
             <div class="mb-2">
-                <label class="block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload Gambar
+                <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload Gambar
                     Kuliner</label>
                 <div class="flex ">
                     <input type="file" id="gambar_kuliner" name="gambar_kuliner"
-                        class="mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
+                        class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
                     <div class="flex justify-center items-center">
                         <div data-modal-target="modal-gambar-kuliner" data-modal-toggle="modal-gambar-kuliner"
-                            class="font-medium shadow-md shadow-gray-600 hover:bg-[#3F6A6B] text-white py-2 px-4 bg-[#4F7F81] rounded-xl">
+                            class="font-poppins font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
                             Detail
                         </div>
                     </div>
@@ -59,35 +59,37 @@
 
 
                 @error('gambar_kuliner')
-                    <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Gambar Menu Tambahan -->
             <div class="mb-2">
-                <label for="multiple_files" class="block mb-2 text-sm font-medium text-gray-900">Upload Gambar Menu
+                <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Menu
                     Kuliner</label>
                 <div class="flex">
                     <input type="file" id="multiple_files" name="gambar_menu[]" multiple
-                        class="mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
+                        class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
                     <div class="flex justify-center items-center">
                         <div data-modal-target="modal-detail-gambar-kuliner"
                             data-modal-toggle="modal-detail-gambar-kuliner"
-                            class="font-medium shadow-md shadow-gray-600 hover:bg-[#3F6A6B] text-white py-2 px-4 bg-[#4F7F81] rounded-xl">
+                            class="font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
                             Detail
                         </div>
                     </div>
                 </div>
 
                 @error('gambar_menu.*')
-                    <div class="text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Submit Button -->
             <div class="flex">
                 <button type="submit"
-                    class="mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Simpan</button>
+                    class="font-poppins mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>
@@ -108,7 +110,7 @@
                     <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
                         class="object-contain w-full max-w-full h-auto max-h-[500px]" alt="Gambar">
                 @else
-                    <p class="text-center text-white">Tidak ada gambar yang tersedia.</p>
+                    <p class="font-poppins text-center text-white">Tidak ada gambar yang tersedia.</p>
                 @endif
             </div>
         </div>
@@ -143,7 +145,7 @@
                             &#10095; <!-- Tanda panah kanan -->
                         </button>
                     @else
-                        <p class="text-center">Tidak ada gambar yang tersedia.</p>
+                        <p class="font-poppins text-center">Tidak ada gambar yang tersedia.</p>
                     @endif
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="bg-slate-100 h-auto w-full">
+    <div class="bg-[#F3F3F3] h-auto w-full">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
                 <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary">PETA
@@ -15,36 +15,36 @@
                 </div>
             </div>
             {{-- Tabel Daftar Lokasi Wisata --}}
-            <p class="m-auto text-start text-2xl font-serif font-semibold pb-10 text-black">Daftar Titik Lokasi Wisata
+            <p class="m-auto text-start text-3xl font-semibold pb-10 text-[#004165] font-fjalla uppercase">Daftar Titik Lokasi Wisata
             </p>
             {{ $rute->links() }}
             <div class="overflow-x-auto pb-20">
                 <table class="mt-6 w-full border-collapse border border-gray-300">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="py-3 px-4 border text-left">No</th>
-                            <th class="py-3 px-4 border text-left">Nama Wisata</th>
-                            <th class="py-3 px-4 border text-left">Kategori</th>
-                            <th class="py-3 px-4 border text-left">Jarak (km)</th>
-                            <th class="py-3 px-4 border text-left">Aksi</th>
+                            <th class="py-3 px-4 border text-left font-poppins">No</th>
+                            <th class="py-3 px-4 border text-left font-poppins">Nama Wisata</th>
+                            <th class="py-3 px-4 border text-left font-poppins">Kategori</th>
+                            <th class="py-3 px-4 border text-left font-poppins">Jarak (km)</th>
+                            <th class="py-3 px-4 border text-left font-poppins">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($rute as $index => $item)
-                            <tr>
-                                <td class="py-3 px-4 border">{{ $loop->iteration }}</td>
-                                <td class="py-3 px-4 border">{{ $item->nama_wisata }}</td>
-                                <td class="py-3 px-4 border">
+                            <tr class="bg-white">
+                                <td class="py-3 px-4 border font-poppins bg-white">{{ $loop->iteration }}</td>
+                                <td class="py-3 px-4 border font-poppins">{{ $item->nama_wisata }}</td>
+                                <td class="py-3 px-4 border font-poppins">
                                     {{ $item->kategori_detail->nama_kategori_detail ?? 'Tidak ada kategori' }}</td>
-                                <td class="py-3 px-4 border">-</td>
-                                <td class="py-3 px-4 border underline text-blue-500">
+                                <td class="py-3 px-4 border font-poppins">-</td>
+                                <td class="py-3 px-4 border underline text-blue-500 font-poppins">
                                     <a href="{{ route('ruteTerdekat.index', $item->nama_wisata) }}"
                                         target="_blank">Lihat</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-5 text-center text-gray-500">Tidak ada data yang tersedia.
+                                <td colspan="5" class="py-5 text-center text-gray-500 font-poppins">Tidak ada data yang tersedia.
                                 </td>
                             </tr>
                         @endforelse

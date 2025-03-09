@@ -1,31 +1,48 @@
 <x-layadmin>
-    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
-        Dashboard
-    </p>
-    <div class="">
-        <div class=" pb-4">
+    <div class="bg-[#f3f3f3] min-h-screen p-6">
+        <!-- Grid Kategori -->
+        <div class="pb-4">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($categories as $category)
-                    <div class="bg-[#C2C5AA] rounded-lg flex items-center p-4">
-                        <div class="flex-shrink-0">
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center p-6">
+                        <!-- Ikon dengan Animasi Gradient -->
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center animate-gradient bg-gradient-to-r from-[#00BAFF] to-yellow-300 bg-[length:200%_200%]">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
                         </div>
+                        <!-- Teks -->
                         <div class="ml-4 flex-grow">
-                            <p class="text-lg font-bold">{{ $category->nama_kategori }}</p>
-                            <p class="text-sm text-gray-600">Jumlah Wisata: {{ $category->total_wisatas }}</p>
+                            <p class="text-lg font-bold font-poppins uppercase text-gray-800">{{ $category->nama_kategori }}</p>
+                            <p class="text-sm text-gray-600 font-montserrat">Jumlah Wisata: {{ $category->total_wisatas }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
-
-
-            
-
-
         </div>
+
+        <!-- Peta -->
         <div>
             <style>
                 #map {
                     max-width: 100%;
+                }
+
+                /* Animasi Gradient */
+                @keyframes gradientAnimation {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+
+                .animate-gradient {
+                    animation: gradientAnimation 4s ease infinite;
                 }
             </style>
 
@@ -46,7 +63,6 @@
 
                 // Dummy markers data
                 const markers = [
-
                     @foreach ($dataLokasi as $lokasi)
                         {
                             coords: [{{ $lokasi->latitude }}, {{ $lokasi->longitude }}],

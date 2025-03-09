@@ -1,16 +1,21 @@
 <x-layadmin>
-    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+    <!--<p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
         Data Wisata
-    </p>
+    </p> -->
     <div class="lg:flex space-y-2 lg:space-y-0 lg:justify-between lg:items-center">
         <!-- Kiri: Tombol Tambah-Wisata -->
-        <div class="flex ">
+        <div class="flex">
             <a href="{{ route('wisata.create') }}" id="tambah-data-wisata"
-                class="{{ request()->routeIs('wisata.create') ? 'bg-[#656D4A] text-white' : '' }}
+                class="{{ request()->routeIs('wisata.create') ? 'bg-blue-600 text-white' : '' }}
                        flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
-                       border border-slate-400 px-4 py-2 hover:bg-[#656D4A] hover:text-white
-                       focus:z-10 focus:ring-2 focus:ring-slate-300">
-                Tambah-Wisata
+                       border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
+                       focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
+                       hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
+                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                Wisata
             </a>
         </div>
 
@@ -21,7 +26,7 @@
                     <div>
                         <!-- Dropdown Kategori -->
                         <select name="id_kategori" id="id_kategori"
-                            class="h-full py-2 text-xs border border-gray-300 rounded-l-md
+                            class="font-poppins h-full py-2 text-xs border border-gray-300 rounded-l-md
                                focus:ring-blue-500 focus:border-blue-500
                                dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
                             <option value="">Semua Kategori</option>
@@ -37,15 +42,15 @@
                         <!-- Input Nama Wisata -->
                         <input type="text" name="nama_wisata" placeholder="Cari nama Wisata"
                             value="{{ request('nama_wisata') }}"
-                            class="h-full py-2 text-xs border-t border-b border-gray-300
+                            class="font-poppins h-full py-2 text-xs border-t border-b border-gray-300
                                focus:ring-blue-500 focus:border-blue-500
                                dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
 
                         <!-- Button Cari -->
                         <button type="submit"
-                            class="h-full px-4 py-2 text-xs text-white bg-[#414833] border-l-0 border border-gray-300
-                               rounded-r-md hover:bg-[#515d4a] focus:ring-4 focus:outline-none focus:ring-blue-300
-                               dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                            class="font-poppins h-full px-4 py-2 text-xs text-white bg-blue-600 border-l-0 border border-gray-300
+                               rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
+                               dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Cari
                         </button>
                     </div>
@@ -58,28 +63,28 @@
 
     {{-- TABEL --}}
     <div class="relative overflow-x-auto  sm:rounded-lg py-2">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+        <table class="font-poppins w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50  border">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         No
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         Wisata
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         Kategori
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         Sub Kategori
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         Deskripsi
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="font-poppins px-6 py-3">
                         Gambar
                     </th>
-                    <th scope="col" class="px-2 py-3 flex justify-center">
+                    <th scope="col" class="font-poppins px-2 py-3 flex justify-center">
                         Action
                     </th>
                 </tr>
@@ -87,40 +92,45 @@
             <tbody>
                 @foreach ($DataWisata as $index => $wisata)
                     <tr class="odd:bg-white even:bg-gray-50 border-b">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <th scope="row" class="font-poppins px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ ($DataWisata->currentPage() - 1) * $DataWisata->perPage() + $loop->iteration }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="font-poppins px-6 py-4">
                             {{ $wisata->nama_wisata }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="font-poppins px-6 py-4">
                             {{ $wisata->kategori_detail->kategori->nama_kategori ?? 'N/A' }}
 
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="font-poppins px-6 py-4">
                             {{ $wisata->kategori_detail->nama_kategori_detail ?? 'N/A' }}
 
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="font-poppins px-6 py-4">
                             {{ Str::limit($wisata->deskripsi_wisata, 30) }}
 
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="font-poppins px-6 py-4">
                             <img src="{{ asset('storage/' . $wisata->img) }}"
                                 class="aspect-auto object-contain h-20 w-full" alt="Image">
                         </td>
 
-                        <td class="px-6 py-4 flex justify-center gap-2">
+                        <td class="font-poppins px-6 py-4 flex justify-center gap-2">
+                            <!-- Tombol Edit -->
                             <div class="flex justify-center">
                                 <a href="{{ route('wisata.edit', $wisata->id) }}"
-                                    class="font-medium text-blue-600 border px-4 py-2 rounded-lg">Edit</a>
+                                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins font-medium text-blue-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-blue-800 transition duration-300 ease-in-out">
+                                    <i class="fas fa-edit mr-2"></i>Edit
+                                </a>
                             </div>
+                            <!-- Tombol Delete -->
                             <div class="flex justify-center">
-                                <button class="delete-button font-medium text-red-600 border px-4 py-2 rounded-lg"
+                                <button
+                                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins delete-button font-medium text-red-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-red-800 transition duration-300 ease-in-out"
                                     data-modal-target="default-modal-delete-wisata{{ $wisata->id }}"
                                     data-modal-toggle="default-modal-delete-wisata{{ $wisata->id }}"
                                     id="btn-delete-wisata">
-                                    Delete
+                                    <i class="fas fa-trash-alt mr-2"></i>Delete
                                 </button>
                             </div>
                         </td>
@@ -176,11 +186,11 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                             Iya, Hapus
                         </button>
                         <button type="button" data-modal-hide="popup-modal"
-                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                             Batal
                         </button>
                     </form>
@@ -220,14 +230,14 @@
                                 @csrf <!-- Token CSRF -->
                                 @method('DELETE') <!-- Menggunakan metode DELETE -->
                                 <button type="submit"
-                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                     Ya, Saya Yakin
                                 </button>
                             </form>
 
                             <button type="button"
                                 id="cancel-logout"data-modal-hide="default-modal-delete-wisata{{ $wisata->id }}"
-                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 Tidak, Batal
                             </button>
                         </div>

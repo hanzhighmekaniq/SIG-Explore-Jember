@@ -37,21 +37,21 @@
                         <!-- Tombol "Deskripsi" -->
                         <button id="btn-deskripsi"
                             class="tab-button active flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
-       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
+       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Deskripsi
                         </button>
 
                         <!-- Tombol "Detail" -->
                         <button id="btn-detail"
                             class="tab-button flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
-       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
+       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Detail
                         </button>
 
                         <!-- Tombol "Rute" -->
                         <a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank"
                             class="flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
-  bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg">
+  bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Rute
                         </a>
                     </div>
