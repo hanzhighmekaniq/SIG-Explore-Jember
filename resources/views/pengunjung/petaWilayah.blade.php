@@ -3,9 +3,9 @@
     <div class="bg-[#F3F3F3] h-auto w-full">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
-                <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary">PETA
+                <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary font-montserrat">PETA
                     WILAYAH</p>
-                <p class="pacifico-regular text-5xl text-[#656D4A]">Visit Jember</p>
+                <p class="pacifico-regular text-5xl text-[#656D4A]">Kabupaten Jember</p>
             </div>
 
             {{-- Peta Wisata --}}

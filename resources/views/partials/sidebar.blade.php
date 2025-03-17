@@ -53,7 +53,7 @@
                 <div class="relative">
                     <!-- Notifikasi -->
                     <span
-                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-red-500 rounded-full group-hover:bg-white group-hover:text-red-500 {{ request()->is('admin/wisata*') ? 'bg-white text-red-500' : 'text-white' }}">
+                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-blue-600 rounded-full group-hover:bg-white group-hover:text-blue-600 {{ request()->is('admin/wisata*') ? 'bg-white text-blue-600' : 'text-white' }}">
                         {{ $countWisata }}
                     </span>
                     <!-- Ikon -->
@@ -82,7 +82,7 @@
                 <div class="relative">
                     <!-- Notifikasi -->
                     <span
-                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-red-500 rounded-full group-hover:bg-white group-hover:text-red-500 {{ request()->is('admin/kuliner*') ? 'bg-white text-red-500' : 'text-white' }}">
+                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-blue-600 rounded-full group-hover:bg-white group-hover:text-blue-600 {{ request()->is('admin/kuliner*') ? 'bg-white text-blue-600' : 'text-white' }}">
                         {{ $countKuliner }}
                     </span>
                     <!-- Ikon -->
@@ -109,7 +109,7 @@
                 <div class="relative">
                     <!-- Notifikasi -->
                     <span
-                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-red-500 rounded-full group-hover:bg-white group-hover:text-red-500 {{ request()->is('admin/event*') ? 'bg-white text-red-500' : 'text-white' }}">
+                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-blue-600 rounded-full group-hover:bg-white group-hover:text-blue-600 {{ request()->is('admin/event*') ? 'bg-white text-blue-600' : 'text-white' }}">
                         {{ $countEvent }}
                     </span>
                     <!-- Ikon -->

@@ -55,7 +55,7 @@
                         @else
                             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                                 <!-- Carousel wrapper -->
-                                <div class="relative overflow-hidden rounded-lg aspect-[1080/424]">
+                                <div class="relative overflow-hidden rounded-lg aspect-[1504/384]">
                                     @foreach ($event as $index => $eventItem)
                                         <a href="{{ route('profilWisata.index', $eventItem->wisata->nama_wisata) }}">
                                             <div class="hidden duration-700 ease-in-out" data-carousel-item>

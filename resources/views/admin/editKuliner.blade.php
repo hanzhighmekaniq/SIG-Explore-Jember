@@ -43,45 +43,43 @@
             </div>
 
             <!-- Gambar Kuliner -->
-            <div class="mb-2">
-                <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload Gambar
-                    Kuliner</label>
-                <div class="flex ">
-                    <input type="file" id="gambar_kuliner" name="gambar_kuliner"
-                        class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
-                    <div class="flex justify-center items-center">
-                        <div data-modal-target="modal-gambar-kuliner" data-modal-toggle="modal-gambar-kuliner"
-                            class="font-poppins font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
-                            Detail
+            <div class="flex gap-4 mb-2"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                <!-- Upload Gambar Kuliner -->
+                <div class="flex-1">
+                    <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload Gambar Kuliner</label>
+                    <div class="flex">
+                        <input type="file" id="gambar_kuliner" name="gambar_kuliner"
+                            class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
+                        <div class="flex justify-center items-center">
+                            <div data-modal-target="modal-gambar-kuliner" data-modal-toggle="modal-gambar-kuliner"
+                                class="font-poppins font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
+                                Detail
+                            </div>
                         </div>
                     </div>
+                    @error('gambar_kuliner')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
 
-
-                @error('gambar_kuliner')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Gambar Menu Tambahan -->
-            <div class="mb-2">
-                <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Menu
-                    Kuliner</label>
-                <div class="flex">
-                    <input type="file" id="multiple_files" name="gambar_menu[]" multiple
-                        class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
-                    <div class="flex justify-center items-center">
-                        <div data-modal-target="modal-detail-gambar-kuliner"
-                            data-modal-toggle="modal-detail-gambar-kuliner"
-                            class="font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
-                            Detail
+                <!-- Upload Gambar Menu Kuliner -->
+                <div class="flex-1">
+                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Menu Kuliner</label>
+                    <div class="flex">
+                        <input type="file" id="multiple_files" name="gambar_menu[]" multiple
+                            class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
+                        <div class="flex justify-center items-center">
+                            <div data-modal-target="modal-detail-gambar-kuliner"
+                                data-modal-toggle="modal-detail-gambar-kuliner"
+                                class="font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
+                                Detail
+                            </div>
                         </div>
                     </div>
+                    @error('gambar_menu.*')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
-
-                @error('gambar_menu.*')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
             </div>
 
             <!-- Submit Button -->

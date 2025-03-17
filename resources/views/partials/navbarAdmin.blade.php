@@ -15,8 +15,7 @@
                 </button>
                 <a href="/" class="flex ms-2 md:me-24">
                     <span
-                        class="pacifico-regular self-center text-[#5C7AFF] text-xl font-semibold sm:text-2xl whitespace-nowrap">Visit
-                        Jember</span>
+                        class="pacifico-regular self-center text-[#5C7AFF] text-xl font-semibold sm:text-2xl whitespace-nowrap">Explore Jember</span>
                 </a>
             </div>
         </div>

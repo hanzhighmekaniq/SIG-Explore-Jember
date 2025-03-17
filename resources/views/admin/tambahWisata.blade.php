@@ -91,27 +91,27 @@
             </div>
 
 
-            <div>
-                <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
-                    File</label>
-                <input class="font-poppins block w-full text-sm border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
-                    id="file_input" type="file" name="img">
+            <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                <div class="flex-1"> <!-- Kolom pertama -->
+                    <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
+                        File</label>
+                    <input
+                        class="font-poppins block w-full text-sm border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
+                        id="file_input" type="file" name="img">
+                    @error('img')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                @error('img')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
-
-            </div>
-
-            <div>
-                <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
-                    Multiple
-                    Files</label>
-                <input class="font-poppins block w-full text-sm border border-slate-500  rounded-lg cursor-pointer "
-                    id="multiple_files" type="file" name="img_detail[]" multiple>
-                @error('img_detail.*')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
+                <div class="flex-1"> <!-- Kolom kedua -->
+                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
+                        Multiple Files</label>
+                    <input class="font-poppins block w-full text-sm border border-slate-500 rounded-lg cursor-pointer"
+                        id="multiple_files" type="file" name="img_detail[]" multiple>
+                    @error('img_detail.*')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
             <div>
                 <label for="Jam_Oprasional" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Jam

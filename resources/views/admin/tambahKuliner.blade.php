@@ -45,29 +45,30 @@
 
                     <!-- Gambar Event -->
 
-                    <div>
-                        <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Gambar
-                            Kuliner</label>
-                        <input
-                            class="font-poppins block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
-                            aria-describedby="user_avatar_help" id="gambar_kuliner" name="gambar_kuliner"
-                            type="file">
-                        @error('gambar_kuliner')
-                            <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                        <!-- Upload Gambar Kuliner -->
+                        <div class="flex-1">
+                            <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Gambar Kuliner</label>
+                            <input
+                                class="font-poppins block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
+                                aria-describedby="user_avatar_help" id="gambar_kuliner" name="gambar_kuliner"
+                                type="file">
+                            @error('gambar_kuliner')
+                                <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                    <div>
-                        <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Multiple
-                            Files Kuliner</label>
-                        <input
-                            class="font-poppins block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
-                            id="multiple_files" type="file" name="gambar_menu[]" multiple>
-                        @error('gambar_menu.*')
-                            <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                        @enderror
+                        <!-- Upload Multiple Files Kuliner -->
+                        <div class="flex-1">
+                            <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Multiple Files Kuliner</label>
+                            <input
+                                class="font-poppins block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                                id="multiple_files" type="file" name="gambar_menu[]" multiple>
+                            @error('gambar_menu.*')
+                                <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
-
                     <!-- Submit Button -->
                     <div class="flex">
                         <button type="submit"

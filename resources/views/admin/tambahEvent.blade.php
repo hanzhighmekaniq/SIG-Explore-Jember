@@ -41,19 +41,22 @@
                             placeholder="Harga tiket masuk" required>
                     </div>
 
-                    <!-- Tanggal Mulai -->
-                    <div>
-                        <label for="tgl_mulai" class="font-poppins block text-gray-700 font-bold mb-2">Tanggal Mulai</label>
-                        <input type="datetime-local" id="tgl_mulai" name="event_mulai"
-                            class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            required>
-                    </div>
-                    <!-- Tanggal Berakhir -->
-                    <div>
-                        <label for="tgl_berakhir" class="font-poppins block text-gray-700 font-bold mb-2">Tanggal Berakhir</label>
-                        <input type="datetime-local" id="tgl_berakhir" name="event_berakhir"
-                            class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            required>
+                    <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                        <!-- Tanggal Mulai -->
+                        <div class="flex-1">
+                            <label for="tgl_mulai" class="font-poppins block text-gray-700 font-bold mb-2">Tanggal Mulai</label>
+                            <input type="datetime-local" id="tgl_mulai" name="event_mulai"
+                                class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                required>
+                        </div>
+
+                        <!-- Tanggal Berakhir -->
+                        <div class="flex-1">
+                            <label for="tgl_berakhir" class="font-poppins block text-gray-700 font-bold mb-2">Tanggal Berakhir</label>
+                            <input type="datetime-local" id="tgl_berakhir" name="event_berakhir"
+                                class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                required>
+                        </div>
                     </div>
                     <!-- Gambar Event -->
                     <div>

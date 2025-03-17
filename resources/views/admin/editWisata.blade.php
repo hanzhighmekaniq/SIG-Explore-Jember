@@ -97,48 +97,44 @@
             </div>
 
             <!-- Gambar Wisata -->
-            <div>
-                <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar
-                    Wisata</label>
-                <div class="flex">
-
-                    <input
-                        class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
-                        id="file_input" type="file" name="img">
-                    <div class="flex justify-center items-center ml-2">
-                        <div data-modal-target="modal-gambar-wisata"
-                            data-modal-toggle="modal-gambar-wisata"
-                            class="font-poppins font-medium shadow-md shadow-gray-200 hover:bg-blue-600 text-white py-2 px-4 bg-blue-700 rounded-xl transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
-                            Detail
+            <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                <!-- Upload Gambar Wisata -->
+                <div class="flex-1">
+                    <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Wisata</label>
+                    <div class="flex">
+                        <input class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
+                            id="file_input" type="file" name="img">
+                        <div class="flex justify-center items-center ml-2">
+                            <div data-modal-target="modal-gambar-wisata"
+                                data-modal-toggle="modal-gambar-wisata"
+                                class="font-poppins font-medium shadow-md shadow-gray-200 hover:bg-blue-600 text-white py-2 px-4 bg-blue-700 rounded-xl transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                Detail
+                            </div>
                         </div>
                     </div>
+                    @error('img')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('img')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
-            </div>
 
-            <!-- Gambar Detail -->
-            <div>
-                <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
-                    Gambar
-                    Detail</label>
-                <div class="flex">
-
-                    <input
-                        class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
-                        id="multiple_files" type="file" name="img_detail[]" multiple>
-                    <div class="flex justify-center items-center ml-2">
-                        <div data-modal-target="modal-gambar-detail-wisata"
-                            data-modal-toggle="modal-gambar-detail-wisata"
-                            class="font-poppins font-medium shadow-md shadow-gray-200 hover:bg-blue-600 text-white py-2 px-4 bg-blue-700 rounded-xl transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
-                            Detail
+                <!-- Upload Gambar Detail -->
+                <div class="flex-1">
+                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Detail</label>
+                    <div class="flex">
+                        <input class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
+                            id="multiple_files" type="file" name="img_detail[]" multiple>
+                        <div class="flex justify-center items-center ml-2">
+                            <div data-modal-target="modal-gambar-detail-wisata"
+                                data-modal-toggle="modal-gambar-detail-wisata"
+                                class="font-poppins font-medium shadow-md shadow-gray-200 hover:bg-blue-600 text-white py-2 px-4 bg-blue-700 rounded-xl transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                Detail
+                            </div>
                         </div>
                     </div>
+                    @error('img_detail.*')
+                        <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('img_detail.*')
-                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                @enderror
             </div>
 
             <div>

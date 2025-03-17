@@ -51,22 +51,23 @@
                             placeholder="Harga tiket masuk" required>
                     </div>
 
-                    <!-- Tanggal Mulai -->
-                    <div>
-                        <label for="tgl_mulai" class="block text-gray-700 font-bold mb-2">Tanggal Mulai</label>
-                        <input type="datetime-local" id="tgl_mulai" name="event_mulai" value="{{ $event->event_mulai }}"
-                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            required>
+                    <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
+                        <!-- Tanggal Mulai -->
+                        <div class="flex-1">
+                            <label for="tgl_mulai" class="block text-gray-700 font-bold mb-2">Tanggal Mulai</label>
+                            <input type="datetime-local" id="tgl_mulai" name="event_mulai" value="{{ $event->event_mulai }}"
+                                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                required>
+                        </div>
 
-                    </div>
-
-                    <!-- Tanggal Berakhir -->
-                    <div>
-                        <label for="tgl_berakhir" class="block text-gray-700 font-bold mb-2">Tanggal Berakhir</label>
-                        <input type="datetime-local" id="tgl_berakhir" name="event_berakhir"
-                            value="{{ $event->event_berakhir }}"
-                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            required>
+                        <!-- Tanggal Berakhir -->
+                        <div class="flex-1">
+                            <label for="tgl_berakhir" class="block text-gray-700 font-bold mb-2">Tanggal Berakhir</label>
+                            <input type="datetime-local" id="tgl_berakhir" name="event_berakhir"
+                                value="{{ $event->event_berakhir }}"
+                                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                required>
+                        </div>
                     </div>
                     <!-- Gambar Event -->
                     <div>
@@ -81,7 +82,7 @@
                                     aria-describedby="user_avatar_help" id="img" name="img" type="file">
                                 <div class="flex">
                                     <div data-modal-target="modal-gambar-event" data-modal-toggle="modal-gambar-event"
-                                        class="font-medium shadow-md shadow-gray-600 hover:bg-[#3F6A6B] text-white py-2 px-4 bg-[#4F7F81] rounded-xl">
+                                        class="font-medium shadow-md shadow-gray-600 hover:bg-blue-700 text-white py-2 px-4 bg-blue-600 rounded-xl">
                                         Detail
                                     </div>
                                 </div>
@@ -97,7 +98,7 @@
                     <!-- Submit Button -->
                     <div class="flex pt-4">
                         <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring">Simpan</button>
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Simpan</button>
                     </div>
                 </div>
             </form>
