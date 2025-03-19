@@ -60,7 +60,7 @@
                     <div class="py-4 pr-4">
                         <div id="deskripsi">
                             <p
-                                class="text-lg md:text-xl font-serif text-gray-700 leading-loose text-justify indent-8 md:indent-12 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 first-letter:mr-2">
+                                class=" text-lg md:text-xl font-poppins text-gray-700 leading-loose text-justify indent-8 md:indent-12 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 first-letter:mr-2 first-letter:font-serif">
                                 {{ $wisata->deskripsi_wisata }}
                             </p>
                         </div>

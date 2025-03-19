@@ -53,7 +53,7 @@
     <div
         class="relative w-full max-w-xl mx-4 p-6 md:p-12 bg-white bg-opacity-30 rounded-2xl shadow-lg backdrop-blur-md">
         <!-- Logo -->
-        
+
 
         <!-- Konten Utama -->
         <div class="flex flex-col md:flex-row items-center ">
@@ -80,7 +80,7 @@
                         <div class="flex items-center border-b border-gray-400 py-2">
                             <i class="fas fa-envelope text-white mr-3"></i>
                             <input
-                                class="font-montserrat appearance-none bg-transparent border-none w-full text-white 
+                                class="font-montserrat appearance-none bg-transparent border-none w-full text-white
                                         mr-3 py-1 px-2 leading-tight focus:outline-none"
                                 name="email" type="email" placeholder="Email" aria-label="Email">
                         </div>
@@ -91,7 +91,7 @@
                         <div class="flex items-center border-b border-gray-400 py-2">
                             <i class="fas fa-lock text-white mr-3"></i>
                             <input
-                                class="font-montserrat appearance-none bg-transparent border-none w-full text-white 
+                                class="font-montserrat appearance-none bg-transparent border-none w-full text-white
                                         mr-3 py-1 px-2 leading-tight focus:outline-none"
                                 name="password" type="password" placeholder="Password" aria-label="Password">
                             <i class="fas fa-eye text-white cursor-pointer absolute right-3"
@@ -113,12 +113,12 @@
 
                     <!-- Tombol Login -->
                     <button type="submit"
-                        class="font-montserrat w-full py-2 md:py-3 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full text-sm 
+                        class="font-montserrat w-full py-2 md:py-3 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full text-sm
                                 md:text-lg hover:from-orange-500 hover:to-pink-600 transition-all duration-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                         Login
                     </button>
                     <button
-                        class="mt-4 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 
+                        class="mt-4 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                             w-full px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600"
                         href="/">
                         Return to Home

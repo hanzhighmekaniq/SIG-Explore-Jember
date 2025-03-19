@@ -59,6 +59,7 @@ module.exports = {
                 montserrat: ['Montserrat', 'sans-serif'], // Tambahkan Montserrat
                 oswald: ['Oswald', 'sans-serif'],
                 fjalla: ['Fjalla One', 'sans-serif'],
+                pacifico: ['Pacifico', 'cursive'],
             },
         },
     },
