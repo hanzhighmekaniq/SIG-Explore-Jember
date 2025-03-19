@@ -100,13 +100,14 @@
             <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
                 <!-- Upload Gambar Wisata -->
                 <div class="flex-1">
-                    <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Wisata</label>
+                    <label for="file_input" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
+                        Gambar Wisata</label>
                     <div class="flex">
-                        <input class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
+                        <input
+                            class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
                             id="file_input" type="file" name="img">
                         <div class="flex justify-center items-center ml-2">
-                            <div data-modal-target="modal-gambar-wisata"
-                                data-modal-toggle="modal-gambar-wisata"
+                            <div data-modal-target="modal-gambar-wisata" data-modal-toggle="modal-gambar-wisata"
                                 class="font-poppins font-medium shadow-md shadow-gray-200 hover:bg-blue-600 text-white py-2 px-4 bg-blue-700 rounded-xl transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 Detail
                             </div>
@@ -119,9 +120,11 @@
 
                 <!-- Upload Gambar Detail -->
                 <div class="flex-1">
-                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Detail</label>
+                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
+                        Gambar Detail</label>
                     <div class="flex">
-                        <input class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
+                        <input
+                            class="font-poppins block w-full text-sm text-gray-900 border border-slate-500 rounded-lg cursor-pointer bg-gray-50"
                             id="multiple_files" type="file" name="img_detail[]" multiple>
                         <div class="flex justify-center items-center ml-2">
                             <div data-modal-target="modal-gambar-detail-wisata"
@@ -140,26 +143,22 @@
             <div>
                 <label for="Jam_Operasional" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Jam
                     Operasional</label>
-                <div id="jam-operasional-container"
+                    <div id="jam-operasional-container"
                     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'] as $hari)
-                        @php
-                            $buka = isset($jamOperasional[$hari]['buka']) ? $jamOperasional[$hari]['buka'] : '';
-                            $tutup = isset($jamOperasional[$hari]['tutup']) ? $jamOperasional[$hari]['tutup'] : '';
-                        @endphp
-
                         <div class="border-2 border-slate-500 p-3 rounded-lg bg-gray-50">
-                            <label
-                                class="font-poppins block text-sm font-semibold text-gray-700 mb-1">{{ ucfirst($hari) }}</label>
+                            <label class="font-poppins block text-sm font-semibold text-gray-700 mb-1">
+                                {{ ucfirst($hari) }}
+                            </label>
 
                             <div class="flex gap-2">
                                 <input type="time" name="jam_operasional[{{ $hari }}][buka]"
                                     class="font-poppins w-full p-2 border rounded text-sm focus:ring-blue-500 focus:border-blue-500"
-                                    value="{{ old("jam_operasional.$hari.buka", $buka) }}" required>
+                                    value="{{ old("jam_operasional.$hari.buka") ?? ($jamOperasional[$hari]['buka'] ?? '') }}" required>
 
                                 <input type="time" name="jam_operasional[{{ $hari }}][tutup]"
                                     class="font-poppins w-full p-2 border rounded text-sm focus:ring-blue-500 focus:border-blue-500"
-                                    value="{{ old("jam_operasional.$hari.tutup", $tutup) }}">
+                                    value="{{ old("jam_operasional.$hari.tutup") ?? ($jamOperasional[$hari]['tutup'] ?? '') }}">
                             </div>
                         </div>
                     @endforeach

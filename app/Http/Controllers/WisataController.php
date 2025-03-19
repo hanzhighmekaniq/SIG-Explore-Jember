@@ -130,9 +130,14 @@ class WisataController extends Controller
     public function edit($id)
     {
         $wisata = DataWisata::findOrFail($id);
-        $dataKategori = DataKategoriDetail::with('kategori')->get(); // Perbaikan: tambahkan get()
-        return view('admin.editWisata', compact('wisata', 'dataKategori'));
+        $dataKategori = DataKategoriDetail::with('kategori')->get();
+
+        // Ambil data jam operasional dan ubah ke array agar bisa digunakan di form
+        $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
+
+        return view('admin.editWisata', compact('wisata', 'dataKategori', 'jamOperasional'));
     }
+
 
 
     public function update(Request $request, $id)

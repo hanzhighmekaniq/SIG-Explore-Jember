@@ -1,6 +1,8 @@
-<nav class="w-full bg-white shadow-md xl:shadow-lg z-[100] relative">
+<nav class="w-full shadow-md xl:shadow-lg z-[100] relative">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2 lg:p-4">
-        <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Explore Jember</a></a>
+        <a href="/"
+            class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Explore
+            Jember</a></a>
         <style>
             .pacifico-regular {
                 font-family: "Pacifico", cursive;
@@ -19,8 +21,8 @@
             </svg>
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul
-                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+            <ul id="navbar"
+                class="font-medium flex flex-col p-4 md:p-0 mt-4  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ">
                 <ul class="flex flex-col md:flex-row md:space-x-8">
                     <!-- Menu "Home" -->
                     <li>
@@ -63,7 +65,7 @@
                             </button>
 
                             <!-- Dropdown Menu -->
-                            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm"
+                            <div class="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow-sm"
                                 id="user-dropdown">
                                 <div class="px-4 py-3">
                                     <span class="block text-sm text-gray-900">{{ Auth::user()->name }}</span>
@@ -137,3 +139,15 @@
 
     </div>
 </nav>
+<script>
+    document.addEventListener("scroll", function() {
+        let navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+            navbar.classList.add("bg-opacity-70", "backdrop-blur-md");
+            navbar.classList.remove("bg-opacity-100");
+        } else {
+            navbar.classList.add("bg-opacity-100");
+            navbar.classList.remove("bg-opacity-70", "backdrop-blur-md");
+        }
+    });
+</script>

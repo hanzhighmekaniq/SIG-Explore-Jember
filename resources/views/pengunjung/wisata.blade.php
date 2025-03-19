@@ -74,8 +74,8 @@
                                         alt="{{ $item->nama_wisata }}" />
 
                                     <div class="w-auto h-auto pt-2 px-4 pb-4">
-                                        <p class="text-[#004165] font-bold text-xl font-fjalla uppercase">{{ $item->nama_wisata }}</p>
-                                        <p class="text-gray-500 text-sm font-poppins">
+                                        <p class="text-[#004165] font-bold text-sm xl:text-xl font-fjalla uppercase">{{ $item->nama_wisata }}</p>
+                                        <p class="text-gray-500 text-xs lg:text-sm font-poppins">
                                             {{ $item->kategori_detail->nama_kategori_detail ?? 'Kategori Tidak Tersedia' }}
                                             {{ $item->kategori_detail->kategori->nama_kategori ?? 'Kategori Tidak Tersedia' }}
                                         </p>

@@ -130,7 +130,8 @@
             <a href="#"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
                 <!-- Teks -->
-                <span class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap hover:text-blue-400">Pengaturan</span>
+                <span
+                    class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap hover:text-blue-400">Pengaturan</span>
                 <!-- Ikon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -149,22 +150,23 @@
                 </svg>
             </a>
         </li>
-
         <li class="group">
-            <button data-modal-target="default-modal-logout" data-modal-toggle="default-modal-logout" type="button"
-                id="logout-button"
-                class="flex items-center p-2 w-full rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
+            <a  id="logout-button" type="button" data-modal-target="default-modal-logout"
+                data-modal-toggle="default-modal-logout"
+                class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
                 <!-- Teks -->
-                <span class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap hover:text-blue-400">Log Out</span>
+                <span
+                    class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap hover:text-blue-400">Logout</span>
                 <!-- Ikon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-log-out hover:text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-log-out hover:text-blue-400">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     <polyline points="16 17 21 12 16 7" />
                     <line x1="21" x2="9" y1="12" y2="12" />
                 </svg>
-            </button>
-        </li>
+
+            </a>
+        </button>
     </ul>
 </div>

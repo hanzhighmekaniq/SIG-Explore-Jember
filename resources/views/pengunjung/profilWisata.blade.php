@@ -229,7 +229,7 @@
 
         </div>
         <div class="mb-4 pt-10">
-            <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Kuliner Saat Ini</p>
+            <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Kuliner Yang Tersedia</p>
             <h5 class="pl-0 text-gray-500">Berikut adalah kuliner yang tersedia saat ini</h5>
         </div>
         @if ($wisata->kuliners->isEmpty())

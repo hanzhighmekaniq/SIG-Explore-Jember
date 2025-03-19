@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f3f3f3;
+            background-color: #000000;
         }
 
         /* Background Slideshow */
@@ -51,31 +51,28 @@
 
     <!-- Konten Utama -->
     <div
-        class="relative w-full max-w-5xl mx-4 p-6 md:p-12 bg-white bg-opacity-30 rounded-2xl shadow-lg backdrop-blur-md">
+        class="relative w-full max-w-xl mx-4 p-6 md:p-12 bg-white bg-opacity-30 rounded-2xl shadow-lg backdrop-blur-md">
         <!-- Logo -->
-        <div class="absolute top-4 left-4 md:top-8 md:left-8">
-            <img alt="Logo" class="w-10 h-10 md:w-12 md:h-12" src="img/lugu.webp">
-        </div>
+        
 
         <!-- Konten Utama -->
-        <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="flex flex-col md:flex-row items-center ">
             <!-- Bagian Kiri (Welcome Message) -->
-            <div class="text-white md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+            <!-- <div class="text-white md:w-1/2 text-center md:text-left mb-8 md:mb-0">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 font-fjalla uppercase">Selamat Datang!</h1>
+            </div> -->
+
+            <!-- Bagian Kanan (Form Login) -->
+            <div class="p-2 md:p-4 w-full">
+                <div class="absolute top-4 left-4 ">
+                    <h1 class="text-sm font-bold text-white font-fjalla">Explore Jember</h1>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-6 font-montserrat uppercase">Selamat Datang!
+                </h1>
                 <p class="mb-6 text-sm md:text-lg font-montserrat">
                     Anu ini loginnya khusus atmin, jadi kalau kamu bukan admin, silakan pergi dan tekan tombol di bawah
                     ini.
                 </p>
-                <a class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 
-                            px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600 transition-all duration-300"
-                    href="/">
-                    Return to Home
-                </a>
-            </div>
-
-            <!-- Bagian Kanan (Form Login) -->
-            <div class="bg-white bg-opacity-40 p-6 md:p-10 rounded-lg w-full md:w-1/2 backdrop-blur-md">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 font-montserrat uppercase">Masuk</h2>
                 <form action="{{ route('session.login') }}" method="POST">
                     @csrf
                     <!-- Email -->
@@ -106,7 +103,7 @@
                     <div class="flex items-center justify-between mb-8">
                         <div class="flex items-center">
                             <input type="checkbox" id="remember" class="mr-3">
-                            <label for="remember" class="text-gray-300 text-sm md:text-lg font-montserrat">Remember
+                            <label for="remember" class="text-gray-500 text-sm md:text-lg font-montserrat">Remember
                                 me</label>
                         </div>
                         <a href="#"
@@ -120,13 +117,19 @@
                                 md:text-lg hover:from-orange-500 hover:to-pink-600 transition-all duration-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                         Login
                     </button>
+                    <button
+                        class="mt-4 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 
+                            w-full px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600"
+                        href="/">
+                        Return to Home
+                    </button>
                 </form>
 
                 <!-- Divider -->
-                <div class="my-6 border-b border-gray-400"></div>
+                <!-- <div class="my-6 border-b border-gray-400"></div> -->
 
                 <!-- Opsi Login Lainnya -->
-                <p class="text-gray-300 text-sm md:text-lg font-montserrat mb-4">Or sign in with</p>
+                <!-- <p class="text-gray-300 text-sm md:text-lg font-montserrat mb-4">Or sign in with</p>
                 <div class="flex justify-center space-x-4">
                     <button
                         class="bg-white bg-opacity-30 border border-gray-400 rounded-full p-3 hover:bg-opacity-50 transition-all duration-300">
@@ -145,10 +148,10 @@
                         <img alt="Apple logo" height="24"
                             src="https://storage.googleapis.com/a1aa/image/nkoEBNLPQLbRDnErHKnO6rRI1hxYGVzzb2VO-xzBfZs.jpg"
                             width="24" />
-                    </button>
-                </div>
+                    </button> -->
             </div>
         </div>
+    </div>
     </div>
 
     <script>

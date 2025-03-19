@@ -23,12 +23,12 @@
 
                 <button data-modal-target="default-modal-tambah-kategori"
                     data-modal-toggle="default-modal-tambah-kategori"
-                    class="flex justify-center items-center text-xs font-medium font-montserrat text-white rounded-lg
-                        px-4 py-2 bg-gradient-to-r from-[#0077B4] to-[#00A8E8] hover:from-[#00527A] hover:to-[#0077B4]
-                        border border-[#0077B4] hover:border-[#00527A]
-                        focus:z-10 focus:ring-2 focus:ring-slate-300
-                        transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#00527A]/50
-                        active:scale-95"
+                    class="flex justify-center items-center text-xs font-medium font-montserrat text-gray-900 rounded-lg
+                    px-4 py-2 bg-white hover:bg-blue-600 hover:text-white
+                    border border-slate-400 hover:border-blue-600
+                    focus:z-10 focus:ring-2 focus:ring-slate-300
+                    transition-all duration-200 ease-in-out
+                    hover:-translate-y-1 active:translate-y-0 active:scale-95"
                     type="button">
 
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -58,7 +58,8 @@
                                 <td class="px-6 py-4 font-poppins">{{ $kategori->nama_kategori }}</td>
                                 <td class="px-2 py-4 flex justify-center gap-2">
                                     <!-- Tombol Edit -->
-                                    <button class="font-poppins edit-button font-medium text-blue-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-blue-800 transition duration-300 ease-in-out"
+                                    <button
+                                        class="font-poppins edit-button font-medium text-blue-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-blue-800 transition duration-300 ease-in-out"
                                         data-modal-target="default-modal-edit-kategori{{ $kategori->id }}"
                                         data-modal-toggle="default-modal-edit-kategori{{ $kategori->id }}"
                                         id="btn-edit-kategori" data-id_kategori="{{ $kategori->id }}"
@@ -66,7 +67,8 @@
                                         <i class="fas fa-edit mr-2"></i>Edit
                                     </button>
                                     <!-- Tombol Hapus -->
-                                    <button class="font-poppins delete-button font-medium text-red-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-red-800 transition duration-300 ease-in-out"
+                                    <button
+                                        class="font-poppins delete-button font-medium text-red-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-red-800 transition duration-300 ease-in-out"
                                         data-modal-target="default-modal-delete-kategori{{ $kategori->id }}"
                                         data-modal-toggle="default-modal-delete-kategori{{ $kategori->id }}"
                                         id="btn-delete-kategori">
@@ -106,7 +108,8 @@
                         <form action="{{ route('kategori.store') }}" method="POST">
                             @csrf
                             <div class="p-4 items-center">
-                                <label for="nama_kategori" class="block text-gray-700 font-bold mb-1 font-poppins">Kategori</label>
+                                <label for="nama_kategori"
+                                    class="block text-gray-700 font-bold mb-1 font-poppins">Kategori</label>
                                 <input type="text" id="nama_kategori" name="nama_kategori"
                                     class="font-poppins w-full px-3 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
                                     placeholder="Masukkan Kategori" required required autocomplete="off">
@@ -206,7 +209,8 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin ingin
+                                <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda
+                                    yakin ingin
                                     menghapus?</h3>
                                 <div class="flex justify-center">
                                     <form id="edit-kategori-form" method="POST"
@@ -241,18 +245,19 @@
 
                     <button data-modal-target="default-modal-tambah-kategori_detail"
                         data-modal-toggle="default-modal-tambah-kategori_detail"
-                        class="flex justify-center items-center text-xs font-medium font-montserrat text-white rounded-lg
-                        px-4 py-2 bg-gradient-to-r from-[#0077B4] to-[#00A8E8] hover:from-[#00527A] hover:to-[#0077B4]
-                        border border-[#0077B4] hover:border-[#00527A]
-                        focus:z-10 focus:ring-2 focus:ring-slate-300
-                        transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#00527A]/50
-                        active:scale-95"
-                    type="button">
+                        class="flex justify-center items-center text-xs font-medium font-montserrat text-gray-900 rounded-lg
+            px-4 py-2 bg-white hover:bg-blue-600 hover:text-white
+            border border-slate-400 hover:border-blue-600
+            focus:z-10 focus:ring-2 focus:ring-slate-300
+            transition-all duration-200 ease-in-out
+            hover:-translate-y-1 active:translate-y-0 active:scale-95"
+                        type="button">
 
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                            </path>
+                        </svg>
                         Sub Kategori
                     </button>
                     {{ $SubKategori->links() }}
@@ -272,7 +277,8 @@
                         <tbody>
                             @foreach ($SubKategori as $index => $item)
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap font-poppins">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap font-poppins">
                                         {{ $index + 1 }}
                                     </th>
                                     <td class="px-6 py-4 font-poppins">
@@ -323,7 +329,8 @@
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="font-poppins text-xl font-semibold text-gray-900 dark:text-white">Tambahkan Sub Kategori</h3>
+                    <h3 class="font-poppins text-xl font-semibold text-gray-900 dark:text-white">Tambahkan Sub Kategori
+                    </h3>
                     <button type="button"
                         class="font-poppins text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-hide="default-modal-tambah-kategori_detail">
@@ -406,7 +413,8 @@
                             name="id" required>
 
                         <div class="px-4 pb-4 items-center">
-                            <label for="Kategori" class="font-poppins block mt-4 text-gray-700 font-bold mb-1">Kategori</label>
+                            <label for="Kategori"
+                                class="font-poppins block mt-4 text-gray-700 font-bold mb-1">Kategori</label>
                             <select id="id_kategori" name="id_kategori"
                                 class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
                                 required>
@@ -419,7 +427,8 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <label for="detail_kategori" class="font-poppins block mt-4 text-gray-700 font-bold mb-1">Sub
+                            <label for="detail_kategori"
+                                class="font-poppins block mt-4 text-gray-700 font-bold mb-1">Sub
                                 Kategori</label>
                             <input type="text" id="edit-namaKategori" name="nama_kategori_detail"
                                 value="{{ $item->nama_kategori_detail }}"
@@ -463,12 +472,14 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 md:p-5 text-center">
-                        <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin ingin
+                        <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin
+                            ingin
                             menghapus?</h3>
                         <div class="flex justify-center">
                             <form id="edit-kategori-form" method="POST"
