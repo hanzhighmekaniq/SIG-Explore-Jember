@@ -14,6 +14,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\subKategori;
 use App\Http\Controllers\UjiCoba;
 
@@ -56,6 +57,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('wisata', WisataController::class);
     Route::resource('event', EventController::class);
     Route::resource('kuliner', KulinerController::class);
+    Route::resource('setting', SettingController::class);
+
 
     // Optional Profile Routes
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

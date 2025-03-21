@@ -27,7 +27,7 @@
                     <select name="id_kategori_detail" id="id_kategori_detail"
                         class="font-poppins h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md
                                focus:ring-blue-500 focus:border-blue-500
-                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500">
+                               ">
                         <option value="">Semua Sub Kategori</option>
                         @foreach ($wisata as $item)
                             <option value="{{ $item->id }}">
@@ -41,13 +41,13 @@
                         value="{{ request('nama_event') }}"
                         class="font-poppins h-full px-4 py-2 text-xs border-t border-b border-gray-300
                                focus:ring-blue-500 focus:border-blue-500
-                               dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:border-blue-500" />
+                               " />
 
                     <!-- Button Cari -->
                     <button type="submit"
                         class="font-poppins h-full px-4 py-2 text-xs text-white bg-blue-600 border-l-0 border border-gray-300
                                rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
-                               dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                         Cari
                     </button>
                 </form>
@@ -141,9 +141,9 @@
     <div id="popup-modal" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-white rounded-lg shadow ">
                 <button type="button"
-                    class="font-poppins absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    class="font-poppins absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
                     data-modal-hide="popup-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
@@ -153,12 +153,12 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="p-4 md:p-5 text-center">
-                    <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                    <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin
+                    <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 ">Apakah Anda yakin ingin
                         menghapus data ini?</h3>
 
                     <!-- Form untuk delete -->
@@ -166,11 +166,11 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                             Iya, Hapus
                         </button>
                         <button type="button" data-modal-hide="popup-modal"
-                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">
                             Batal
                         </button>
                     </form>
@@ -183,9 +183,9 @@
         <div id="default-modal-delete-event{{ $event->id }}" tabindex="-1"
             class="hidden fixed inset-0 z-50  items-center justify-center bg-black bg-opacity-50">
             <div class="relative p-4 w-full max-w-md max-h-full">
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="relative bg-white rounded-lg shadow ">
                     <button type="button" data-modal-hide="default-modal-delete-event{{ $event->id }}"
-                        class="font-poppins absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="font-poppins absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center "
                         id="close-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
@@ -195,12 +195,12 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 md:p-5 text-center">
-                        <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                        <svg class="font-poppins mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin ingin
+                        <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 ">Anda yakin ingin
                             menghapus?</h3>
                         <div class="flex justify-center">
                             <form id="edit-event-form" method="POST"
@@ -208,14 +208,14 @@
                                 @csrf <!-- Token CSRF -->
                                 @method('DELETE') <!-- Menggunakan metode DELETE -->
                                 <button type="submit"
-                                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                     Ya, Saya Yakin
                                 </button>
                             </form>
 
                             <button type="button"
                                 id="cancel-logout"data-modal-hide="default-modal-delete-event{{ $event->id }}"
-                                class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">
                                 Tidak, Batal
                             </button>
                         </div>

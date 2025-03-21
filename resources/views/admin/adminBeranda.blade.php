@@ -2,7 +2,8 @@
     <div class="bg-[#f3f3f3] min-h-screen p-6">
         <!-- Grid Kategori -->
         <div class="pb-4">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1
+            sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($categories as $category)
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center p-6">
                         <!-- Ikon dengan Animasi Gradient -->

@@ -127,15 +127,15 @@
         </li>
 
         <li class="group">
-            <a href="#"
+            <a href="{{ route('setting.index') }}"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
                 <!-- Teks -->
                 <span
-                    class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap hover:text-blue-400">Pengaturan</span>
+                    class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap {{ request()->is('admin/setting*') ? 'text-blue-600' : 'hover:text-blue-400' }}">Pengaturan</span>
                 <!-- Ikon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-user-cog hover:text-blue-400">
+                    class="lucide lucide-user-cog {{ request()->is('admin/setting*') ? 'text-blue-600' : 'hover:text-blue-400' }}">
                     <circle cx="18" cy="15" r="3" />
                     <circle cx="9" cy="7" r="4" />
                     <path d="M10 15H6a4 4 0 0 0-4 4v2" />
@@ -151,7 +151,7 @@
             </a>
         </li>
         <li class="group">
-            <a  id="logout-button" type="button" data-modal-target="default-modal-logout"
+            <a id="logout-button" type="button" data-modal-target="default-modal-logout"
                 data-modal-toggle="default-modal-logout"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
                 <!-- Teks -->
@@ -167,6 +167,6 @@
                 </svg>
 
             </a>
-        </button>
+            </button>
     </ul>
 </div>

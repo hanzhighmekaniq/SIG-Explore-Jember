@@ -33,4 +33,5 @@ class AdminController extends Controller
         view()->share('countWisata', $countWisata); // Bagikan variabel ke seluruh view
         return view('partials.sidebar');
     }
+   
 }

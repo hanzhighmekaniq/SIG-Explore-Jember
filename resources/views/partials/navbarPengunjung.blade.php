@@ -65,7 +65,7 @@
                             </button>
 
                             <!-- Dropdown Menu -->
-                            <div class="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow-sm"
+                            <div class="z-50 hidden my-4 text-base list-none bg-gray-200 divide-y divide-gray-100 rounded-lg shadow-sm"
                                 id="user-dropdown">
                                 <div class="px-4 py-3">
                                     <span class="block text-sm text-gray-900">{{ Auth::user()->name }}</span>

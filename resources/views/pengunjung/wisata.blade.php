@@ -1,10 +1,26 @@
 {{-- pacifico-regular --}}
 <x-layout>
     <div class="bg-[#f3f3f3] h-auto w-full">
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let elements = document.querySelectorAll("#wisataScroll");
 
-        <div class="container m-auto px-4">
+                let observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove("opacity-0", "translate-y-10");
+                        }
+                    });
+                }, {
+                    threshold: 0.2
+                });
+
+                elements.forEach((el) => observer.observe(el));
+            });
+        </script>
+        <div id="wisataScroll" class="container m-auto px-4 opacity-0 translate-y-10 transition-all duration-[1500ms]">
             <!-- Title Section -->
-            <div class="m-auto w-auto text-center pt-20 lg:pt-28 pb-10 text-6xl">
+            <div class="m-auto w-auto text-center pt-20 lg:pt-28 pb-10 text-6xl ">
                 <p
                     class="pb-4  text-center font-bold lg:font-extrabold xl:text-xl text-lime-800 text-lg leading-7 text-primary font-montserrat">
                     WISATA</p>

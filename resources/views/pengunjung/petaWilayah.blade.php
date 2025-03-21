@@ -1,6 +1,22 @@
 <x-layout>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let elements = document.querySelectorAll("#petaWilayah");
 
-    <div class="bg-[#F3F3F3] h-auto w-full">
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove("opacity-0", "translate-y-10");
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            elements.forEach((el) => observer.observe(el));
+        });
+    </script>
+    <div id="petaWilayah" class="bg-[#F3F3F3] h-auto w-full opacity-0 translate-y-10 transition-all duration-[1500ms]">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
                 <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary font-montserrat">PETA
@@ -11,7 +27,7 @@
             {{-- Peta Wisata --}}
             <div class="flex justify-center items-center pb-10 lg:pb-14 xl:pb-16 w-full">
                 <div class="w-full pt-8">
-                    <div id="map" class="relative z-[1] rounded-xl aspect-video"></div>
+                    <div id="map" class="relative z-[1] rounded-xl aspect-[1920/720]"></div>
                 </div>
             </div>
             {{-- Tabel Daftar Lokasi Wisata --}}

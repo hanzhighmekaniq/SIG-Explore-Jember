@@ -117,13 +117,13 @@
                                 md:text-lg hover:from-orange-500 hover:to-pink-600 transition-all duration-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                         Login
                     </button>
-                    <button
-                        class="mt-4 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
-                            w-full px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600"
-                        href="/">
-                        Return to Home
-                    </button>
                 </form>
+                <a
+                    class="mt-4 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
+                        w-full px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600 flex justify-center"
+                    href="/">
+                    Return to Home
+                </a>
 
                 <!-- Divider -->
                 <!-- <div class="my-6 border-b border-gray-400"></div> -->

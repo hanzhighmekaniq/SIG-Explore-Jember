@@ -11,7 +11,7 @@
     @include('partials.navbarPengunjung')
 </div>
 
-    
+
 <body class="bg-white">
     {{ $slot }}
 </body>
@@ -56,8 +56,10 @@
     }
 </style>
 
+<div class="bg-slate-500">
 
-@include('partials.footerPengunjung')
+    @include('partials.footerPengunjung')
+</div>
 
 </html>
 
