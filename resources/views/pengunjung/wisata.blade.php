@@ -22,9 +22,9 @@
             <!-- Title Section -->
             <div class="m-auto w-auto text-center pt-20 lg:pt-28 pb-10 text-6xl ">
                 <p
-                    class="pb-4  text-center font-bold lg:font-extrabold xl:text-xl text-lime-800 text-lg leading-7 text-primary font-montserrat">
+                    class="pb-4 text-center font-bold lg:font-extrabold xl:text-xl text-[#004165] text-lg leading-7 text-primary font-montserrat">
                     WISATA</p>
-                <p class="pacifico-regular text-5xl text-[#656D4A] ">Kabupaten Jember </p>
+                <p class="pacifico-regular text-5xl text-[#004165] ">Kabupaten Jember </p>
             </div>
 
             <div class="flex justify-center items-center space-x-4 pt-4 pb-8 ">

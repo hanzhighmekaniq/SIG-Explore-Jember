@@ -15,7 +15,7 @@
                 </button>
                 <a href="/" class="flex ms-2 md:me-24">
                     <span
-                        class="font-pacifico self-center text-[#5C7AFF] text-xl font-semibold sm:text-2xl whitespace-nowrap">Hello, Admin Explore Jember!</span>
+                        class="font-pacifico self-center text-[#5C7AFF] text-xl font-regular sm:text-2xl whitespace-nowrap">Hello, Admin!</span>
                 </a>
             </div>
         </div>

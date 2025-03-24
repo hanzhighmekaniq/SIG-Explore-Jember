@@ -19,9 +19,9 @@
     <div id="petaWilayah" class="bg-[#F3F3F3] h-auto w-full opacity-0 translate-y-10 transition-all duration-[1500ms]">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
-                <p class="pb-4 text-center font-extrabold xl:text-xl text-lime-800 text-base leading-7 text-primary font-montserrat">PETA
+                <p class="pb-4 text-center font-extrabold xl:text-xl text-[#004165] text-base leading-7 text-primary font-montserrat">PETA
                     WILAYAH</p>
-                <p class="pacifico-regular text-5xl text-[#656D4A]">Kabupaten Jember</p>
+                <p class="pacifico-regular text-5xl text-[#004165]">Kabupaten Jember</p>
             </div>
 
             {{-- Peta Wisata --}}
