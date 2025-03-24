@@ -56,7 +56,7 @@
     }
 </style>
 
-<div class="bg-slate-500">
+<div class="bg-gradient-to-r from-[#004165] to-[#0066a2]">
 
     @include('partials.footerPengunjung')
 </div>

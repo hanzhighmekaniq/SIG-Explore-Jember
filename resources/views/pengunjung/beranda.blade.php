@@ -10,32 +10,61 @@
                             class="  w-full relative bottom-10 sm:bottom-12 md:bottom-16 lg:bottom-24 2xl:bottom-36">
                     </div>
                     <div class="absolute inset-0 flex items-center mb-10 justify-center">
-                        <figcaption class="container ">
-                            <div class=" text-center px-4  2xl:px-8 space-y-4 lg:space-y-10">
-                                <p
-                                    class="font-fjalla font-semibold text-2xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#FFFFFF] drop-shadow-lg">
-                                    WISATA <br> KABUPATEN JEMBER
+                        <figcaption class="container">
+                            <div class="text-left px-4 2xl:px-8 space-y-4 lg:space-y-10">
+                                <!-- Judul -->
+                                <p class="font-fjalla font-semibold text-2xl sm:text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-[#FFFFFF] drop-shadow-lg">
+                                    WISATA <br>
+                                    <span class="typing-animation">KABUPATEN JEMBER</span> <!-- Animasi hanya pada "KABUPATEN JEMBER" -->
                                 </p>
-                                <p
-                                    class="text-white break-words font-montserrat text-sm sm:text-sm md:text-lg lg:text-xl xl:text-2xl drop-shadow-lg">
-                                    Selamat datang di Jember, kota yang menawarkan pesona alam yang memukau, budaya yang
-                                    kaya,
-                                    serta
-                                    berbagai destinasi wisata menarik. Dari keindahan Pantai Papuma hingga pesona
-                                    Rembangan
-                                    yang
-                                    sejuk, Jember siap memberikan pengalaman liburan yang tak terlupakan. Jelajahi
-                                    keajaiban
-                                    alam
-                                    dan nikmati keragaman budaya di setiap sudut kota yang menawan ini.
+                                <!-- Deskripsi -->
+                                <p class="text-white break-words font-montserrat text-sm sm:text-sm md:text-lg lg:text-xl xl:text-2xl drop-shadow-lg">
+                                    Selamat datang di Jember, kota yang menawarkan pesona alam yang memukau, budaya yang kaya, serta berbagai destinasi wisata menarik. Dari keindahan Pantai Papuma hingga pesona Rembangan yang sejuk, Jember siap memberikan pengalaman liburan yang tak terlupakan. Jelajahi keajaiban alam dan nikmati keragaman budaya di setiap sudut kota yang menawan ini.
                                 </p>
+                                {{-- Tombol (dikomentari) --}}
                                 {{-- <div class="w-auto h-auto flex justify-center m-auto">
-                                        <a class="bg-[#C2C5AA] shadow-lg shadow-gray-800 text-xs xl:text-base px-6 py-2 xl:px-12 xl:py-2 rounded-2xz xl:rounded-xl text-center flex items-center justify-center font-serif text-black"
-                                            href="" role="button">Buka Peta Wisata</a>
-                                    </div> --}}
+                                    <a class="bg-[#C2C5AA] shadow-lg shadow-gray-800 text-xs xl:text-base px-6 py-2 xl:px-12 xl:py-2 rounded-2xz xl:rounded-xl text-center flex items-center justify-center font-serif text-black"
+                                        href="" role="button">Buka Peta Wisata</a>
+                                </div> --}}
                             </div>
                         </figcaption>
                     </div>
+                    
+                    <style>
+                        /* Animasi Ketikan */
+                        .typing-animation {
+                            overflow: hidden; /* Sembunyikan teks yang belum ditampilkan */
+                            border-right: 0.15em solid white; /* Efek kursor */
+                            white-space: nowrap; /* Hindari teks wrapping */
+                            display: inline-block; /* Agar animasi hanya berlaku untuk teks ini */
+                            animation: typing 6s steps(40, end), blink-caret 0.75s step-end infinite; /* Durasi animasi diperlambat */
+                        }
+                    
+                        /* Animasi untuk mengetik */
+                        @keyframes typing {
+                            from { width: 0; }
+                            to { width: 100%; }
+                        }
+                    
+                        /* Animasi untuk kursor */
+                        @keyframes blink-caret {
+                            from, to { border-color: transparent; }
+                            50% { border-color: white; }
+                        }
+                    </style>
+                    
+                    <script>
+                        // Fungsi untuk mengulang animasi
+                        function restartAnimation() {
+                            const typingElement = document.querySelector('.typing-animation');
+                            typingElement.style.animation = 'none'; // Hentikan animasi sementara
+                            void typingElement.offsetHeight; // Trigger reflow
+                            typingElement.style.animation = null; // Mulai ulang animasi
+                        }
+                    
+                        // Set interval untuk mengulang animasi setiap 7 detik (sesuaikan dengan durasi animasi)
+                        setInterval(restartAnimation, 7000);
+                    </script>
                 </div>
                 <div class="container bg-white">
                     <div class="px-4 grid grid-cols-1 gap-y-20 pb-20 relative z-[1] opacity-0 translate-y-10 transition-all duration-[1500ms]"

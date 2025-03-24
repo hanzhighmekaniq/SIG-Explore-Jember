@@ -1,8 +1,10 @@
 <nav class="w-full shadow-md xl:shadow-lg z-[100] relative">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2 lg:p-4">
-        <a href="/"
-            class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Explore
-            Jember</a></a>
+        <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center">
+            <img src="img/logo-color.png" alt="Logo Explore Jember" class="w-8 h-8 mr-2"> <!-- Tambahkan logo di sini -->
+            Explore Jember
+        </a>
+
         <style>
             .pacifico-regular {
                 font-family: "Pacifico", cursive;
