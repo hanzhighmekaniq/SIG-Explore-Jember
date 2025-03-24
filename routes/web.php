@@ -20,10 +20,14 @@ use App\Http\Controllers\UjiCoba;
 
 //aq
 Route::get('/aq', [aqController::class, 'aq'])->name('aq.index');
+Route::get('/ujicoba', [UjiCoba::class, 'ujicoba'])->name('ujicoba');
 
 // Rute untuk pengunjung
-Route::get('/', [PengunjungController::class, 'beranda'])->name('beranda.index');
 
+// Rute untuk session login
+Route::get('/login', [SessionController::class, 'index'])->name('login');
+Route::post('/session/login', [SessionController::class, 'loginProses'])->name('session.login');
+Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 
 
 // Route untuk AJAX request
@@ -33,16 +37,12 @@ Route::get('/get-kategori-details/{kategori_id}', [PengunjungController::class, 
 
 
 
+Route::get('/', [PengunjungController::class, 'beranda'])->name('beranda.index');
 Route::get('/petaWilayah', [PengunjungController::class, 'petaWilayah'])->name('petaWilayah.index');
 Route::get('/hubungiKami', [PengunjungController::class, 'hubungiKami'])->name('hubungiKami.index');
 Route::get('/wisata/profil/{nama_wisata}', [PengunjungController::class, 'detailWisata'])->name('profilWisata.index');
 Route::get('/wisata/profil/ruteTerdekat/{nama_wisata}', [PengunjungController::class, 'rute'])->name('ruteTerdekat.index');
 
-// Rute untuk session login
-Route::get('/login', [SessionController::class, 'index'])->name('login');
-Route::post('/session/login', [SessionController::class, 'loginProses'])->name('session.login');
-Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
-Route::get('/ujicoba', [UjiCoba::class, 'ujicoba'])->name('ujicoba');
 
 // Rute untuk admin
 route::post('/sendMail', [SendEmailController::class, 'sendmail'])->name('send.mail');

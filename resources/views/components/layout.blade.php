@@ -107,7 +107,7 @@
                         <form action="{{ route('send.mail') }}" method="POST">
                             @csrf
                             <!-- Contact Form -->
-                            <div class="space-y-2 max-w-md mx-auto">
+                            <div class="space-y-2 max-w-md pb-16 mx-auto">
                                 <p class="text-white text-lg font-bold font-poppins">Formulir Kritik/Saran</p>
 
                                 <div>
@@ -132,13 +132,7 @@
 
                                 <button type="submit"
                                     class="rounded  btn bg-white text-[#0077B4] py-2 text-base font-bold w-full hover:bg-gray-100 transition-all duration-300 font-poppins text-m uppercase transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Kirim</button>
-                                <div class="text-start pt-6">
-                                    <p class="text-4xl font-bold text-white pacifico-regular mb-4">Explore Jember</p>
-                                    <div class="items-center justify-start text-start mb-4">
-                                        <p class="text-white text-2xl font-fjalla">085259990293</p>
-                                        <p class="text-white text-2xl font-fjalla">cs.visit@gmail.com</p>
-                                    </div>
-                                </div>
+
                             </div>
                             <!-- Contact Information -->
                         </form>

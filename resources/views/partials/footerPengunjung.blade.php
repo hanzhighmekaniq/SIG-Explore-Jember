@@ -1,54 +1,60 @@
-<footer class="bg-gradient-to-r from-[#004165] to-[#0066a2] text-white p-5 rounded-lg container">
+<footer class="bg-transparent text-white p-5 rounded-lg container">
     <div class="mx-auto w-full p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
                 <a href="/" class="flex items-center">
                     <img src="img/logo-no-color.png" class="h-8 me-3" alt="Explore Jember Logo" />
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap pacifico-regular">Explore Jember</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap pacifico-regular">Explore
+                        Jember</span>
                 </a>
             </div>
-            <div class="grid grid-cols-2 gap-8 sm:gap-8 sm:grid-cols-2">
+            <div class="grid grid-cols-2 gap-8 sm:gap-8 sm:grid-cols-3">
                 <div>
                     <h2 class="mb-6 text-xl font-semibold uppercase font-poppins">Navigasi Cepat</h2>
-                    <ul class="text-white font-medium font-poppins">
-                        <li class="mb-4">
-                            <a href="/" class="hover:underline">Home</a>
+                    <ul class="text-white font-medium font-poppins space-y-2">
+                        <li class="">
+                            <a href="{{ route('beranda.index') }}" class="hover:underline">Home</a>
                         </li>
                         <li>
-                            <a href="/wisata" class="hover:underline">Wisata</a>
+                            <a href="{{ route('wisata.pengunjung') }}" class="hover:underline">Wisata</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('petaWilayah.index') }}" class="hover:underline">Peta Wilayah</a>
                         </li>
                     </ul>
                 </div>
                 <div>
                     <h2 class="mb-6 text-xl font-semibold uppercase font-poppins">Sumber Daya</h2>
-                    <ul class="text-white font-poppins font-medium">
-                        <li class="mb-4">
-                            <a href="/petaWilayah" class="hover:underline">Peta Wilayah</a>
+                    <ul class="text-white font-poppins font-medium space-y-2">
+                        <li>
+                            <a href="{{ route('login') }}" class="hover:underline">Admin</a>
                         </li>
                         <li>
-                            <a href="/login" class="hover:underline">Admin</a>
+                            <button type="button" data-modal-target="service" data-modal-toggle="service"
+                                class="hover:underline">Hubungi Kami</button>
                         </li>
                     </ul>
                 </div>
-            <!--<div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase">Legal</h2>
-                    <ul class="text-black font-medium">
-                        <li class="mb-4">
-                            <a href="#" class="hover:underline">Privacy Policy</a>
+                <div>
+                    <h2 class="mb-6 text-xl font-semibold uppercase font-poppins">Contact Person</h2>
+                    <ul class="text-white font-poppins font-medium space-y-2">
+                        <li>
+                            <a href="/login" class="hover:underline">+62 85259990293</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                            <a href="/login" class="hover:underline">cs.visit@gmail.com</a>
                         </li>
+
                     </ul>
-                </div> -->
+                </div>
             </div>
         </div>
-        <hr class="my-6 border-gray-700 sm:mx-auto lg:my-8" />
+        <hr class="my-6 border-white sm:mx-auto lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
             <span class="text-sm text-white sm:text-center">© 2025 <a href="https://flowbite.com/"
                     class="hover:underline">Explore Jember™</a>. All Rights Reserved.
             </span>
-        <!--<div class="flex mt-4 sm:justify-center sm:mt-0">
+            <!--<div class="flex mt-4 sm:justify-center sm:mt-0">
                 <a href="#" class="text-black hover:text-white">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 8 19">

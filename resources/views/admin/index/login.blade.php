@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,8 @@
     <link rel="icon" type="image/png" href="img/logo-no-color.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    @include('partials.head')
+    @include('partials.font')
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -41,6 +44,7 @@
         }
     </style>
 </head>
+
 <body class="flex items-center justify-center min-h-screen">
     <!-- Background Slideshow -->
     <div class="background-slideshow">
@@ -49,19 +53,21 @@
     </div>
 
     <!-- Konten Utama -->
-    <div class="relative w-full max-w-xl mx-4 p-6 md:p-12 bg-white bg-opacity-30 rounded-2xl shadow-lg backdrop-blur-md">
+    <div
+        class="relative w-full max-w-xl mx-4 p-6 md:p-12 bg-opacity-50 bg-slate-800 rounded-2xl shadow-lg backdrop-blur-sm">
         <!-- Logo dan Judul -->
         <div class="flex items-center mb-8">
             <img src="img/logo-no-color.png" alt="Logo Explore Jember" class="w-10 h-10 mr-3">
-            <h1 class="text-xl font-bold text-white pacifico-regular">Explore Jember</h1>
+            <h1 class="text-xl font-regular text-white pacifico-regular">Explore Jember</h1>
         </div>
 
         <!-- Judul dan Deskripsi -->
         <h1 class="text-2xl md:text-3xl font-bold text-white mb-6 font-montserrat uppercase animate-fade-in">
             Selamat Datang, Admin!
         </h1>
-        <p class="mb-6 text-sm md:text-lg font-montserrat text-gray-300 animate-fade-in-delay">
-            Halaman login ini khusus untuk administrator. Jika Anda bukan admin, harap tidak mencoba mengakses halaman ini. Silakan kembali ke halaman utama dengan menekan tombol di bawah.
+        <p class="mb-6 text-sm md:text-lg font-montserrat text-white animate-fade-in-delay">
+            Halaman login ini khusus untuk administrator. Jika Anda bukan admin, harap tidak mencoba mengakses halaman
+            ini. Silakan kembali ke halaman utama dengan menekan tombol di bawah.
         </p>
 
         <!-- Form Login -->
@@ -73,7 +79,7 @@
                     <i class="fas fa-envelope text-white mr-3"></i>
                     <input
                         class="font-montserrat appearance-none bg-transparent border-none w-full text-white
-                                mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray-400"
+                                mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray-400 placeholder:text-white"
                         name="email" type="email" placeholder="Email" aria-label="Email" required>
                 </div>
             </div>
@@ -84,7 +90,7 @@
                     <i class="fas fa-lock text-white mr-3"></i>
                     <input
                         class="font-montserrat appearance-none bg-transparent border-none w-full text-white
-                                mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray-400"
+                                mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray-400 placeholder:text-white"
                         name="password" type="password" placeholder="Password" aria-label="Password" required>
                     <i class="fas fa-eye text-white cursor-pointer absolute right-3"
                         onclick="togglePasswordVisibility()"></i>
@@ -92,19 +98,22 @@
             </div>
 
             <!-- Remember Me dan Lupa Password -->
-            <div class="flex items-center justify-between mb-8">
+            <!--<div class="flex items-center justify-between mb-8">
                 <div class="flex items-center">
                     <input type="checkbox" id="remember" class="mr-3">
                     <label for="remember" class="text-gray-400 text-sm md:text-lg font-montserrat">Remember me</label>
                 </div>
                 <a href="#" class="text-blue-400 hover:underline text-sm md:text-lg font-montserrat">Forgot Password?</a>
-            </div>
+            </div>-->
 
             <!-- Tombol Login -->
             <button type="submit"
                 class="mt-6 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
-                        font-montserrat w-full py-2 md:py-3 bg-gradient-to-r from-orange-400 to-pink-500 text-white rounded-full text-sm
-                        md:text-lg hover:from-orange-500 hover:to-pink-600 hover-scale">
+                font-montserrat w-full py-2 md:py-3
+                {{-- bg-gradient-to-r from-orange-400 to-pink-500 --}}
+bg-gradient-to-r from-indigo-800 to-blue-600
+                text-white rounded-full text-sm
+                md:text-lg hover:from-indigo-900 hover:to-blue-700 hover-scale">
                 Login
             </button>
         </form>
@@ -112,7 +121,9 @@
         <!-- Tombol Kembali ke Home -->
         <a href="/"
             class="mt-6 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
-                w-full px-6 py-2 md:px-8 md:py-3 bg-green-500 text-white rounded-full text-sm md:text-lg hover:bg-green-600 flex justify-center hover-scale">
+                w-full px-6 py-2 md:px-8 md:py-3
+                	bg-red-600 hover:bg-red-700
+                 text-white rounded-full text-sm md:text-lg  flex justify-center hover-scale">
             Kembali ke Halaman Utama
         </a>
     </div>
@@ -252,4 +263,5 @@
         }
     </script>
 </body>
+
 </html>
