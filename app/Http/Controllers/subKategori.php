@@ -23,10 +23,10 @@ class subKategori extends Controller
                 'nama_kategori_detail' => $request->nama_kategori_detail,
             ]);
 
-            return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Ditambahkan']);
+            return redirect()->route('kategori.index')->with(['success' => 'Sub Kategori Berhasil Ditambahkan']);
         } catch (\Exception $e) {
             // $e->getMessage()])
-            return redirect()->route('kategori.index')->with(['error' => 'Data Sudah Ada']);
+            return redirect()->route('kategori.index')->with(['error' => 'Sub Kategori Sudah Ada']);
         }
     }
 
@@ -50,11 +50,11 @@ class subKategori extends Controller
 
             // Simpan perubahan
             $SubKategori->save();
-            return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
+            return redirect()->route('kategori.index')->with('success', 'Sub Kategori berhasil diperbarui.');
             //code...
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->route('kategori.index')->with(['error' => 'Data Sudah Ada']);
+            return redirect()->route('kategori.index')->with(['error' => 'Sub Kategori Sudah Ada']);
         }
     }
 
@@ -65,6 +65,6 @@ class subKategori extends Controller
 
         // Hapus kategori
         $kategori->delete();
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('kategori.index')->with('success', 'Sub Kategori berhasil dihapus.');
     }
 }

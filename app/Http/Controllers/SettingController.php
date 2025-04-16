@@ -69,9 +69,9 @@ class SettingController extends Controller
 
             // Update password
             $user->update(['password' => Hash::make($request->new_password)]);
-            return redirect()->route('dashboard')->with('success', 'Data Berhasil Ditambahkan!');
+            return redirect()->route('dashboard')->with('success', 'Password berhasil diubah!');
         } catch (\Exception $e) {
-            return redirect()->route('setting.index')->with('error', 'Data gagal disimpan: ' . $e->getMessage());
+            return redirect()->route('setting.index')->with('error', 'Password gagal diubah ' . $e->getMessage());
         }
     }
 

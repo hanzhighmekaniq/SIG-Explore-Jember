@@ -40,15 +40,14 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Inisialisasi peta dengan koordinat awal dan zoom level
             var map = L.map('map', {
-                    dragging: true,
-                    touchZoom: true,
-                    scrollWheelZoom: true,
-                    doubleClickZoom: true
-                })
-                .setView([-8.2644, 113.6321], 10);
+                dragging: true,
+                touchZoom: true,
+                scrollWheelZoom: true,
+                doubleClickZoom: true
+            }).setView([-8.2644, 113.6321], 10);
 
             // Menambahkan tile layer dari OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -67,7 +66,7 @@
                 });
 
                 // Ketika lokasi pengguna ditemukan
-                map.on('locationfound', function(e) {
+                map.on('locationfound', function (e) {
                     var userLatLng = e.latlng;
 
                     // Jika marker sudah ada, perbarui lokasinya
@@ -76,8 +75,8 @@
                     } else {
                         // Tambahkan marker untuk lokasi pengguna jika belum ada
                         userMarker = L.marker(userLatLng, {
-                                interactive: true
-                            })
+                            interactive: true
+                        })
                             .addTo(map)
                             .bindPopup("Lokasi Anda")
                             .openPopup();
@@ -85,28 +84,32 @@
 
                     // Menambahkan marker untuk lokasi tujuan
                     var destinationLatLng = L.latLng({{ $rute->latitude }}, {{ $rute->longitude }});
-                    L.marker(destinationLatLng, {
+                    var tujuanMarker = L.marker(destinationLatLng, {
+                        interactive: false
+                    }).addTo(map)
+                        .bindPopup("{{ $rute->nama_wisata }}", {
+                            autoClose: false,
+                            closeOnClick: false,
+                            closeButton: false,
                             interactive: false
                         })
-                        .addTo(map)
-                        .bindPopup("{{ $rute->nama_kursus }}")
                         .openPopup();
 
                     // Tambahkan rute antara lokasi pengguna dan tujuan
                     L.Routing.control({
                         waypoints: [userLatLng, destinationLatLng],
-                        routeWhileDragging: true, // Nonaktifkan drag untuk menjaga rute tetap sesuai
-                        draggableWaypoints: true, // Pastikan titik rute tidak bisa dipindah
-                        collapsible: true, // Buat kontrol bisa disembunyikan
-                        createMarker: function() {
+                        routeWhileDragging: true,
+                        draggableWaypoints: true,
+                        collapsible: true,
+                        createMarker: function () {
                             return null;
-                        }, // Tidak menampilkan marker tambahan
-                        fitSelectedRoutes: true // Pastikan peta menyesuaikan ke rute
+                        },
+                        fitSelectedRoutes: true
                     }).addTo(map);
                 });
 
                 // Tangani error jika geolocation tidak tersedia
-                map.on('locationerror', function(e) {
+                map.on('locationerror', function (e) {
                     console.error("Geolocation error: " + e.message);
                     L.popup()
                         .setLatLng([-8.2644, 113.6321])
@@ -123,6 +126,8 @@
             }
         });
     </script>
+
+
 
 
 </body>

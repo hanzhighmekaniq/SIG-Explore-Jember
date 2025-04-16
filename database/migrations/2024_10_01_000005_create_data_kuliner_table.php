@@ -14,6 +14,8 @@ return new class extends Migration
             $table->text('deskripsi_kuliner')->nullable();
             $table->string('gambar_kuliner')->nullable();
             $table->string('gambar_menu')->nullable();
+            $table->string('no_hp');
+            $table->json('jam_operasional')->nullable(); // Kolom baru untuk jam buka & tutup
             $table->timestamps();
 
             // Ubah 'data_kategoris' menjadi 'data_wisata' jika itu tabel yang benar

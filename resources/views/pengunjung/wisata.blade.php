@@ -56,7 +56,7 @@
                         <!-- Input Pencarian -->
                         <input type="text" name="nama_wisata" placeholder="Cari nama wisata"
                             value="{{ request('nama_wisata') }}"
-                            class="px-4 py-2 w-full text-sm rounded-l-full bg-white focus:outline-none border-none">
+                            class="px-4 py-2 w-full text-sm rounded-l-full bg-white focus:outline-none border-none font-poppins">
 
                         <!-- Tombol "Cari" -->
                         <button type="submit"

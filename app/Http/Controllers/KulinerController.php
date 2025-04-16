@@ -36,7 +36,7 @@ class KulinerController extends Controller
         }
 
         // Ambil data kuliner dengan relasi wisata dan kategori
-        $DataKuliner = $query->with(['wisata.kategori_detail.kategori'])->paginate(10);
+        $DataKuliner = $query->with(['wisata.kategori_detail.kategori'])->latest()->paginate(10);
 
         return view('admin.adminDataKuliner', compact('DataKuliner', 'kategoriDetails'));
     }
@@ -50,48 +50,61 @@ class KulinerController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
-        $validator = Validator::make($request->all(), [
+        // Validasi data yang diterima
+        $validated = $request->validate([
             'id_wisata' => 'required',
-            'nama_kuliner' => 'required|string|max:255',
-            'deskripsi_kuliner' => 'required|string|max:800',
-            'gambar_kuliner' => 'required',
-            'gambar_menu.*' => 'nullable',
+            'nama_kuliner.*' => 'required|string|max:255',
+            'deskripsi_kuliner.*' => 'required|string',
+            'no_hp.*' => ['required', 'regex:/^(\+62|0)[0-9]{8,13}$/'],
+
+            'jam_operasional.*.hari' => 'nullable|string',
+            'jam_operasional.*.buka' => 'nullable|date_format:H:i',
+            'jam_operasional.*.tutup' => 'nullable|date_format:H:i',
+            'gambar_kuliner.*' => 'nullable|image',
+            'gambar_menu.*.*' => 'nullable|image',
         ]);
 
-        // Cek apakah validasi gagal
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // Proses simpan data kuliner dan gambar
+        foreach ($request->nama_kuliner as $index => $nama_kuliner) {
+            $kuliner = new DataKuliner();
+            $kuliner->id_wisata = $request->id_wisata;
+            $kuliner->nama_kuliner = $nama_kuliner;
+            $kuliner->deskripsi_kuliner = $request->deskripsi_kuliner[$index] ?? null;
+            $kuliner->no_hp = $request->no_hp[$index] ?? null;
 
-        try {
-            // Proses penyimpanan gambar utama
-            $imgPath = $request->file('gambar_kuliner')->store('images/kuliner/img', 'public');
+            // Simpan jam operasional untuk masing-masing kuliner
+            $kuliner->jam_operasional = isset($request->jam_operasional[$index])
+                ? json_encode($request->jam_operasional[$index])
+                : null;
 
-            // Proses penyimpanan gambar detail (jika ada)
-            $imgDetail = [];
-            if ($request->hasFile('gambar_menu')) {
-                foreach ($request->file('gambar_menu') as $detail) {
-                    $imgDetail[] = $detail->store('images/kuliner/detail', 'public');
-                }
+            // Menyimpan gambar kuliner
+            if (
+                is_array($request->file('gambar_kuliner')) &&
+                isset($request->file('gambar_kuliner')[$index])
+            ) {
+                $file = $request->file('gambar_kuliner')[$index];
+                $path = $file->store('images/kuliner/img', 'public');
+                $kuliner->gambar_kuliner = $path;
             }
 
-            // Simpan data kuliner ke tabel `data_kuliner` melalui model `DataKuliner`
-            DataKuliner::create([
-                'id_wisata' => $request->id_wisata,
-                'nama_kuliner' => $request->nama_kuliner,
-                'deskripsi_kuliner' => $request->deskripsi_kuliner,
-                'gambar_kuliner' => $imgPath, // Menyimpan path relatif
-                'gambar_menu' => json_encode($imgDetail), // Menyimpan array sebagai JSON
-            ]);
-
-            // Redirect setelah berhasil
-            return redirect()->route('kuliner.index')->with(['success' => 'Data Berhasil Ditambahkan']);
-        } catch (\Exception $e) {
-            // Menampilkan pesan error untuk debugging
-            dd($e->getMessage());
+            // Menyimpan gambar menu
+            if (isset($request->gambar_menu[$index]) && is_array($request->gambar_menu[$index])) {
+                $menu_images = [];
+                foreach ($request->gambar_menu[$index] as $menu_image) {
+                    $path = $menu_image->store('images/kuliner/detail', 'public');
+                    $menu_images[] = $path;
+                }
+                $kuliner->gambar_menu = json_encode($menu_images);
+            }
+            $kuliner->save();
         }
+
+        return redirect()->route('kuliner.index')->with('success', 'Kuliner berhasil ditambahkan.');
     }
+
+
+
+
 
     public function edit($id)
     {
@@ -100,7 +113,12 @@ class KulinerController extends Controller
 
         // Cek apakah data ditemukan
         if (!$kuliner) {
-            return redirect()->route('kuliner.index')->with(['error' => 'Data tidak ditemukan']);
+            return redirect()->route('kuliner.index')->with(['error' => 'Kuliner tidak ditemukan']);
+        }
+
+        // Decode JSON ke array jika masih string
+        if (is_string($kuliner->jam_operasional)) {
+            $kuliner->jam_operasional = json_decode($kuliner->jam_operasional, true);
         }
 
         // Ambil data wisata untuk dropdown
@@ -113,81 +131,69 @@ class KulinerController extends Controller
         ]);
     }
 
-
-
-
     public function update(Request $request, $id)
     {
-        // Validasi input
         $request->validate([
-            'id_wisata' => 'required', // Pastikan ID wisata ada
+            'id_wisata' => 'required',
             'nama_kuliner' => 'required|string|max:255',
             'deskripsi_kuliner' => 'nullable|string|max:800',
-            'gambar_kuliner' => 'nullable', // Validasi gambar
-            'gambar_menu.*' => 'nullable', // Validasi multiple files
+            'gambar_kuliner' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar_menu.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'no_hp' => 'nullable|string',
+            'jam_operasional' => 'nullable|array',
         ]);
 
-        // Ambil data kuliner berdasarkan ID
         $kuliner = DataKuliner::find($id);
 
-        // Cek apakah data ditemukan
         if (!$kuliner) {
-            return redirect()->route('kuliner.edit')->with(['error' => 'Data tidak ditemukan']);
+            return redirect()->route('kuliner.index')->with(['error' => 'Data kuliner tidak ditemukan']);
         }
+
         try {
-            // Update data kuliner
             $kuliner->id_wisata = $request->id_wisata;
             $kuliner->nama_kuliner = $request->nama_kuliner;
             $kuliner->deskripsi_kuliner = $request->deskripsi_kuliner;
+            $kuliner->no_hp = $request->no_hp;
 
-            // Cek jika ada gambar baru yang di-upload untuk gambar kuliner
+
+            // ✅ Simpan seluruh jam_operasional
+            if ($request->has('jam_operasional')) {
+                $kuliner->jam_operasional = json_encode($request->jam_operasional);
+            }
+
+            // ✅ Gambar utama
             if ($request->hasFile('gambar_kuliner')) {
-                // Hapus gambar lama jika ada
                 if ($kuliner->gambar_kuliner) {
                     Storage::delete('public/' . $kuliner->gambar_kuliner);
                 }
-
-
-                // Simpan gambar baru
                 $path = $request->file('gambar_kuliner')->store('images/kuliner/img', 'public');
                 $kuliner->gambar_kuliner = $path;
             }
 
-            // Cek jika ada multiple files yang di-upload untuk gambar menu tambahan
+            // ✅ Gambar Menu
             if ($request->hasFile('gambar_menu')) {
-                // Hapus gambar menu lama jika ada
                 if ($kuliner->gambar_menu) {
-                    // Decode JSON untuk mendapatkan array path dari gambar lama
-                    $oldImages = json_decode($kuliner->gambar_menu, true);
-                    foreach ($oldImages as $oldImage) {
-                        // Hapus setiap file lama dari penyimpanan
+                    foreach (json_decode($kuliner->gambar_menu, true) as $oldImage) {
                         Storage::delete('public/' . $oldImage);
                     }
                 }
 
-                // Proses setiap file yang di-upload untuk gambar menu baru
                 $menuImages = [];
                 foreach ($request->file('gambar_menu') as $file) {
-                    // Simpan file di folder 'images/kuliner/detail' dalam disk 'public'
-                    $path = $file->store('images/kuliner/detail', 'public');
-                    // Menambahkan path ke array baru
-                    $menuImages[] = $path;
+                    $menuImages[] = $file->store('images/kuliner/detail', 'public');
                 }
-
-                // Simpan array path gambar menu baru ke database
                 $kuliner->gambar_menu = json_encode($menuImages);
             }
 
-
-            // Simpan perubahan
             $kuliner->save();
 
-            // Redirect ke halaman index kuliner dengan pesan sukses
             return redirect()->route('kuliner.index')->with(['success' => 'Data kuliner berhasil diupdate']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+
 
 
     public function destroy($id)

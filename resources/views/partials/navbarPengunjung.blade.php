@@ -1,9 +1,12 @@
 <nav class="w-full shadow-md xl:shadow-lg z-[100] relative">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2 lg:p-4">
-        <a href="/" class="pacifico-regular text-lg lg:text-2xl text-[#205C9E] hover:text-[#4A90E2] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center">
-            <img src="img/logo-color.png" alt="Logo Explore Jember" class="w-8 h-8 mr-2"> <!-- Tambahkan logo di sini -->
-            Explore Jember
+        <a href="/"
+            class="flex items-center gap-1 pacifico-regular text-lg lg:text-2xl text-[#205C9E] transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 hover:text-[#4A90E2]">
+            <img src="{{ asset('img/logo-color.png') }}" alt="Logo Explore Jember" class="w-8 h-8">
+            <p>Explore Jember</p>
         </a>
+
+
 
         <style>
             .pacifico-regular {
@@ -67,17 +70,17 @@
                             </button>
 
                             <!-- Dropdown Menu -->
-                            <div class="z-50 hidden my-4 text-base list-none bg-gray-200 divide-y divide-gray-100 rounded-lg shadow-sm"
+                            <div class="z-50 hidden my-4 text-base list-none bg-gray-200 divide-y divide-gray-100 rounded-lg shadow-sm font-poppinsprofi"
                                 id="user-dropdown">
                                 <div class="px-4 py-3">
-                                    <span class="block text-sm text-gray-900">{{ Auth::user()->name }}</span>
-                                    <span class="block text-sm text-gray-500 truncate">{{ Auth::user()->email }}</span>
+                                    <span class="block text-sm text-gray-900 ">{{ Auth::user()->name }}</span>
+                                    <span class="block text-sm text-gray-500 truncate ">{{ Auth::user()->email }}</span>
                                 </div>
                                 <ul class="py-2" aria-labelledby="user-menu-button">
                                     <!-- Menu "Dashboard" -->
                                     <li>
                                         <a href="{{ route('dashboard') }}"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out  transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('dashboard') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Dashboard
                                         </a>
@@ -86,7 +89,7 @@
                                     <!-- Menu "Settings" -->
                                     <li>
                                         <a href="#"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out  transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('settings') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Settings
                                         </a>
@@ -95,7 +98,7 @@
                                     <!-- Menu "Sign out" -->
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out font-poppins transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
+                                            class="block px-4 py-2 text-sm transition-all duration-300 ease-in-out  transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95
                                         {{ request()->is('logout') ? 'text-[#205C9E] font-semibold border-b-2 border-[#205C9E]' : 'text-gray-500 hover:text-[#4A90E2] hover:border-b-2 hover:border-[#4A90E2]' }}">
                                             Sign out
                                         </a>

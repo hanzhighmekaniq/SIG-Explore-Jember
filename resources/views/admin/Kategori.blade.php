@@ -211,7 +211,7 @@
                                 </svg>
                                 <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda
                                     yakin ingin
-                                    menghapus?</h3>
+                                    menghapus Kategori ini?</h3>
                                 <div class="flex justify-center">
                                     <form id="edit-kategori-form" method="POST"
                                         action="{{ route('kategori.destroy', $kategori->id) }}">
@@ -480,7 +480,7 @@
                         </svg>
                         <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin
                             ingin
-                            menghapus?</h3>
+                            menghapus Sub Kategori ini?</h3>
                         <div class="flex justify-center">
                             <form id="edit-kategori-form" method="POST"
                                 action="{{ route('subKategori.destroy', $item->id) }}">

@@ -73,9 +73,8 @@
                 var map = L.map('map').setView([-8.184485, 113.668075], 10);
 
                 // Tambahkan lapisan tile dari OpenStreetMap
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '<img src="https://flagcdn.com/w20/id.png" srcset="https://flagcdn.com/w40/id.png 2x" width="20" alt="Indonesia"> Explore Jember | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
 
                 // Data
@@ -118,7 +117,7 @@
 
                 // Icon custom untuk posisi saat ini
                 const currentPositionIcon = L.icon({
-                    iconUrl: 'https://cdn-icons-png.flaticon.com/512/4776/4776595.png',
+                    iconUrl: 'img/icon8/markhuman.png',
                     iconSize: [38, 38],
                     iconAnchor: [19, 38],
                     popupAnchor: [0, -38]
@@ -177,11 +176,11 @@
                         let row = document.createElement("tr");
 
                         row.innerHTML = `
-                                            <td class="py-3 px-4 border">${index + 1}</td>
-                                            <td class="py-3 px-4 border">${rute.nama_wisata}</td>
-                                            <td class="py-3 px-4 border">${rute.kategori}</td>
-                                            <td class="py-3 px-4 border">${distance}</td>
-                                            <td class="py-3 px-4 border underline text-blue-500">
+                                            <td class="py-3 px-4 border font-poppins">${index + 1}</td>
+                                            <td class="py-3 px-4 border font-poppins">${rute.nama_wisata}</td>
+                                            <td class="py-3 px-4 border font-poppins">${rute.kategori}</td>
+                                            <td class="py-3 px-4 border font-poppins">${distance}</td>
+                                            <td class="py-3 px-4 border underline text-blue-500 font-poppins">
                                                 <a href="${rute.nama_wisata !== "Data Kosong" ? `/wisata/profil/ruteTerdekat/${rute.nama_wisata}` : "#"}" target="_blank">Lihat</a>
                                             </td>
                                         `;

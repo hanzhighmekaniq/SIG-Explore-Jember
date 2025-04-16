@@ -117,7 +117,7 @@
 
                         <td class="px-6 py-4">
                             <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
-                                class="aspect-auto object-contain h-20 w-full">
+                                class=" object-cover h-20 w-20">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center gap-2">

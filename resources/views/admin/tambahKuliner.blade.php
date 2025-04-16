@@ -4,80 +4,117 @@
 
             <form action="{{ route('kuliner.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="space-y-4 text-md">
 
-                    <div>
-                        <label for="id_wisata" class="font-poppins block text-gray-700 font-bold mb-2">Pilih Wisata Untuk Menambah
-                            Kuliner</label>
-                        <select id="id_wisata" name="id_wisata" required
-                            class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
-                            <option selected disabled>Pilih Wisata</option>
-                            @foreach ($DataWisata as $wisata)
-                                <option value="{{ $wisata->id }}">{{ $wisata->id }}---{{ $wisata->nama_wisata }},
-                                    {{ $wisata->detail_wisata }}
-                                </option>
-                            @endforeach
-                        </select>
+                {{-- Pilih Wisata --}}
+                <div class="mb-4">
+                    <label for="id_wisata" class="block mb-1 font-poppins">Pilih Wisata</label>
+                    <select name="id_wisata" id="id_wisata" class="w-full border p-2 rounded font-poppins" required>
+                        <option value="" class="font-poppins">-- Pilih Disini --</option>
+                        @foreach ($DataWisata as $kategoris)
+                            <option value="{{ $kategoris->id }}" class="font-poppins">{{ $kategoris->nama_wisata }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    </div>
-                    <!-- Nama Kuliner -->
-                    <div>
-                        <label for="nama_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Nama Kuliner</label>
-                        <input type="text" id="nama_kuliner" name="nama_kuliner"
-                            class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            placeholder="Masukkan Nama Kuliner" required>
-                        @error('nama_kuliner')
-                            <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                        @enderror
-                    </div>
+                {{-- Wrapper Kuliner --}}
+                <div id="kuliner-wrapper">
+                    <div class="kuliner-item border p-4 rounded mb-4">
+                        <div class="mb-2 font-poppins">
+                            <label>Nama Kuliner</label>
+                            <input type="text" name="nama_kuliner[]" class="w-full border p-2 rounded" required>
+                        </div>
+                        <div class="mb-2 font-poppins">
+                            <label>Deskripsi Kuliner</label>
+                            <textarea name="deskripsi_kuliner[]" class="w-full border p-2 rounded" required></textarea>
+                        </div>
+                        <div class="mb-2 font-poppins">
+                            <label class="block text-sm">No. HP</label>
+                            <input type="tel" name="no_hp[]" class="w-full border p-2 rounded" required placeholder="+6281234567890">
 
-                    <!-- Deskripsi Event -->
-                    <div>
-                        <label for="deskripsi_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Deskripsi
-                            Kuliner</label>
-                        <textarea id="deskripsi_kuliner" name="deskripsi_kuliner"
-                            class="font-poppins w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-                            placeholder="Masukkan deskripsi event"></textarea>
-                        @error('deskripsi_kuliner')
-                            <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Gambar Event -->
-
-                    <div class="flex gap-4"> <!-- Flex container dengan jarak (gap) 4 unit -->
-                        <!-- Upload Gambar Kuliner -->
-                        <div class="flex-1">
-                            <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Gambar Kuliner</label>
-                            <input
-                                class="font-poppins block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
-                                aria-describedby="user_avatar_help" id="gambar_kuliner" name="gambar_kuliner"
-                                type="file">
-                            @error('gambar_kuliner')
-                                <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                            @enderror
                         </div>
 
-                        <!-- Upload Multiple Files Kuliner -->
-                        <div class="flex-1">
-                            <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Multiple Files Kuliner</label>
-                            <input
-                                class="font-poppins block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
-                                id="multiple_files" type="file" name="gambar_menu[]" multiple>
-                            @error('gambar_menu.*')
-                                <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
-                            @enderror
+                        {{-- Jam Operasional --}}
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-poppins">Jam Operasional</label>
+                            <div class="jam-operasional-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 font-poppins">
+                                @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'] as $index => $hari)
+                                    <div class="border-2 border-slate-500 p-3 rounded-lg bg-gray-50">
+                                        <label class="block text-sm font-semibold mb-1">{{ ucfirst($hari) }}</label>
+                                        <input type="hidden" name="jam_operasional[0][{{ $index }}][hari]" value="{{ $hari }}">
+                                        <div class="flex gap-2">
+                                            <input type="time" name="jam_operasional[0][{{ $index }}][buka]" class="w-full p-2 border rounded text-sm font-poppins">
+                                            <input type="time" name="jam_operasional[0][{{ $index }}][tutup]" class="w-full p-2 border rounded text-sm font-poppins">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="flex">
-                        <button type="submit"
-                            class="font-poppins mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
-                            Tambah Data
-                        </button>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <label class="font-poppins">Gambar Kuliner</label>
+                                <input type="file" name="gambar_kuliner[]" class="w-full border p-2 font-poppins" required>
+                            </div>
+                            <div>
+                                <label class="font-poppins">Gambar Menu</label>
+                                <input type="file" name="gambar_menu[0][]" class="w-full border p-2 font-poppins" multiple>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="button" class="btn-hapus bg-red-500 text-white px-3 py-1 rounded mt-2 font-poppins hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all
+                            duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Hapus</button>
+                        </div>
                     </div>
                 </div>
 
+                <button type="button" id="tambah-kuliner" class="font-poppins w-full px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none
+                focus:ring-2 focus:ring-blue-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">+ Tambah Kuliner</button>
+
+                <div class="mt-6">
+                    <button type="submit" class="font-poppins px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all
+                            duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Simpan</button>
+                </div>
             </form>
+            <script>
+                let index = 1;
+
+                document.getElementById('tambah-kuliner').addEventListener('click', function () {
+                    const wrapper = document.getElementById('kuliner-wrapper');
+                    const original = document.querySelector('.kuliner-item');
+                    const clone = original.cloneNode(true);
+
+                    // Kosongkan semua input & textarea
+                    clone.querySelectorAll('input[type="text"], textarea').forEach(input => input.value = '');
+                    clone.querySelectorAll('input[type="time"]').forEach(input => input.value = '');
+                    clone.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
+
+                    // Perbarui name untuk jam_operasional
+                    clone.querySelectorAll('input[name^="jam_operasional"]').forEach(input => {
+                        input.name = input.name.replace(/^jam_operasional\[0\]/, `jam_operasional[${index}]`);
+                    });
+
+                    // Perbarui name untuk gambar_menu
+                    const menuInput = clone.querySelector('input[name^="gambar_menu"]');
+                    if (menuInput) {
+                        menuInput.name = `gambar_menu[${index}][]`;
+                    }
+
+                    wrapper.appendChild(clone);
+                    index++;
+                });
+
+                // Hapus kuliner item (kecuali yang pertama)
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('btn-hapus')) {
+                        const items = document.querySelectorAll('.kuliner-item');
+                        if (items.length > 1) {
+                            e.target.closest('.kuliner-item').remove();
+                        }
+                    }
+                });
+            </script>
+
+
+
         </div>
     </x-layadmin>

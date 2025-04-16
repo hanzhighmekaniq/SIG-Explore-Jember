@@ -71,10 +71,10 @@ class EventController extends Controller
                 'img' => $imgPath,
             ]);
 
-            return redirect()->route('event.index')->with(['success' => 'Data Berhasil Ditambahkan']);
+            return redirect()->route('event.index')->with(['success' => 'Event Berhasil Ditambahkan']);
         } catch (\Exception $e) {
             dd($e->getMessage()); // Debug: tampilkan pesan error jika terjadi exception
-            return redirect()->route('event.index')->with(['error' => 'Data gagal disimpan: ' . $e->getMessage()]);
+            return redirect()->route('event.index')->with(['error' => 'Event gagal disimpan: ' . $e->getMessage()]);
         }
     }
 
@@ -86,7 +86,7 @@ class EventController extends Controller
 
         // Cek apakah data ditemukan
         if (!$event) {
-            return redirect()->route('event.index')->with(['error' => 'Data tidak ditemukan']);
+            return redirect()->route('event.index')->with(['error' => 'Event tidak ditemukan']);
         }
 
         // Ambil data wisata untuk dropdown
@@ -117,7 +117,7 @@ class EventController extends Controller
 
         // Cek apakah data ditemukan
         if (!$event) {
-            return redirect()->route('kuliner.edit')->with(['error' => 'Data tidak ditemukan']);
+            return redirect()->route('kuliner.edit')->with(['error' => 'Event tidak ditemukan']);
         }
         try {
             // Update data kuliner

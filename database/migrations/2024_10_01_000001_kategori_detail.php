@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('kategori_detail', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kategori_detail'); 
-            $table->timestamps(); 
+            $table->string('nama_kategori_detail')->unique();
+            $table->timestamps();
             $table->foreignId('id_kategori')
                 ->nullable()
                 ->constrained('data_kategori')

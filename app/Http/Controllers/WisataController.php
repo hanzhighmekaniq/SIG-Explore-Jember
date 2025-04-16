@@ -116,9 +116,9 @@ class WisataController extends Controller
                 'jam_operasional' => json_encode($jamOperasionalData), // Simpan JSON jam buka & tutup
             ]);
 
-            return redirect()->route('wisata.index')->with(['success' => 'Data Berhasil Ditambahkan']);
+            return redirect()->route('wisata.index')->with(['success' => 'Wisata Berhasil Ditambahkan']);
         } catch (\Exception $e) {
-            return redirect()->route('wisata.create')->with(['error' => 'Data gagal disimpan: ' . $e->getMessage()]);
+            return redirect()->route('wisata.create')->with(['error' => 'Wisata gagal disimpan: ' . $e->getMessage()]);
         }
     }
 

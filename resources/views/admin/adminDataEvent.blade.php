@@ -159,7 +159,7 @@
                             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 ">Apakah Anda yakin ingin
-                        menghapus data ini?</h3>
+                        menghapus data Event ini?</h3>
 
                     <!-- Form untuk delete -->
                     <form id="deleteForm" action="" method="POST">
@@ -201,7 +201,7 @@
                                 stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 class="font-poppins mb-5 text-lg font-normal text-gray-500 ">Anda yakin ingin
-                            menghapus?</h3>
+                            menghapus Event?</h3>
                         <div class="flex justify-center">
                             <form id="edit-event-form" method="POST"
                                 action="{{ route('event.destroy', $event->id) }}">

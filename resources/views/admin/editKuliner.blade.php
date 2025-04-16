@@ -34,7 +34,8 @@
 
             <!-- Deskripsi Kuliner -->
             <div class="mb-2">
-                <label for="deskripsi_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Deskripsi Kuliner</label>
+                <label for="deskripsi_kuliner" class="font-poppins block text-gray-700 font-bold mb-2">Deskripsi
+                    Kuliner</label>
                 <textarea id="deskripsi_kuliner" name="deskripsi_kuliner"
                     class="font-poppins w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">{{ $kuliner->deskripsi_kuliner }}</textarea>
                 @error('deskripsi_kuliner')
@@ -42,11 +43,56 @@
                 @enderror
             </div>
 
+            <!-- No. HP -->
+            <div class="mb-2">
+                <label for="no_hp" class="block text-sm font-poppins font-bold mb-2">No. HP</label>
+                <input type="text" name="no_hp" class="form-input" value="{{ old('no_hp', $kuliner->no_hp) }}">
+
+                @error('no_hp')
+                    <div class="font-poppins text-red-500 mt-1 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
+            {{-- Jam Operasional --}}
+            @php
+                $hariList = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'];
+                $jam_operasional_old = old('jam_operasional');
+            @endphp
+
+            <div class="mb-4">
+                <label class="block mb-2 text-sm font-poppins">Jam Operasional</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 font-poppins">
+                    @foreach ($hariList as $index => $hari)
+                        @php
+                            $dataBuka =
+                                $jam_operasional_old[$index]['buka'] ??
+                                ($kuliner->jam_operasional[$index]['buka'] ?? '');
+                            $dataTutup =
+                                $jam_operasional_old[$index]['tutup'] ??
+                                ($kuliner->jam_operasional[$index]['tutup'] ?? '');
+                        @endphp
+
+                        <div class="border border-gray-400 p-3 rounded-lg bg-gray-50">
+                            <label class="block text-sm font-semibold mb-1">{{ ucfirst($hari) }}</label>
+                            <input type="hidden" name="jam_operasional[{{ $index }}][hari]"
+                                value="{{ $hari }}">
+                            <div class="flex gap-2">
+                                <input type="time" name="jam_operasional[{{ $index }}][buka]"
+                                    class="w-full p-2 border rounded text-sm font-poppins" value="{{ $dataBuka }}">
+                                <input type="time" name="jam_operasional[{{ $index }}][tutup]"
+                                    class="w-full p-2 border rounded text-sm font-poppins" value="{{ $dataTutup }}">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
             <!-- Gambar Kuliner -->
             <div class="flex gap-4 mb-2"> <!-- Flex container dengan jarak (gap) 4 unit -->
                 <!-- Upload Gambar Kuliner -->
                 <div class="flex-1">
-                    <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload Gambar Kuliner</label>
+                    <label class="font-poppins block mb-2 text-sm font-medium text-gray-900" for="gambar_kuliner">Upload
+                        Gambar Kuliner</label>
                     <div class="flex">
                         <input type="file" id="gambar_kuliner" name="gambar_kuliner"
                             class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">
@@ -64,7 +110,8 @@
 
                 <!-- Upload Gambar Menu Kuliner -->
                 <div class="flex-1">
-                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload Gambar Menu Kuliner</label>
+                    <label for="multiple_files" class="font-poppins block mb-2 text-sm font-medium text-gray-900">Upload
+                        Gambar Menu Kuliner</label>
                     <div class="flex">
                         <input type="file" id="multiple_files" name="gambar_menu[]" multiple
                             class="font-poppins mr-2 block w-full text-sm text-gray-900 border border-gray-500 rounded-lg cursor-pointer bg-gray-50">

@@ -115,17 +115,23 @@ class PengunjungController extends Controller
 
     public function detailWisata($nama_wisata)
     {
-        // Mengambil data wisata dan memuat relasi 'kategori_detail' dan 'events'
+        // Ambil data wisata berdasarkan nama, dengan relasi kategori, event, dan kuliner
         $wisata = DataWisata::where('nama_wisata', $nama_wisata)
-            ->with(['kategori_detail.kategori', 'events', 'kuliners']) // Tambahkan relasi events
-            ->firstOrFail(); // Jika tidak ada, akan lempar exception dan tampilkan halaman 404
+            ->with(['kategori_detail.kategori', 'events', 'kuliners'])
+            ->firstOrFail();
 
-        $imgDetails = json_decode($wisata->img_detail, true);
-        shuffle($imgDetails); // Acak urutan gambar
-        $imgDetails = array_slice($imgDetails, 0, 8); // Ambil maksimal 7 gambar
+        // Decode gambar detail dan ambil maksimal 8 secara acak
+        $imgDetails = json_decode($wisata->img_detail, true) ?? [];
+        shuffle($imgDetails);
+        $imgDetails = array_slice($imgDetails, 0, 8);
 
+        // Ambil wisata lain secara acak, kecuali wisata yang sedang dibuka
+        $lainnya = DataWisata::where('id', '!=', $wisata->id)
+            ->inRandomOrder()
+            ->limit(4)
+            ->with('kategori_detail.kategori')
+            ->get();
 
-        // Mengirim data ke view
-        return view('pengunjung.profilWisata', compact('wisata', 'imgDetails'));
+        return view('pengunjung.profilWisata', compact('wisata', 'imgDetails', 'lainnya'));
     }
 }

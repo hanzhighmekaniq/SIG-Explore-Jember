@@ -16,6 +16,8 @@ class DataKuliner extends Model
         'deskripsi_kuliner',
         'gambar_kuliner',
         'gambar_menu',
+        'no_hp',
+        'jam_operasional',
     ];
 
     public function wisata(): BelongsTo

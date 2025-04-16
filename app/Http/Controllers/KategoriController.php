@@ -31,13 +31,13 @@ class KategoriController extends Controller
                 'nama_kategori' => $request->nama_kategori,
             ]);
 
-            return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Ditambahkan']);
+            return redirect()->route('kategori.index')->with(['success' => 'Kategori Berhasil Ditambahkan']);
         } catch (\Exception $e) {
             // $e->getMessage()])
-            return redirect()->route('kategori.index')->with(['error' => 'Data Sudah Ada']);
+            return redirect()->route('kategori.index')->with(['error' => 'Kategori Sudah Ada']);
         }
     }
-    
+
 
 
     public function edit($id)
@@ -63,7 +63,7 @@ class KategoriController extends Controller
             //code...
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->route('kategori.index')->with(['error' => 'Data Sudah Ada']);
+            return redirect()->route('kategori.index')->with(['error' => 'Kategori Sudah Ada']);
         }
     }
 
