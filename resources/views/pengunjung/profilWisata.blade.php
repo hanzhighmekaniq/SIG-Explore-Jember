@@ -542,49 +542,69 @@
                                 <!-- Kolom Informasi -->
                                 <div class="col-span-5">
                                     <!-- Tampilkan Nama Kuliner -->
-                                    <div class="mb-4">
-                                        <h2 class="text-2xl font-bold text-gray-800">
+                                    <div class="mb-6">
+                                        <h2 class="text-2xl font-bold text-gray-800 font-poppins">
                                             {{ $kuliner->nama_kuliner }}
                                         </h2>
                                     </div>
+
                                     <!-- Tampilkan Deskripsi -->
-                                    <div class="mb-6">
-                                        <h3 class="text-lg font-semibold text-gray-500 font-poppins">Deskripsi:</h3>
-                                        <p class="text-gray-500 leading-relaxed font-poppins">
+                                    <div class="mb-8">
+                                        <h3 class="text-lg font-semibold text-gray-500 font-poppins mb-2">Deskripsi
+                                        </h3>
+                                        <p class="text-gray-600 leading-relaxed font-poppins">
                                             {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
                                         </p>
                                     </div>
-                                    <!-- Tampilkan Kontak (Opsional) -->
+
+                                    <!-- Tampilkan Kontak -->
                                     @if (!empty($kuliner->no_hp))
-                                        <div class="mb-6">
-                                            <h3 class="text-lg font-semibold text-gray-500 font-poppins">No HP:</h3>
+                                        <div class="mb-8">
+                                            <h3 class="text-lg font-semibold text-gray-500 font-poppins mb-2">Kontak
+                                            </h3>
                                             <p class="text-gray-600 font-poppins">
-                                                {{ $kuliner->no_hp }}
+                                                <a href="tel:{{ $kuliner->no_hp }}"
+                                                    class="hover:text-blue-600 transition-colors">
+                                                    {{ $kuliner->no_hp }}
+                                                </a>
                                             </p>
                                         </div>
                                     @endif
+
+                                    <!-- Tampilkan Jam Operasional -->
                                     @if (!empty($kuliner->jam_operasional))
                                         @php
                                             $jamOperasional = json_decode($kuliner->jam_operasional, true);
                                         @endphp
 
                                         @if (is_array($jamOperasional))
-                                            <div class="mb-6">
-                                                <h3 class="text-lg font-semibold text-gray-500 font-poppins">Jam
-                                                    Operasional:</h3>
-                                                <ul class="text-gray-600 font-poppins">
+                                            <div class="mb-8">
+                                                <h3 class="text-lg font-semibold text-gray-500 font-poppins mb-2">Jam
+                                                    Operasional</h3>
+                                                <ul class="text-gray-600 font-poppins space-y-1">
                                                     @foreach ($jamOperasional as $jam)
-                                                        <li>
-                                                            {{ ucfirst($jam['hari']) }}:
-                                                            {{ $jam['buka'] && $jam['tutup'] ? $jam['buka'] . ' - ' . $jam['tutup'] : 'Tutup' }}
+                                                        <li class="flex">
+                                                            <span
+                                                                class="w-24 font-medium">{{ ucfirst($jam['hari']) }}:</span>
+                                                            <span class="flex items-center gap-1">
+                                                                @if ($jam['buka'] == '00:00' && $jam['tutup'] == '00:00')
+                                                                    <span class="text-green-600">24 Jam</span>
+                                                                @elseif($jam['buka'] && $jam['tutup'])
+                                                                    <span
+                                                                        class="text-green-600">{{ $jam['buka'] }}</span>
+                                                                    <span class="text-gray-400">-</span>
+                                                                    <span
+                                                                        class="text-red-500">{{ $jam['tutup'] }}</span>
+                                                                @else
+                                                                    <span class="text-red-500">Tutup</span>
+                                                                @endif
+                                                            </span>
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
                                         @endif
                                     @endif
-
-
                                 </div>
                             </div>
                         @else

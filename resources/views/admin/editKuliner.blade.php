@@ -69,22 +69,78 @@
                             $dataTutup =
                                 $jam_operasional_old[$index]['tutup'] ??
                                 ($kuliner->jam_operasional[$index]['tutup'] ?? '');
+                            $is24Jam = $dataBuka === '00:00' && $dataTutup === '00:00';
                         @endphp
 
-                        <div class="border border-gray-400 p-3 rounded-lg bg-gray-50">
+                        <div class="border border-gray-400 p-3 rounded-lg bg-gray-50 relative">
                             <label class="block text-sm font-semibold mb-1">{{ ucfirst($hari) }}</label>
                             <input type="hidden" name="jam_operasional[{{ $index }}][hari]"
                                 value="{{ $hari }}">
-                            <div class="flex gap-2">
+
+                            <div class="time-inputs flex gap-2 {{ $is24Jam ? 'hidden' : '' }}">
                                 <input type="time" name="jam_operasional[{{ $index }}][buka]"
-                                    class="w-full p-2 border rounded text-sm font-poppins" value="{{ $dataBuka }}">
+                                    class="w-full p-2 border rounded text-sm font-poppins waktu-input"
+                                    value="{{ $dataBuka }}" onchange="updateJamDisplay(this)">
                                 <input type="time" name="jam_operasional[{{ $index }}][tutup]"
-                                    class="w-full p-2 border rounded text-sm font-poppins" value="{{ $dataTutup }}">
+                                    class="w-full p-2 border rounded text-sm font-poppins waktu-input"
+                                    value="{{ $dataTutup }}" onchange="updateJamDisplay(this)">
                             </div>
+
+                            <div
+                                class="jam-display {{ $is24Jam ? '' : 'hidden' }} text-sm font-semibold mt-1 text-center">
+                                24 Jam
+                            </div>
+
+                            <button type="button"
+                                class="toggle-jam absolute top-1 right-1 text-xs text-blue-500 hover:text-blue-700 {{ !$is24Jam ? 'hidden' : '' }}"
+                                onclick="toggleJamInput(this)">
+                                Ubah
+                            </button>
                         </div>
                     @endforeach
                 </div>
             </div>
+
+            <script>
+                function updateJamDisplay(inputElement) {
+                    const parentDiv = inputElement.closest('.border-gray-400');
+                    const bukaInput = parentDiv.querySelector('input[name*="[buka]"]');
+                    const tutupInput = parentDiv.querySelector('input[name*="[tutup]"]');
+                    const timeInputs = parentDiv.querySelector('.time-inputs');
+                    const jamDisplay = parentDiv.querySelector('.jam-display');
+                    const toggleBtn = parentDiv.querySelector('.toggle-jam');
+
+                    if (bukaInput.value === '00:00' && tutupInput.value === '00:00') {
+                        timeInputs.classList.add('hidden');
+                        jamDisplay.classList.remove('hidden');
+                        toggleBtn.classList.remove('hidden');
+                    } else {
+                        jamDisplay.classList.add('hidden');
+                        toggleBtn.classList.add('hidden');
+                    }
+                }
+
+                function toggleJamInput(buttonElement) {
+                    const parentDiv = buttonElement.closest('.border-gray-400');
+                    const timeInputs = parentDiv.querySelector('.time-inputs');
+                    const jamDisplay = parentDiv.querySelector('.jam-display');
+
+                    timeInputs.classList.remove('hidden');
+                    jamDisplay.classList.add('hidden');
+                    buttonElement.classList.add('hidden');
+
+                    // Reset values
+                    const bukaInput = parentDiv.querySelector('input[name*="[buka]"]');
+                    const tutupInput = parentDiv.querySelector('input[name*="[tutup]"]');
+                    bukaInput.value = '';
+                    tutupInput.value = '';
+                }
+
+                // Initialize on page load
+                document.querySelectorAll('.waktu-input').forEach(input => {
+                    updateJamDisplay(input);
+                });
+            </script>
 
 
             <!-- Gambar Kuliner -->
