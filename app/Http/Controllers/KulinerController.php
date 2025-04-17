@@ -137,8 +137,8 @@ class KulinerController extends Controller
             'id_wisata' => 'required',
             'nama_kuliner' => 'required|string|max:255',
             'deskripsi_kuliner' => 'nullable|string|max:800',
-            'gambar_kuliner' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_menu.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar_kuliner' => 'nullable|image',
+            'gambar_menu.*' => 'nullable|image',
             'no_hp' => 'nullable|string',
             'jam_operasional' => 'nullable|array',
         ]);

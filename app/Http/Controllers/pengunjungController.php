@@ -80,26 +80,11 @@ class PengunjungController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function rute($nama_wisata)
     {
         $rute = DataWisata::where('nama_wisata', $nama_wisata)->firstOrFail();
         return view('pengunjung.ruteTerdekat', compact('rute'));
     }
-
-
 
 
 
