@@ -38,8 +38,8 @@
                     <div class="flex items-start space-x-2 text-md font-semibold">
                         <!-- Tombol "Deskripsi" -->
                         <button id="btn-deskripsi"
-                            class="tab-button active flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
-       bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                            class="tab-button active flex rounded-xl px-4 py-1 font-poppins
+        bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Deskripsi
                         </button>
 
@@ -125,28 +125,37 @@
 
 
                                 <!-- Jam Operasional -->
-                                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4  gap-2">
+                                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                                     <p class="font-semibold col-span-full font-poppins">Jam Operasional</p>
                                     @php
-$jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
+                                        $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                                     @endphp
 
                                     @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'] as $hari)
-                                                                        @php
-    $jamBuka = $jamOperasional[$hari]['buka'] ?? 'Kosong';
-    $jamTutup = $jamOperasional[$hari]['tutup'] ?? 'Kosong';
-                                                                        @endphp
-                                                                        <div class="border-2 border-slate-500 p-2 rounded-lg bg-gray-50">
-                                                                            <p class="font-semibold font-poppins">{{ ucfirst($hari) }}</p>
-                                                                            <p class="text-sm font-poppins">Buka: <span
-                                                                                    class="font-medium">{{ $jamBuka }}</span></p>
-                                                                            <p class="text-sm font-poppins">Tutup: <span
-                                                                                    class="font-medium">{{ $jamTutup }}</span></p>
-                                                                        </div>
+                                        @php
+                                            $jamBuka = $jamOperasional[$hari]['buka'] ?? null;
+                                            $jamTutup = $jamOperasional[$hari]['tutup'] ?? null;
+
+                                            if (($jamBuka === '00:00' && $jamTutup === '00:00')) {
+                                                $status = '24 Jam';
+                                            } elseif (empty($jamBuka) || empty($jamTutup)) {
+                                                $status = 'Tutup';
+                                            } else {
+                                                $status = "Buka: $jamBuka<br>Tutup: $jamTutup";
+                                            }
+                                        @endphp
+                                        <div class="border-2 border-slate-500 p-2 rounded-lg bg-gray-50">
+                                            <p class="font-semibold font-poppins">{{ ucfirst($hari) }}</p>
+                                            @if($status === '24 Jam' || $status === 'Tutup')
+                                                <p class="text-sm font-poppins font-medium">{!! $status !!}</p>
+                                            @else
+                                                <p class="text-sm font-poppins">Buka: <span class="font-medium">{{ $jamBuka }}</span></p>
+                                                <p class="text-sm font-poppins">Tutup: <span class="font-medium">{{ $jamTutup }}</span></p>
+                                            @endif
+                                        </div>
                                     @endforeach
-
-
                                 </div>
+
                             </div>
                         </div>
 
@@ -178,7 +187,8 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                                 @foreach ($imgDetails as $img)
                                     <img src="{{ asset('storage/' . $img) }}"
                                         class="object-cover w-full aspect-[1/1] cursor-pointer  border-transparent hover:border-blue-500 "
-                                        alt="Gambar detail" onclick="changeMainImage('{{ asset('storage/' . $img) }}')">
+                                        alt="Gambar detail"
+                                        onclick="changeMainImage('{{ asset('storage/' . $img) }}')">
                                 @endforeach
                             </div>
                         @else
@@ -248,7 +258,8 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                                 class="relative group flex-shrink-0" type="button">
 
                                 <!-- Aspect ratio and image sizing adjustment -->
-                                <div class="w-64 h-80 overflow-hidden rounded-lg"> <!-- Set a fixed size for image container -->
+                                <div class="w-64 h-80 overflow-hidden rounded-lg">
+                                    <!-- Set a fixed size for image container -->
                                     <img src="{{ asset('storage/' . $kulinersss->gambar_kuliner) }}"
                                         alt="{{ $kulinersss->nama_kuliner }}"
                                         class="w-full h-full object-cover transition duration-300 ease-in-out transform group-hover:scale-105 group-hover:brightness-90">
@@ -256,7 +267,8 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
 
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <figcaption class="absolute bottom-4 z-10 w-full text-center">
-                                        <h1 class="font-semibold text-white text-xs md:text-sm uppercase tracking-wide">
+                                        <h1
+                                            class="font-semibold text-white text-xs md:text-sm uppercase tracking-wide">
                                             {{ $kulinersss->nama_kuliner }}
                                         </h1>
                                     </figcaption>
@@ -279,8 +291,9 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                 <!-- Carousel Wrapper -->
                 <div class="relative overflow-hidden rounded-lg aspect-[1920/720]">
                     @foreach ($wisata->events as $event)
-                        <button data-modal-target="img-event-{{ $event->id }}" data-modal-toggle="img-event-{{ $event->id }}"
-                            class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <button data-modal-target="img-event-{{ $event->id }}"
+                            data-modal-toggle="img-event-{{ $event->id }}" class="hidden duration-700 ease-in-out"
+                            data-carousel-item>
                             <img src="{{ asset('storage/' . $event->img) }}"
                                 class="block w-full h-auto max-h-full object-cover transition-all duration-300 filter grayscale hover:grayscale-0 mx-auto"
                                 alt="{{ $event->name ?? 'Event Image' }}">
@@ -293,8 +306,9 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                 <!-- Slider Indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
                     @foreach ($wisata->events as $index => $event)
-                        <button type="button" class="w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600" aria-current="false"
-                            aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}">
+                        <button type="button" class="w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600"
+                            aria-current="false" aria-label="Slide {{ $index + 1 }}"
+                            data-carousel-slide-to="{{ $index }}">
                         </button>
                     @endforeach
                 </div>
@@ -305,10 +319,10 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                     data-carousel-prev>
                     <span
                         class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white">
-                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 1 1 5l4 4" />
+                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M5 1 1 5l4 4" />
                         </svg>
                         <span class="sr-only">Previous</span>
                     </span>
@@ -318,10 +332,10 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                     data-carousel-next>
                     <span
                         class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white">
-                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 9 4-4-4-4" />
+                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
                         <span class="sr-only">Next</span>
                     </span>
@@ -369,18 +383,17 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow-sm ">
-                    <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  border-gray-200">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  border-gray-200">
                         <h3 class="text-xl font-semibold text-gray-900  font-poppins">
 
                         </h3>
                         <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
                             data-modal-hide="img-event-{{ $event->id }}">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
                             <span class="sr-only font-poppins">Close modal</span>
                         </button>
@@ -400,103 +413,105 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
 
 
     @foreach ($wisata->kuliners as $kuliner)
-    <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" tabindex="-1" aria-hidden="true"
-        class="hidden fixed inset-0 z-50 overflow-y-auto flex justify-center items-center p-4 bg-black bg-opacity-50">
-        <div class="relative w-full max-w-4xl md:max-w-5xl xl:max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
-            
-            <!-- Tombol Close -->
-            <button data-modal-hide="modal-gambar-detail-wisata-{{ $kuliner->id }}"
-                class="absolute top-4 right-4 bg-white border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-all z-20">
-                ✕
-            </button>
+        <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" tabindex="-1" aria-hidden="true"
+            class="hidden fixed inset-0 z-50 overflow-y-auto flex justify-center items-center p-4 bg-black bg-opacity-50">
+            <div
+                class="relative w-full max-w-4xl md:max-w-5xl xl:max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
 
-            <!-- Modal Body -->
-            <div class="p-6 grid md:grid-cols-4 gap-6">
-                <!-- Kolom Gambar -->
-                <div class="md:col-span-2 flex flex-col space-y-4 h-full">
-                    @if (!empty($kuliner->gambar_menu))
-                        <div class="overflow-x-auto space-x-4 flex-nowrap flex pb-4">
-                            @foreach (json_decode($kuliner->gambar_menu, true) as $gambar_menu)
-                                <div class="flex-shrink-0 w-[225px] aspect-[3/4]">
-                                    <button type="button"
-                                        class="w-full h-full border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105"
-                                        data-src="{{ asset('storage/' . $gambar_menu) }}">
-                                        <img src="{{ asset('storage/' . $gambar_menu) }}"
-                                            class="object-cover w-full h-full rounded-lg"
-                                            alt="Gambar Kuliner {{ $kuliner->nama_kuliner }}">
-                                    </button>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
-                    @endif
-                </div>
+                <!-- Tombol Close -->
+                <button data-modal-hide="modal-gambar-detail-wisata-{{ $kuliner->id }}"
+                    class="absolute top-4 right-4 bg-white border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-all z-20">
+                    ✕
+                </button>
 
-                <!-- Kolom Informasi -->
-                <div class="md:col-span-2 space-y-6">
-                    <!-- Nama Kuliner -->
-                    <div>
-                        <h2 class="text-3xl font-semibold text-gray-800 font-poppins">
-                            {{ $kuliner->nama_kuliner }}
-                        </h2>
+                <!-- Modal Body -->
+                <div class="p-6 grid md:grid-cols-4 gap-6">
+                    <!-- Kolom Gambar -->
+                    <div class="md:col-span-2 flex flex-col space-y-4 h-full">
+                        @if (!empty($kuliner->gambar_menu))
+                            <div class="overflow-x-auto space-x-4 flex-nowrap flex pb-4">
+                                @foreach (json_decode($kuliner->gambar_menu, true) as $gambar_menu)
+                                    <div class="flex-shrink-0 w-[225px] aspect-[3/4]">
+                                        <button type="button"
+                                            class="w-full h-full border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105"
+                                            data-src="{{ asset('storage/' . $gambar_menu) }}">
+                                            <img src="{{ asset('storage/' . $gambar_menu) }}"
+                                                class="object-cover w-full h-full rounded-lg"
+                                                alt="Gambar Kuliner {{ $kuliner->nama_kuliner }}">
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
+                        @endif
                     </div>
 
-                    <!-- Deskripsi -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-600">Deskripsi</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
-                        </p>
-                    </div>
-
-                    <!-- Kontak -->
-                    @if (!empty($kuliner->no_hp))
+                    <!-- Kolom Informasi -->
+                    <div class="md:col-span-2 space-y-6">
+                        <!-- Nama Kuliner -->
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-600">Kontak</h3>
-                            <p class="text-gray-700">
-                                <a href="tel:{{ $kuliner->no_hp }}" class="text-blue-600 hover:text-blue-800">
-                                    {{ $kuliner->no_hp }}
-                                </a>
+                            <h2 class="text-3xl font-semibold text-gray-800 font-poppins">
+                                {{ $kuliner->nama_kuliner }}
+                            </h2>
+                        </div>
+
+                        <!-- Deskripsi -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-600">Deskripsi</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
                             </p>
                         </div>
-                    @endif
 
-                    <!-- Jam Operasional -->
-                    @if (!empty($kuliner->jam_operasional))
-                        @php
-                            $jamOperasional = json_decode($kuliner->jam_operasional, true);
-                        @endphp
-                        @if (is_array($jamOperasional))
+                        <!-- Kontak -->
+                        @if (!empty($kuliner->no_hp))
                             <div>
-                                <h3 class="text-xl font-semibold text-gray-600">Jam Operasional</h3>
-                                <ul class="space-y-2">
-                                    @foreach ($jamOperasional as $jam)
-                                        <li class="flex">
-                                            <span class="w-28 font-medium text-gray-600">{{ ucfirst($jam['hari']) }}:</span>
-                                            <span class="text-gray-500">
-                                                @if ($jam['buka'] == '00:00' && $jam['tutup'] == '00:00')
-                                                    <span class="text-green-600">24 Jam</span>
-                                                @elseif($jam['buka'] && $jam['tutup'])
-                                                    <span class="text-green-600">{{ $jam['buka'] }}</span>
-                                                    <span class="text-gray-400">-</span>
-                                                    <span class="text-red-500">{{ $jam['tutup'] }}</span>
-                                                @else
-                                                    <span class="text-red-500">Tutup</span>
-                                                @endif
-                                            </span>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <h3 class="text-xl font-semibold text-gray-600">Kontak</h3>
+                                <p class="text-gray-700">
+                                    <a href="tel:{{ $kuliner->no_hp }}" class="text-blue-600 hover:text-blue-800">
+                                        {{ $kuliner->no_hp }}
+                                    </a>
+                                </p>
                             </div>
                         @endif
-                    @endif
-                </div>
-            </div>
 
+                        <!-- Jam Operasional -->
+                        @if (!empty($kuliner->jam_operasional))
+                            @php
+                                $jamOperasional = json_decode($kuliner->jam_operasional, true);
+                            @endphp
+                            @if (is_array($jamOperasional))
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-600">Jam Operasional</h3>
+                                    <ul class="space-y-2">
+                                        @foreach ($jamOperasional as $jam)
+                                            <li class="flex">
+                                                <span
+                                                    class="w-28 font-medium text-gray-600">{{ ucfirst($jam['hari']) }}:</span>
+                                                <span class="text-gray-500">
+                                                    @if ($jam['buka'] == '00:00' && $jam['tutup'] == '00:00')
+                                                        <span class="text-green-600">24 Jam</span>
+                                                    @elseif($jam['buka'] && $jam['tutup'])
+                                                        <span class="text-green-600">{{ $jam['buka'] }}</span>
+                                                        <span class="text-gray-400">-</span>
+                                                        <span class="text-red-500">{{ $jam['tutup'] }}</span>
+                                                    @else
+                                                        <span class="text-red-500">Tutup</span>
+                                                    @endif
+                                                </span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 
 
 
@@ -510,7 +525,8 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
                 </path>
             </svg>
         </button>
-        <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded-lg" alt="Preview Gambar">
+        <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded-lg"
+            alt="Preview Gambar">
     </div>
     <script>
         document.querySelectorAll('.open-image-modal').forEach(button => {
@@ -545,7 +561,7 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const btnDeskripsi = document.getElementById("btn-deskripsi");
             const btnDetail = document.getElementById("btn-detail");
             const deskripsi = document.getElementById("deskripsi");
@@ -563,11 +579,11 @@ $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
             }
 
             // Event listener untuk tombol
-            btnDeskripsi.addEventListener("click", function () {
+            btnDeskripsi.addEventListener("click", function() {
                 showContent(deskripsi, detail, btnDeskripsi);
             });
 
-            btnDetail.addEventListener("click", function () {
+            btnDetail.addEventListener("click", function() {
                 showContent(detail, deskripsi, btnDetail);
             });
 

@@ -1,5 +1,5 @@
 <x-layadmin>
-   <!-- <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+<!-- <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
         Data Event
     </p> -->
     <div class="lg:flex space-y-2 lg:space-y-0 lg:justify-between lg:items-center">
@@ -7,11 +7,11 @@
         <div class="flex ">
             <a href="{{ route('event.create') }}" id="tambah-event-wisata"
                 class="{{ request()->routeIs('event.create') ? 'bg-blue-600 text-white' : '' }}
-                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
-                       border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
-                       focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
-                       hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
-                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
+                        border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
+                        focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
+                        hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -26,8 +26,7 @@
                     <!-- Dropdown Kategori -->
                     <select name="id_kategori_detail" id="id_kategori_detail"
                         class="font-poppins h-full px-4 py-2 text-xs border border-gray-300 rounded-l-md
-                               focus:ring-blue-500 focus:border-blue-500
-                               ">
+                            focus:ring-blue-500 focus:border-blue-500">
                         <option value="">Semua Sub Kategori</option>
                         @foreach ($wisata as $item)
                             <option value="{{ $item->id }}">
@@ -40,13 +39,12 @@
                     <input type="text" name="nama_event" placeholder="Cari nama Event"
                         value="{{ request('nama_event') }}"
                         class="font-poppins h-full px-4 py-2 text-xs border-t border-b border-gray-300
-                               focus:ring-blue-500 focus:border-blue-500
-                               " />
+                            focus:ring-blue-500 focus:border-blue-500" />
 
                     <!-- Button Cari -->
                     <button type="submit"
                         class="font-poppins h-full px-4 py-2 text-xs text-white bg-blue-600 border-l-0 border border-gray-300
-                               rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
+                                rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
                                 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                         Cari
                     </button>

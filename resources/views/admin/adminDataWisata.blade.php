@@ -7,11 +7,11 @@
         <div class="flex">
             <a href="{{ route('wisata.create') }}" id="tambah-data-wisata"
                 class="{{ request()->routeIs('wisata.create') ? 'bg-blue-600 text-white' : '' }}
-                       flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
-                       border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
-                       focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
-                       hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
-                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        flex justify-center items-center text-xs font-medium text-gray-900 rounded-lg
+                        border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
+                        focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
+                        hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -27,8 +27,8 @@
                         <!-- Dropdown Kategori -->
                         <select name="id_kategori" id="id_kategori"
                             class="font-poppins h-full py-2 text-xs border border-gray-300 rounded-l-md
-                               focus:ring-blue-500 focus:border-blue-500
-                               ">
+                                focus:ring-blue-500 focus:border-blue-500
+                                ">
                             <option value="">Semua Kategori</option>
                             @foreach ($category as $item)
                                 <option value="{{ $item->id }}">
@@ -43,13 +43,13 @@
                         <input type="text" name="nama_wisata" placeholder="Cari nama Wisata"
                             value="{{ request('nama_wisata') }}"
                             class="font-poppins h-full py-2 text-xs border-t border-b border-gray-300
-                               focus:ring-blue-500 focus:border-blue-500
-                               " />
+                                focus:ring-blue-500 focus:border-blue-500
+                                " />
 
                         <!-- Button Cari -->
                         <button type="submit"
                             class="font-poppins h-full px-4 py-2 text-xs text-white bg-blue-600 border-l-0 border border-gray-300
-                               rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
+                                rounded-r-md hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300
                                 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Cari
                         </button>

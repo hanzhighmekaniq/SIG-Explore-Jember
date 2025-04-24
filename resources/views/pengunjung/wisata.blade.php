@@ -35,8 +35,8 @@
                         <!-- Tombol "Semua" -->
                         <a href="{{ route('wisata.pengunjung') }}"
                             class="px-4 py-2 rounded-full text-sm shadow-md shadow-gray-400 transition-all duration-500 ease-in-out font-poppins
-                                  {{ !request('id_kategori') ? 'bg-white border border-[#006495] text-[#006495] font-bold' : 'bg-gray-200 text-gray-500' }}
-                                  hover:bg-gray-200 hover:text-[#006495] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                {{ !request('id_kategori') ? 'bg-white border border-[#006495] text-[#006495] font-bold' : 'bg-gray-200 text-gray-500' }}
+                                hover:bg-gray-200 hover:text-[#006495] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Semua
                         </a>
 
