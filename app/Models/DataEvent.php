@@ -17,6 +17,8 @@ class DataEvent extends Model
         'deskripsi_event',
         'event_mulai',
         'event_berakhir',
+        'is_temporer',
+        'jadwal_mingguan',
         'htm_event',
         'img',
     ];

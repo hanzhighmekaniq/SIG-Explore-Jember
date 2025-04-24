@@ -28,7 +28,7 @@ class EventController extends Controller
         if ($request->nama_kuliner) {
             $query->where('nama_kuliner', 'like', '%' . $request->nama_kuliner . '%');
         }
-
+        $query->orderBy('created_at', 'desc');
         $DataEvent = $query->with(['wisata.kategori_detail'])->paginate(10);
 
 
@@ -43,40 +43,55 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'id_wisata' => 'required',
-            'nama_event' => 'required',
-            'deskripsi_event' => 'required',
-            'event_mulai' => 'required',
-            'event_berakhir' => 'required',
-            'htm_event' => 'required',
-            'img' => 'required',
-        ]);
+        $rules = [
+            'id_wisata' => 'required|exists:data_wisata,id',
+            'nama_event' => 'required|string|max:255',
+            'deskripsi_event' => 'nullable|string',
+            'is_temporer' => 'required|boolean',
+            'htm_event' => 'required|numeric',
+            'img' => 'nullable|image|max:2048',
+        ];
 
-        if ($validator->fails()) {
-            dd($validator->errors()->all()); // Debug: lihat pesan error dari validasi
-            return redirect()->back()->withErrors($validator)->withInput();
+        if ($request->is_temporer) {
+            $rules['event_mulai'] = 'required|date';
+            $rules['event_berakhir'] = 'required|date|after_or_equal:event_mulai';
+        } else {
+            $rules['jadwal'] = 'required|array';
         }
 
-        try {
-            $imgPath = $request->file('img')->store('images/event/img', 'public');
+        $validated = $request->validate($rules);
 
-            DataEvent::create([
+        try {
+            $imgPath = null;
+            if ($request->hasFile('img')) {
+                $imgPath = $request->file('img')->store('images/event/img', 'public');
+            }
+
+            $data = [
                 'id_wisata' => $request->id_wisata,
                 'nama_event' => $request->nama_event,
                 'deskripsi_event' => $request->deskripsi_event,
-                'event_mulai' => $request->event_mulai,
-                'event_berakhir' => $request->event_berakhir,
+                'is_temporer' => $request->is_temporer,
                 'htm_event' => $request->htm_event,
                 'img' => $imgPath,
-            ]);
+            ];
 
-            return redirect()->route('event.index')->with(['success' => 'Event Berhasil Ditambahkan']);
+            if ($request->is_temporer) {
+                $data['event_mulai'] = $request->event_mulai;
+                $data['event_berakhir'] = $request->event_berakhir;
+            } else {
+                $data['jadwal_mingguan'] = json_encode($request->jadwal);
+            }
+
+            DataEvent::create($data);
+
+            return redirect()->route('event.index')->with('success', 'Event berhasil ditambahkan!');
         } catch (\Exception $e) {
-            dd($e->getMessage()); // Debug: tampilkan pesan error jika terjadi exception
-            return redirect()->route('event.index')->with(['error' => 'Event gagal disimpan: ' . $e->getMessage()]);
+            return redirect()->back()->with('error', 'Gagal menyimpan event: ' . $e->getMessage());
         }
     }
+
+
 
 
     public function edit($id)

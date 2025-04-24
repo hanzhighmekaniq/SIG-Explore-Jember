@@ -12,20 +12,29 @@ return new class extends Migration
             $table->id();
             $table->string('nama_event');
             $table->text('deskripsi_event')->nullable();
-            $table->datetime('event_mulai'); // Menggabungkan tanggal dan waktu mulai
-            $table->datetime('event_berakhir'); // Menggabungkan tanggal dan waktu berakhir
-            $table->decimal('htm_event', 15, 2)->nullable();
-            $table->string('img')->nullable();
+
+            // Event temporer (sekali jalan)
+            $table->datetime('event_mulai')->nullable();    // Tanggal + waktu mulai
+            $table->datetime('event_berakhir')->nullable(); // Tanggal + waktu selesai
+
+            // Event permanen (berulang setiap minggu)
+            $table->json('jadwal_mingguan')->nullable(); // Disimpan dalam format JSON misalnya: [{"hari": "Senin", "jam_mulai": "08:00", "jam_akhir": "12:00"}, ...]
+
+            $table->boolean('is_temporer')->default(true); // Menentukan apakah event ini temporer atau tidak
+
+            $table->decimal('htm_event', 15, 2)->nullable(); // Harga Tiket Masuk
+            $table->string('img')->nullable(); // Gambar
             $table->timestamps();
 
-            // Menambahkan foreign key
+            // Foreign key ke tempat wisata
             $table->foreignId('id_wisata')
-                ->nullable() // Kolom bisa NULL
-                ->constrained('data_wisata') 
-                ->onDelete('set null') // Set ke NULL jika data dihapus
-                ->onUpdate('cascade');  // Perbarui nilai jika data diupdate
+                ->nullable()
+                ->constrained('data_wisata')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
         });
     }
+
 
 
     public function down(): void
