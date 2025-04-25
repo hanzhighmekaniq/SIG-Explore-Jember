@@ -27,7 +27,7 @@ class SendEmailController extends Controller
             ];
 
             // Kirim email ke admin
-            Mail::to('shundallbolong@gmail.com')->send(new KritikSaranMail($data));
+            Mail::to('fadiaskeyn@gmail.com')->send(new KritikSaranMail($data));
 
             // Jika berhasil, tampilkan pesan sukses
             return back()->with('success', 'Kritik & saran telah berhasil dikirim!');

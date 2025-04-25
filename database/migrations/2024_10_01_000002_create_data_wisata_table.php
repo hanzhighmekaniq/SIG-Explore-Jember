@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('fasilitas')->nullable();
             $table->longText('lokasi')->nullable();
             $table->string('img')->nullable();
-            $table->json('img_detail')->nullable();
+            $table->longText('img_detail')->nullable();
             $table->string('latitude');
             $table->string('longitude');
             $table->string('htm_wisata')->nullable();

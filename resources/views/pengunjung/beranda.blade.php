@@ -157,7 +157,7 @@
 
                     <!-- Script Swiper -->
                     <script>
-                        document.addEventListener("DOMContentLoaded", function () {
+                        document.addEventListener("DOMContentLoaded", function() {
                             new Swiper(".mySwiper", {
                                 slidesPerView: 2, // Default untuk layar kecil
                                 spaceBetween: 10,
@@ -228,8 +228,8 @@
 
             @endif
 
-            </div>
         </div>
+    </div>
     </div>
 
 
@@ -277,15 +277,19 @@
 
             // Tambahkan tile layer dari OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: ''
             }).addTo(map);
 
             @foreach ($wisata as $wisata)
                 // Tambahkan marker lokasi wisata dengan popup
                 L.marker([{{ $wisata->latitude }}, {{ $wisata->longitude }}]).addTo(map)
-                    .bindPopup(
-                        `<b>{{ $wisata->nama_wisata }}</b><br>{{ $wisata->kategori_detail->nama_kategori_detail }}, {{ $wisata->kategori_detail->kategori->nama_kategori }}.`
-                    );
+                    .bindPopup(`
+    <strong>{{ $wisata->nama_wisata }}</strong><br>
+    {{ $wisata->kategori_detail->nama_kategori_detail }}, {{ $wisata->kategori_detail->kategori->nama_kategori }}<br>
+    <a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank" class="text-blue-600 underline">
+        Lihat
+    </a>
+`)
             @endforeach
         </script>
 
@@ -348,7 +352,7 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             let elements = document.querySelectorAll("#mapScroll, #eventScrol, #wisataScroll");
 
             let observer = new IntersectionObserver((entries) => {

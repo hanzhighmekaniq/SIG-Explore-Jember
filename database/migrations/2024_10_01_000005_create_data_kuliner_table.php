@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('nama_kuliner');
             $table->text('deskripsi_kuliner')->nullable();
             $table->string('gambar_kuliner')->nullable();
-            $table->string('gambar_menu')->nullable();
+            $table->longText('gambar_menu')->nullable();
             $table->string('no_hp');
             $table->json('jam_operasional')->nullable(); // Kolom baru untuk jam buka & tutup
             $table->timestamps();

@@ -38,9 +38,6 @@ class PengunjungController extends Controller
             ->limit(4) // Ambil maksimal 3 data
             ->get();
 
-
-
-
         // Mengirim data ke view beranda
         return view('pengunjung.beranda', compact('event', 'wisata', 'filterWisata'));
     }
@@ -100,23 +97,24 @@ class PengunjungController extends Controller
 
     public function detailWisata($nama_wisata)
     {
-        // Ambil data wisata berdasarkan nama, dengan relasi kategori, event, dan kuliner
         $wisata = DataWisata::where('nama_wisata', $nama_wisata)
             ->with(['kategori_detail.kategori', 'events', 'kuliners'])
             ->firstOrFail();
 
-        // Decode gambar detail dan ambil maksimal 8 secara acak
         $imgDetails = json_decode($wisata->img_detail, true) ?? [];
         shuffle($imgDetails);
         $imgDetails = array_slice($imgDetails, 0, 8);
 
-        // Ambil wisata lain secara acak, kecuali wisata yang sedang dibuka
         $lainnya = DataWisata::where('id', '!=', $wisata->id)
             ->inRandomOrder()
             ->limit(4)
             ->with('kategori_detail.kategori')
             ->get();
 
-        return view('pengunjung.profilWisata', compact('wisata', 'imgDetails', 'lainnya'));
+        return view('pengunjung.profilWisata', compact(
+            'wisata',
+            'imgDetails',
+            'lainnya',
+        ));
     }
 }

@@ -136,7 +136,7 @@
                                             $jamBuka = $jamOperasional[$hari]['buka'] ?? null;
                                             $jamTutup = $jamOperasional[$hari]['tutup'] ?? null;
 
-                                            if (($jamBuka === '00:00' && $jamTutup === '00:00')) {
+                                            if ($jamBuka === '00:00' && $jamTutup === '00:00') {
                                                 $status = '24 Jam';
                                             } elseif (empty($jamBuka) || empty($jamTutup)) {
                                                 $status = 'Tutup';
@@ -146,11 +146,13 @@
                                         @endphp
                                         <div class="border-2 border-slate-500 p-2 rounded-lg bg-gray-50">
                                             <p class="font-semibold font-poppins">{{ ucfirst($hari) }}</p>
-                                            @if($status === '24 Jam' || $status === 'Tutup')
+                                            @if ($status === '24 Jam' || $status === 'Tutup')
                                                 <p class="text-sm font-poppins font-medium">{!! $status !!}</p>
                                             @else
-                                                <p class="text-sm font-poppins">Buka: <span class="font-medium">{{ $jamBuka }}</span></p>
-                                                <p class="text-sm font-poppins">Tutup: <span class="font-medium">{{ $jamTutup }}</span></p>
+                                                <p class="text-sm font-poppins">Buka: <span
+                                                        class="font-medium">{{ $jamBuka }}</span></p>
+                                                <p class="text-sm font-poppins">Tutup: <span
+                                                        class="font-medium">{{ $jamTutup }}</span></p>
                                             @endif
                                         </div>
                                     @endforeach
@@ -227,13 +229,17 @@
 
                 // Tambahkan tile layer dari OpenStreetMap
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '<img src="https://flagcdn.com/w20/id.png" srcset="https://flagcdn.com/w40/id.png 2x" width="20" alt="Indonesia"> Explore Jember | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    attribution: ''
                 }).addTo(map);
 
                 // Tambahkan marker lokasi wisata dengan popup
                 L.marker([{{ $wisata->latitude }}, {{ $wisata->longitude }}]).addTo(map)
                     .bindPopup(
-                        `<b>{{ $wisata->nama_wisata }}</b><br>{{ $wisata->kategori_detail->kategori->nama_kategori }}, {{ $wisata->kategori_detail->nama_kategori_detail }}.`
+                        `<a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank">
+            <b>{{ $wisata->nama_wisata }}</b>
+        </a><br>
+        {{ $wisata->kategori_detail->kategori->nama_kategori }},
+        {{ $wisata->kategori_detail->nama_kategori_detail }}.`
                     );
             </script>
 
@@ -243,11 +249,8 @@
             <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Kuliner Yang Tersedia</p>
             <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah kuliner yang tersedia saat ini</h5>
         </div>
-        @if ($wisata->kuliners->isEmpty())
-            <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border">
-                Kuliner Kosong.
-            </div>
-        @else
+        @if ($wisata->kuliners->isNotEmpty())
+
             <div class="relative">
                 <div class="w-full h-auto overflow-x-auto py-4">
                     <div class="flex gap-4 min-w-max">
@@ -278,7 +281,10 @@
                     </div>
                 </div>
             </div>
-
+        @else
+            <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border">
+                Kuliner Kosong.
+            </div>
 
 
         @endif
@@ -286,66 +292,117 @@
             <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Event Yang Akan Datang</p>
             <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah event yang akan datang saat ini</h5>
         </div>
-        @if ($wisata->events && $wisata->events->isNotEmpty())
-            <div id="event-carousel" class="relative w-full pt-4 pb-4 mb-20" data-carousel="slide">
-                <!-- Carousel Wrapper -->
-                <div class="relative overflow-hidden rounded-lg aspect-[1920/720]">
-                    @foreach ($wisata->events as $event)
-                        <button data-modal-target="img-event-{{ $event->id }}"
-                            data-modal-toggle="img-event-{{ $event->id }}" class="hidden duration-700 ease-in-out"
-                            data-carousel-item>
-                            <img src="{{ asset('storage/' . $event->img) }}"
-                                class="block w-full h-auto max-h-full object-cover transition-all duration-300 filter grayscale hover:grayscale-0 mx-auto"
-                                alt="{{ $event->name ?? 'Event Image' }}">
-                            <p class="text-center mt-4 font-semibold text-lg">{{ $event->nama_event ?? 'Event Name' }}
-                            </p>
-                        </button>
-                    @endforeach
-                </div>
 
-                <!-- Slider Indicators -->
-                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
-                    @foreach ($wisata->events as $index => $event)
-                        <button type="button" class="w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600"
-                            aria-current="false" aria-label="Slide {{ $index + 1 }}"
-                            data-carousel-slide-to="{{ $index }}">
-                        </button>
-                    @endforeach
-                </div>
+        @if ($wisata->events->isNotEmpty())
 
-                <!-- Slider Controls -->
-                <button type="button"
-                    class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-prev>
-                    <span
-                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white">
-                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M5 1 1 5l4 4" />
-                        </svg>
-                        <span class="sr-only">Previous</span>
-                    </span>
-                </button>
-                <button type="button"
-                    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-next>
-                    <span
-                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white">
-                        <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 9 4-4-4-4" />
-                        </svg>
-                        <span class="sr-only">Next</span>
-                    </span>
-                </button>
+
+            <div class="w-full pt-4 pb-4 mb-20">
+                <div id="event-carousel" class="relative w-full" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="relative h-auto overflow-hidden rounded-lg aspect-[3/4] md:aspect-[1920/840]">
+                        @foreach ($wisata->events as $event)
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <div class="md:grid md:grid-cols-10 md:gap-6 items-start w-full py-6 px-4">
+                                    <!-- Gambar: Untuk ukuran 0-md, gambar dapat diklik -->
+                                    <div class="md:col-span-4 h-full">
+                                        <button data-modal-target="img-event-{{ $event->id }}"
+                                            data-modal-toggle="img-event-{{ $event->id }}"
+                                            class="w-full h-full block md:hidden">
+                                            <img src="{{ asset('storage/' . $event->img) }}"
+                                                class="w-full h-full object-cover object-center rounded-lg"
+                                                alt="{{ $event->nama_event ?? 'Event Image' }}">
+                                        </button>
+                                        <!-- Gambar tanpa button untuk ukuran md ke atas -->
+                                        <div class="hidden md:block w-full h-full">
+                                            <img src="{{ asset('storage/' . $event->img) }}"
+                                                class="w-full h-full object-cover object-center rounded-lg"
+                                                alt="{{ $event->nama_event ?? 'Event Image' }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Detail: Hanya tampil di ukuran md dan ke atas -->
+                                    <div class="hidden col-span-6 md:flex md:flex-col justify-start space-y-4">
+                                        <div class="hidden md:block">
+                                            <h3
+                                                class="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                                                {{ $event->nama_event ?? 'Event Name' }}
+                                            </h3>
+                                            <div class="text-gray-700 text-xl sm:text-lg md:text-xl leading-relaxed">
+                                                {{ $event->deskripsi_event ?? '-' }}
+                                            </div>
+                                            <div class="text-gray-600 text-lg space-y-2">
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-calendar-day text-blue-500"></i>
+                                                    <p><strong>Mulai:</strong>
+                                                        {{ \Carbon\Carbon::parse($event->event_mulai)->format('d M Y, H:i') }}
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <i class="fas fa-calendar-day text-red-500"></i>
+                                                    <p><strong>Berakhir:</strong>
+                                                        {{ \Carbon\Carbon::parse($event->event_berakhir)->format('d M Y, H:i') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="flex items-center space-x-2 font-poppins text-3xl sm:text-2xl md:text-3xl">
+                                                <i class="fas fa-ticket-alt text-xl"></i>
+                                                <span>HTM: <span class="font-extrabold">
+                                                        Rp{{ number_format($event->htm_event, 0, ',', '.') }}
+                                                    </span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Carousel indicators -->
+                    <div class="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3">
+                        @foreach ($wisata->events as $index => $event)
+                            <button type="button" class="w-3 h-3 rounded-full bg-white"
+                                aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                                aria-label="Slide {{ $index + 1 }}"
+                                data-carousel-slide-to="{{ $index }}"></button>
+                        @endforeach
+                    </div>
+
+                    <!-- Carousel controls -->
+                    <button type="button"
+                        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+                        <span
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/80 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                            <svg class="w-4 h-4 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M5 1 1 5l4 4" />
+                            </svg>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </button>
+                    <button type="button"
+                        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+                        <span
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/80 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                            <svg class="w-4 h-4 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
+                </div>
             </div>
         @else
             <div class="p-10 mb-10 text-center font-bold text-gray-500 rounded border font-poppins">
                 Event yang akan datang sedang tidak ada.
             </div>
         @endif
+
         <div class="py-10">
             <div class="py-4">
                 <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla ">Wisata Lainnya</p>
@@ -382,13 +439,13 @@
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow-sm ">
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  border-gray-200">
-                        <h3 class="text-xl font-semibold text-gray-900  font-poppins">
-
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                        <h3 class="text-lg md:text-xl font-semibold text-gray-900 font-poppins">
+                            Detail Event
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                             data-modal-hide="img-event-{{ $event->id }}">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
@@ -397,12 +454,41 @@
                             </svg>
                             <span class="sr-only font-poppins">Close modal</span>
                         </button>
-
                     </div>
-                    <div class="p-4 md:p-5 space-y-4">
-                        <img src="{{ asset('storage/' . $event->img) }}"
-                            class="block w-full h-auto max-h-full object-contain transition-all duration-300 filter grayscale hover:grayscale-0 mx-auto"
-                            alt="{{ $event->name ?? 'Event Image' }}">
+                    <div class="p-4 md:p-5 space-y-5 text-gray-700 break-words">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins leading-snug">
+                            {{ $event->nama_event ?? 'Event Name' }}
+                        </h3>
+
+                        <p class="text-base sm:text-lg leading-relaxed tracking-wide">
+                            <strong>Deskripsi:</strong> <br>
+                            {{ $event->deskripsi_event ?? '-' }}
+
+                        </p>
+
+                        <div class="space-y-2 text-sm sm:text-base text-gray-600">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-calendar-day text-blue-500 mt-1"></i>
+                                <p><strong>Mulai:</strong>
+                                    {{ \Carbon\Carbon::parse($event->event_mulai)->format('d M Y, H:i') }}
+                                </p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-calendar-day text-red-500 mt-1"></i>
+                                <p><strong>Berakhir:</strong>
+                                    {{ \Carbon\Carbon::parse($event->event_berakhir)->format('d M Y, H:i') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-lg sm:text-xl font-poppins">
+                            <i class="fas fa-ticket-alt text-gray-800"></i>
+                            <span><strong>HTM:</strong>
+                                <span class="font-extrabold text-gray-900">
+                                    Rp{{ number_format($event->htm_event, 0, ',', '.') }}
+                                </span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -413,105 +499,130 @@
 
 
     @foreach ($wisata->kuliners as $kuliner)
-        <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" tabindex="-1" aria-hidden="true"
-            class="hidden fixed inset-0 z-50 overflow-y-auto flex justify-center items-center p-4 bg-black bg-opacity-50">
-            <div
-                class="relative w-full max-w-4xl md:max-w-5xl xl:max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
-
-                <!-- Tombol Close -->
-                <button data-modal-hide="modal-gambar-detail-wisata-{{ $kuliner->id }}"
-                    class="absolute top-4 right-4 bg-white border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-all z-20">
-                    ✕
-                </button>
-
-                <!-- Modal Body -->
-                <div class="p-6 grid md:grid-cols-4 gap-6">
-                    <!-- Kolom Gambar -->
-                    <div class="md:col-span-2 flex flex-col space-y-4 h-full">
-                        @if (!empty($kuliner->gambar_menu))
-                            <div class="overflow-x-auto space-x-4 flex-nowrap flex pb-4">
-                                @foreach (json_decode($kuliner->gambar_menu, true) as $gambar_menu)
-                                    <div class="flex-shrink-0 w-[225px] aspect-[3/4]">
-                                        <button type="button"
-                                            class="w-full h-full border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105"
-                                            data-src="{{ asset('storage/' . $gambar_menu) }}">
-                                            <img src="{{ asset('storage/' . $gambar_menu) }}"
-                                                class="object-cover w-full h-full rounded-lg"
-                                                alt="Gambar Kuliner {{ $kuliner->nama_kuliner }}">
-                                        </button>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
-                        @endif
+        <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" data-modal-backdrop="static" tabindex="-1"
+            aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
+            <div class="relative p-4 w-full max-w-7xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-900">
+                            Kuliner
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                            data-modal-hide="modal-gambar-detail-wisata-{{ $kuliner->id }}">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
                     </div>
-
-                    <!-- Kolom Informasi -->
-                    <div class="md:col-span-2 space-y-6">
-                        <!-- Nama Kuliner -->
-                        <div>
-                            <h2 class="text-3xl font-semibold text-gray-800 font-poppins">
-                                {{ $kuliner->nama_kuliner }}
-                            </h2>
-                        </div>
-
-                        <!-- Deskripsi -->
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-600">Deskripsi</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
-                            </p>
-                        </div>
-
-                        <!-- Kontak -->
-                        @if (!empty($kuliner->no_hp))
-                            <div>
-                                <h3 class="text-xl font-semibold text-gray-600">Kontak</h3>
-                                <p class="text-gray-700">
-                                    <a href="tel:{{ $kuliner->no_hp }}" class="text-blue-600 hover:text-blue-800">
-                                        {{ $kuliner->no_hp }}
-                                    </a>
-                                </p>
-                            </div>
-                        @endif
-
-                        <!-- Jam Operasional -->
-                        @if (!empty($kuliner->jam_operasional))
-                            @php
-                                $jamOperasional = json_decode($kuliner->jam_operasional, true);
-                            @endphp
-                            @if (is_array($jamOperasional))
-                                <div>
-                                    <h3 class="text-xl font-semibold text-gray-600">Jam Operasional</h3>
-                                    <ul class="space-y-2">
-                                        @foreach ($jamOperasional as $jam)
-                                            <li class="flex">
-                                                <span
-                                                    class="w-28 font-medium text-gray-600">{{ ucfirst($jam['hari']) }}:</span>
-                                                <span class="text-gray-500">
-                                                    @if ($jam['buka'] == '00:00' && $jam['tutup'] == '00:00')
-                                                        <span class="text-green-600">24 Jam</span>
-                                                    @elseif($jam['buka'] && $jam['tutup'])
-                                                        <span class="text-green-600">{{ $jam['buka'] }}</span>
-                                                        <span class="text-gray-400">-</span>
-                                                        <span class="text-red-500">{{ $jam['tutup'] }}</span>
-                                                    @else
-                                                        <span class="text-red-500">Tutup</span>
-                                                    @endif
-                                                </span>
-                                            </li>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5 space-y-4">
+                        <!-- Modal Body -->
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-10 gap-4">
+                            <!-- Kolom Gambar -->
+                            <div class="md:col-span-4 flex flex-col  space-y-4 max-h-[500px]">
+                                @if (!empty($kuliner->gambar_menu))
+                                    <div class="overflow-x-auto flex pb-4">
+                                        @foreach (json_decode($kuliner->gambar_menu, true) as $gambar_menu)
+                                            <div class="flex-shrink-0 w-auto h-[500px] mr-4">
+                                                <button type="button"
+                                                    class="open-image-modal w-full h-full border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl"
+                                                    data-src="{{ asset('storage/' . $gambar_menu) }}">
+                                                    <img src="{{ asset('storage/' . $gambar_menu) }}"
+                                                        class="object-cover h-full w-auto rounded-lg"
+                                                        alt="Gambar Kuliner {{ $kuliner->nama_kuliner }}">
+                                                </button>
+                                            </div>
                                         @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                        @endif
-                    </div>
-                </div>
+                                    </div>
+                                @else
+                                    <p class="text-center text-gray-500">Tidak ada gambar yang tersedia.</p>
+                                @endif
+                            </div>
+                            <!-- Kolom Informasi -->
+                            <div class="md:col-span-6 space-y-2 overflow-y-auto max-h-[500px]">
+                                <!-- Deskripsi -->
+                                <div>
+                                    <p class="text-gray-800 font-bold text-3xl poppins-bold uppercase ">
+                                        {{ $kuliner->nama_kuliner ?? 'Nama tidak tersedia.' }}
+                                    </p>
 
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-600">Deskripsi</h3>
+                                    <p class="text-gray-700 leading-relaxed">
+                                        {{ $kuliner->deskripsi_kuliner ?? 'Deskripsi tidak tersedia.' }}
+
+                                    </p>
+                                </div>
+
+                                <!-- Kontak -->
+                                @if (!empty($kuliner->no_hp))
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-gray-600">Kontak</h3>
+                                        <p class="text-gray-700">
+                                            <a href="https://wa.me/{{ '62' . ltrim($kuliner->no_hp, '0') }}"
+                                                class="text-blue-600 hover:text-blue-800" target="_blank">
+                                                {{ $kuliner->no_hp }}
+                                            </a>
+
+                                        </p>
+                                    </div>
+                                @endif
+
+                                <!-- Jam Operasional -->
+                                @if (!empty($kuliner->jam_operasional))
+                                    @php
+                                        $jamOperasional = json_decode($kuliner->jam_operasional, true);
+                                    @endphp
+                                    @if (is_array($jamOperasional))
+                                        <div>
+                                            <h3 class="text-xl font-semibold text-gray-600">Jam Operasional</h3>
+                                            <ul class="space-y-2">
+                                                @foreach ($jamOperasional as $jam)
+                                                    <li class="flex">
+                                                        <span
+                                                            class="w-28 font-medium text-gray-600">{{ ucfirst($jam['hari']) }}:</span>
+                                                        <span class="text-gray-500">
+                                                            @if ($jam['buka'] == '00:00' && $jam['tutup'] == '00:00')
+                                                                <span class="text-green-600">24 Jam</span>
+                                                            @elseif($jam['buka'] && $jam['tutup'])
+                                                                <span
+                                                                    class="text-green-600">{{ $jam['buka'] }}</span>
+                                                                <span class="text-gray-400">-</span>
+                                                                <span class="text-red-500">{{ $jam['tutup'] }}</span>
+                                                            @else
+                                                                <span class="text-red-500">Tutup</span>
+                                                            @endif
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                @endif
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
+
+
+
+
     @endforeach
+    <!-- Main modal -->
 
 
 
@@ -521,11 +632,10 @@
             id="closeModalBtn">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded-lg"
+        <img id="modalImage" src="" class="max-h-screen max-w-screen object-contain rounded-lg"
             alt="Preview Gambar">
     </div>
     <script>
@@ -545,7 +655,7 @@
             document.getElementById('modalImage').src = '';
         });
 
-        // Optional: tutup modal jika klik area hitam di luar gambar
+        // Optional: klik area luar gambar untuk menutup modal
         document.getElementById('imageModal').addEventListener('click', (e) => {
             if (e.target.id === 'imageModal') {
                 e.currentTarget.classList.add('hidden');
@@ -553,6 +663,7 @@
             }
         });
     </script>
+
 
 
 

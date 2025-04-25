@@ -19,7 +19,9 @@
     <div id="petaWilayah" class="bg-[#F3F3F3] h-auto w-full opacity-0 translate-y-10 transition-all duration-[1500ms]">
         <div class="container m-auto px-4">
             <div class="m-auto w-auto text-center pt-28 pb-10 text-6xl">
-                <p class="pb-4 text-center font-extrabold xl:text-xl text-[#004165] text-base leading-7 text-primary font-montserrat">PETA
+                <p
+                    class="pb-4 text-center font-extrabold xl:text-xl text-[#004165] text-base leading-7 text-primary font-montserrat">
+                    PETA
                     WILAYAH</p>
                 <p class="pacifico-regular text-5xl text-[#004165]">Kabupaten Jember</p>
             </div>
@@ -31,7 +33,8 @@
                 </div>
             </div>
             {{-- Tabel Daftar Lokasi Wisata --}}
-            <p class="m-auto text-start text-3xl font-semibold pb-10 text-[#004165] font-fjalla uppercase">Daftar Titik Lokasi Wisata
+            <p class="m-auto text-start text-3xl font-semibold pb-10 text-[#004165] font-fjalla uppercase">Daftar Titik
+                Lokasi Wisata
             </p>
             {{ $rute->links() }}
             <div class="overflow-x-auto pb-20">
@@ -60,7 +63,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-5 text-center text-gray-500 font-poppins">Tidak ada data yang tersedia.
+                                <td colspan="5" class="py-5 text-center text-gray-500 font-poppins">Tidak ada data
+                                    yang tersedia.
                                 </td>
                             </tr>
                         @endforelse
@@ -74,7 +78,7 @@
 
                 // Tambahkan lapisan tile dari OpenStreetMap
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '<img src="https://flagcdn.com/w20/id.png" srcset="https://flagcdn.com/w40/id.png 2x" width="20" alt="Indonesia"> Explore Jember | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    attribution: ''
                 }).addTo(map);
 
                 // Data
@@ -103,6 +107,7 @@
                             kategori: "{{ $item->kategori_detail->nama_kategori_detail ?? 'Tidak ada kategori' }}",
                             latitude: {{ $item->latitude ?? 0 }},
                             longitude: {{ $item->longitude ?? 0 }},
+                            url: "{{ route('ruteTerdekat.index', $item->nama_wisata) }}"
                         },
                     @empty
                         {
@@ -188,11 +193,15 @@
                     });
                 }
 
-                // Render semua data wisata pada peta
                 wisataData.forEach(wisata => {
                     if (wisata.latitude !== 0 && wisata.longitude !== 0) {
                         L.marker([wisata.latitude, wisata.longitude]).addTo(map)
-                            .bindPopup(`<strong>${wisata.nama_wisata}</strong><br>${wisata.kategori}`);
+                            .bindPopup(`
+                <a href="${wisata.url}" target="_blank" class="font-bold text-blue-600 underline">
+                    ${wisata.nama_wisata}
+                </a><br>
+                ${wisata.kategori}
+            `);
                     }
                 });
             </script>
