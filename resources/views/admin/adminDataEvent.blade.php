@@ -1,5 +1,5 @@
 <x-layadmin>
-<!-- <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+    <!-- <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
         Data Event
     </p> -->
     <div class="lg:flex space-y-2 lg:space-y-0 lg:justify-between lg:items-center">
@@ -11,10 +11,10 @@
                         border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
                         focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
                         hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
                 Event
             </a>
         </div>
@@ -69,7 +69,7 @@
                         Event
                     </th>
                     <th scope="col" class="px-6 py-3 font-poppins">
-                        Mulai - sampai
+                        Jadwal
                     </th>
                     <th scope="col" class="px-6 py-3 font-poppins">
                         Wisata
@@ -95,13 +95,42 @@
                             {{ $event->nama_event }}
                         </td>
                         <td class="px-6 py-4 font-poppins">
-                            <div>
-                                {{ $event->event_mulai }}
-                            </div>
-                            <div>
-                                {{ $event->event_berakhir }}
-                            </div>
+                            @if ($event->is_temporer == 1)
+                                <div>
+                                    {{ $event->event_mulai ? \Carbon\Carbon::parse($event->event_mulai)->format('H:i d-m-Y') : 'kosoong' }}
+                                </div>
+                                <div>
+                                    {{ $event->event_berakhir ? \Carbon\Carbon::parse($event->event_berakhir)->format('H:i d-m-Y') : 'kosoong' }}
+                                </div>
+                            @else
+                                @php
+                                    $jadwal = json_decode($event->jadwal_mingguan, true) ?? [];
+                                    $hariList = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                                @endphp
+
+                                @foreach ($hariList as $hari)
+                                    @php
+                                        $mulai = $jadwal[$hari]['mulai'] ?? null;
+                                        $akhir = $jadwal[$hari]['akhir'] ?? null;
+                                    @endphp
+
+                                    <div class="mb-1">
+                                        <strong>{{ $hari }}:</strong>
+                                        @if (empty($mulai) && empty($akhir))
+                                            Tutup
+                                        @elseif ($mulai == '00:00' && $akhir == '00:00')
+                                            24 Jam
+                                        @else
+                                            {{ $mulai ?? 'kosoong' }} - {{ $akhir ?? 'kosoong' }}
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @endif
                         </td>
+
+
+
+
                         <td class="px-6 py-4 font-poppins">
                             {{ $event->wisata->nama_wisata ?? '-' }}
                         </td>
@@ -110,7 +139,8 @@
                             {{ $event->htm_event }}
                         </td>
                         <td class="px-6 py-4 font-poppins">
-                            <img src="{{ asset('storage/' . $event->img) }}" alt="Gambar" class="aspect-auto object-contain h-20 w-full">
+                            <img src="{{ asset('storage/' . $event->img) }}" alt="Gambar"
+                                class="aspect-auto object-contain h-20 w-full">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2" font-poppins>
                             <div class="flex justify-center">
@@ -119,7 +149,8 @@
                                     <i class="fas fa-edit mr-2"></i>Edit</a>
                             </div>
                             <div class="flex justify-center">
-                                <button class="font-poppins delete-button font-medium text-red-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-red-800 transition duration-300 ease-in-out"
+                                <button
+                                    class="font-poppins delete-button font-medium text-red-600 border px-4 py-2 rounded-lg hover:transform hover:-translate-y-1 hover:text-red-800 transition duration-300 ease-in-out"
                                     data-modal-target="default-modal-delete-event{{ $event->id }}"
                                     data-modal-toggle="default-modal-delete-event{{ $event->id }}"
                                     id="btn-delete-event">

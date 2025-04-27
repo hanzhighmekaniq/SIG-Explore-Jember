@@ -45,14 +45,14 @@
 
                         <!-- Tombol "Detail" -->
                         <button id="btn-detail"
-                            class="tab-button flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
+                            class="tab-button flex rounded-xl px-4 py-1  font-poppins
        bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Detail
                         </button>
 
                         <!-- Tombol "Rute" -->
                         <a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank"
-                            class="flex rounded-xl px-4 py-1 transition-all duration-500 ease-in-out font-poppins
+                            class="flex rounded-xl px-4 py-1  font-poppins
   bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                             Rute
                         </a>
@@ -288,19 +288,154 @@
 
 
         @endif
+
+
+
+        @if ($wisata->events->where('is_temporer', 0)->isNotEmpty())
+            <div class="mb-4 pt-10 ">
+                <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Event Wisata</p>
+                <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah event yang hadir setiap hari</h5>
+            </div>
+            <div class="w-full ">
+                <div id="event-carousel" class="relative w-full h-auto" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="relative h-auto overflow-hidden rounded-lg aspect-[3/4] md:aspect-[1920/920]">
+                        @foreach ($wisata->events->where('is_temporer', 0) as $event)
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <div class="md:grid md:grid-cols-10 md:gap-6 items-start w-full py-6 px-4">
+                                    <!-- Gambar: Untuk ukuran 0-md, gambar dapat diklik -->
+                                    <div class="md:col-span-4 h-full">
+                                        <button data-modal-target="img-events-{{ $event->id }}"
+                                            data-modal-toggle="img-events-{{ $event->id }}"
+                                            class="w-full h-full block md:hidden">
+                                            <img src="{{ asset('storage/' . $event->img) }}"
+                                                class="w-full h-full object-cover object-center rounded-lg"
+                                                alt="{{ $event->nama_event ?? 'Event Image' }}">
+                                        </button>
+                                        <!-- Gambar tanpa button untuk ukuran md ke atas -->
+                                        <div class="hidden md:block w-full h-full">
+                                            <img src="{{ asset('storage/' . $event->img) }}"
+                                                class="w-full h-full object-cover object-center rounded-lg"
+                                                alt="{{ $event->nama_event ?? 'Event Image' }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Detail: Hanya tampil di ukuran md dan ke atas -->
+                                    <div class="hidden col-span-6 md:flex md:flex-col justify-start space-y-4">
+                                        <div class="md:block p-4 bg-white rounded-lg shadow-lg">
+                                            <h3
+                                                class="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
+                                                {{ $event->nama_event ?? 'Event Name' }}
+                                            </h3>
+                                            <div class="text-gray-700 text-xl sm:text-lg md:text-xl leading-relaxed">
+                                                {{ $event->deskripsi_event ?? '-' }}
+                                            </div>
+                                            <div class="text-gray-600 text-lg space-y-2">
+                                                @php
+                                                    $jadwal = json_decode($event->jadwal_mingguan, true) ?? [];
+                                                    $hariList = [
+                                                        'Senin',
+                                                        'Selasa',
+                                                        'Rabu',
+                                                        'Kamis',
+                                                        'Jumat',
+                                                        'Sabtu',
+                                                        'Minggu',
+                                                    ];
+                                                @endphp
+
+                                                @foreach ($hariList as $hari)
+                                                    @php
+                                                        $mulai = $jadwal[$hari]['mulai'] ?? null;
+                                                        $akhir = $jadwal[$hari]['akhir'] ?? null;
+                                                    @endphp
+
+                                                    <div class="mb-1 border-b border-gray-200 last:border-b-0">
+                                                        <strong class="block pb-2">{{ $hari }}:</strong>
+                                                        <div class="flex items-start gap-2">
+                                                            <i class="fas fa-calendar-day text-gray-500"></i>
+                                                            <span>
+                                                                @if (empty($mulai) && empty($akhir))
+                                                                    Tutup
+                                                                @elseif ($mulai == '00:00' && $akhir == '00:00')
+                                                                    24 Jam
+                                                                @else
+                                                                    {{ $mulai ?? '-' }} - {{ $akhir ?? '-' }}
+                                                                @endif
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div
+                                                class="flex items-center space-x-2 font-poppins text-3xl sm:text-2xl md:text-3xl">
+                                                <i class="fas fa-ticket-alt text-gray-500"></i>
+                                                <span>HTM: <span class="font-extrabold">
+                                                        Rp{{ number_format($event->htm_event, 0, ',', '.') }}
+                                                    </span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Carousel indicators -->
+                    <div class="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3">
+                        @foreach ($wisata->events->where('is_temporer', 1) as $index => $event)
+                            <button type="button" class="w-3 h-3 rounded-full bg-white"
+                                aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                                aria-label="Slide {{ $index + 1 }}"
+                                data-carousel-slide-to="{{ $index }}"></button>
+                        @endforeach
+                    </div>
+
+                    <!-- Carousel controls -->
+                    <button type="button"
+                        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+                        <span
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/80 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                            <svg class="w-4 h-4 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M5 1 1 5l4 4" />
+                            </svg>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </button>
+                    <button type="button"
+                        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+                        <span
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/80 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                            <svg class="w-4 h-4 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        @else
+        @endif
+
         <div class="mb-4 pt-10 ">
             <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Event Yang Akan Datang</p>
             <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah event yang akan datang saat ini</h5>
         </div>
 
-        @if ($wisata->events->isNotEmpty())
 
 
+        @if ($wisata->events->where('is_temporer', 1)->where('event_berakhir', '>', now())->isNotEmpty())
             <div class="w-full pt-4 pb-4 mb-20">
                 <div id="event-carousel" class="relative w-full" data-carousel="slide">
                     <!-- Carousel wrapper -->
                     <div class="relative h-auto overflow-hidden rounded-lg aspect-[3/4] md:aspect-[1920/840]">
-                        @foreach ($wisata->events as $event)
+                        @foreach ($wisata->events->where('is_temporer', 1) as $event)
                             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <div class="md:grid md:grid-cols-10 md:gap-6 items-start w-full py-6 px-4">
                                     <!-- Gambar: Untuk ukuran 0-md, gambar dapat diklik -->
@@ -322,7 +457,7 @@
 
                                     <!-- Detail: Hanya tampil di ukuran md dan ke atas -->
                                     <div class="hidden col-span-6 md:flex md:flex-col justify-start space-y-4">
-                                        <div class="hidden md:block">
+                                        <div class="hidden md:block p-4 bg-white rounded-lg shadow-lg">
                                             <h3
                                                 class="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">
                                                 {{ $event->nama_event ?? 'Event Name' }}
@@ -347,9 +482,9 @@
                                             <div
                                                 class="flex items-center space-x-2 font-poppins text-3xl sm:text-2xl md:text-3xl">
                                                 <i class="fas fa-ticket-alt text-xl"></i>
-                                                <span>HTM: <span class="font-extrabold">
-                                                        Rp{{ number_format($event->htm_event, 0, ',', '.') }}
-                                                    </span></span>
+                                                <span
+                                                    class="font-extrabold text-gray-900">Rp{{ number_format($event->htm_event, 0, ',', '.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -360,7 +495,7 @@
 
                     <!-- Carousel indicators -->
                     <div class="absolute z-30 flex -translate-x-1/2 bottom-4 left-1/2 space-x-3">
-                        @foreach ($wisata->events as $index => $event)
+                        @foreach ($wisata->events->where('is_temporer', 1) as $index => $event)
                             <button type="button" class="w-3 h-3 rounded-full bg-white"
                                 aria-current="{{ $index === 0 ? 'true' : 'false' }}"
                                 aria-label="Slide {{ $index + 1 }}"
@@ -479,6 +614,82 @@
                                     {{ \Carbon\Carbon::parse($event->event_berakhir)->format('d M Y, H:i') }}
                                 </p>
                             </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-lg sm:text-xl font-poppins">
+                            <i class="fas fa-ticket-alt text-gray-800"></i>
+                            <span><strong>HTM:</strong>
+                                <span class="font-extrabold text-gray-900">
+                                    Rp{{ number_format($event->htm_event, 0, ',', '.') }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    @foreach ($wisata->events as $event)
+        <div id="img-events-{{ $event->id }}" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                        <h3 class="text-lg md:text-xl font-semibold text-gray-900 font-poppins">
+                            Detail Event
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                            data-modal-hide="img-events-{{ $event->id }}">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only font-poppins">Close modal</span>
+                        </button>
+                    </div>
+                    <div class="p-4 md:p-5 space-y-5 text-gray-700 break-words">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 font-poppins leading-snug">
+                            {{ $event->nama_event ?? 'Event Name' }}
+                        </h3>
+
+                        <p class="text-base sm:text-lg leading-relaxed tracking-wide">
+                            <strong>Deskripsi:</strong> <br>
+                            {{ $event->deskripsi_event ?? '-' }}
+
+                        </p>
+
+                        <div class="text-gray-600 text-lg space-y-2">
+                            @php
+                                $jadwal = json_decode($event->jadwal_mingguan, true) ?? [];
+                                $hariList = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                            @endphp
+
+                            @foreach ($hariList as $hari)
+                                @php
+                                    $mulai = $jadwal[$hari]['mulai'] ?? null;
+                                    $akhir = $jadwal[$hari]['akhir'] ?? null;
+                                @endphp
+
+                                <div class="mb-1 border-b border-gray-200 last:border-b-0">
+                                    <strong class="block pb-2">{{ $hari }}:</strong>
+                                    <div class="flex items-start gap-2">
+                                        <i class="fas fa-calendar-day text-gray-500"></i>
+                                        <span>
+                                            @if (empty($mulai) && empty($akhir))
+                                                Tutup
+                                            @elseif ($mulai == '00:00' && $akhir == '00:00')
+                                                24 Jam
+                                            @else
+                                                {{ $mulai ?? '-' }} - {{ $akhir ?? '-' }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
 
                         <div class="flex items-center gap-2 text-lg sm:text-xl font-poppins">
@@ -616,17 +827,11 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
     @endforeach
     <!-- Main modal -->
 
+    <div id="imageModal" class="hidden fixed inset-0 z-[999] bg-black bg-opacity-90 items-center justify-center">
 
-
-    <div id="imageModal" class="hidden fixed inset-0 z-[999] bg-black bg-opacity-90 flex items-center justify-center">
         <button type="button"
             class="absolute top-4 right-4 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm p-2.5 inline-flex items-center z-50"
             id="closeModalBtn">
@@ -639,37 +844,43 @@
             alt="Preview Gambar">
     </div>
     <script>
+        // Untuk semua tombol yang punya class 'open-image-modal'
         document.querySelectorAll('.open-image-modal').forEach(button => {
             button.addEventListener('click', () => {
                 const src = button.getAttribute('data-src');
                 const modal = document.getElementById('imageModal');
                 const modalImg = document.getElementById('modalImage');
 
+                // Set gambar dan tampilkan modal
                 modalImg.src = src;
-                modal.classList.remove('hidden');
+                modal.classList.remove('hidden'); // Hilangkan hidden
+                modal.classList.add('flex'); // Tambahkan flex supaya tampil
             });
         });
 
+        // Tombol untuk menutup modal
         document.getElementById('closeModalBtn').addEventListener('click', () => {
-            document.getElementById('imageModal').classList.add('hidden');
-            document.getElementById('modalImage').src = '';
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+
+            modal.classList.add('hidden'); // Sembunyikan lagi
+            modal.classList.remove('flex'); // Hilangkan flex
+            modalImg.src = ''; // Kosongkan gambar
         });
 
-        // Optional: klik area luar gambar untuk menutup modal
+        // Klik area luar gambar untuk menutup modal
         document.getElementById('imageModal').addEventListener('click', (e) => {
+            // Pastikan yang diklik adalah area gelap, bukan gambar atau tombol
             if (e.target.id === 'imageModal') {
-                e.currentTarget.classList.add('hidden');
-                document.getElementById('modalImage').src = '';
+                const modal = e.currentTarget;
+                const modalImg = document.getElementById('modalImage');
+
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modalImg.src = '';
             }
         });
     </script>
-
-
-
-
-
-
-
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

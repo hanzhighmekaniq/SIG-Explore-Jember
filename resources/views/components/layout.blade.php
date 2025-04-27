@@ -64,7 +64,7 @@
 </html>
 
 <button type="button" data-modal-target="service" data-modal-toggle="service"
-    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 fixed bottom-10 right-0 z-50 inline-flex items-center space-x-3 rounded-l-lg bg-primary p-4 px-5 uppercase text-primary-foreground duration-300 ease-in-out bg-[#004165] md:pr-6 hover:bg-[#003055] transition-all"
+    class="transition-all  hover:-translate-y-1 active:translate-y-0 active:scale-95 fixed bottom-10 right-0 z-50 inline-flex items-center space-x-3 rounded-l-lg bg-primary p-4 px-5 uppercase text-primary-foreground duration-300 ease-in-out bg-[#004165] md:pr-6 hover:bg-[#003055] "
     id="radix-:R8m:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -88,7 +88,7 @@
                 class="flex items-center justify-between p-6 md:p-8 relative bg-gradient-to-r from-[#0077B4cc] to-[#004165cc] text-white rounded-t-2xl">
                 <p class="text-4xl font-extrabold font-fjalla">HUBUNGI KAMI</p>
                 <button type="button"
-                    class="transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 text-white bg-transparent hover:bg-gray-600 hover:text-white rounded-lg text-lg w-10 h-10 ms-auto inline-flex justify-center items-center transition-all duration-300"
+                    class="transition-all ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95 text-white bg-transparent hover:bg-gray-600 hover:text-white rounded-lg text-lg w-10 h-10 ms-auto inline-flex justify-center items-center duration-300"
                     data-modal-hide="service">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
@@ -131,7 +131,7 @@
                                 </div>
 
                                 <button type="submit"
-                                    class="rounded  btn bg-white text-[#0077B4] py-2 text-base font-bold w-full hover:bg-gray-100 transition-all duration-300 font-poppins text-m uppercase transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Kirim</button>
+                                    class="rounded  btn bg-white text-[#0077B4] py-2 text-base font-bold w-full hover:bg-gray-100 font-poppins text-m uppercase transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">Kirim</button>
 
                             </div>
                             <!-- Contact Information -->

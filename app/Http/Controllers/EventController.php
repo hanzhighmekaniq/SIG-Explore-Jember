@@ -116,31 +116,53 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validasi input
+
         $request->validate([
-            'id_wisata' => 'required', // Pastikan ID wisata ada
-            'nama_event' => 'required|string|max:255',
-            'deskripsi_event' => 'nullable|string',
-            'event_mulai' => 'required',
-            'event_berakhir' => 'required', // Validasi multiple files
-            'htm_event' => 'nullable', // Validasi multiple files
-            'img' => 'nullable', // Validasi multiple files
+            'id_wisata' => 'required',
+            'nama_event' => 'required',
+            'deskripsi_event' => 'nullable',
+            'is_temporer' => 'required',
+            'htm_event' => 'required',
+            'img' => 'nullable|image',
         ]);
+
+        if ($request->is_temporer) {
+            $request->validate([
+                'event_mulai' => 'nullable|date',
+                'event_berakhir' => 'nullable',
+                'jadwal_mingguan' => 'nullable|in:',
+            ]);
+        } else {
+            $request->validate([
+                'jadwal' => 'nullable',
+                'event_mulai' => 'nullable',
+                'event_berakhir' => 'nullable',
+            ]);
+        }
 
         // Ambil data kuliner berdasarkan ID
         $event = DataEvent::find($id);
-
         // Cek apakah data ditemukan
         if (!$event) {
-            return redirect()->route('kuliner.edit')->with(['error' => 'Event tidak ditemukan']);
+            return redirect()->route('event.edit')->with(['error' => 'Event tidak ditemukan']);
         }
         try {
             // Update data kuliner
             $event->id_wisata = $request->id_wisata;
             $event->nama_event = $request->nama_event;
             $event->deskripsi_event = $request->deskripsi_event;
-            $event->event_mulai = $request->event_mulai;
-            $event->event_berakhir = $request->event_berakhir;
+            $event->is_temporer = $request->is_temporer;
+            $event->htm_event = $request->htm_event;
+
+            if ((int)$request->is_temporer === 1) {
+                $event->event_mulai = $request->event_mulai;
+                $event->event_berakhir = $request->event_berakhir;
+                $event->jadwal_mingguan = null;
+            } else {
+                $event->event_mulai = null;
+                $event->event_berakhir = null;
+                $event->jadwal_mingguan = json_encode($request->jadwal);
+            }
 
             // Cek jika ada gambar baru yang di-upload untuk gambar kuliner
             if ($request->hasFile('img')) {
@@ -149,13 +171,10 @@ class EventController extends Controller
                     Storage::delete('public/' . $event->img);
                 }
 
-
                 // Simpan gambar baru
                 $path = $request->file('img')->store('images/event/img', 'public');
                 $event->img = $path;
             }
-
-
             // Simpan perubahan
             $event->save();
 

@@ -20,7 +20,7 @@ return new class extends Migration
             // Event permanen (berulang setiap minggu)
             $table->json('jadwal_mingguan')->nullable(); // Disimpan dalam format JSON misalnya: [{"hari": "Senin", "jam_mulai": "08:00", "jam_akhir": "12:00"}, ...]
 
-            $table->boolean('is_temporer')->default(true); // Menentukan apakah event ini temporer atau tidak
+            $table->boolean('is_temporer')->default(true);
 
             $table->decimal('htm_event', 15, 2)->nullable(); // Harga Tiket Masuk
             $table->string('img')->nullable(); // Gambar

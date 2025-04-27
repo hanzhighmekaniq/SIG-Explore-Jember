@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 
 <head>
     @include('partials.head')
@@ -82,24 +82,9 @@
     </script>
 
 
-
-
-
-
-
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-gray-200 border-dashed rounded-lg mt-14">
-            <div class="flex">
-
-            </div>
-
-            <div>
-                <div class="">
-
-
-                    {{ $slot }}
-                </div>
-            </div>
+            {{ $slot }}
         </div>
     </div>
 
