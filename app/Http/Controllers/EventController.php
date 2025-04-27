@@ -48,7 +48,7 @@ class EventController extends Controller
             'nama_event' => 'required|string|max:255',
             'deskripsi_event' => 'nullable|string',
             'is_temporer' => 'required|boolean',
-            'htm_event' => 'required|numeric',
+            'htm_event' => 'required',
             'img' => 'nullable|image|max:2048',
         ];
 

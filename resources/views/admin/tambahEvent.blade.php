@@ -49,7 +49,7 @@
 
                 <div>
                     <label for="htm_event" class="block text-gray-700 font-bold mb-2">HTM Event</label>
-                    <input type="text" id="htm_event" name="htm_event" step="0.01"
+                    <input type="number" id="htm_event" name="htm_event" step="0.01"
                         class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                         placeholder="Harga tiket masuk" required>
                 </div>

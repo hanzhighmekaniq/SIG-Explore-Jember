@@ -517,7 +517,7 @@
 
         {{-- EVENT --}}
         @if ($wisata->events->isNotEmpty())
-            <div class="w-full pt-4 pb-4 mb-20">
+            <div class="w-full pt-4 pb-4 mb-8">
                 <div class="swiper eventSwiper w-full h-auto">
                     <div class="swiper-wrapper">
                         @foreach ($wisata->events as $event)
@@ -709,17 +709,19 @@
                                 @else
                                     <div class="space-y-2 text-sm sm:text-base text-gray-600">
                                         <strong>Jadwal Mingguan:</strong>
-                                        @foreach (json_decode($event->jadwal_mingguan ?? '{}', true) as $day => $schedule)
+                                        @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $day)
+                                            @php
+                                                $schedule = json_decode($event->jadwal_mingguan ?? '{}', true)[$day] ?? null;
+                                            @endphp
                                             <div class="flex items-start gap-2">
                                                 <i class="fas fa-clock text-gray-500 mt-1"></i>
                                                 <p><strong>{{ $day }}:</strong>
-                                                    @if ($schedule['mulai'] == '00:00' && $schedule['akhir'] == '00:00')
-                                                        24 Jam
-                                                    @elseif ($schedule['mulai'] === null || $schedule['akhir'] === null)
+                                                    @if ($schedule === null || ($schedule['mulai'] === null && $schedule['akhir'] === null))
                                                         Tutup
+                                                    @elseif ($schedule['mulai'] == '00:00' && $schedule['akhir'] == '00:00')
+                                                        24 Jam
                                                     @else
-                                                        Mulai: {{ $schedule['mulai'] }} - Selesai:
-                                                        {{ $schedule['akhir'] }}
+                                                        Mulai: {{ $schedule['mulai'] }} - Selesai: {{ $schedule['akhir'] }}
                                                     @endif
                                                 </p>
                                             </div>
@@ -769,7 +771,7 @@
 
 
         {{-- Wisata lain --}}
-        <div class="py-10">
+        <div class="pb-10">
             <div class="py-4">
                 <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla ">Wisata Lainnya</p>
                 <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah beberapa rekomendasi wisata saat ini</h5>

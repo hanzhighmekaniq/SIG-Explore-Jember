@@ -54,9 +54,7 @@
     </div>
 
 
-    <div class="">
-        {{ $DataEvent->links() }}
-    </div>
+
     {{-- TABEL --}}
     <div class="relative overflow-x-auto  sm:rounded-lg py-2">
         <table class="font-poppins w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -87,18 +85,20 @@
             </thead>
             <tbody>
                 @foreach ($DataEvent as $index => $event)
-                    <tr class="odd:bg-white even:bg-gray-50 border-b">
+                    <tr class="odd:bg-white even:bg-gray-50 border-b poppins-semibold">
                         <th scope="row" class="font-poppins px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ $index + 1 }}
                         </th>
-                        <td class="px-6 py-4 font-poppins">
+                        <td class="px-6 py-4 font-poppins text-sm  lg:text-base uppercase">
                             {{ $event->nama_event }}
                         </td>
                         <td class="px-6 py-4 font-poppins">
                             @if ($event->is_temporer == 1)
+                                <p>Event Mulai</p>
                                 <div>
                                     {{ $event->event_mulai ? \Carbon\Carbon::parse($event->event_mulai)->format('H:i d-m-Y') : 'kosoong' }}
                                 </div>
+                                <p class="pt-2">Event Berakhir</p>
                                 <div>
                                     {{ $event->event_berakhir ? \Carbon\Carbon::parse($event->event_berakhir)->format('H:i d-m-Y') : 'kosoong' }}
                                 </div>
@@ -140,7 +140,7 @@
                         </td>
                         <td class="px-6 py-4 font-poppins">
                             <img src="{{ asset('storage/' . $event->img) }}" alt="Gambar"
-                                class="aspect-auto object-contain h-20 w-full">
+                                class="aspect-auto object-cover h-32 w-24 rounded-xl">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2" font-poppins>
                             <div class="flex justify-center">
@@ -164,7 +164,9 @@
             </tbody>
         </table>
     </div>
-
+    <div class="">
+        {{ $DataEvent->links() }}
+    </div>
 
     <!-- Modal -->
     <div id="popup-modal" tabindex="-1"

@@ -22,8 +22,8 @@ return new class extends Migration
 
             $table->boolean('is_temporer')->default(true);
 
-            $table->decimal('htm_event', 15, 2)->nullable(); // Harga Tiket Masuk
-            $table->string('img')->nullable(); // Gambar
+            $table->integer('htm_event')->nullable(); // Harga Tiket Masuk
+`            $table->string('img')->nullable(); // Gambar
             $table->timestamps();
 
             // Foreign key ke tempat wisata

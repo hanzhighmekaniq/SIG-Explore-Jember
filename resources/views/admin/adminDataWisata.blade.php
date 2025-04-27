@@ -112,7 +112,7 @@
                         </td>
                         <td class="font-poppins px-6 py-4">
                             <img src="{{ asset('storage/' . $wisata->img) }}"
-                                class="aspect-auto object-contain h-20 w-full" alt="Image">
+                                class="aspect-auto object-contain h-24 w-32 rounded-xl" alt="Image">
                         </td>
 
                         <td class="font-poppins px-6 py-4 flex justify-center gap-2">
@@ -139,7 +139,7 @@
             </tbody>
         </table>
     </div>
-    <div class="py-4">
+    <div class="">
         {{ $DataWisata->links() }}
     </div>
     <script>

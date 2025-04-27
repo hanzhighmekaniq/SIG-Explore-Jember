@@ -14,6 +14,10 @@
 
 <body class="bg-white">
     {{ $slot }}
+    <div class="bg-gradient-to-r from-[#004165] to-[#0066a2]">
+
+        @include('partials.footerPengunjung')
+    </div>
 </body>
 @if (session('success'))
     <div id="alert-success"
@@ -56,10 +60,7 @@
     }
 </style>
 
-<div class="bg-gradient-to-r from-[#004165] to-[#0066a2]">
 
-    @include('partials.footerPengunjung')
-</div>
 
 </html>
 

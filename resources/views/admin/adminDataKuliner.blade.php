@@ -11,10 +11,10 @@
                         border border-slate-400 px-4 py-2 hover:bg-blue-600 hover:text-white
                         focus:z-10 focus:ring-2 focus:ring-slate-300 transition-all duration-200 ease-in-out
                         hover:-translate-y-1 active:translate-y-0 active:scale-95 font-poppins">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
                 Kuliner
             </a>
         </div>
@@ -56,9 +56,7 @@
     </div>
 
 
-    <div class="">
-        {{ $DataKuliner->links() }}
-    </div>
+
     {{-- TABEL --}}
     <div class="relative overflow-x-auto  sm:rounded-lg py-2">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -115,7 +113,7 @@
 
                         <td class="px-6 py-4">
                             <img src="{{ asset('storage/' . $kuliner->gambar_kuliner) }}"
-                                class=" object-cover h-20 w-20">
+                                class=" object-cover h-32 w-32 rounded-xl">
                         </td>
                         <td class="px-2 py-4 flex justify-center gap-2">
                             <div class="flex justify-center gap-2">
@@ -142,6 +140,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="">
+        {{ $DataKuliner->links() }}
     </div>
 
 
