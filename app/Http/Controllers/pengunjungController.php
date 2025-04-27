@@ -16,29 +16,34 @@ class PengunjungController extends Controller
 {
     public function beranda()
     {
-        // Mengambil data event yang akan datang (event_mulai >= hari ini)
-        $event = DataEvent::where('event_mulai', '>=', now())->get();
+        // Ambil event dengan filter temporer
+        $event = DataEvent::where(function ($query) {
+            $query->where('is_temporer', 0) // semua event permanen
+                ->orWhere(function ($query) {
+                    $query->where('is_temporer', 1)
+                        ->where('event_berakhir', '>=', now()); // temporer yang belum berakhir
+                });
+        })->get();
 
-        // Mengubah format tanggal, waktu, dan harga menggunakan transformasi
+        // Ubah format tanggal dll
         $event->transform(function ($e) {
-            $e->event_mulai_tanggal = Carbon::parse($e->event_mulai)->translatedFormat('d F Y'); // Format: '17 Agustus 2012'
+            $e->event_mulai_tanggal = Carbon::parse($e->event_mulai)->translatedFormat('d F Y');
             $e->event_berakhir_tanggal = Carbon::parse($e->event_berakhir)->translatedFormat('d F Y');
-            $e->event_mulai_waktu = Carbon::parse($e->event_mulai)->format('H:i'); // Format: '12:00'
+            $e->event_mulai_waktu = Carbon::parse($e->event_mulai)->format('H:i');
             $e->event_berakhir_waktu = Carbon::parse($e->event_berakhir)->format('H:i');
-            $e->htm_event = number_format($e->htm_event, 0, ',', ''); // Format harga tanpa desimal
+            $e->htm_event = number_format($e->htm_event, 0, ',', '');
+
             return $e;
         });
 
-        // Mengambil data wisata dengan relasi kategori
+        // Wisata
         $wisata = DataWisata::all();
-        // Mengambil maksimal 3 data wisata dengan kategori yang berelasi
-        // Mengambil maksimal 3 data wisata secara acak berdasarkan kategori dan kategori detail
-        $filterWisata = DataWisata::with('kategori_detail.kategori') // Memastikan relasi ke kategori dan kategori detail
-            ->inRandomOrder() // Ambil data secara acak
-            ->limit(4) // Ambil maksimal 3 data
+
+        $filterWisata = DataWisata::with('kategori_detail.kategori')
+            ->inRandomOrder()
+            ->limit(4)
             ->get();
 
-        // Mengirim data ke view beranda
         return view('pengunjung.beranda', compact('event', 'wisata', 'filterWisata'));
     }
 

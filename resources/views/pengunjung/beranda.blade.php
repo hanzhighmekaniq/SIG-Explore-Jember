@@ -99,17 +99,19 @@
             setInterval(restartAnimation, 7000); // Ulangi animasi setiap 7 detik
         </script>
     </div>
+
+
     <div class="container bg-white">
         <div class="px-4 grid grid-cols-1 gap-y-4 pb-20 relative z-[1] opacity-0 translate-y-10 transition-all duration-[1500ms]"
             id="eventScrol">
             <!-- Upcoming Events -->
 
             <div class="mb-4">
-                <p class="text-3xl font-fjalla font-bold pb-2 text-[#004165]">EVENT YANG AKAN DATANG</p>
-                <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah event yang akan datang saat ini
+                <p class="text-3xl font-fjalla font-bold pb-2 text-[#004165]">EVENT SEDANG BERLANGSUNG DAN MENDATANG</p>
+                <h5 class="pl-0 text-gray-500 font-poppins">Berikut daftar event yang sedang berlangsung dan akan
+                    datang.</h5>
                 </h5>
             </div>
-
 
             @if ($event->isEmpty())
                 <div class="p-10 text-center font-bold text-gray-500 rounded border font-poppins">
@@ -226,10 +228,10 @@
                         }
                     </style>
 
+                </div>
             @endif
 
         </div>
-    </div>
     </div>
 
 
