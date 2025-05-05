@@ -11,11 +11,11 @@ class AdminController extends Controller
     public function adminBeranda()
     {
         // Mengambil seluruh DataKategori beserta jumlah wisata
-        $categories = DataKategori::with(['kategori_details.wisatas'])
+        $categories = DataKategori::with(['kategori_details.wisata'])
             ->get()
             ->map(function ($category) {
-                $category->total_wisatas = $category->kategori_details->sum(function ($detail) {
-                    return $detail->wisatas->count();
+                $category->total_wisata = $category->kategori_details->sum(function ($detail) {
+                    return $detail->wisata->count();
                 });
                 return $category;
             });
@@ -33,5 +33,5 @@ class AdminController extends Controller
         view()->share('countWisata', $countWisata); // Bagikan variabel ke seluruh view
         return view('partials.sidebar');
     }
-   
+
 }

@@ -21,7 +21,7 @@
                             <p class="text-lg font-bold font-poppins uppercase text-gray-800">
                                 {{ $category->nama_kategori }}</p>
                             <p class="text-sm text-gray-600 font-montserrat">Jumlah Wisata:
-                                {{ $category->total_wisatas }}</p>
+                                {{ $category->total_wisata }}</p>
                         </div>
                     </div>
                 @endforeach

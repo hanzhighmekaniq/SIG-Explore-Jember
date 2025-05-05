@@ -11,21 +11,18 @@ use App\Models\DataKategoriDetail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
-
 class PengunjungController extends Controller
 {
     public function beranda()
     {
-        // Ambil event dengan filter temporer
         $event = DataEvent::where(function ($query) {
-            $query->where('is_temporer', 0) // semua event permanen
+            $query->where('is_temporer', 0)
                 ->orWhere(function ($query) {
                     $query->where('is_temporer', 1)
-                        ->where('event_berakhir', '>=', now()); // temporer yang belum berakhir
+                        ->where('event_berakhir', '>=', now());
                 });
         })->get();
 
-        // Ubah format tanggal dll
         $event->transform(function ($e) {
             $e->event_mulai_tanggal = Carbon::parse($e->event_mulai)->translatedFormat('d F Y');
             $e->event_berakhir_tanggal = Carbon::parse($e->event_berakhir)->translatedFormat('d F Y');
@@ -36,7 +33,6 @@ class PengunjungController extends Controller
             return $e;
         });
 
-        // Wisata
         $wisata = DataWisata::all();
 
         $filterWisata = DataWisata::with('kategori_detail.kategori')
@@ -53,34 +49,26 @@ class PengunjungController extends Controller
         return response()->json($kategoriDetails);
     }
 
-
     public function wisata(Request $request)
     {
-        // Ambil semua kategori
         $kategoris = DataKategori::all();
 
-        // Query utama untuk wisata
         $query = DataWisata::query();
 
-        // Filter berdasarkan nama wisata
         if ($request->filled('nama_wisata')) {
             $query->where('nama_wisata', 'like', '%' . $request->nama_wisata . '%');
         }
 
-        // Filter berdasarkan kategori jika dipilih
         if ($request->filled('id_kategori')) {
             $query->whereHas('kategori_detail', function ($q) use ($request) {
                 $q->where('id_kategori', $request->id_kategori);
             });
         }
 
-        // Paginate hasilnya
         $wisata = $query->paginate(20);
 
-        // Return view dengan data
         return view('pengunjung.wisata', compact('kategoris', 'wisata'));
     }
-
 
     public function rute($nama_wisata)
     {
@@ -88,38 +76,56 @@ class PengunjungController extends Controller
         return view('pengunjung.ruteTerdekat', compact('rute'));
     }
 
-
-
     public function petaWilayah()
     {
         $peta = DataWisata::with('kategori_detail.kategori')->get();
-        $rute = DataWisata::with('kategori_detail.kategori')->paginate(10); // Jika tidak butuh paginasi
+        $rute = DataWisata::with('kategori_detail.kategori')->paginate(10);
         return view('pengunjung.petaWilayah', compact('peta', 'rute'));
     }
 
-    // PengunjungController.php
-
-
     public function detailWisata($nama_wisata)
     {
-        $wisata = DataWisata::where('nama_wisata', $nama_wisata)
+        $data = DataWisata::where('nama_wisata', $nama_wisata)
             ->with(['kategori_detail.kategori', 'events', 'kuliners'])
             ->firstOrFail();
 
-        $imgDetails = json_decode($wisata->img_detail, true) ?? [];
+        $imgDetails = json_decode($data->img_detail, true) ?? [];
         shuffle($imgDetails);
         $imgDetails = array_slice($imgDetails, 0, 8);
 
-        $lainnya = DataWisata::where('id', '!=', $wisata->id)
+        $lainnya = DataWisata::where('id', '!=', $data->id)
             ->inRandomOrder()
             ->limit(4)
             ->with('kategori_detail.kategori')
             ->get();
 
+        $reviews = $data->reviews()->latest()->get();
+
+        // ambil komentar
+        $komentar = \App\Models\Komentar::where('wisata_id', $data->id)->latest()->get();
+
         return view('pengunjung.profilWisata', compact(
-            'wisata',
+            'data',
             'imgDetails',
             'lainnya',
+            'reviews',
+            'komentar'
         ));
+    }
+
+    public function storeReview(Request $request, $wisata_id)
+    {
+        $request->validate([
+            'nama' => 'required|max:100',
+            'komentar' => 'required|max:1000',
+        ]);
+
+        \App\Models\Review::create([
+            'wisata_id' => $wisata_id,
+            'nama' => $request->nama,
+            'komentar' => $request->komentar,
+        ]);
+
+        return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
     }
 }

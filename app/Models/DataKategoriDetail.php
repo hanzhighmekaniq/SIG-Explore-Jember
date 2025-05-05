@@ -25,7 +25,7 @@ class DataKategoriDetail extends Model
     {
         return $this->belongsTo(DataKategori::class, 'id_kategori', 'id'); // Menentukan foreign key dan local key
     }
-    public function wisatas(): HasMany
+    public function wisata(): HasMany
     {
         return $this->hasMany(DataWisata::class, 'id_kategori_detail', 'id'); // Menentukan foreign key dan local key
     }

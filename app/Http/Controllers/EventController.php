@@ -14,7 +14,7 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
-        $wisata = DataKategoriDetail::with('wisatas')->get();
+        $wisata = DataKategoriDetail::with('wisata')->get();
         $query = DataEvent::query();
 
         // Filter berdasarkan kategori (jika ada input id_kategori)

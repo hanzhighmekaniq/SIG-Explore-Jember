@@ -39,9 +39,6 @@ class WisataController extends Controller
     }
 
 
-
-
-
     public function create()
     {
         $showDataKategori = DataKategoriDetail::with('kategori')->get();
@@ -236,9 +233,19 @@ class WisataController extends Controller
         return redirect()->route('wisata.index')->with('success', 'Wisata berhasil dihapus.');
     }
 
-    public function show($id)
+    public function showAdmin($id)
     {
         $wisata = DataWisata::findOrFail($id);
         return view('admin.showWisata', compact('wisata'));
+
     }
+
+    public function showUlasan($id)
+    {
+        $data = DataWisata::with(['kategori_detail.kategori'])->findOrFail($id);
+        $komentar = \App\Models\Komentar::where('wisata_id', $id)->latest()->get();
+
+        return view('user.detail', compact('data', 'komentar'));
+    }
+
 }

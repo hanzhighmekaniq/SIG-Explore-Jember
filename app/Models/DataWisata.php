@@ -46,4 +46,16 @@ class DataWisata extends Model
     {
         return $this->hasMany(DataEvent::class, 'id_wisata', 'id'); // Menentukan foreign key dan local key
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class, 'wisata_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class, 'wisata_id');
+    }
+
+    
 }

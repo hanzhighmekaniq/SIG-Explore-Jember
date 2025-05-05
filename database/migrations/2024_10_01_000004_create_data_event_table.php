@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('is_temporer')->default(true);
 
             $table->integer('htm_event')->nullable(); // Harga Tiket Masuk
-`            $table->string('img')->nullable(); // Gambar
+            $table->string('img')->nullable(); // Gambar
             $table->timestamps();
 
             // Foreign key ke tempat wisata
