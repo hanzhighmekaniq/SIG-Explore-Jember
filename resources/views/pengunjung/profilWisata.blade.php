@@ -19,7 +19,7 @@
                                         stroke-width="2" d="m1 9 4-4-4-4" />
                                 </svg>
                                 <a href="#"
-                                    class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 ">{{ $wisata->nama_wisata }}</a>
+                                    class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 ">{{ $data->nama_wisata }}</a>
                             </div>
                         </li>
 
@@ -32,7 +32,7 @@
                 <div class="xl:col-span-3 dm-sans rounded-xl">
                     <!-- Tombol Navigasi -->
                     <p class="font-bold text-2xl 2xl:text-6xl mb-8 text-[#004165] font-fjalla uppercase">
-                        {{ $wisata->nama_wisata }}
+                        {{ $data->nama_wisata }}
                     </p>
 
                     <div class="flex items-start space-x-2 text-md font-semibold">
@@ -60,7 +60,7 @@
                             </button>
 
                             <!-- Tombol "Rute" -->
-                            <a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank"
+                            <a href="{{ route('ruteTerdekat.index', $data->nama_wisata) }}" target="_blank"
                                 class="flex rounded-xl px-4 py-1 font-poppins
             bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 Rute
@@ -120,7 +120,7 @@
                         <div id="deskripsi">
                             <p
                                 class=" text-lg md:text-xl font-poppins text-gray-700 leading-loose text-justify indent-8 md:indent-12 first-letter:text-4xl first-letter:font-bold first-letter:text-gray-900 first-letter:mr-2 first-letter:font-serif">
-                                {{ $wisata->deskripsi_wisata }}
+                                {{ $data->deskripsi_wisata }}
                             </p>
                         </div>
                         <div id="detail" class="hidden">
@@ -134,8 +134,8 @@
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
                                         <p class="flex ml-2 font-poppins">
-                                            {{ $wisata->kategori_detail->kategori->nama_kategori }},
-                                            {{ $wisata->kategori_detail->nama_kategori_detail }}
+                                            {{ $data->kategori_detail->kategori->nama_kategori }},
+                                            {{ $data->kategori_detail->nama_kategori_detail }}
                                         </p>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2 font-poppins">{{ $wisata->lokasi }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $data->lokasi }}</p>
                                     </div>
                                 </div>
 
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2 font-poppins">{{ $wisata->fasilitas }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $data->fasilitas }}</p>
                                     </div>
                                 </div>
 
@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2 font-poppins">Rp {{ $wisata->htm_wisata }}</p>
+                                        <p class="flex ml-2 font-poppins">Rp {{ $data->htm_wisata }}</p>
                                     </div>
                                 </div>
 
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="col-span-1">:</div>
                                     <div class="col-span-9">
-                                        <p class="flex ml-2 font-poppins">{{ $wisata->parkir ?? 'Tidak tersedia' }}</p>
+                                        <p class="flex ml-2 font-poppins">{{ $data->parkir ?? 'Tidak tersedia' }}</p>
                                     </div>
                                 </div>
 
@@ -184,7 +184,7 @@
                                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                                     <p class="font-semibold col-span-full font-poppins">Jam Operasional</p>
                                     @php
-                                        $jamOperasional = json_decode($wisata->jam_operasional, true) ?? [];
+                                        $jamOperasional = json_decode($data->jam_operasional, true) ?? [];
                                     @endphp
 
                                     @foreach (['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu'] as $hari)
@@ -218,35 +218,37 @@
                         <!-- Section Ulasan -->
                         <div id="ulasan" class="mt-6">
                             {{-- Form Review --}}
-                            <form action="{{ route('komentar.store', ['id' => $data->id]) }}" method="POST">
+                            <form action="
+                            {{-- {{ route('komentar.store', ['id' => $data->nama]) }} --}}
+                             " method="POST">
                                 @csrf
                                 <h3 class="text-xl font-semibold mb-4">Bagikan pengalaman Anda</h3>
-                        
+
                                 {{-- Rating --}}
                                 <div class="flex items-center gap-1 mb-4" id="rating-stars">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <label class="cursor-pointer text-2xl">
-                                            <input type="radio" name="rating" value="{{ $i }}" class="hidden" required>
+                                            <input type="radio" name="rating" value="{{ $i }}"
+                                                class="hidden" required>
                                             <span data-star="{{ $i }}" class="star text-gray-300">★</span>
                                         </label>
                                     @endfor
                                 </div>
-                        
+
                                 {{-- Judul --}}
                                 <input type="text" name="judul" maxlength="120" required
                                     class="w-full border border-gray-300 p-2 rounded mb-4" placeholder="Judul ulasan">
-                        
+
                                 {{-- Komentar --}}
-                                <textarea name="komentar" rows="4" required
-                                    class="w-full border border-gray-300 p-2 rounded mb-4"
+                                <textarea name="komentar" rows="4" required class="w-full border border-gray-300 p-2 rounded mb-4"
                                     placeholder="Tulis ulasan Anda di sini..."></textarea>
-                        
+
                                 <button type="submit"
                                     class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
                                     Kirim Ulasan
                                 </button>
                             </form>
-                        
+
                             {{-- Tampilkan error jika ada --}}
                             @if ($errors->any())
                                 <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
@@ -257,7 +259,7 @@
                                     </ul>
                                 </div>
                             @endif
-                        
+
                             {{-- Daftar Komentar --}}
                             <div class="mt-10">
                                 <h4 class="text-lg font-semibold mb-4">Ulasan Pengunjung</h4>
@@ -265,7 +267,8 @@
                                     <div class="border p-4 mb-4 rounded shadow-sm">
                                         <div class="flex justify-between items-center mb-1">
                                             <h5 class="font-bold">{{ $review->judul }}</h5>
-                                            <form action="{{ route('komentar.destroy', $review->id) }}" method="POST"
+                                            <form action="{{ route('komentar.destroy', $review->id) }}"
+                                                method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus ulasan ini?')">
                                                 @csrf
                                                 @method('DELETE')
@@ -274,23 +277,25 @@
                                         </div>
                                         <div class="text-yellow-400 mb-1">
                                             @for ($i = 1; $i <= 5; $i++)
-                                                <span class="{{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
+                                                <span
+                                                    class="{{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
                                             @endfor
                                         </div>
                                         <p class="text-sm text-gray-700">{{ $review->komentar }}</p>
-                                        <p class="text-xs text-gray-500 mt-2">Ditulis pada {{ $review->created_at->format('d M Y') }}</p>
+                                        <p class="text-xs text-gray-500 mt-2">Ditulis pada
+                                            {{ $review->created_at->format('d M Y') }}</p>
                                     </div>
                                 @empty
                                     <p class="text-sm text-gray-500">Belum ada ulasan untuk tempat ini.</p>
                                 @endforelse
                             </div>
-                        
+
                             {{-- JavaScript Bintang Interaktif --}}
                             <script>
-                                document.addEventListener('DOMContentLoaded', function () {
+                                document.addEventListener('DOMContentLoaded', function() {
                                     const stars = document.querySelectorAll('#rating-stars .star');
                                     let selectedRating = 0;
-                        
+
                                     function updateStars(rating) {
                                         stars.forEach(star => {
                                             const starValue = parseInt(star.getAttribute('data-star'));
@@ -298,28 +303,29 @@
                                             star.classList.toggle('text-gray-300', starValue > rating);
                                         });
                                     }
-                        
+
                                     stars.forEach(star => {
-                                        star.addEventListener('mouseover', function () {
+                                        star.addEventListener('mouseover', function() {
                                             const rating = parseInt(this.getAttribute('data-star'));
                                             updateStars(rating);
                                         });
-                        
-                                        star.addEventListener('mouseout', function () {
+
+                                        star.addEventListener('mouseout', function() {
                                             updateStars(selectedRating);
                                         });
-                        
-                                        star.addEventListener('click', function () {
+
+                                        star.addEventListener('click', function() {
                                             selectedRating = parseInt(this.getAttribute('data-star'));
-                                            document.querySelector(`#rating-stars input[value="${selectedRating}"]`).checked = true;
+                                            document.querySelector(`#rating-stars input[value="${selectedRating}"]`)
+                                                .checked = true;
                                             updateStars(selectedRating);
                                         });
                                     });
                                 });
                             </script>
                         </div>
-                        
-                        
+
+
 
                     </div>
                 </div>
@@ -332,7 +338,7 @@
                             @if (!empty($imgDetails) && isset($imgDetails[0]))
                                 <img id="main-image" src="{{ asset('storage/' . $imgDetails[0]) }}"
                                     class="object-cover w-full h-auto aspect-[16/9] rounded-lg"
-                                    alt="Gambar utama {{ $wisata->nama_wisata }}">
+                                    alt="Gambar utama {{ $data->nama_wisata }}">
                             @else
                                 <div
                                     class="flex justify-center items-center h-[300px] md:h-[400px] lg:h-[500px] bg-gray-200 text-gray-500 rounded-lg font-poppins">
@@ -437,9 +443,9 @@
             <!-- Memuat Leaflet -->
             <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
             <script>
-                // Inisialisasi peta dengan titik tengah menggunakan koordinat dari variabel $wisata
+                // Inisialisasi peta dengan titik tengah menggunakan koordinat dari variabel $data
                 var map = L.map('map', {
-                    center: [{{ $wisata->latitude }}, {{ $wisata->longitude }}], // Atur titik pusat
+                    center: [{{ $data->latitude }}, {{ $data->longitude }}], // Atur titik pusat
                     zoom: 13, // Atur level zoom
                     scrollWheelZoom: false // Menonaktifkan zoom menggunakan scroll mouse
                 });
@@ -450,13 +456,13 @@
                 }).addTo(map);
 
                 // Tambahkan marker lokasi wisata dengan popup
-                L.marker([{{ $wisata->latitude }}, {{ $wisata->longitude }}]).addTo(map)
+                L.marker([{{ $data->latitude }}, {{ $data->longitude }}]).addTo(map)
                     .bindPopup(
-                        `<a href="{{ route('ruteTerdekat.index', $wisata->nama_wisata) }}" target="_blank">
-                            <b>{{ $wisata->nama_wisata }}</b>
+                        `<a href="{{ route('ruteTerdekat.index', $data->nama_wisata) }}" target="_blank">
+                            <b>{{ $data->nama_wisata }}</b>
                         </a><br>
-                        {{ $wisata->kategori_detail->kategori->nama_kategori }},
-                        {{ $wisata->kategori_detail->nama_kategori_detail }}.`
+                        {{ $data->kategori_detail->kategori->nama_kategori }},
+                        {{ $data->kategori_detail->nama_kategori_detail }}.`
                     );
             </script>
         </div>
@@ -467,13 +473,13 @@
             <p class="text-2xl 2xl:text-4xl font-bold pb-2 text-[#004165] font-fjalla">Kuliner Yang Tersedia</p>
             <h5 class="pl-0 text-gray-500 font-poppins">Berikut adalah kuliner yang tersedia saat ini</h5>
         </div>
-        @if ($wisata->kuliners->isNotEmpty())
+        @if ($data->kuliners->isNotEmpty())
 
             <div class="relative">
                 <div class="w-full h-auto overflow-x-auto py-4">
                     <div class="flex gap-4 min-w-max">
                         <!-- Added min-w-max to ensure horizontal overflow when items are many -->
-                        @foreach ($wisata->kuliners as $kulinersss)
+                        @foreach ($data->kuliners as $kulinersss)
                             <button data-modal-target="modal-gambar-detail-wisata-{{ $kulinersss->id }}"
                                 data-modal-toggle="modal-gambar-detail-wisata-{{ $kulinersss->id }}"
                                 class="relative group flex-shrink-0" type="button">
@@ -505,7 +511,7 @@
             </div>
         @endif
         {{-- MODAL KULINER --}}
-        @foreach ($wisata->kuliners as $kuliner)
+        @foreach ($data->kuliners as $kuliner)
             <div id="modal-gambar-detail-wisata-{{ $kuliner->id }}" data-modal-backdrop="static" tabindex="-1"
                 aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
@@ -688,11 +694,11 @@
 
 
         {{-- EVENT --}}
-        @if ($wisata->events->isNotEmpty())
+        @if ($data->events->isNotEmpty())
             <div class="w-full pt-4 pb-4 mb-8">
                 <div class="swiper eventSwiper w-full h-auto">
                     <div class="swiper-wrapper">
-                        @foreach ($wisata->events as $event)
+                        @foreach ($data->events as $event)
                             @if ($event->is_temporer == 0 || ($event->is_temporer == 1 && $event->event_berakhir > now()))
                                 <div class="swiper-slide flex items-center justify-center cursor-pointer">
                                     <div data-modal-target="img-event-{{ $event->id }}"
@@ -814,7 +820,7 @@
 
 
         {{-- MODAL EVENT --}}
-        @foreach ($wisata->events as $event)
+        @foreach ($data->events as $event)
             <div id="img-event-{{ $event->id }}" tabindex="-1" aria-hidden="true"
                 class="hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full min-h-screen bg-black bg-opacity-50 aspect-[1920/1440]">
                 <div
@@ -918,7 +924,7 @@
             </div>
         @endforeach
 
-        @forelse ($wisata->events as $event)
+        @forelse ($data->events as $event)
             {{-- id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" --}}
             <div id="img-event-detail{{ $event->id }}" data-modal-backdrop="static" tabindex="-1"
                 aria-hidden="true"
