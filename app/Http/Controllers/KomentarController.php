@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 
 class KomentarController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request, $id_wisata)
     {
         $request->validate([
             'nama' => 'nullable|string|max:100',
             'judul' => 'required|string|max:120',
-            'komentar' => 'required|string|max:1000',
+            'komentar' => 'required',
             'rating' => 'nullable|integer|min:1|max:5',
         ]);
 
         Komentar::create([
-            'wisata_id' => $id,
+            'id_wisata' => $id_wisata,
             'nama' => $request->nama ?? 'Anonim',
             'judul' => $request->judul,
             'komentar' => $request->komentar,

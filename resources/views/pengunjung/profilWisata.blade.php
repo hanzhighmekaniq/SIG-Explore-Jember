@@ -40,29 +40,29 @@
                         <div class="flex space-x-2">
                             <!-- Tombol "Deskripsi" -->
                             <button id="btn-deskripsi"
-                                class="tab-button active flex rounded-xl px-4 py-1 font-poppins
-            bg-blue-300 text-white hover:bg-blue-400 hover:text-white hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                class="tab-button active rounded-xl px-4 py-1 font-poppins
+            bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E2E8F0] hover:text-[#1A202C] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 Deskripsi
                             </button>
 
                             <!-- Tombol "Detail" -->
                             <button id="btn-detail"
-                                class="tab-button flex rounded-xl px-4 py-1 font-poppins
-            bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                class="tab-button rounded-xl px-4 py-1 font-poppins
+            bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E2E8F0] hover:text-[#1A202C] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 Detail
                             </button>
 
-                            <!-- Tombol "Ulasan" -->
-                            <button id="btn-ulasan"
-                                class="tab-button flex rounded-xl px-4 py-1 font-poppins
-            bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
-                                Ulasan
+                            <!-- Tombol "Komentar" -->
+                            <button id="btn-komentar"
+                                class="tab-button rounded-xl px-4 py-1 font-poppins
+            bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E2E8F0] hover:text-[#1A202C] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+                                Komentar
                             </button>
 
                             <!-- Tombol "Rute" -->
                             <a href="{{ route('ruteTerdekat.index', $data->nama_wisata) }}" target="_blank"
                                 class="flex rounded-xl px-4 py-1 font-poppins
-            bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-600 hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
+            bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E2E8F0] hover:text-[#1A202C] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                 Rute
                             </a>
                         </div>
@@ -85,15 +85,16 @@
                             document.addEventListener("DOMContentLoaded", function() {
                                 const btnDeskripsi = document.getElementById("btn-deskripsi");
                                 const btnDetail = document.getElementById("btn-detail");
-                                const btnUlasan = document.getElementById("btn-ulasan");
+                                const btnKomentar = document.getElementById("btn-komentar");
+
                                 const deskripsi = document.getElementById("deskripsi");
                                 const detail = document.getElementById("detail");
-                                const ulasan = document.getElementById("ulasan");
+                                const komentar = document.getElementById("komentar");
                                 const buttons = document.querySelectorAll(".tab-button");
 
                                 function showContent(showSection, activeButton) {
                                     // Sembunyikan semua section
-                                    [deskripsi, detail, ulasan].forEach(section => section.classList.add("hidden"));
+                                    [deskripsi, detail, komentar].forEach(section => section.classList.add("hidden"));
 
                                     // Tampilkan yang aktif
                                     showSection.classList.remove("hidden");
@@ -106,7 +107,7 @@
                                 // Event listener
                                 btnDeskripsi.addEventListener("click", () => showContent(deskripsi, btnDeskripsi));
                                 btnDetail.addEventListener("click", () => showContent(detail, btnDetail));
-                                btnUlasan.addEventListener("click", () => showContent(ulasan, btnUlasan));
+                                btnKomentar.addEventListener("click", () => showContent(komentar, btnKomentar));
 
                                 // Default aktif di Deskripsi
                                 showContent(deskripsi, btnDeskripsi);
@@ -216,42 +217,86 @@
                             </div>
                         </div>
                         <!-- Section Ulasan -->
-                        <div id="ulasan" class="mt-6">
+                        <div id="komentar" class="mt-6">
                             {{-- Form Review --}}
-                            <form action="
-                            {{-- {{ route('komentar.store', ['id' => $data->nama]) }} --}}
-                             " method="POST">
+                            <form action="{{ route('komentar.store', ['id_wisata' => $data->id]) }}" method="POST"
+                                class="bg-white p-6 rounded-md shadow-md">
                                 @csrf
-                                <h3 class="text-xl font-semibold mb-4">Bagikan pengalaman Anda</h3>
+                                <h3 class="text-xl font-semibold mb-4 text-gray-800">Bagikan pengalaman Anda</h3>
+
+                                {{-- Nama (opsional) --}}
+                                <input type="text" name="nama"
+                                    class="w-full border border-gray-300 p-2 rounded mb-4 focus:outline-none focus:ring focus:border-blue-300"
+                                    placeholder="Nama Anda (opsional)" value="{{ old('nama') }}">
+
+                                {{-- Judul Ulasan --}}
+                                <input type="text" name="judul" required
+                                    class="w-full border border-gray-300 p-2 rounded mb-4 focus:outline-none focus:ring focus:border-blue-300"
+                                    placeholder="Judul ulasan (misal: Tempat yang sangat menyenangkan)"
+                                    value="{{ old('judul') }}">
 
                                 {{-- Rating --}}
-                                <div class="flex items-center gap-1 mb-4" id="rating-stars">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <label class="cursor-pointer text-2xl">
-                                            <input type="radio" name="rating" value="{{ $i }}"
-                                                class="hidden" required>
-                                            <span data-star="{{ $i }}" class="star text-gray-300">★</span>
-                                        </label>
-                                    @endfor
+                                <div class="mb-4">
+                                    <span class="block mb-2 text-gray-700">Rating:</span>
+                                    <div class="flex space-x-1" id="star-rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <input type="radio" id="star{{ $i }}" name="rating"
+                                                value="{{ $i }}" class="hidden"
+                                                {{ old('rating') == $i ? 'checked' : '' }}>
+                                            <label for="star{{ $i }}" data-star="{{ $i }}"
+                                                class="cursor-pointer">
+                                                <svg class="w-8 h-8 star {{ old('rating') >= $i ? 'text-yellow-400' : 'text-gray-300' }}"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
+                                                </svg>
+                                            </label>
+                                        @endfor
+                                    </div>
                                 </div>
 
-                                {{-- Judul --}}
-                                <input type="text" name="judul" maxlength="120" required
-                                    class="w-full border border-gray-300 p-2 rounded mb-4" placeholder="Judul ulasan">
-
                                 {{-- Komentar --}}
-                                <textarea name="komentar" rows="4" required class="w-full border border-gray-300 p-2 rounded mb-4"
-                                    placeholder="Tulis ulasan Anda di sini..."></textarea>
+                                <textarea name="komentar" rows="4" required
+                                    class="w-full border border-gray-300 p-2 rounded mb-4 resize-none focus:outline-none focus:ring focus:border-blue-300"
+                                    placeholder="Tulis ulasan Anda di sini...">{{ old('komentar') }}</textarea>
 
+                                {{-- Submit --}}
                                 <button type="submit"
-                                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition focus:outline-none focus:ring-2 focus:ring-green-500">
                                     Kirim Ulasan
                                 </button>
                             </form>
 
-                            {{-- Tampilkan error jika ada --}}
+                            {{-- Script rating --}}
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const stars = document.querySelectorAll('#star-rating label');
+                                    const radios = document.querySelectorAll('#star-rating input[type="radio"]');
+
+                                    stars.forEach((star, index) => {
+                                        star.addEventListener('click', () => {
+                                            // Set checked pada input radio
+                                            radios[index].checked = true;
+
+                                            // Update warna semua bintang
+                                            stars.forEach((s, i) => {
+                                                const svg = s.querySelector('svg');
+                                                if (i <= index) {
+                                                    svg.classList.remove('text-gray-300');
+                                                    svg.classList.add('text-yellow-400');
+                                                } else {
+                                                    svg.classList.remove('text-yellow-400');
+                                                    svg.classList.add('text-gray-300');
+                                                }
+                                            });
+                                        });
+                                    });
+                                });
+                            </script>
+
+
                             @if ($errors->any())
-                                <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                                <div class="mt-4 p-3 bg-red-100 text-red-700 rounded">
                                     <ul class="list-disc ml-5">
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -260,74 +305,70 @@
                                 </div>
                             @endif
 
-                            {{-- Daftar Komentar --}}
-                            <div class="mt-10">
-                                <h4 class="text-lg font-semibold mb-4">Ulasan Pengunjung</h4>
-                                @forelse ($komentar as $review)
-                                    <div class="border p-4 mb-4 rounded shadow-sm">
-                                        <div class="flex justify-between items-center mb-1">
-                                            <h5 class="font-bold">{{ $review->judul }}</h5>
-                                            <form action="{{ route('komentar.destroy', $review->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus ulasan ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="text-red-500 hover:underline text-sm">Hapus</button>
-                                            </form>
-                                        </div>
-                                        <div class="text-yellow-400 mb-1">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                <span
-                                                    class="{{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
-                                            @endfor
-                                        </div>
-                                        <p class="text-sm text-gray-700">{{ $review->komentar }}</p>
-                                        <p class="text-xs text-gray-500 mt-2">Ditulis pada
-                                            {{ $review->created_at->format('d M Y') }}</p>
-                                    </div>
-                                @empty
-                                    <p class="text-sm text-gray-500">Belum ada ulasan untuk tempat ini.</p>
-                                @endforelse
-                            </div>
 
-                            {{-- JavaScript Bintang Interaktif --}}
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const stars = document.querySelectorAll('#rating-stars .star');
-                                    let selectedRating = 0;
-
-                                    function updateStars(rating) {
-                                        stars.forEach(star => {
-                                            const starValue = parseInt(star.getAttribute('data-star'));
-                                            star.classList.toggle('text-yellow-400', starValue <= rating);
-                                            star.classList.toggle('text-gray-300', starValue > rating);
-                                        });
-                                    }
-
-                                    stars.forEach(star => {
-                                        star.addEventListener('mouseover', function() {
-                                            const rating = parseInt(this.getAttribute('data-star'));
-                                            updateStars(rating);
-                                        });
-
-                                        star.addEventListener('mouseout', function() {
-                                            updateStars(selectedRating);
-                                        });
-
-                                        star.addEventListener('click', function() {
-                                            selectedRating = parseInt(this.getAttribute('data-star'));
-                                            document.querySelector(`#rating-stars input[value="${selectedRating}"]`)
-                                                .checked = true;
-                                            updateStars(selectedRating);
-                                        });
-                                    });
-                                });
-                            </script>
                         </div>
 
 
+                        <!-- HASIL ULASAN -->
+                        {{-- <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-gray-700 mb-4">Ulasan Pengunjung</h2>
+
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <!-- Kiri: Ringkasan Rating -->
+                                <div class="md:w-1/3 bg-white shadow-md p-4 rounded-md border border-gray-200">
+                                    <div class="text-3xl font-bold text-green-600 mb-2">
+                                        {{ number_format($reviews->avg('rating'), 1) }} / 5
+                                    </div>
+                                    <div class="text-sm text-gray-500 mb-4">{{ $reviews->count() }} ulasan</div>
+
+                                    @for ($i = 5; $i >= 1; $i--)
+                                        @php
+                                            $jumlah = $reviews->where('rating', $i)->count();
+                                            $persentase =
+                                                $reviews->count() > 0 ? ($jumlah / $reviews->count()) * 100 : 0;
+                                        @endphp
+                                        <div class="flex items-center text-sm mb-1">
+                                            <span class="w-10">{{ $i }}★</span>
+                                            <div class="w-full bg-gray-200 rounded h-2 mx-2">
+                                                <div class="bg-green-500 h-2 rounded"
+                                                    style="width: {{ $persentase }}%"></div>
+                                            </div>
+                                            <span class="w-6 text-right">{{ $jumlah }}</span>
+                                        </div>
+                                    @endfor
+                                </div>
+
+                                <!-- Kanan: Daftar Ulasan -->
+                                <div class="md:w-2/3 space-y-4">
+                                    @forelse ($reviews as $item)
+                                        <div class="p-4 bg-white shadow-md rounded-md border border-gray-200">
+                                            <div class="flex items-center justify-between mb-1">
+                                                <p class="text-sm text-gray-600 font-semibold">{{ $item->nama }}</p>
+                                                <p class="text-xs text-gray-400">
+                                                    {{ $item->created_at->diffForHumans() }}</p>
+                                            </div>
+                                            <!-- Tampilkan rating sebagai bintang -->
+                                            <div class="flex items-center text-yellow-400 text-sm mb-1">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $item->rating)
+                                                        ★
+                                                    @else
+                                                        <span class="text-gray-300">★</span>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <p class="text-gray-800 text-sm">{{ $item->komentar }}</p>
+                                        </div>
+                                    @empty
+                                        <p class="text-gray-500">Belum ada ulasan. Jadilah yang pertama!</p>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div> --}}
+
 
                     </div>
+
                 </div>
 
                 <div class="xl:col-span-5 flex flex-col rounded-lg xl:rounded-2xl overflow-hidden ">
@@ -373,62 +414,44 @@
                     </script>
                 </div>
             </div>
+
         </div>
 
-
-        <!-- HASIL ULASAN -->
-        <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Ulasan Pengunjung</h2>
-
-            <div class="flex flex-col md:flex-row gap-6">
-                <!-- Kiri: Ringkasan Rating -->
-                <div class="md:w-1/3 bg-white shadow-md p-4 rounded-md border border-gray-200">
-                    <div class="text-3xl font-bold text-green-600 mb-2">
-                        {{ number_format($reviews->avg('rating'), 1) }} / 5
+        {{-- Daftar Komentar --}}
+        <div class="mt-10">
+            <h4 class="text-lg font-semibold mb-4 text-gray-800">Komentar Pengunjung</h4>
+            @forelse ($data->komentars as $review)
+                <div class="border p-4 mb-4 rounded shadow-sm bg-white">
+                    <div class="flex items-center justify-between mb-2">
+                        <h5 class="font-bold text-gray-700">Komentar</h5>
+                        <div class="flex text-yellow-400">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $review->rating)
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
+                                    </svg>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
+                                    </svg>
+                                @endif
+                            @endfor
+                        </div>
                     </div>
-                    <div class="text-sm text-gray-500 mb-4">{{ $reviews->count() }} ulasan</div>
-
-                    @for ($i = 5; $i >= 1; $i--)
-                        @php
-                            $jumlah = $reviews->where('rating', $i)->count();
-                            $persentase = $reviews->count() > 0 ? ($jumlah / $reviews->count()) * 100 : 0;
-                        @endphp
-                        <div class="flex items-center text-sm mb-1">
-                            <span class="w-10">{{ $i }}★</span>
-                            <div class="w-full bg-gray-200 rounded h-2 mx-2">
-                                <div class="bg-green-500 h-2 rounded" style="width: {{ $persentase }}%"></div>
-                            </div>
-                            <span class="w-6 text-right">{{ $jumlah }}</span>
-                        </div>
-                    @endfor
+                    <p class="text-sm text-gray-700">{{ $review->komentar }}</p>
+                    <p class="text-xs text-gray-500 mt-2">Ditulis pada
+                        {{ $review->created_at->format('d M Y') }}
+                    </p>
                 </div>
-
-                <!-- Kanan: Daftar Ulasan -->
-                <div class="md:w-2/3 space-y-4">
-                    @forelse ($reviews as $item)
-                        <div class="p-4 bg-white shadow-md rounded-md border border-gray-200">
-                            <div class="flex items-center justify-between mb-1">
-                                <p class="text-sm text-gray-600 font-semibold">{{ $item->nama }}</p>
-                                <p class="text-xs text-gray-400">{{ $item->created_at->diffForHumans() }}</p>
-                            </div>
-                            <!-- Tampilkan rating sebagai bintang -->
-                            <div class="flex items-center text-yellow-400 text-sm mb-1">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $item->rating)
-                                        ★
-                                    @else
-                                        <span class="text-gray-300">★</span>
-                                    @endif
-                                @endfor
-                            </div>
-                            <p class="text-gray-800 text-sm">{{ $item->komentar }}</p>
-                        </div>
-                    @empty
-                        <p class="text-gray-500">Belum ada ulasan. Jadilah yang pertama!</p>
-                    @endforelse
-                </div>
-            </div>
+            @empty
+                <p class="text-sm text-gray-500">Belum ada komentar untuk tempat ini.</p>
+            @endforelse
         </div>
+        {{--  --}}
 
 
 

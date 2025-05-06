@@ -233,19 +233,4 @@ class WisataController extends Controller
         return redirect()->route('wisata.index')->with('success', 'Wisata berhasil dihapus.');
     }
 
-    public function showAdmin($id)
-    {
-        $wisata = DataWisata::findOrFail($id);
-        return view('admin.showWisata', compact('wisata'));
-
-    }
-
-    public function showUlasan($id)
-    {
-        $data = DataWisata::with(['kategori_detail.kategori'])->findOrFail($id);
-        $komentar = \App\Models\Komentar::where('wisata_id', $id)->latest()->get();
-
-        return view('user.detail', compact('data', 'komentar'));
-    }
-
 }

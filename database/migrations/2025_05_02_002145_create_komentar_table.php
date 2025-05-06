@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('komentar', function (Blueprint $table) {
             $table->id();
-            $table->text('komentar'); // isi komentar
+            $table->string('nama');
+            $table->longText('komentar'); // isi komentar
             $table->unsignedTinyInteger('rating')->nullable(); // rating (opsional)
 
             // Relasi ke wisata
-            $table->foreignId('wisata_id')
+            $table->foreignId('id_wisata')
                 ->constrained('data_wisata') // sesuaikan dengan nama tabel wisata kamu
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
 
             $table->timestamps();
         });

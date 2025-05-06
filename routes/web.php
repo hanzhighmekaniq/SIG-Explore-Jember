@@ -42,14 +42,14 @@ Route::get('/wisata/profil/{nama_wisata}', [PengunjungController::class, 'detail
 Route::get('/wisata/profil/ruteTerdekat/{nama_wisata}', [PengunjungController::class, 'rute'])->name('ruteTerdekat.index');
 
 // Tambahan route untuk detail wisata dan komentar
-Route::get('/wisata/detail/{id}', [WisataController::class, 'showUlasan'])->name('wisata.detail');
+Route::post('/wisata/profil/{id_wisata}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
 
-Route::post('/wisata/{id}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
-Route::delete('/komentar/{id}', [KomentarController::class, 'destroy'])->name('komentar.destroy');
-Route::post('/review/{wisata_id}', [PengunjungController::class, 'storeReview'])->name('pengunjung.review.store');
+
 
 // Rute untuk admin
 Route::post('/sendMail', [SendEmailController::class, 'sendmail'])->name('send.mail');
+
+
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'adminBeranda'])->name('dashboard');

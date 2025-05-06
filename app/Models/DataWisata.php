@@ -34,28 +34,21 @@ class DataWisata extends Model
         return $this->belongsTo(DataKategoriDetail::class, 'id_kategori_detail', 'id');
     }
 
-
     // Relasi dengan DataKuliner
     public function kuliners(): HasMany
     {
-        return $this->hasMany(DataKuliner::class, 'id_wisata', 'id'); // Menentukan foreign key dan local key
+        return $this->hasMany(DataKuliner::class, 'id_wisata', 'id');
     }
 
     // Relasi dengan DataEvent
     public function events(): HasMany
     {
-        return $this->hasMany(DataEvent::class, 'id_wisata', 'id'); // Menentukan foreign key dan local key
+        return $this->hasMany(DataEvent::class, 'id_wisata', 'id');
     }
 
-    public function komentar()
+    public function komentars(): HasMany
     {
-        return $this->hasMany(Komentar::class, 'wisata_id');
+        return $this->hasMany(Komentar::class, 'id_wisata', 'id');
     }
-
-    public function reviews()
-    {
-        return $this->hasMany(\App\Models\Review::class, 'wisata_id');
-    }
-
-    
 }
+

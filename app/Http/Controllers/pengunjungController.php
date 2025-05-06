@@ -86,7 +86,7 @@ class PengunjungController extends Controller
     public function detailWisata($nama_wisata)
     {
         $data = DataWisata::where('nama_wisata', $nama_wisata)
-            ->with(['kategori_detail.kategori', 'events', 'kuliners'])
+            ->with(['kategori_detail.kategori', 'events', 'kuliners', 'komentars'])
             ->firstOrFail();
 
         $imgDetails = json_decode($data->img_detail, true) ?? [];
@@ -99,33 +99,12 @@ class PengunjungController extends Controller
             ->with('kategori_detail.kategori')
             ->get();
 
-        $reviews = $data->reviews()->latest()->get();
-
-        // ambil komentar
-        $komentar = \App\Models\Komentar::where('wisata_id', $data->id)->latest()->get();
 
         return view('pengunjung.profilWisata', compact(
             'data',
             'imgDetails',
-            'lainnya',
-            'reviews',
-            'komentar'
+            'lainnya'
         ));
     }
 
-    public function storeReview(Request $request, $wisata_id)
-    {
-        $request->validate([
-            'nama' => 'required|max:100',
-            'komentar' => 'required|max:1000',
-        ]);
-
-        \App\Models\Review::create([
-            'wisata_id' => $wisata_id,
-            'nama' => $request->nama,
-            'komentar' => $request->komentar,
-        ]);
-
-        return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
-    }
 }
