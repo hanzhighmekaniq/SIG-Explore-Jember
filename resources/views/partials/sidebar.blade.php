@@ -25,6 +25,7 @@
                 </svg>
             </a>
         </li>
+
         <li class="">
             <a href="{{ route('kategori.index') }}"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600
@@ -42,6 +43,7 @@
                 </svg>
             </a>
         </li>
+
         <li class="group">
             <a href="{{ route('wisata.index') }}"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none {{ request()->is('admin/wisata*') ? 'text-blue-600' : '' }}">
@@ -127,14 +129,43 @@
         </li>
 
         <li class="group">
+            <a href="{{ route('admin.komentar.index') }}"
+                class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none {{ request()->is('admin/komentar') ? 'text-blue-600' : '' }}">
+                <!-- Teks -->
+                <span
+                    class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap {{ request()->is('admin/komentar') ? 'text-blue-600' : 'hover:text-blue-400' }}">
+                    Data Komentar
+                </span>
+                <!-- Ikon dan Notifikasi -->
+                <div class="relative">
+                    <!-- Notifikasi (jika ingin menambahkan jumlah komentar misalnya $countKomentar) -->
+<!--                    <span
+                        class="absolute -top-2 -right-2 inline-flex items-center justify-center w-6 h-6 text-xs font-medium bg-blue-600 rounded-full group-hover:bg-white group-hover:text-blue-600 {{ request()->is('admin/komentar') ? 'bg-white text-blue-600' : 'text-white' }}">
+                        {{ $countKomentar ?? '0' }}
+                    </span> -->
+                    <!-- Ikon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 {{ request()->is('admin/komentar') ? 'text-blue-600' : 'hover:text-blue-400' }} transition duration-75">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12.75c0 3.727 3.75 6.75 8.25 6.75s8.25-3.023 8.25-6.75S14.727 6 11.25 6 2.25 9.023 2.25 12.75z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 14.25h.008v.008H12v-.008zM9.75 14.25h.008v.008H9.75v-.008zM14.25 14.25h.008v.008H14.25v-.008z" />
+                    </svg>
+                </div>
+            </a>
+        </li>        
+
+        <li class="group">
             <a href="{{ route('setting.index') }}"
                 class="flex items-center p-2 rounded-lg text-gray-400 hover:text-blue-400 focus:text-blue-600 active:text-blue-600 focus:outline-none">
                 <!-- Teks -->
                 <span
                     class="font-montserrat font-semibold flex-1 ms-3 whitespace-nowrap {{ request()->is('admin/setting*') ? 'text-blue-600' : 'hover:text-blue-400' }}">Pengaturan</span>
                 <!-- Ikon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round"
                     class="lucide lucide-user-cog {{ request()->is('admin/setting*') ? 'text-blue-600' : 'hover:text-blue -400' }}">
                     <circle cx="18" cy="15" r="3" />
                     <circle cx="9" cy="7" r="4" />
@@ -150,6 +181,7 @@
                 </svg>
             </a>
         </li>
+
         <li class="group">
             <a id="logout-button" type="button" data-modal-target="default-modal-logout"
                 data-modal-toggle="default-modal-logout"

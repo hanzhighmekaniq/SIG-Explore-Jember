@@ -44,6 +44,17 @@ Route::get('/wisata/profil/ruteTerdekat/{nama_wisata}', [PengunjungController::c
 // Tambahan route untuk detail wisata dan komentar
 Route::post('/wisata/profil/{id_wisata}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
 
+Route::get('/komentar', [KomentarController::class, 'komentarAdminIndex']);
+
+// Halaman admin lihat daftar wisata + jumlah komentar
+Route::get('/admin/komentar', [KomentarController::class, 'komentarAdminIndex'])->name('admin.komentar.index');
+
+// Halaman admin lihat komentar dari wisata tertentu
+Route::get('/admin/komentar/{id_wisata}', [KomentarController::class, 'show'])->name('admin.komentar.show');
+
+// Hapus komentar (admin)
+Route::delete('/admin/komentar/{id}', [KomentarController::class, 'destroy'])->name('admin.komentar.destroy');
+
 
 
 // Rute untuk admin

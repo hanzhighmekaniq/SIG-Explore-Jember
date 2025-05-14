@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Komentar;
 use Illuminate\Http\Request;
+use App\Models\DataWisata;
 
 class KomentarController extends Controller
 {
@@ -27,6 +28,28 @@ class KomentarController extends Controller
         return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
     }
 
+    //    public function index()
+    //    {
+    //        return redirect()->route('komentar.admin.index');
+    //    }
+
+    // Buat admin lihat semua komentar (pengunjung tetap bisa store kayak biasa)
+    public function komentarAdminIndex()
+    {
+        $wisatas = DataWisata::withCount('komentar')->paginate(10);
+        return view('admin.komentar.adminDataKomentar', compact('wisatas'));
+    }
+
+    // Buat admin lihat komentar per wisata
+    public function show($id_wisata)
+    {
+        $wisata = DataWisata::findOrFail($id_wisata);
+        $komentars = Komentar::where('id_wisata', $id_wisata)->latest()->get();
+
+        return view('admin.komentar.editKomentar', compact('wisata', 'komentars'));
+    }
+
+    // Hapus komentar
     public function destroy($id)
     {
         $komentar = Komentar::findOrFail($id);
@@ -34,4 +57,5 @@ class KomentarController extends Controller
 
         return redirect()->back()->with('success', 'Komentar berhasil dihapus!');
     }
+
 }

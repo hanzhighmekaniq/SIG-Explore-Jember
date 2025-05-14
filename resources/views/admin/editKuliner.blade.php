@@ -1,5 +1,5 @@
 <x-layadmin>
-    <p class="font-semibold text-3xl playfair-display-uniquifier pb-4">
+    <p class="font-semibold text-3xl font-poppins pb-4">
         Edit Kuliner
     </p>
     <div class="mx-auto bg-white rounded-lg">

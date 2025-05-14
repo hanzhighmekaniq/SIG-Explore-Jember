@@ -7,7 +7,7 @@
                 <div class="space-y-4">
 
                     <!-- Pilihan Event -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 font-poppins">
                         <div>
                             <label for="is_temporer" class="font-poppins block text-gray-700 font-bold mb-2">
                                 Jenis Event

@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <p class="font-poppins font-semibold text-3xl playfair-display-uniquifier pb-4">
+    <p class="font-poppins font-semibold text-3xl font-poppins pb-4">
         Edit Wisata
     </p>
     <form action="{{ route('wisata.update', ['wisatum' => $wisata->id]) }}" method="POST"

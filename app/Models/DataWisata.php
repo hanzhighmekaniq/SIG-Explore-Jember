@@ -50,5 +50,10 @@ class DataWisata extends Model
     {
         return $this->hasMany(Komentar::class, 'id_wisata', 'id');
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class, 'id_wisata');
+    }
 }
 

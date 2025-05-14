@@ -6,13 +6,12 @@
                     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                         <li class="inline-flex items-center">
                             <a href="{{ route('wisata.pengunjung') }}"
-                                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 ">
-
+                                class="font-poppins inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 ">
                                 Wisata
                             </a>
                         </li>
                         <li>
-                            <div class="flex items-center">
+                            <div class="flex items-center font-poppins">
                                 <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +55,7 @@
                             <button id="btn-komentar"
                                 class="tab-button rounded-xl px-4 py-1 font-poppins
             bg-[#F8FAFC] text-[#6B7280] hover:bg-[#E2E8F0] hover:text-[#1A202C] hover:scale-105 hover:shadow-lg transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
-                                Komentar
+                                Tulis Ulasan
                             </button>
 
                             <!-- Tombol "Rute" -->
@@ -217,7 +216,7 @@
                             </div>
                         </div>
                         <!-- Section Ulasan -->
-                        <div id="komentar" class="mt-6">
+                        <div id="komentar" class="font-poppins">
                             {{-- Form Review --}}
                             <form action="{{ route('komentar.store', ['id_wisata' => $data->id]) }}" method="POST"
                                 class="bg-white p-6 rounded-md shadow-md">
@@ -262,7 +261,7 @@
 
                                 {{-- Submit --}}
                                 <button type="submit"
-                                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    class="font-poppins px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200 ease-in-out hover:-translate-y-1 active:translate-y-0 active:scale-95">
                                     Kirim Ulasan
                                 </button>
                             </form>
@@ -419,40 +418,91 @@
 
         {{-- Daftar Komentar --}}
         <div class="mt-10">
-            <h4 class="text-lg font-semibold mb-4 text-gray-800">Komentar Pengunjung</h4>
-            @forelse ($data->komentars as $review)
-                <div class="border p-4 mb-4 rounded shadow-sm bg-white">
-                    <div class="flex items-center justify-between mb-2">
-                        <h5 class="font-bold text-gray-700">Komentar</h5>
-                        <div class="flex text-yellow-400">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $review->rating)
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-300"
-                                        fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
-                                    </svg>
-                                @endif
-                            @endfor
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-700">{{ $review->komentar }}</p>
-                    <p class="text-xs text-gray-500 mt-2">Ditulis pada
-                        {{ $review->created_at->format('d M Y') }}
-                    </p>
-                </div>
-            @empty
-                <p class="text-sm text-gray-500">Belum ada komentar untuk tempat ini.</p>
-            @endforelse
-        </div>
-        {{--  --}}
+            <h4 class="font-bold text-2xl 2xl:text-4xl mb-4 text-[#004165] font-fjalla">Komentar Pengunjung</h4>
 
+            @if ($data->komentars->count() > 0)
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        @foreach ($data->komentars as $review)
+                            <div class="swiper-slide">
+                                <div class="flex bg-white border rounded-lg shadow p-4 gap-6">
+                                    <!-- Kiri: info -->
+                                    <div
+                                        class="w-1/3 flex flex-col justify-between text-sm text-gray-700 font-poppins">
+                                        <div class="flex items-center gap-3">
+                                            <!-- Foto profil -->
+                                            <div class="mb-2">
+                                                <div
+                                                    class="w-14 h-14 rounded-full bg-[#e1effe] text-[#004165] flex items-center justify-center text-lg font-semibold font-poppins shadow-sm">
+                                                    {{ strtoupper(substr($review->nama, 0, 2)) }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Nama -->
+                                            <p class="font-semibold text-xl">{{ $review->nama }}</p>
+                                        </div>
+                                        <!-- Rating -->
+                                        <div class="flex mt-2">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.3 4.005h4.21c.969 0 1.371 1.24.588 1.81l-3.404 2.474 1.3 4.005c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.404 2.474c-.785.57-1.84-.197-1.54-1.118l1.3-4.005L2.952 8.742c-.783-.57-.38-1.81.588-1.81h4.21l1.3-4.005z" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <!-- Tanggal -->
+                                        <span class="text-xs text-gray-500 mt-2">
+                                            {{ $review->created_at->translatedFormat('H:i, d F Y') }}
+                                        </span>
+                                    </div>
+
+                                    <!-- Kanan: judul + komentar -->
+                                    <div class="w-2/3 flex flex-col justify-start">
+                                        <div class="flex items-center h-[40px]">
+                                            <h5 class="font-semibold text-xl text-gray-800 font-poppins">
+                                                {{ $review->judul }}
+                                            </h5>
+                                        </div>
+                                        <p class="text-sm text-gray-700 font-poppins mt-1">
+                                            {{ $review->komentar }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                <p class="pl-0 text-gray-500 font-poppins">Belum ada komentar untuk tempat ini.</p>
+            @endif
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                new Swiper(".mySwiper", {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    keyboard: {
+                        enabled: true,
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 1
+                        },
+                        1024: {
+                            slidesPerView: 2
+                        },
+                    },
+                });
+            });
+        </script>
 
 
         {{-- LOKASI --}}
